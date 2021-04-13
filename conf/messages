@@ -1,0 +1,3 @@
+service.name = helpline-frontend
+service.homePageUrl = /helpline-frontend
+service.text = This is your new service
