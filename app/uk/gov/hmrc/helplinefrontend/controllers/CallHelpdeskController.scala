@@ -16,25 +16,32 @@
 
 package uk.gov.hmrc.helplinefrontend.controllers
 
+import javax.inject.{Inject, Singleton}
+import play.api.Logger.logger
 import play.api.mvc._
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
-import uk.gov.hmrc.helplinefrontend.views.html.ChildBenefit
+import uk.gov.hmrc.helplinefrontend.views.html.helpdesks.{ChildBenefit, IVDeceased}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
-import javax.inject.{Inject, Singleton}
 import scala.concurrent.Future
 
 @Singleton
-class ContactPageController @Inject()(
-  appConfig: AppConfig,
-  mcc: MessagesControllerComponents,
-  childBenefitPage: ChildBenefit)
-    extends FrontendController(mcc) {
+class CallHelpdeskController @Inject()(implicit appConfig: AppConfig, mcc: MessagesControllerComponents, ivDeceased: IVDeceased, childBenefitPage: ChildBenefit)
+  extends FrontendController(mcc) {
 
-  implicit val config: AppConfig = appConfig
+  def getHelpdeskPage(helpKey: String, back: Option[String]): Action[AnyContent] = Action.async { implicit request =>
+    logger.warn(s"[VER-517] calling for $helpKey")
+    helpKey.toLowerCase match {
+      case "deceased" => Future.successful(Ok(ivDeceased(back)))
+      case _          => // default help page
+        logger.warn(s"[VER-517] calling without a valid help key($helpKey): request.headers => ${request.headers}")
+        // todo the default  page being built in VER-592
+        Future.successful(Ok("the page being built in VER-592"))
+    }
+
+  }
 
   val childBenefit: Action[AnyContent] = Action.async { implicit request =>
     Future.successful(Ok(childBenefitPage()))
   }
-
 }

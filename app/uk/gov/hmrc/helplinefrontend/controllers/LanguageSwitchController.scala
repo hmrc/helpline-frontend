@@ -16,23 +16,22 @@
 
 package uk.gov.hmrc.helplinefrontend.controllers
 
-import uk.gov.hmrc.helplinefrontend.config.AppConfig
-import uk.gov.hmrc.play.language.{LanguageController, LanguageUtils}
-import play.api.mvc._
-import play.api.i18n.Lang
 import com.google.inject.Inject
 import javax.inject.Singleton
+import play.api.i18n.Lang
+import play.api.mvc._
+import uk.gov.hmrc.helplinefrontend.config.AppConfig
+import uk.gov.hmrc.play.language.{LanguageController, LanguageUtils}
 
 @Singleton
-class LanguageSwitchController @Inject()(
-  appConfig: AppConfig,
-  languageUtils: LanguageUtils,
-  cc: ControllerComponents)
-    extends LanguageController(languageUtils, cc) {
-  import appConfig._
+class LanguageSwitchController @Inject()(appConfig: AppConfig, languageUtils: LanguageUtils, cc: ControllerComponents)
+  extends LanguageController(languageUtils, cc) {
 
-  override def fallbackURL: String =
-    "https://www.gov.uk/government/organisations/hm-revenue-customs"
+  override def fallbackURL: String = "https://www.gov.uk/government/organisations/hm-revenue-customs"
+
+  val en: String            = "en"
+  val cy: String            = "cy"
+  val defaultLanguage: Lang = Lang(en)
 
   override protected def languageMap: Map[String, Lang] = {
     if (appConfig.welshLanguageSupportEnabled) Map(en -> Lang(en), cy -> Lang(cy))

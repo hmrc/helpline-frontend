@@ -14,14 +14,21 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.helplinefrontend.config
+import play.api.http.Status.OK
 
-import javax.inject.{Inject, Singleton}
-import play.api.Configuration
+class CallHelpdeskControllerISpec extends helperSpec {
 
-@Singleton
-class AppConfig @Inject()(config: Configuration) {
+  val getPageBaseUrl = "/helpline/contact"
+  val deceasedHelpKey = "deceased"
 
-  val welshLanguageSupportEnabled: Boolean = config.getOptional[Boolean]("features.welsh-language-support").getOrElse(true)
+  "GET /contact/:helpKey" should {
+    "return deceased help page if the help key is 'deceased' but there is no go back url" in {
+      withClient {
+        wsClient => {
+          wsClient.url(resource(s"$getPageBaseUrl/$deceasedHelpKey")).get().futureValue
+        }
+      }.status shouldBe OK
+    }
+  }
 
 }
