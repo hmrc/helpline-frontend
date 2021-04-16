@@ -24,7 +24,7 @@ import play.api.mvc.{MessagesControllerComponents, Result}
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
-import uk.gov.hmrc.helplinefrontend.views.html.helpdesks.{ChildBenefit, IVDeceased}
+import uk.gov.hmrc.helplinefrontend.views.html.helpdesks.{ChildBenefit, IVDeceased, IncomeTax}
 
 import scala.concurrent.Future
 
@@ -36,11 +36,13 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   val messagesCC: MessagesControllerComponents = app.injector.instanceOf[MessagesControllerComponents]
   val contactUsDeceased: IVDeceased = app.injector.instanceOf[IVDeceased]
   val childBenefit: ChildBenefit = app.injector.instanceOf[ChildBenefit]
+  val incomeTax: IncomeTax = app.injector.instanceOf[IncomeTax]
 
-  val controller: CallHelpdeskController = new CallHelpdeskController()(appConfig, messagesCC, contactUsDeceased, childBenefit)
+  val controller: CallHelpdeskController = new CallHelpdeskController()(appConfig, messagesCC, contactUsDeceased, childBenefit, incomeTax)
 
   val childBenefitHelpKey: String = "CHILDBENEFIT"
   val deceasedHelpKey: String = "deceased"
+  val incomeTaxHelpKey: String = "INCOMETAX"
 
   "CallHelpdeskController get deceased help page" should {
     "return deceased help page if the help key is 'deceased' but there is no go back url" in {
@@ -70,6 +72,22 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       val result: Future[Result] = controller.getHelpdeskPage(childBenefitHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Call the Child Benefits helpline") shouldBe true
+      contentAsString(result).contains("Back") shouldBe true
+    }
+  }
+
+  "CallHelpdeskController get Income Tax help page" should {
+    "return Income Tax help page if the help key is 'INCOMETAX' but there is no go back url" in {
+      val result: Future[Result] = controller.getHelpdeskPage(incomeTaxHelpKey, None)(fakeRequest)
+      status(result) shouldBe Status.OK
+      contentAsString(result).contains("Call the taxes helpline") shouldBe true
+      contentAsString(result).contains("Back") shouldBe false
+    }
+
+    "return Income Tax help page if the help key is 'INCOMETAX' and there is a go back url" in {
+      val result: Future[Result] = controller.getHelpdeskPage(incomeTaxHelpKey, Some("backURL"))(fakeRequest)
+      status(result) shouldBe Status.OK
+      contentAsString(result).contains("Call the taxes helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
     }
   }
