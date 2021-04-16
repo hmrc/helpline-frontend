@@ -76,7 +76,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
     }
   }
 
-  "CallHelpdeskController get child benefit help page" should {
+  "CallHelpdeskController get Income Tax help page" should {
     "return Income Tax help page if the help key is 'INCOMETAX' but there is no go back url" in {
       val result: Future[Result] = controller.getHelpdeskPage(incomeTaxHelpKey, None)(fakeRequest)
       status(result) shouldBe Status.OK
