@@ -16,8 +16,8 @@
 
 package uk.gov.hmrc.helplinefrontend.controllers
 
-import com.google.inject.{Inject, Singleton}
 import controllers.{AssetsBuilder, AssetsMetadata}
+import javax.inject.{Inject, Singleton}
 import play.api.http.HttpErrorHandler
 
 @Singleton

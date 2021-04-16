@@ -33,6 +33,7 @@ class CallHelpdeskController @Inject()(implicit appConfig: AppConfig, mcc: Messa
     logger.warn(s"[VER-517] calling for $helpKey")
     helpKey.toLowerCase match {
       case "deceased" => Future.successful(Ok(ivDeceased(back)))
+      case "childbenefit" => Future.successful(Ok(childBenefitPage(back)))
       case _          => // default help page
         logger.warn(s"[VER-517] calling without a valid help key($helpKey): request.headers => ${request.headers}")
         // todo the default  page being built in VER-592
@@ -41,7 +42,4 @@ class CallHelpdeskController @Inject()(implicit appConfig: AppConfig, mcc: Messa
 
   }
 
-  val childBenefit: Action[AnyContent] = Action.async { implicit request =>
-    Future.successful(Ok(childBenefitPage()))
-  }
 }

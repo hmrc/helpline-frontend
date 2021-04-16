@@ -18,7 +18,7 @@ import play.api.http.Status.OK
 
 class CallHelpdeskControllerISpec extends helperSpec {
 
-  val getPageBaseUrl = "/helpline/contact"
+  val getPageBaseUrl = "/helpline"
   val deceasedHelpKey = "deceased"
 
   "GET /contact/:helpKey" should {
