@@ -16,8 +16,7 @@
 
 package uk.gov.hmrc.helplinefrontend.controllers
 
-import com.google.inject.Inject
-import javax.inject.Singleton
+import javax.inject.{Inject, Singleton}
 import play.api.i18n.Lang
 import play.api.mvc._
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
