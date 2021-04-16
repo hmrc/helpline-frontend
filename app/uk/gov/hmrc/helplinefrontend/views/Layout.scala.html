@@ -15,17 +15,15 @@
  *@
 
 @import uk.gov.hmrc.helplinefrontend.config.AppConfig
-@import uk.gov.hmrc.govukfrontend.views.Layouts
 
-@this(
-        govukLayout: GovukLayout,
-        head: Head,
-        hmrcStandardFooter: HmrcStandardFooter,
-        languageSelect: LanguageSelect
-)
+@this(govukLayout: GovukLayout,
+      head: Head,
+      hmrcStandardFooter: HmrcStandardFooter,
+      languageSelect: LanguageSelect)
+
 @(pageTitle: Option[String] = None,
-        headBlock: Option[Html] = None,
-        scriptsBlock: Option[Html] = None
+  headBlock: Option[Html] = None,
+  scriptsBlock: Option[Html] = None
 )(contentBlock: Html)(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
 
 @beforeContentBlock = {

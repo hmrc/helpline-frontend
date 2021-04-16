@@ -14,15 +14,11 @@
  * limitations under the License.
  */
 
-import org.scalatest.matchers.should.Matchers
-import org.scalatest.wordspec.AnyWordSpec
+package uk.gov.hmrc.helplinefrontend.controllers
 
-class TempItTest extends AnyWordSpec with Matchers {
-  //this is a temporary It:test to make the pipeline pass, remove when correct it:tests have been added
-  "the pipeline" should {
-    "pass with a simple test" in {
-      val result = 1+1
-      result shouldBe 2
-    }
-  }
-}
+import com.google.inject.{Inject, Singleton}
+import controllers.{AssetsBuilder, AssetsMetadata}
+import play.api.http.HttpErrorHandler
+
+@Singleton
+class AssetsController @Inject()(errorHandler: HttpErrorHandler, meta: AssetsMetadata) extends AssetsBuilder(errorHandler, meta)

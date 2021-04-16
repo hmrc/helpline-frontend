@@ -14,14 +14,17 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.helplinefrontend.config
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
+import play.api.test.WsTestClient
+import uk.gov.hmrc.integration.ServiceSpec
 
-import javax.inject.{Inject, Singleton}
-import play.api.Configuration
+class helperSpec extends AnyWordSpec with Matchers with WsTestClient with ServiceSpec {
 
-@Singleton
-class AppConfig @Inject()(config: Configuration) {
+  override def afterAll(): Unit = {
+    // Not calling this as we don't use ServiceManagerClient
+  }
 
-  val welshLanguageSupportEnabled: Boolean = config.getOptional[Boolean]("features.welsh-language-support").getOrElse(true)
+  override def externalServices: Seq[String] = Seq.empty
 
 }
