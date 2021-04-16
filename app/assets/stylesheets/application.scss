@@ -1,5 +1,19 @@
-$govuk-assets-path: "/helpline-frontend/assets/lib/govuk-frontend/govuk/assets/";
-$hmrc-assets-path: "/helpline-frontend/assets/lib/hmrc-frontend/hmrc/";
+$govuk-assets-path: "/helpline/assets/lib/govuk-frontend/govuk/assets/";
+$hmrc-assets-path: "/helpline/assets/lib/hmrc-frontend/hmrc/";
 
 @import "lib/govuk-frontend/govuk/all";
 @import "lib/hmrc-frontend/hmrc/all";
+
+.box--shaded {
+  padding: 10px 20px;
+}
+
+.box--shaded {
+  margin: 2em 0;
+  padding: 2em;
+  background-color: #dee0e2;
+
+  p {
+    margin-bottom: 0;
+  }
+}

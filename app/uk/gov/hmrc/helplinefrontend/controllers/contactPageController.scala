@@ -16,26 +16,25 @@
 
 package uk.gov.hmrc.helplinefrontend.controllers
 
-import javax.inject.{Inject, Singleton}
-
 import play.api.mvc._
-import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
-import uk.gov.hmrc.helplinefrontend.views.html.HelloWorldPage
+import uk.gov.hmrc.helplinefrontend.views.html.ChildBenefit
+import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
+import javax.inject.{Inject, Singleton}
 import scala.concurrent.Future
 
 @Singleton
-class HelloWorldController @Inject()(
+class ContactPageController @Inject()(
   appConfig: AppConfig,
   mcc: MessagesControllerComponents,
-  helloWorldPage: HelloWorldPage)
+  childBenefitPage: ChildBenefit)
     extends FrontendController(mcc) {
 
   implicit val config: AppConfig = appConfig
 
-  val helloWorld: Action[AnyContent] = Action.async { implicit request =>
-    Future.successful(Ok(helloWorldPage()))
+  val childBenefit: Action[AnyContent] = Action.async { implicit request =>
+    Future.successful(Ok(childBenefitPage()))
   }
 
 }
