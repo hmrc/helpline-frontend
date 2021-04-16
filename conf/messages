@@ -1,3 +1,14 @@
-service.name = helpline-frontend
-service.homePageUrl = /helpline-frontend
-service.text = This is your new service
+service.name=
+title.suffix=- GOV.UK
+label.telephone=Telephone
+label.outside-uk=Outside UK
+label.monday-friday=Monday to Friday
+call-charges=<a class="govuk-link" href="{0}">Find out about call charges</a>.
+get-help=Get help <a class="govuk-link" href="{0}">dealing with HMRC if you have additional needs</a>.
+
+child-benefit.title=Call the Child Benefits helpline
+child-benefit.telephone=0300 200 3100
+child-benefit.telephone.international=+44 161 210 3086
+child-benefit.hours.monday-friday=8:30am to 5pm
+child-benefit.closed=Closed weekends and bank holidays.
+
