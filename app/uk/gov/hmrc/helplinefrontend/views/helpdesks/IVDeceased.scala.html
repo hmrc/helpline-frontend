@@ -26,13 +26,13 @@
         <a id="backLink" href="@back" class="govuk-back-link">@Messages("back")</a>
     }
 
-    <h1 class="heading-xlarge">
+    <h1 class="govuk-heading-xl">
         @messages("contact_us.deceased.h1")
     </h1>
     <p class="govuk-body-l call-hmrc">@messages("contact_us.deceased.call_hmrc")</p>
     <dl id="telephone">
-        <dt>@messages("contact_us.deceased.contact_number.telephone.text")</dt>
-        <dd class="govuk-heading-l">@messages("contact_us.deceased.contact_number.telephone.number")</dd>
+        <dt class="govuk-body govuk-!-margin-bottom-0">@messages("label.telephone")</dt>
+        <dd class="govuk-heading-l govuk-!-margin-top-0 govuk-!-padding-top-0 govuk-!-font-weight-bold govuk-!-margin-left-0">@messages("contact_us.deceased.contact_number.telephone.number")</dd>
     </dl>
     <div class="govuk-inset-text">
         <p id="advice-p1" class="govuk-!-font-weight-bold">@messages("contact_us.deceased.contact_number.call_advice.p1")</p>
@@ -43,20 +43,20 @@
         </ul>
     </div>
     <dl id="textphone">
-        <dt>@messages("contact_us.deceased.contact_number.textphone.text")</dt>
-        <dd class="govuk-!-font-weight-bold margin-bottom-20">@messages("contact_us.deceased.contact_number.textphone.number")</dd>
+        <dt class="govuk-body govuk-!-margin-bottom-0">@messages("contact_us.deceased.contact_number.textphone.text")</dt>
+        <dd class="govuk-heading-l govuk-!-margin-top-0 govuk-!-padding-top-0 govuk-!-font-weight-bold govuk-!-margin-left-0">@messages("contact_us.deceased.contact_number.textphone.number")</dd>
     </dl>
     <dl id="outside-uk">
-        <dt>@messages("contact_us.deceased.contact_number.no_uk_telephone.text")</dt>
-        <dd class="govuk-!-font-weight-bold margin-bottom-20">@messages("contact_us.deceased.contact_number.no_uk_telephone.number")</dd>
+        <dt class="govuk-body govuk-!-margin-bottom-0">@messages("label.outside-uk")</dt>
+        <dd class="govuk-body govuk-!-margin-top-0 govuk-!-padding-top-0 govuk-!-font-weight-bold govuk-!-margin-left-0">@messages("contact_us.deceased.contact_number.no_uk_telephone.number")</dd>
     </dl>
     <dl id="hours-weekdays">
-        <dt>@messages("contact_us.deceased.contact_hours.text1")</dt>
-        <dd class="govuk-!-font-weight-bold margin-bottom-20">@messages("contact_us.deceased.contact_hours.weekday")</dd>
+        <dt class="govuk-body govuk-!-margin-bottom-0">@messages("contact_us.deceased.contact_hours.text1")</dt>
+        <dd class="govuk-body govuk-!-margin-top-0 govuk-!-padding-top-0 govuk-!-font-weight-bold govuk-!-margin-left-0">@messages("contact_us.deceased.contact_hours.weekday")</dd>
     </dl>
-    <p id="hours-other" class="extra-space">@messages("contact_us.deceased.contact_hours.text2")</p>
-    <div class="box--shaded get-help">
-        <p>@Html(Messages("contact_us.deceased.getHelp", "https://www.gov.uk/dealing-hmrc-additional-needs/overview"))</p>
+    <p id="hours-other" class="extra-space govuk-body">@messages("contact_us.deceased.contact_hours.text2")</p>
+    <div class="box--shaded">
+        <p class="govuk-body">@Html(Messages("contact_us.deceased.getHelp", "https://www.gov.uk/dealing-hmrc-additional-needs/overview"))</p>
     </div>
     <p id="call-charges" class="govuk-body govuk-!-margin-bottom-9">@Html(Messages("contact_us.deceased.callCharges", "https://www.gov.uk/call-charges"))</p>
 
