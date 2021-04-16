@@ -17,7 +17,6 @@ child-benefit.closed=Ar gau ar benwythnosau a gwyliau banc.
 
 contact_us.deceased.h1=A yw’r person hwn wedi marw?
 contact_us.deceased.call_hmrc=Ffoniwch CThEM am help gyda threth ar ôl i rywun farw.
-contact_us.deceased.contact_number.telephone.text=Ffôn:
 contact_us.deceased.contact_number.telephone.number=0300 200 1900
 contact_us.deceased.contact_number.call_advice.p1=Pan fyddwch yn ffonio
 contact_us.deceased.contact_number.call_advice.p2=Mae’r llinell gymorth hon yn defnyddio meddalwedd adnabod lleferydd, felly gofynnir i chi pam eich bod yn ffonio CThEM. Gwnewch eich gorau i ateb gan ddefnyddio brawddegau a geiriau byr, er enghraifft:
