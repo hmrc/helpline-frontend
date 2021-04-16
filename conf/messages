@@ -1,11 +1,12 @@
 service.name=
-title.suffix=- GOV.UK
+title.suffix=- HMRC Helplines - GOV.UK
 
 back=Back
 
 label.telephone=Telephone
 label.outside-uk=Outside UK
 label.monday-friday=Monday to Friday
+label.opening-hours=Our phone line opening hours
 call-charges=<a class="govuk-link" href="{0}">Find out about call charges</a>.
 get-help=Get help <a class="govuk-link" href="{0}">dealing with HMRC if you have additional needs</a>.
 
@@ -14,6 +15,12 @@ child-benefit.telephone=0300 200 3100
 child-benefit.telephone.international=+44 161 210 3086
 child-benefit.hours.monday-friday=8:30am to 5pm
 child-benefit.closed=Closed weekends and bank holidays.
+
+income-tax.title=Call the taxes helpline
+income-tax.telephone=0300 200 3300
+income-tax.telephone.international=+44 135 535 9022
+income-tax.hours.monday-friday=8am to 6pm
+income-tax.closed=Closed weekends and bank holidays.
 
 contact_us.deceased.h1=Has this person died?
 contact_us.deceased.call_hmrc=Call HMRC for help with tax after someone dies.
