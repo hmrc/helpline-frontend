@@ -22,6 +22,12 @@ income-tax.telephone.international=+44 135 535 9022
 income-tax.hours.monday-friday=8am to 6pm
 income-tax.closed=Closed weekends and bank holidays.
 
+national-insurance.title=Call the National Insurance helpline
+national-insurance.telephone=0300 200 3500
+national-insurance.telephone.international=+44 191 203 7010
+national-insurance.hours.monday-friday=8:30am to 5pm
+national-insurance.closed=Closed weekends and bank holidays.
+
 contact_us.deceased.h1=Has this person died?
 contact_us.deceased.call_hmrc=Call HMRC for help with tax after someone dies.
 contact_us.deceased.contact_number.telephone.number=0300 200 3300

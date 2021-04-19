@@ -26,7 +26,7 @@ import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import scala.concurrent.Future
 
 @Singleton
-class CallHelpdeskController @Inject()(implicit appConfig: AppConfig, mcc: MessagesControllerComponents, ivDeceased: IVDeceased, childBenefitPage: ChildBenefit, incomeTaxPage: IncomeTax)
+class CallHelpdeskController @Inject()(implicit appConfig: AppConfig, mcc: MessagesControllerComponents, ivDeceased: IVDeceased, childBenefitPage: ChildBenefit, incomeTaxPage: IncomeTax, nationalInsurancePage: NationalInsurance)
   extends FrontendController(mcc) {
 
   def getHelpdeskPage(helpKey: String, back: Option[String]): Action[AnyContent] = Action.async { implicit request =>
@@ -35,7 +35,9 @@ class CallHelpdeskController @Inject()(implicit appConfig: AppConfig, mcc: Messa
       case "deceased" => Future.successful(Ok(ivDeceased(back)))
       case "childbenefit" => Future.successful(Ok(childBenefitPage(back)))
       case "incometax" => Future.successful(Ok(incomeTaxPage(back)))
-      case _          => // default help page
+      case "nationalinsurance" => Future.successful(Ok(nationalInsurancePage(back)))
+
+      case _ => // default help page
         logger.warn(s"[VER-517] calling without a valid help key($helpKey): request.headers => ${request.headers}")
         // todo the default  page being built in VER-592
         Future.successful(Ok("the page being built in VER-592"))
