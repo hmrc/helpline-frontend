@@ -18,11 +18,13 @@ We permit one optional query parameter, ?back=URL. When this is set by the calli
 
 Several alternatives will be available and can be selected by indicating the helpKey that represents the particular helpdesk using the URL.
 
-| helpKey         | Page                                    |
-|-----------------|-----------------------------------------|
-| CHILDBENEFIT    | details about CHILDBENEFIT information  |
-| DECEASED        | details about DECEASED information      |
-| anything else   | DEFAULT page                            |
+| helpKey              | Page                                         |
+|----------------------|----------------------------------------------|
+| CHILDBENEFIT         | details about CHILDBENEFIT information       |
+| INCOMETAX            | details about INCOMETAX information          |
+| NATIONALINSURANCE    | details about NATIONALINSURANCE information  |
+| DECEASED             | details about DECEASED information           |
+| anything else        | DEFAULT page                                 |
 
 
 ### License
