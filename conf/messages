@@ -9,6 +9,10 @@ label.monday-friday=Monday to Friday
 label.opening-hours=Our phone line opening hours
 call-charges=<a class="govuk-link" href="{0}">Find out about call charges</a>.
 get-help=Get help <a class="govuk-link" href="{0}">dealing with HMRC if you have additional needs</a>.
+contact_hours.temp.text1=Our phone line opening hours have temporarily changed to:
+contact_hours.temp.weekday=Monday to Friday: 8am to 4pm
+contact_hours.temp.text2=This is due to having fewer advisers available to answer calls because of the measures put in place to stop the spread of coronavirus.
+more-details=<a class="govuk-link" href="{0}">More contact details (including webchat)</a>
 
 child-benefit.title=Call the Child Benefits helpline
 child-benefit.telephone=0300 200 3100
@@ -27,6 +31,12 @@ national-insurance.telephone=0300 200 3500
 national-insurance.telephone.international=+44 191 203 7010
 national-insurance.hours.monday-friday=8:30am to 5pm
 national-insurance.closed=Closed weekends and bank holidays.
+
+paye-employers.title=Call the PAYE for employers helpline
+paye-employers.telephone=0300 200 3200
+paye-employers.telephone.international=+44 151 268 0558
+paye-employers.hours.monday-friday=8am to 4pm
+paye-employers.closed=Closed weekends and bank holidays.
 
 contact_us.deceased.h1=Has this person died?
 contact_us.deceased.call_hmrc=Call HMRC for help with tax after someone dies.
