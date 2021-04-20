@@ -37,6 +37,7 @@ class CallHelpdeskController @Inject()(implicit
   extends FrontendController(mcc) {
 
   def getHelpdeskPage(helpKey: String, back: Option[String]): Action[AnyContent] = Action.async { implicit request =>
+    logger.warn(s"[VER-517] calling for $helpKey")
     helpKey.toLowerCase match {
       case "deceased" => Future.successful(Ok(ivDeceased(back)))
       case "childbenefit" => Future.successful(Ok(childBenefitPage(back)))
@@ -45,6 +46,7 @@ class CallHelpdeskController @Inject()(implicit
       case "payeforemployers" => Future.successful(Ok(payeForEmployersPage(back)))
 
       case _ => // default help page
+        logger.warn(s"[VER-517] calling without a valid help key($helpKey): request.headers => ${request.headers}")
         Future.successful(Ok("the page being built in VER-592"))
     }
 
