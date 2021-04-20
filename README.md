@@ -23,6 +23,7 @@ Several alternatives will be available and can be selected by indicating the hel
 | CHILDBENEFIT         | details about CHILDBENEFIT information       |
 | INCOMETAX            | details about INCOMETAX information          |
 | NATIONALINSURANCE    | details about NATIONALINSURANCE information  |
+| PAYEFOREMPLOYERS     | details about PAYEFOREMPLOYERS information   |
 | DECEASED             | details about DECEASED information           |
 | anything else        | DEFAULT page                                 |
 
