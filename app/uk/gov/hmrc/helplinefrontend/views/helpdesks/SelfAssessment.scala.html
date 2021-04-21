@@ -1,0 +1,51 @@
+@*
+ * Copyright 2021 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import uk.gov.hmrc.helplinefrontend.config.AppConfig
+@import uk.gov.hmrc.helplinefrontend.views.html.Layout
+
+@this(layout: Layout)
+
+@(back: Option[String])(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
+
+@layout(pageTitle = Some(s"${messages("self-assessment.title")} ${messages("title.suffix")}")) {
+
+    @if(back.nonEmpty) {
+        <a id="backLink" href="@back" class="govuk-back-link">@Messages("back")</a>
+    }
+
+    <h1 class="govuk-heading-xl">
+    @messages("self-assessment.title")
+    </h1>
+    <dl>
+        <dt class="govuk-body govuk-!-margin-bottom-0">@messages("label.telephone"):</dt>
+        <dd class="govuk-heading-l govuk-!-margin-top-0 govuk-!-padding-top-0 govuk-!-font-weight-bold govuk-!-margin-left-0">@messages("self-assessment.telephone")</dd>
+    </dl>
+    <dl>
+        <dt class="govuk-body govuk-!-margin-bottom-0">@messages("label.outside-uk"):</dt>
+        <dd class="govuk-body govuk-!-font-weight-bold govuk-!-margin-left-0">@messages("self-assessment.telephone.international")</dd>
+    </dl>
+    <dl id="hours-weekdays">
+        <dt class="govuk-body govuk-!-margin-bottom-0">@messages("contact_hours.temp.text1")</dt>
+        <dd class="govuk-body govuk-!-margin-top-0 govuk-!-padding-top-0 govuk-!-font-weight-bold govuk-!-margin-left-0">@messages("contact_hours.temp.weekday")</dd>
+    </dl>
+    <p id="hours-other" class="extra-space govuk-body">@messages("contact_hours.temp.text2")</p>
+    <p class="govuk-body">@Html(messages("more-details", "https://www.gov.uk/government/organisations/hm-revenue-customs/contact/employer-enquiries"))
+    <div class="box--shaded">
+        <p class="govuk-body">@Html(messages("get-help", "https://www.gov.uk/get-help-hmrc-extra-support"))</p>
+    </div>
+    <p class="govuk-body govuk-!-margin-bottom-9">@Html(messages("call-charges", "https://www.gov.uk/call-charges"))</p>
+}
