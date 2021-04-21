@@ -44,6 +44,12 @@ self-assessment.telephone.international=+44 161 931 9070
 self-assessment.hours.monday-friday=8am to 4pm
 self-assessment.closed=Closed weekends and bank holidays.
 
+state-pension.title=Call the pensions helpline
+state-pension.telephone=0300 123 1079
+state-pension.telephone.international=+44 300 123 1079
+state-pension.hours.monday-friday=8am to 4pm
+state-pension.closed=Closed weekends and bank holidays.
+
 contact_us.deceased.h1=Has this person died?
 contact_us.deceased.call_hmrc=Call HMRC for help with tax after someone dies.
 contact_us.deceased.contact_number.telephone.number=0300 200 3300

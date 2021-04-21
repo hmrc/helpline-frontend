@@ -24,7 +24,7 @@ import play.api.mvc.{MessagesControllerComponents, Result}
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
-import uk.gov.hmrc.helplinefrontend.views.html.helpdesks.{ChildBenefit, IVDeceased, IncomeTax, NationalInsurance, PayeForEmployers, SelfAssessment}
+import uk.gov.hmrc.helplinefrontend.views.html.helpdesks.{ChildBenefit, IVDeceased, IncomeTax, NationalInsurance, PayeForEmployers, SelfAssessment, StatePension}
 
 import scala.concurrent.Future
 
@@ -40,8 +40,9 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   val nationalInsurance: NationalInsurance = app.injector.instanceOf[NationalInsurance]
   val payeForEmployers: PayeForEmployers = app.injector.instanceOf[PayeForEmployers]
   val selfAssessment: SelfAssessment = app.injector.instanceOf[SelfAssessment]
+  val statePension: StatePension = app.injector.instanceOf[StatePension]
 
-  val controller: CallHelpdeskController = new CallHelpdeskController()(appConfig, messagesCC, contactUsDeceased, childBenefit, incomeTax, nationalInsurance, payeForEmployers, selfAssessment)
+  val controller: CallHelpdeskController = new CallHelpdeskController()(appConfig, messagesCC, contactUsDeceased, childBenefit, incomeTax, nationalInsurance, payeForEmployers, selfAssessment, statePension)
 
   val childBenefitHelpKey: String = "CHILDBENEFIT"
   val deceasedHelpKey: String = "deceased"
@@ -49,6 +50,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   val nationalInsuranceHelpKey: String = "NATIONALINSURANCE"
   val payeForEmployersHelpKey: String = "PAYEFOREMPLOYERS"
   val selfAssessmentHelpKey: String = "SELFASSESSMENT"
+  val statePensionHelpKey: String = "STATEPENSION"
 
   "CallHelpdeskController get deceased help page" should {
     "return deceased help page if the help key is 'deceased' but there is no go back url" in {
@@ -142,6 +144,22 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       val result: Future[Result] = controller.getHelpdeskPage(selfAssessmentHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Call the Self Assessment helpline") shouldBe true
+      contentAsString(result).contains("Back") shouldBe true
+    }
+  }
+
+  "CallHelpdeskController get State Pension help page" should {
+    "return Self Assessment help page if the help key is 'STATEPENSION' but there is no go back url" in {
+      val result: Future[Result] = controller.getHelpdeskPage(statePensionHelpKey, None)(fakeRequest)
+      status(result) shouldBe Status.OK
+      contentAsString(result).contains("Call the pensions helpline") shouldBe true
+      contentAsString(result).contains("Back") shouldBe false
+    }
+
+    "return State Pension help page if the help key is 'STATEPENSION' and there is a go back url" in {
+      val result: Future[Result] = controller.getHelpdeskPage(statePensionHelpKey, Some("backURL"))(fakeRequest)
+      status(result) shouldBe Status.OK
+      contentAsString(result).contains("Call the pensions helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
     }
   }

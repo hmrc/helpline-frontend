@@ -26,6 +26,7 @@ Several alternatives will be available and can be selected by indicating the hel
 | PAYEFOREMPLOYERS     | details about PAYEFOREMPLOYERS information   |
 | DECEASED             | details about DECEASED information           |
 | SELFASSESSMENT       | details about SELFASSESSMENT information     |
+| STATEPENSION         | details about STATEPENSION information       |
 | anything else        | DEFAULT page                                 |
 
 
