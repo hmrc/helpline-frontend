@@ -25,6 +25,7 @@ Several alternatives will be available and can be selected by indicating the hel
 | NATIONALINSURANCE    | details about NATIONALINSURANCE information  |
 | PAYEFOREMPLOYERS     | details about PAYEFOREMPLOYERS information   |
 | DECEASED             | details about DECEASED information           |
+| SELFASSESSMENT       | details about SELFASSESSMENT information     |
 | anything else        | DEFAULT page                                 |
 
 
