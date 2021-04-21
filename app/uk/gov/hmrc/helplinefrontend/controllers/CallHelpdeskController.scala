@@ -34,7 +34,7 @@ class CallHelpdeskController @Inject()(implicit
    incomeTaxPage: IncomeTax,
    nationalInsurancePage: NationalInsurance,
    payeForEmployersPage: PayeForEmployers,
-   selfAssessment: SelfAssessment)
+   selfAssessmentPage: SelfAssessment)
   extends FrontendController(mcc) {
 
   def getHelpdeskPage(helpKey: String, back: Option[String]): Action[AnyContent] = Action.async { implicit request =>
@@ -45,7 +45,7 @@ class CallHelpdeskController @Inject()(implicit
       case "incometax" => Future.successful(Ok(incomeTaxPage(back)))
       case "nationalinsurance" => Future.successful(Ok(nationalInsurancePage(back)))
       case "payeforemployers" => Future.successful(Ok(payeForEmployersPage(back)))
-      case "selfassessment" => Future.successful(Ok(selfAssessment(back)))
+      case "selfassessment" => Future.successful(Ok(selfAssessmentPage(back)))
 
       case _ => // default help page
         logger.warn(s"[VER-517] calling without a valid help key($helpKey): request.headers => ${request.headers}")
