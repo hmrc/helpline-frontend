@@ -38,6 +38,12 @@ paye-employers.telephone.international=+44 151 268 0558
 paye-employers.hours.monday-friday=8am to 4pm
 paye-employers.closed=Closed weekends and bank holidays.
 
+self-assessment.title=Call the Self Assessment helpline
+self-assessment.telephone=0300 200 3310
+self-assessment.telephone.international=+44 161 931 9070
+self-assessment.hours.monday-friday=8am to 4pm
+self-assessment.closed=Closed weekends and bank holidays.
+
 contact_us.deceased.h1=Has this person died?
 contact_us.deceased.call_hmrc=Call HMRC for help with tax after someone dies.
 contact_us.deceased.contact_number.telephone.number=0300 200 3300
