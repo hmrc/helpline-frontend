@@ -21,11 +21,7 @@
 
 @(back: Option[String])(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
 
-@layout(pageTitle = Some(s"${messages("national-insurance.title")} ${messages("title.suffix")}")) {
-
-    @if(back.nonEmpty) {
-        <a id="backLink" href="@back" class="govuk-back-link">@Messages("back")</a>
-    }
+@layout(pageTitle = Some(s"${messages("national-insurance.title")} ${messages("title.suffix")}"), backLinkLocation = back.getOrElse("")) {
 
     <h1 class="govuk-heading-xl">
     @messages("national-insurance.title")
