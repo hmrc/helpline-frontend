@@ -24,4 +24,18 @@ class AppConfig @Inject()(config: Configuration) {
 
   val welshLanguageSupportEnabled: Boolean = config.getOptional[Boolean]("features.welsh-language-support").getOrElse(true)
 
+ private val defaultCallOptions = List(
+    "childbenefit",
+    "incometax",
+    "nationalinsurance",
+    "payeforemployers",
+    "selfassessment",
+    "statepension",
+    "taxcredits",
+    "default"
+  )
+
+  val callOptionsList: List[String] =
+    config.getOptional[String]("features.call-options")
+      .fold(defaultCallOptions)(_.split(",").toList)
 }

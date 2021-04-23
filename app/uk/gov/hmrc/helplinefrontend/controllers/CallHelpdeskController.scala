@@ -20,6 +20,7 @@ import javax.inject.{Inject, Singleton}
 import play.api.Logger.logger
 import play.api.mvc._
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
+import uk.gov.hmrc.helplinefrontend.models.form.CallOptionForm
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
@@ -36,7 +37,8 @@ class CallHelpdeskController @Inject()(implicit
    payeForEmployersPage: PayeForEmployers,
    selfAssessmentPage: SelfAssessment,
    statePensionPage: StatePension,
-   taxCreditsPage: TaxCredits)
+   taxCreditsPage: TaxCredits,
+   callOptionsNoAnswers: CallOptionsNoAnswers)
   extends FrontendController(mcc) {
 
   def getHelpdeskPage(helpKey: String, back: Option[String]): Action[AnyContent] = Action.async { implicit request =>
@@ -55,7 +57,19 @@ class CallHelpdeskController @Inject()(implicit
         logger.warn(s"[VER-517] calling without a valid help key($helpKey): request.headers => ${request.headers}")
         Future.successful(Ok("the page being built in VER-592"))
     }
+  }
 
+  def callOptionsNoAnswersPage(): Action[AnyContent] = Action.async { implicit request =>
+    logger.debug(s"[VER-539] Showing options for ${ appConfig.callOptionsList.mkString(", ")}")
+    Future.successful(Ok(callOptionsNoAnswers(CallOptionForm.callOptionForm(appConfig.callOptionsList))))
+  }
+
+  def selectCallOption(): Action[AnyContent] = Action.async { implicit request =>
+   val result = CallOptionForm.callOptionForm(appConfig.callOptionsList).bindFromRequest.fold(
+      errors ⇒ BadRequest(callOptionsNoAnswers(errors)),
+      value => Redirect(routes.CallHelpdeskController.getHelpdeskPage(value, Some(routes.CallHelpdeskController.callOptionsNoAnswersPage().url)))
+    )
+    Future.successful(result)
   }
 
 }

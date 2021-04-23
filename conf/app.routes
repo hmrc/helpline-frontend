@@ -7,4 +7,6 @@
 GET        /assets/*file        uk.gov.hmrc.helplinefrontend.controllers.AssetsController.versioned(path = "/public", file: Asset)
 GET        /language/:lang      uk.gov.hmrc.helplinefrontend.controllers.LanguageSwitchController.switchToLanguage(lang: String)
 
+GET        /call-options-no-answers   uk.gov.hmrc.helplinefrontend.controllers.CallHelpdeskController.callOptionsNoAnswersPage()
+POST       /call-options-no-answers   uk.gov.hmrc.helplinefrontend.controllers.CallHelpdeskController.selectCallOption()
 GET        /:helpKey            uk.gov.hmrc.helplinefrontend.controllers.CallHelpdeskController.getHelpdeskPage(helpKey: String, back: Option[String])
