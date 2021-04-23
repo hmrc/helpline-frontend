@@ -14,20 +14,52 @@
  * limitations under the License.
  */
 
+import java.net.URLEncoder
+
 import play.api.http.Status.OK
+import play.api.libs.ws.WSResponse
+import play.api.test.Helpers.LOCATION
 
 class CallHelpdeskControllerISpec extends helperSpec {
 
   val getPageBaseUrl = "/helpline"
   val deceasedHelpKey = "deceased"
+  val callOptionsPage = "/call-options-no-answers"
 
-  "GET /contact/:helpKey" should {
+  "GET /helpline/:helpKey" should {
     "return deceased help page if the help key is 'deceased' but there is no go back url" in {
       withClient {
         wsClient => {
           wsClient.url(resource(s"$getPageBaseUrl/$deceasedHelpKey")).get().futureValue
         }
       }.status shouldBe OK
+    }
+  }
+
+  "GET /helpline/call-options-no-answers" should {
+    "return a page which list the call options and takes you to the corresponding help pages" in {
+      val callOptions = List("childbenefit", "incometax", "nationalinsurance", "payeforemployers", "selfassessment", "statepension", "taxcredits", "default")
+      val backLinkToCallOptionsPage = URLEncoder.encode(getPageBaseUrl + callOptionsPage, "UTF-8")
+
+      withClient {
+        wsClient => {
+          val callOptionsPageResponse: WSResponse = wsClient.url(resource(s"$getPageBaseUrl$callOptionsPage")).get().futureValue
+
+          callOptionsPageResponse.status shouldBe OK
+          callOptions.map {
+            callOption =>
+
+              callOptionsPageResponse.body should include(callOption)
+
+              val callOptionSelected = s"selected-call-option=${URLEncoder.encode(callOption, "UTF-8")}"
+              val submitCallOption = wsClient.url(resource(s"$getPageBaseUrl$callOptionsPage"))
+                .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded")
+                .withFollowRedirects(false).post(callOptionSelected).futureValue
+
+              submitCallOption.header(LOCATION).get should endWith(s"$getPageBaseUrl/$callOption?back=$backLinkToCallOptionsPage")
+          }
+        }
+      }
     }
   }
 

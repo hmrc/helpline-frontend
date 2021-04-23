@@ -24,7 +24,7 @@ import play.api.mvc.{MessagesControllerComponents, Result}
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
-import uk.gov.hmrc.helplinefrontend.views.html.helpdesks.{ChildBenefit, IVDeceased, IncomeTax, NationalInsurance, PayeForEmployers, SelfAssessment, StatePension, TaxCredits}
+import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
 
 import scala.concurrent.Future
 
@@ -42,8 +42,9 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   val selfAssessment: SelfAssessment = app.injector.instanceOf[SelfAssessment]
   val statePension: StatePension = app.injector.instanceOf[StatePension]
   val taxCredits: TaxCredits = app.injector.instanceOf[TaxCredits]
+  val callOptionsNoAnswers: CallOptionsNoAnswers = app.injector.instanceOf[CallOptionsNoAnswers]
 
-  val controller: CallHelpdeskController = new CallHelpdeskController()(appConfig, messagesCC, contactUsDeceased, childBenefit, incomeTax, nationalInsurance, payeForEmployers, selfAssessment, statePension, taxCredits)
+  val controller: CallHelpdeskController = new CallHelpdeskController()(appConfig, messagesCC, contactUsDeceased, childBenefit, incomeTax, nationalInsurance, payeForEmployers, selfAssessment, statePension, taxCredits, callOptionsNoAnswers)
 
   val childBenefitHelpKey: String = "CHILDBENEFIT"
   val deceasedHelpKey: String = "deceased"
@@ -179,6 +180,16 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Call the Tax Credits helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
+    }
+  }
+
+  "CallHelpdeskController get call-options-no-answers page" should {
+    "return a page with a list all the available help pages as radio buttons, and no go back url" in {
+      val result: Future[Result] = controller.callOptionsNoAnswersPage()(fakeRequest)
+      status(result) shouldBe Status.OK
+      appConfig.callOptionsList.map(option =>
+        contentAsString(result).contains(option)).reduce(_ && _) shouldBe true
+      contentAsString(result).contains("Back") shouldBe false
     }
   }
 }
