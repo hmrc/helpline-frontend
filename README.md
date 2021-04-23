@@ -27,6 +27,7 @@ Several alternatives will be available and can be selected by indicating the hel
 | DECEASED             | details about DECEASED information           |
 | SELFASSESSMENT       | details about SELFASSESSMENT information     |
 | STATEPENSION         | details about STATEPENSION information       |
+| TAXCREDITS           | details about TAXCREDITS information         |
 | anything else        | DEFAULT page                                 |
 
 

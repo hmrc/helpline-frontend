@@ -20,7 +20,7 @@ child-benefit.telephone.international=+44 161 210 3086
 child-benefit.hours.monday-friday=8:30am to 5pm
 child-benefit.closed=Closed weekends and bank holidays.
 
-income-tax.title=Call the taxes helpline
+income-tax.title=Call the Income tax helpline
 income-tax.telephone=0300 200 3300
 income-tax.telephone.international=+44 135 535 9022
 income-tax.hours.monday-friday=8am to 6pm
@@ -44,11 +44,17 @@ self-assessment.telephone.international=+44 161 931 9070
 self-assessment.hours.monday-friday=8am to 4pm
 self-assessment.closed=Closed weekends and bank holidays.
 
-state-pension.title=Call the pensions helpline
+state-pension.title=Call the Pensions helpline
 state-pension.telephone=0300 123 1079
-state-pension.telephone.international=+44 (0) 300 123 1079
+state-pension.telephone.international=+44 300 123 1079
 state-pension.hours.monday-friday=8am to 4pm
 state-pension.closed=Closed weekends and bank holidays.
+
+tax-credits.title=Call the Tax Credits helpline
+tax-credits.telephone=0345 300 3900
+tax-credits.telephone.international=+44 2890 538 192
+tax-credits.hours.monday-friday=8:30am to 5pm
+tax-credits.closed=Closed weekends and bank holidays.
 
 contact_us.deceased.h1=Has this person died?
 contact_us.deceased.call_hmrc=Call HMRC for help with tax after someone dies.
