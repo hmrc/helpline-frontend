@@ -18,11 +18,9 @@ package uk.gov.hmrc.helplinefrontend.controllers
 
 import javax.inject.{Inject, Singleton}
 import play.api.Logger.logger
-import play.api.data.Form
-import play.api.data.Forms.{nonEmptyText, single}
-import play.api.data.validation.{Constraint, Invalid, Valid}
 import play.api.mvc._
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
+import uk.gov.hmrc.helplinefrontend.models.form.CallOptionForm
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
@@ -62,32 +60,16 @@ class CallHelpdeskController @Inject()(implicit
   }
 
   def callOptionsNoAnswersPage(): Action[AnyContent] = Action.async { implicit request =>
-        logger.debug(s"[VER-539] Showing options for ${ appConfig.callOptionsList.mkString(", ")}")
-
-    Future.successful(Ok(callOptionsNoAnswers(callOptionform)))
-  }
-
-
-  def oneOfConstraint[T](options: Seq[T], error: String = "error.invalid"): Constraint[T] = Constraint { v ⇒
-    if (options contains v)
-      Valid
-    else
-      Invalid(error)
-  }
-
-  val callOptionform: Form[String] = {
-    Form(single("selected-call-option" → (nonEmptyText verifying oneOfConstraint(appConfig.callOptionsList))))
+    logger.debug(s"[VER-539] Showing options for ${ appConfig.callOptionsList.mkString(", ")}")
+    Future.successful(Ok(callOptionsNoAnswers(CallOptionForm.callOptionForm(appConfig.callOptionsList))))
   }
 
   def selectCallOption(): Action[AnyContent] = Action.async { implicit request =>
-   val result = callOptionform.bindFromRequest.fold(
+   val result = CallOptionForm.callOptionForm(appConfig.callOptionsList).bindFromRequest.fold(
       errors ⇒ BadRequest(callOptionsNoAnswers(errors)),
       value => Redirect(routes.CallHelpdeskController.getHelpdeskPage(value, Some(routes.CallHelpdeskController.callOptionsNoAnswersPage().url)))
     )
     Future.successful(result)
   }
-
-
-
 
 }

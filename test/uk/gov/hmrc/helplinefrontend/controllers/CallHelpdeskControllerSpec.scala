@@ -44,7 +44,19 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   val taxCredits: TaxCredits = app.injector.instanceOf[TaxCredits]
   val callOptionsNoAnswers: CallOptionsNoAnswers = app.injector.instanceOf[CallOptionsNoAnswers]
 
-  val controller: CallHelpdeskController = new CallHelpdeskController()(appConfig, messagesCC, contactUsDeceased, childBenefit, incomeTax, nationalInsurance, payeForEmployers, selfAssessment, statePension, taxCredits, callOptionsNoAnswers)
+  val controller: CallHelpdeskController =
+    new CallHelpdeskController()(
+                                 appConfig,
+                                 messagesCC,
+                                 contactUsDeceased,
+                                 childBenefit,
+                                 incomeTax,
+                                 nationalInsurance,
+                                 payeForEmployers,
+                                 selfAssessment,
+                                 statePension,
+                                 taxCredits,
+                                 callOptionsNoAnswers)
 
   val childBenefitHelpKey: String = "CHILDBENEFIT"
   val deceasedHelpKey: String = "deceased"
