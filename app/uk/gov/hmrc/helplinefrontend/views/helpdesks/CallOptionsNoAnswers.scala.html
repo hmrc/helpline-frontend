@@ -37,7 +37,7 @@
         @if(callOptionForm.hasErrors) {
             @govukErrorSummary(ErrorSummary(
                 title = Text(messages("call-options-no-answers.h2-error")),
-                errorList = callOptionForm.errors.map(err => ErrorLink(href = Some("#" + err.key), content = Text(messages("call-options-no-answers.error")))
+                errorList = callOptionForm.errors.map(err => ErrorLink(href = Some("#selected-call-option-error"), content = Text(messages("call-options-no-answers.error")))
                 ))
             )
         }
@@ -51,8 +51,9 @@
                 ))
             )),
             hint = None,
-            errorMessage = Some(ErrorMessage(
-                content = Text(messages("call-options-no-answers.error")))),
+            errorMessage = if(callOptionForm.hasErrors)Some(ErrorMessage(
+                content = Text(messages("call-options-no-answers.error"))))
+            else None,
             idPrefix = Some("selected-call-option"),
             name = "selected-call-option",
             items = appConfig.callOptionsList.map { selectedCallOption =>
