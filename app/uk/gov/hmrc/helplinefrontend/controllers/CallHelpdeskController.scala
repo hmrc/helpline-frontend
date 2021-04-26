@@ -55,7 +55,7 @@ class CallHelpdeskController @Inject()(implicit
 
       case _ => // default help page
         logger.warn(s"[VER-517] calling without a valid help key($helpKey): request.headers => ${request.headers}")
-        Future.successful(Ok("the page being built in VER-592"))
+        Future.successful(Ok(incomeTaxPage(back)))
     }
   }
 
