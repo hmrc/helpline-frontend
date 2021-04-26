@@ -66,6 +66,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   val selfAssessmentHelpKey: String = "SELFASSESSMENT"
   val statePensionHelpKey: String = "STATEPENSION"
   val taxCreditsHelpKey: String = "TAXCREDITS"
+  val defaultHelpKey: String = "DEFAULT"
 
   "CallHelpdeskController get deceased help page" should {
     "return deceased help page if the help key is 'deceased' but there is no go back url" in {
@@ -202,6 +203,22 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       appConfig.callOptionsList.map(option =>
         contentAsString(result).contains(option)).reduce(_ && _) shouldBe true
       contentAsString(result).contains("Back") shouldBe false
+    }
+  }
+
+  "CallHelpdeskController get Income Tax help page" should {
+    "return Income Tax help page if the help key is 'DEFAULT' but there is no go back url" in {
+      val result: Future[Result] = controller.getHelpdeskPage(defaultHelpKey, None)(fakeRequest)
+      status(result) shouldBe Status.OK
+      contentAsString(result).contains("Call the Income tax helpline") shouldBe true
+      contentAsString(result).contains("Back") shouldBe false
+    }
+
+    "return Income Tax help page if the help key is 'DEFAULT' and there is a go back url" in {
+      val result: Future[Result] = controller.getHelpdeskPage(defaultHelpKey, Some("backURL"))(fakeRequest)
+      status(result) shouldBe Status.OK
+      contentAsString(result).contains("Call the Income tax helpline") shouldBe true
+      contentAsString(result).contains("Back") shouldBe true
     }
   }
 }
