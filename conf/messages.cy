@@ -3,6 +3,19 @@ title.suffix=- GOV.UK
 
 back=Yn ôl
 
+call-options-no-answers.h1=Pa wasanaeth ydych yn ceisio cael ato?
+call-options-no-answers.h2-error=There is a problem
+call-options-no-answers.error=Select which service you were trying to access using this account
+
+call-option.label.childbenefit=Budd-dal Plant
+call-option.label.incometax=Treth Incwm
+call-option.label.nationalinsurance=Yswiriant Gwladol
+call-option.label.payeforemployers=TWE i gyflogwyr
+call-option.label.selfassessment=Hunanasesiad
+call-option.label.statepension=Pensiwn y Wladwriaeth
+call-option.label.taxcredits=Credydau Treth
+call-option.label.default=Rhywbeth arall
+
 label.telephone=Ffôn
 label.outside-uk=Y tu allan i’r DU
 label.monday-friday=Dydd Llun – Dydd Gwener
