@@ -8,13 +8,13 @@ call-options-no-answers.h1=Which service are you trying to access?
 call-options-no-answers.h2-error=There is a problem
 call-options-no-answers.error=Select which service you were trying to access using this account
 
-call-option.label.childbenefit=Child Benefits
-call-option.label.incometax=Income Tax
-call-option.label.nationalinsurance=National Insurance
-call-option.label.payeforemployers=PAYE for Employers
-call-option.label.selfassessment=Self Assessment
-call-option.label.statepension=State Pension
-call-option.label.taxcredits=Tax Credits
+call-option.label.child-benefits=Child Benefits
+call-option.label.income-tax=Income Tax
+call-option.label.national-insurance=National Insurance
+call-option.label.paye-for-employers=PAYE for Employers
+call-option.label.self-assessment=Self Assessment
+call-option.label.state-pension=State Pension
+call-option.label.tax-credits=Tax Credits
 call-option.label.default=Something else
 
 label.telephone=Telephone
