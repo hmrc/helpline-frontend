@@ -20,7 +20,6 @@ call-option.label.default=Something else
 label.telephone=Telephone
 label.outside-uk=Outside UK
 label.monday-friday=Monday to Friday
-label.opening-hours=Our phone line opening hours
 call-charges=<a class="govuk-link" href="{0}">Find out about call charges</a>.
 get-help=Get help <a class="govuk-link" href="{0}">dealing with HMRC if you have additional needs</a>.
 contact_hours.temp.text1=Our phone line opening hours have temporarily changed to:
