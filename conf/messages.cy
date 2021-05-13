@@ -18,8 +18,8 @@ call-option.label.tax-credits=Credydau Treth
 call-option.label.default=Rhywbeth arall
 
 call-options-no-answers.h1=Pa wasanaeth ydych yn ceisio cael ato?
-call-options-no-answers.h2-error=There is a problem
-call-options-no-answers.error=Select which service you were trying to access using this account
+call-options-no-answers.h2-error=Mae problem wedi codi
+call-options-no-answers.error=Dewiswch pa wasanaeth yr oeddech yn ceisio cael mynediad ato gan ddefnyddio’r cyfrif hwn
 
 call-option.label.childbenefit=Budd-dal Plant
 call-option.label.incometax=Treth Incwm
