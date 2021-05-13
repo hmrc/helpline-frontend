@@ -6,7 +6,7 @@ continue=Yn eich blaen
 
 call-options-no-answers.h1=Pa wasanaeth ydych yn ceisio cael ato?
 call-options-no-answers.h2-error=Mae problem wedi codi
-
+call-options-no-answers.error=Dewiswch pa wasanaeth yr oeddech yn ceisio cael mynediad ato gan ddefnyddio’r cyfrif hwn
 
 call-option.label.child-benefits=Budd-dal Plant
 call-option.label.income-tax=Treth Incwm
