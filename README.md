@@ -19,17 +19,17 @@ We permit one optional query parameter, ?back=URL. When this is set by the calli
 
 Several alternatives will be available and can be selected by indicating the helpKey that represents the particular helpdesk using the URL.
 
-| helpKey              | Page                                         |
-|----------------------|----------------------------------------------|
-| CHILDBENEFIT         | details about CHILDBENEFIT information       |
-| INCOMETAX            | details about INCOMETAX information          |
-| NATIONALINSURANCE    | details about NATIONALINSURANCE information  |
-| PAYEFOREMPLOYERS     | details about PAYEFOREMPLOYERS information   |
-| DECEASED             | details about DECEASED information           |
-| SELFASSESSMENT       | details about SELFASSESSMENT information     |
-| STATEPENSION         | details about STATEPENSION information       |
-| TAXCREDITS           | details about TAXCREDITS information         |
-| anything else        | DEFAULT page                                 |
+| helpKey               | Page                                          |
+|-----------------------|-----------------------------------------------|
+| CHILD-BENEFIT         | details about CHILD-BENEFIT information       |
+| INCOME-TAX            | details about INCOME-TAX information          |
+| NATIONAL-INSURANCE    | details about NATIONAL-INSURANCE information  |
+| PAYE-FOR-EMPLOYERS    | details about PAYE-FOR-EMPLOYERS information  |
+| DECEASED              | details about DECEASED information            |
+| SELF-ASSESSMENT       | details about SELF-ASSESSMENT information     |
+| STATE-PENSION         | details about STATE-PENSION information       |
+| TAX-CREDITS           | details about TAX-CREDITS information         |
+| anything else         | DEFAULT page                                  |
 
 
 ### License

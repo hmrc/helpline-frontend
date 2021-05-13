@@ -45,13 +45,13 @@ class CallHelpdeskController @Inject()(implicit
     logger.warn(s"[VER-517] calling for $helpKey")
     helpKey.toLowerCase match {
       case "deceased" => Future.successful(Ok(ivDeceased(back)))
-      case "childbenefit" => Future.successful(Ok(childBenefitPage(back)))
-      case "incometax" => Future.successful(Ok(incomeTaxPage(back)))
-      case "nationalinsurance" => Future.successful(Ok(nationalInsurancePage(back)))
-      case "payeforemployers" => Future.successful(Ok(payeForEmployersPage(back)))
-      case "selfassessment" => Future.successful(Ok(selfAssessmentPage(back)))
-      case "statepension" => Future.successful(Ok(statePensionPage(back)))
-      case "taxcredits" => Future.successful(Ok(taxCreditsPage(back)))
+      case "child-benefits" => Future.successful(Ok(childBenefitPage(back)))
+      case "income-tax" => Future.successful(Ok(incomeTaxPage(back)))
+      case "national-insurance" => Future.successful(Ok(nationalInsurancePage(back)))
+      case "paye-for-employers" => Future.successful(Ok(payeForEmployersPage(back)))
+      case "self-assessment" => Future.successful(Ok(selfAssessmentPage(back)))
+      case "state-pension" => Future.successful(Ok(statePensionPage(back)))
+      case "tax-credits" => Future.successful(Ok(taxCreditsPage(back)))
 
       case _ => // default help page
         logger.warn(s"[VER-517] calling without a valid help key($helpKey): request.headers => ${request.headers}")
