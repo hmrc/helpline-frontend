@@ -23,9 +23,9 @@ label.monday-friday=Dydd Llun – Dydd Gwener
 
 call-charges=<a class="govuk-link" href="{0}">Gwybodaeth am gostau galwadau</a>.
 get-help=Help i <a href=>ddelio â CThEM os oes gennych anghenion ychwanegol</a>
-contact_hours.temp.text1=Mae oriau agor ein llinellau ffôn wedi newid dros dro:
-contact_hours.temp.weekday=Dydd Llun i Ddydd Gwener: 08:00 i 16:00
-contact_hours.temp.text2=Mae hyn oherwydd bod llai o ymgynghorwyr ar gael i ateb galwadau, oherwydd y gweithdrefnau sydd wedi’u rhoi ar waith er mwyn atal coronafeirws rhag ymledu.
+contact_hours.temp.text1=
+contact_hours.temp.weekday=Dydd Llun i Ddydd Gwener: 08:30 i 17:00
+contact_hours.temp.text2=
 more-details=<a class="govuk-link" href="{0}">Mwy o fanylion cyswllt (gan gynnwys gwasanaeth sgwrs dros y we)</a>
 
 child-benefit.title=Ffoniwch Wasanaeth Cwsmeriaid Cymraeg CThEM
@@ -49,19 +49,19 @@ national-insurance.closed=Ar gau ar benwythnosau a gwyliau banc.
 paye-employers.title=Ffoniwch Wasanaeth Cwsmeriaid Cymraeg CThEM
 paye-employers.telephone=0300 200 1900
 paye-employers.telephone.international=+44 300 200 1900
-paye-employers.hours.monday-friday=08:00 i 16:00
+paye-employers.hours.monday-friday=08:30 i 17:00
 paye-employers.closed=Ar gau ar benwythnosau a gwyliau banc.
 
 self-assessment.title=Ffoniwch Wasanaeth Cwsmeriaid Cymraeg CThEM
 self-assessment.telephone=0300 200 1900
 self-assessment.telephone.international=+44 300 200 1900
-self-assessment.hours.monday-friday=08:00 i 16:00
+self-assessment.hours.monday-friday=08:30 i 17:00
 self-assessment.closed=Ar gau ar benwythnosau a gwyliau banc.
 
 state-pension.title=Ffoniwch Wasanaeth Cwsmeriaid Cymraeg CThEM
 state-pension.telephone=0300 200 1900
 state-pension.telephone.international=+44 300 200 1900
-state-pension.hours.monday-friday=08:00 i 16:00
+state-pension.hours.monday-friday=08:30 i 17:00
 state-pension.closed=Ar gau ar benwythnosau a gwyliau banc.
 
 tax-credits.title=Ffoniwch Wasanaeth Cwsmeriaid Cymraeg CThEM
