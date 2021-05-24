@@ -8,10 +8,9 @@ call-options-no-answers.h1=Pa wasanaeth ydych yn ceisio cael ato?
 call-options-no-answers.h2-error=Mae problem wedi codi
 call-options-no-answers.error=Dewiswch pa wasanaeth yr oeddech yn ceisio cael mynediad ato gan ddefnyddio’r cyfrif hwn
 
-call-option.label.child-benefits=Budd-dal Plant
-call-option.label.income-tax=Treth Incwm
+call-option.label.child-benefit=Budd-dal Plant
+call-option.label.income-tax-paye=Treth Incwm
 call-option.label.national-insurance=Yswiriant Gwladol
-call-option.label.paye-for-employers=TWE i gyflogwyr
 call-option.label.self-assessment=Hunanasesiad
 call-option.label.state-pension=Pensiwn y Wladwriaeth
 call-option.label.tax-credits=Credydau Treth
@@ -34,11 +33,11 @@ child-benefit.telephone.international=+44 300 200 1900
 child-benefit.hours.monday-friday=08:30 i 17:00
 child-benefit.closed=Ar gau ar benwythnosau a gwyliau banc.
 
-income-tax.title=Ffoniwch Wasanaeth Cwsmeriaid Cymraeg CThEM
-income-tax.telephone=0300 200 1900
-income-tax.telephone.international=+44 300 200 1900
-income-tax.hours.monday-friday=08:00 i 18:00
-income-tax.closed=Ar gau ar benwythnosau a gwyliau banc.
+income-tax-paye.title=Ffoniwch Wasanaeth Cwsmeriaid Cymraeg CThEM
+income-tax-paye.telephone=0300 200 1900
+income-tax-paye.telephone.international=+44 300 200 1900
+income-tax-paye.hours.monday-friday=08:00 i 18:00
+income-tax-paye.closed=Ar gau ar benwythnosau a gwyliau banc.
 
 national-insurance.title=Ffoniwch Wasanaeth Cwsmeriaid Cymraeg CThEM
 national-insurance.telephone=0300 200 1900

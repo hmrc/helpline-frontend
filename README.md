@@ -22,9 +22,8 @@ Several alternatives will be available and can be selected by indicating the hel
 | helpKey               | Page                                          |
 |-----------------------|-----------------------------------------------|
 | CHILD-BENEFIT         | details about CHILD-BENEFIT information       |
-| INCOME-TAX            | details about INCOME-TAX information          |
+| INCOME-TAX-PAYE       | details about INCOME-TAX-PAYE information     |
 | NATIONAL-INSURANCE    | details about NATIONAL-INSURANCE information  |
-| PAYE-FOR-EMPLOYERS    | details about PAYE-FOR-EMPLOYERS information  |
 | DECEASED              | details about DECEASED information            |
 | SELF-ASSESSMENT       | details about SELF-ASSESSMENT information     |
 | STATE-PENSION         | details about STATE-PENSION information       |
