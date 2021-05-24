@@ -8,13 +8,13 @@ call-options-no-answers.h1=Which service are you trying to access?
 call-options-no-answers.h2-error=There is a problem
 call-options-no-answers.error=Select which service you were trying to access using this account
 
-call-option.label.child-benefits=Child Benefits
-call-option.label.income-tax=Income Tax
+call-option.label.child-benefit=Child Benefit
+call-option.label.income-tax-paye=Income Tax and PAYE
 call-option.label.national-insurance=National Insurance
-call-option.label.paye-for-employers=PAYE for Employers
 call-option.label.self-assessment=Self Assessment
 call-option.label.state-pension=State Pension
 call-option.label.tax-credits=Tax Credits
+call-option.label.seiss=Self-Employment Income Support Scheme (SEISS)
 call-option.label.default=Something else
 
 label.telephone=Telephone
@@ -33,11 +33,11 @@ child-benefit.telephone.international=+44 161 210 3086
 child-benefit.hours.monday-friday=8:30am to 5pm
 child-benefit.closed=Closed weekends and bank holidays.
 
-income-tax.title=Call the Income tax helpline
-income-tax.telephone=0300 200 3300
-income-tax.telephone.international=+44 135 535 9022
-income-tax.hours.monday-friday=8am to 6pm
-income-tax.closed=Closed weekends and bank holidays.
+income-tax-paye.title=Call the Income tax helpline
+income-tax-paye.telephone=0300 200 3300
+income-tax-paye.telephone.international=+44 135 535 9022
+income-tax-paye.hours.monday-friday=8am to 6pm
+income-tax-paye.closed=Closed weekends and bank holidays.
 
 national-insurance.title=Call the National Insurance helpline
 national-insurance.telephone=0300 200 3500
@@ -69,6 +69,14 @@ tax-credits.telephone.international=+44 2890 538 192
 tax-credits.hours.monday-friday=8:30am to 5pm
 tax-credits.closed=Closed weekends and bank holidays.
 
+seiss.title=Call an HMRC helpline
+seiss.need-help.heading=If you need help signing in
+seiss.need-help.p1=If you need help recovering your user ID, resetting your password or changing how you get your access codes, you need to contact the Online Services helpdesk on <span class="govuk-!-font-weight-bold">0300 200 3600</span>.
+seiss.need-help.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Online Services helpdesk</a>.
+seiss.query.heading=If you have a Self-Assessment Income Support Scheme query
+seiss.query.p1=If you do not need help signing in but have another query about the Self-Assessment Income Support Scheme, you need to contact the Self-Assessment Income Support Scheme helpline on <span class="govuk-!-font-weight-bold">0800 024 1222</span>.
+seiss.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Self-Assessment Income Support Scheme helpline</a>.
+
 contact_us.deceased.h1=Has this person died?
 contact_us.deceased.call_hmrc=Call HMRC for help with tax after someone dies.
 contact_us.deceased.contact_number.telephone.number=0300 200 3300
@@ -84,5 +92,5 @@ contact_us.deceased.contact_hours.text1=Our phone line opening hours have tempor
 contact_us.deceased.contact_hours.weekday=Monday to Friday: 8am to 4pm
 contact_us.deceased.contact_hours.text2=This is due to having fewer advisers available to answer calls because of the measures put in place to stop the spread of coronavirus.
 contact_us.deceased.getHelp=Get help <a href=>dealing with HMRC if you have additional needs</a>
-contact_us.deceased.callCharges=<a href=>Find out about call charges</a>
+contact_us.deceased.callCharges=<a href="{0}">Find out about call charges</a>
 
