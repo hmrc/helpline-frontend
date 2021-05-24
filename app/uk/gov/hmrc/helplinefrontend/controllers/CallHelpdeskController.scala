@@ -38,6 +38,7 @@ class CallHelpdeskController @Inject()(implicit
    selfAssessmentPage: SelfAssessment,
    statePensionPage: StatePension,
    taxCreditsPage: TaxCredits,
+   seissPage: Seiss,
    callOptionsNoAnswers: CallOptionsNoAnswers)
   extends FrontendController(mcc) {
 
@@ -52,6 +53,7 @@ class CallHelpdeskController @Inject()(implicit
       case "self-assessment" => Future.successful(Ok(selfAssessmentPage(back)))
       case "state-pension" => Future.successful(Ok(statePensionPage(back)))
       case "tax-credits" => Future.successful(Ok(taxCreditsPage(back)))
+      case "seiss" => Future.successful(Ok(seissPage(back)))
 
       case _ => // default help page
         logger.warn(s"[VER-517] calling without a valid help key($helpKey): request.headers => ${request.headers}")

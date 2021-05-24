@@ -42,6 +42,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   val selfAssessment: SelfAssessment = app.injector.instanceOf[SelfAssessment]
   val statePension: StatePension = app.injector.instanceOf[StatePension]
   val taxCredits: TaxCredits = app.injector.instanceOf[TaxCredits]
+  val seiss: Seiss = app.injector.instanceOf[Seiss]
   val callOptionsNoAnswers: CallOptionsNoAnswers = app.injector.instanceOf[CallOptionsNoAnswers]
 
   val controller: CallHelpdeskController =
@@ -56,6 +57,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
                                  selfAssessment,
                                  statePension,
                                  taxCredits,
+                                 seiss,
                                  callOptionsNoAnswers)
 
   val childBenefitHelpKey: String = "CHILD-BENEFITS"
@@ -66,6 +68,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   val selfAssessmentHelpKey: String = "SELF-ASSESSMENT"
   val statePensionHelpKey: String = "STATE-PENSION"
   val taxCreditsHelpKey: String = "TAX-CREDITS"
+  val seissHelpKey: String = "SEISS"
   val defaultHelpKey: String = "DEFAULT"
 
   "CallHelpdeskController get deceased help page" should {
@@ -192,6 +195,22 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       val result: Future[Result] = controller.getHelpdeskPage(taxCreditsHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Call the Tax Credits helpline") shouldBe true
+      contentAsString(result).contains("Back") shouldBe true
+    }
+  }
+
+  "CallHelpdeskController get Seiss help page" should {
+    "return Seiss help page if the help key is 'SEISS' but there is no go back url" in {
+      val result: Future[Result] = controller.getHelpdeskPage(seissHelpKey, None)(fakeRequest)
+      status(result) shouldBe Status.OK
+      contentAsString(result).contains("Call an HMRC helpline") shouldBe true
+      contentAsString(result).contains("Back") shouldBe false
+    }
+
+    "return Seiss help page if the help key is 'SEISS' and there is a go back url" in {
+      val result: Future[Result] = controller.getHelpdeskPage(seissHelpKey, Some("backURL"))(fakeRequest)
+      status(result) shouldBe Status.OK
+      contentAsString(result).contains("Call an HMRC helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
     }
   }
