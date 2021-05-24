@@ -8,10 +8,9 @@ call-options-no-answers.h1=Which service are you trying to access?
 call-options-no-answers.h2-error=There is a problem
 call-options-no-answers.error=Select which service you were trying to access using this account
 
-call-option.label.child-benefits=Child Benefits
-call-option.label.income-tax=Income Tax
+call-option.label.child-benefit=Child Benefit
+call-option.label.income-tax-paye=Income Tax and PAYE
 call-option.label.national-insurance=National Insurance
-call-option.label.paye-for-employers=PAYE for Employers
 call-option.label.self-assessment=Self Assessment
 call-option.label.state-pension=State Pension
 call-option.label.tax-credits=Tax Credits
@@ -34,11 +33,11 @@ child-benefit.telephone.international=+44 161 210 3086
 child-benefit.hours.monday-friday=8:30am to 5pm
 child-benefit.closed=Closed weekends and bank holidays.
 
-income-tax.title=Call the Income tax helpline
-income-tax.telephone=0300 200 3300
-income-tax.telephone.international=+44 135 535 9022
-income-tax.hours.monday-friday=8am to 6pm
-income-tax.closed=Closed weekends and bank holidays.
+income-tax-paye.title=Call the Income tax helpline
+income-tax-paye.telephone=0300 200 3300
+income-tax-paye.telephone.international=+44 135 535 9022
+income-tax-paye.hours.monday-friday=8am to 6pm
+income-tax-paye.closed=Closed weekends and bank holidays.
 
 national-insurance.title=Call the National Insurance helpline
 national-insurance.telephone=0300 200 3500

@@ -21,21 +21,21 @@
 
 @(back: Option[String])(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
 
-@layout(pageTitle = Some(s"${messages("income-tax.title")} ${messages("title.suffix")}"), backLinkLocation = back.getOrElse("")) {
+@layout(pageTitle = Some(s"${messages("income-tax-paye.title")} ${messages("title.suffix")}"), backLinkLocation = back.getOrElse("")) {
 
     <h1 class="govuk-heading-xl">
-    @messages("income-tax.title")
+    @messages("income-tax-paye.title")
     </h1>
     <dl>
         <dt class="govuk-body govuk-!-margin-bottom-0">@messages("label.telephone"):</dt>
-        <dd class="govuk-heading-l govuk-!-margin-top-0 govuk-!-padding-top-0 govuk-!-font-weight-bold govuk-!-margin-left-0">@messages("income-tax.telephone")</dd>
+        <dd class="govuk-heading-l govuk-!-margin-top-0 govuk-!-padding-top-0 govuk-!-font-weight-bold govuk-!-margin-left-0">@messages("income-tax-paye.telephone")</dd>
     </dl>
     <dl>
         <dt class="govuk-body govuk-!-margin-bottom-0">@messages("label.outside-uk"):</dt>
-        <dd class="govuk-body govuk-!-font-weight-bold govuk-!-margin-left-0">@messages("income-tax.telephone.international")</dd>
+        <dd class="govuk-body govuk-!-font-weight-bold govuk-!-margin-left-0">@messages("income-tax-paye.telephone.international")</dd>
     </dl>
-    <p class="govuk-body govuk-hint govuk-!-margin-bottom-0">@messages("label.monday-friday"): @messages("income-tax.hours.monday-friday")</p>
-    <p class="govuk-body govuk-hint">@messages("income-tax.closed")</p>
+    <p class="govuk-body govuk-hint govuk-!-margin-bottom-0">@messages("label.monday-friday"): @messages("income-tax-paye.hours.monday-friday")</p>
+    <p class="govuk-body govuk-hint">@messages("income-tax-paye.closed")</p>
     <div class="box--shaded">
         <p class="govuk-body">@Html(messages("get-help", "https://www.gov.uk/get-help-hmrc-extra-support"))</p>
     </div>
