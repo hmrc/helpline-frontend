@@ -15,6 +15,7 @@ call-option.label.paye-for-employers=PAYE for Employers
 call-option.label.self-assessment=Self Assessment
 call-option.label.state-pension=State Pension
 call-option.label.tax-credits=Tax Credits
+call-option.label.seiss=Self-Employment Income Support Scheme (SEISS)
 call-option.label.default=Something else
 
 label.telephone=Telephone
