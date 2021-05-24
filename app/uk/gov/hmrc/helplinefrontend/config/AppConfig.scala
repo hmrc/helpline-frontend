@@ -30,6 +30,7 @@ class AppConfig @Inject()(config: Configuration) {
     "national-insurance",
     "paye-for-employers",
     "self-assessment",
+    "seiss",
     "state-pension",
     "tax-credits",
     "default"
