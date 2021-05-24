@@ -24,9 +24,10 @@ import play.api.mvc.{MessagesControllerComponents, Result}
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
+import uk.gov.hmrc.helplinefrontend.monitoring.EventDispatcher
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
 
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, Future}
 
 class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOneAppPerSuite {
 
@@ -43,6 +44,8 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   val statePension: StatePension = app.injector.instanceOf[StatePension]
   val taxCredits: TaxCredits = app.injector.instanceOf[TaxCredits]
   val callOptionsNoAnswers: CallOptionsNoAnswers = app.injector.instanceOf[CallOptionsNoAnswers]
+  val eventDispatcher: EventDispatcher = app.injector.instanceOf[EventDispatcher]
+  val ec: ExecutionContext =  app.injector.instanceOf[ExecutionContext]
 
   val controller: CallHelpdeskController =
     new CallHelpdeskController()(
@@ -56,7 +59,9 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
                                  selfAssessment,
                                  statePension,
                                  taxCredits,
-                                 callOptionsNoAnswers)
+                                 callOptionsNoAnswers,
+                                 eventDispatcher,
+                                 ec)
 
   val childBenefitHelpKey: String = "CHILD-BENEFITS"
   val deceasedHelpKey: String = "deceased"
