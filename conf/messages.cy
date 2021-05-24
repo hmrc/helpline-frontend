@@ -85,5 +85,5 @@ contact_us.deceased.contact_hours.text1=Mae oriau agor ein llinellau ffôn wedi 
 contact_us.deceased.contact_hours.weekday=Dydd Llun i Ddydd Gwener: 08:00 i 16:00
 contact_us.deceased.contact_hours.text2=Mae hyn oherwydd bod llai o ymgynghorwyr ar gael i ateb galwadau, oherwydd y gweithdrefnau sydd wedi’u rhoi ar waith er mwyn atal coronafeirws rhag ymledu.
 contact_us.deceased.getHelp=Help i <a href=>ddelio â CThEM os oes gennych anghenion ychwanegol</a>
-contact_us.deceased.callCharges=<a href=>Gwybodaeth am gostau galwadau</a>
+contact_us.deceased.callCharges=<a href="{0}">Gwybodaeth am gostau galwadau</a>
 

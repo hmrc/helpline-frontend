@@ -29,6 +29,7 @@ Several alternatives will be available and can be selected by indicating the hel
 | SELF-ASSESSMENT       | details about SELF-ASSESSMENT information     |
 | STATE-PENSION         | details about STATE-PENSION information       |
 | TAX-CREDITS           | details about TAX-CREDITS information         |
+| SEISS                 | details about SEISS information               |
 | anything else         | DEFAULT page                                  |
 
 
