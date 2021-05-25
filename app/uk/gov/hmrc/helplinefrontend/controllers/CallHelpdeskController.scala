@@ -46,19 +46,20 @@ class CallHelpdeskController @Inject()(implicit
 
   def getHelpdeskPage(helpKey: String, back: Option[String]): Action[AnyContent] = Action.async { implicit request =>
     logger.warn(s"[VER-517] calling for $helpKey")
+    val backCall: Option[String] = if (appConfig.backCallEnabled) back else None
     helpKey.toLowerCase match {
-      case "deceased" => Future.successful(Ok(ivDeceased(back)))
-      case "child-benefit" => Future.successful(Ok(childBenefitPage(back)))
-      case "income-tax-paye" => Future.successful(Ok(incomeTaxPayePage(back)))
-      case "national-insurance" => Future.successful(Ok(nationalInsurancePage(back)))
-      case "self-assessment" => Future.successful(Ok(selfAssessmentPage(back)))
-      case "state-pension" => Future.successful(Ok(statePensionPage(back)))
-      case "tax-credits" => Future.successful(Ok(taxCreditsPage(back)))
-      case "seiss" => Future.successful(Ok(seissPage(back)))
+      case "deceased" => Future.successful(Ok(ivDeceased(backCall)))
+      case "child-benefit" => Future.successful(Ok(childBenefitPage(backCall)))
+      case "income-tax-paye" => Future.successful(Ok(incomeTaxPayePage(backCall)))
+      case "national-insurance" => Future.successful(Ok(nationalInsurancePage(backCall)))
+      case "self-assessment" => Future.successful(Ok(selfAssessmentPage(backCall)))
+      case "state-pension" => Future.successful(Ok(statePensionPage(backCall)))
+      case "tax-credits" => Future.successful(Ok(taxCreditsPage(backCall)))
+      case "seiss" => Future.successful(Ok(seissPage(backCall)))
 
       case _ => // default help page
         logger.warn(s"[VER-517] calling without a valid help key($helpKey): request.headers => ${request.headers}")
-        Future.successful(Ok(incomeTaxPayePage(back)))
+        Future.successful(Ok(incomeTaxPayePage(backCall)))
     }
   }
 
