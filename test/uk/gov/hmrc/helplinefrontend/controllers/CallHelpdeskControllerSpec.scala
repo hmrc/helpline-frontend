@@ -19,6 +19,7 @@ package uk.gov.hmrc.helplinefrontend.controllers
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
+import play.api.Configuration
 import play.api.http.Status
 import play.api.mvc.{MessagesControllerComponents, Result}
 import play.api.test.FakeRequest
@@ -26,12 +27,17 @@ import play.api.test.Helpers._
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.helplinefrontend.monitoring.EventDispatcher
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
+import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
 
 import scala.concurrent.{ExecutionContext, Future}
 
 class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOneAppPerSuite {
 
   private val fakeRequest = FakeRequest("GET", "/")
+  val config: Configuration = Configuration.from(Map(
+    "features.back-call-support" -> false
+  ))
+  val customiseAppConfig = new AppConfig(config, new ServicesConfig(config))
 
   val appConfig: AppConfig = app.injector.instanceOf[AppConfig]
   val messagesCC: MessagesControllerComponents = app.injector.instanceOf[MessagesControllerComponents]
@@ -48,8 +54,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   val ec: ExecutionContext =  app.injector.instanceOf[ExecutionContext]
 
   val controller: CallHelpdeskController =
-    new CallHelpdeskController()(
-                                 appConfig,
+    new CallHelpdeskController()(appConfig,
                                  messagesCC,
                                  contactUsDeceased,
                                  childBenefit,
@@ -134,6 +139,17 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Call the National Insurance helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
+    }
+
+    "return National Insurance help page if the help key is 'NATIONAL-INSURANCE' and there is a go back url, but back call is not supported" in {
+      val controller: CallHelpdeskController =
+        new CallHelpdeskController()(customiseAppConfig, messagesCC, contactUsDeceased, childBenefit, incomeTaxPaye, nationalInsurance,
+          selfAssessment, statePension, taxCredits, seiss, callOptionsNoAnswers, eventDispatcher, ec)
+
+      val result: Future[Result] = controller.getHelpdeskPage(nationalInsuranceHelpKey, Some("backURL"))(fakeRequest)
+      status(result) shouldBe Status.OK
+      contentAsString(result).contains("Call the National Insurance helpline") shouldBe true
+      contentAsString(result).contains("Back") shouldBe false
     }
   }
 

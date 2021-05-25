@@ -21,9 +21,10 @@ import play.api.Configuration
 import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
 
 @Singleton
-class AppConfig @Inject()(config: Configuration,servicesConfig: ServicesConfig) {
+class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig) {
 
   val welshLanguageSupportEnabled: Boolean = config.getOptional[Boolean]("features.welsh-language-support").getOrElse(true)
+  val backCallEnabled: Boolean = config.getOptional[Boolean]("features.back-call-support").getOrElse(false)
 
  private val defaultCallOptions = List(
     "child-benefit",
