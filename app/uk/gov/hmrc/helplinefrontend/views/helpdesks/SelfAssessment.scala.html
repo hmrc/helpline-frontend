@@ -16,32 +16,18 @@
 
 @import uk.gov.hmrc.helplinefrontend.config.AppConfig
 @import uk.gov.hmrc.helplinefrontend.views.html.Layout
+@import uk.gov.hmrc.helplinefrontend.views.html.components.{Paragraph, H1, H2}
 
-@this(layout: Layout)
+@this(layout: Layout, p: Paragraph, h1: H1, h2: H2)
 
 @(back: Option[String])(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
 
-@layout(pageTitle = Some(s"${messages("self-assessment.title")} ${messages("title.suffix")}"), backLinkLocation = back.getOrElse("")) {
-
-    <h1 class="govuk-heading-xl">
-    @messages("self-assessment.title")
-    </h1>
-    <dl>
-        <dt class="govuk-body govuk-!-margin-bottom-0">@messages("label.telephone"):</dt>
-        <dd class="govuk-heading-l govuk-!-margin-top-0 govuk-!-padding-top-0 govuk-!-font-weight-bold govuk-!-margin-left-0">@messages("self-assessment.telephone")</dd>
-    </dl>
-    <dl>
-        <dt class="govuk-body govuk-!-margin-bottom-0">@messages("label.outside-uk"):</dt>
-        <dd class="govuk-body govuk-!-font-weight-bold govuk-!-margin-left-0">@messages("self-assessment.telephone.international")</dd>
-    </dl>
-    <dl id="hours-weekdays">
-        <dt class="govuk-body govuk-!-margin-bottom-0">@messages("contact_hours.temp.text1")</dt>
-        <dd class="govuk-body govuk-!-margin-top-0 govuk-!-padding-top-0 govuk-!-font-weight-bold govuk-!-margin-left-0">@messages("contact_hours.temp.weekday")</dd>
-    </dl>
-    <p id="hours-other" class="extra-space govuk-body">@messages("contact_hours.temp.text2")</p>
-    <p class="govuk-body">@Html(messages("more-details", "https://www.gov.uk/government/organisations/hm-revenue-customs/contact/employer-enquiries"))
-    <div class="box--shaded">
-        <p class="govuk-body">@Html(messages("get-help", "https://www.gov.uk/get-help-hmrc-extra-support"))</p>
-    </div>
-    <p class="govuk-body govuk-!-margin-bottom-9">@Html(messages("call-charges", "https://www.gov.uk/call-charges"))</p>
+@layout(pageTitle = Some(s"${messages("default.title")} ${messages("title.suffix")}"), backLinkLocation = back.getOrElse("")) {
+    @h1(messages("default.title"))
+    @h2(messages("default.need-help.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
+    @p(messages("default.need-help.p1"))
+    @p(messages("default.need-help.p2", "https://www.gov.uk/government/organisations/hm-revenue-customs/contact/online-services-helpdesk"), Some("govuk-!-margin-bottom-8"))
+    @h2(messages("self-assessment.query.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
+    @p(messages("self-assessment.query.p1"))
+    @p(messages("self-assessment.query.p2", "https://www.gov.uk/government/organisations/hm-revenue-customs/contact/self-assessment"))
 }

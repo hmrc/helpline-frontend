@@ -22,11 +22,11 @@
 
 @(back: Option[String])(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
 
-@layout(pageTitle = Some(s"${messages("seiss.title")} ${messages("title.suffix")}"), backLinkLocation = back.getOrElse("")) {
-    @h1(messages("seiss.title"))
-    @h2(messages("seiss.need-help.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
-    @p(messages("seiss.need-help.p1"))
-    @p(messages("seiss.need-help.p2", "https://www.gov.uk/government/organisations/hm-revenue-customs/contact/online-services-helpdesk"), Some("govuk-!-margin-bottom-8"))
+@layout(pageTitle = Some(s"${messages("default.title")} ${messages("title.suffix")}"), backLinkLocation = back.getOrElse("")) {
+    @h1(messages("default.title"))
+    @h2(messages("default.need-help.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
+    @p(messages("default.need-help.p1"))
+    @p(messages("default.need-help.p2", "https://www.gov.uk/government/organisations/hm-revenue-customs/contact/online-services-helpdesk"), Some("govuk-!-margin-bottom-8"))
     @h2(messages("seiss.query.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
     @p(messages("seiss.query.p1"))
     @p(messages("seiss.query.p2", "https://www.gov.uk/government/organisations/hm-revenue-customs/contact/get-help-with-the-self-employment-income-support-scheme"))
