@@ -18,9 +18,10 @@ package uk.gov.hmrc.helplinefrontend.config
 
 import javax.inject.{Inject, Singleton}
 import play.api.Configuration
+import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
 
 @Singleton
-class AppConfig @Inject()(config: Configuration) {
+class AppConfig @Inject()(config: Configuration,servicesConfig: ServicesConfig) {
 
   val welshLanguageSupportEnabled: Boolean = config.getOptional[Boolean]("features.welsh-language-support").getOrElse(true)
 
@@ -38,4 +39,6 @@ class AppConfig @Inject()(config: Configuration) {
   val callOptionsList: List[String] =
     config.getOptional[String]("features.call-options")
       .fold(defaultCallOptions)(_.split(",").toList)
+
+  lazy val platformAnalyticsUrl = servicesConfig.baseUrl("platform-analytics")
 }

@@ -21,10 +21,11 @@ import play.api.Logger.logger
 import play.api.mvc._
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.helplinefrontend.models.form.CallOptionForm
+import uk.gov.hmrc.helplinefrontend.monitoring.{ContactLink, EventDispatcher}
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
 class CallHelpdeskController @Inject()(implicit
@@ -38,7 +39,9 @@ class CallHelpdeskController @Inject()(implicit
    statePensionPage: StatePension,
    taxCreditsPage: TaxCredits,
    seissPage: Seiss,
-   callOptionsNoAnswers: CallOptionsNoAnswers)
+   callOptionsNoAnswers: CallOptionsNoAnswers,
+   val eventDispatcher: EventDispatcher,
+   ec: ExecutionContext)
   extends FrontendController(mcc) {
 
   def getHelpdeskPage(helpKey: String, back: Option[String]): Action[AnyContent] = Action.async { implicit request =>
@@ -61,6 +64,7 @@ class CallHelpdeskController @Inject()(implicit
 
   def callOptionsNoAnswersPage(): Action[AnyContent] = Action.async { implicit request =>
     logger.debug(s"[VER-539] Showing options for ${ appConfig.callOptionsList.mkString(", ")}")
+    eventDispatcher.dispatchEvent(ContactLink)
     Future.successful(Ok(callOptionsNoAnswers(CallOptionForm.callOptionForm(appConfig.callOptionsList))))
   }
 
