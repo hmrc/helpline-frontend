@@ -39,6 +39,7 @@ class CallHelpdeskController @Inject()(implicit
    statePensionPage: StatePension,
    taxCreditsPage: TaxCredits,
    seissPage: Seiss,
+   generalEnquiriesPage: GeneralEnquiries,
    callOptionsNoAnswers: CallOptionsNoAnswers,
    val eventDispatcher: EventDispatcher,
    ec: ExecutionContext)
@@ -56,10 +57,11 @@ class CallHelpdeskController @Inject()(implicit
       case "state-pension" => Future.successful(Ok(statePensionPage(backCall)))
       case "tax-credits" => Future.successful(Ok(taxCreditsPage(backCall)))
       case "seiss" => Future.successful(Ok(seissPage(backCall)))
+      case "general-enquiries" => Future.successful(Ok(generalEnquiriesPage(backCall)))
 
       case _ => // default help page
         logger.warn(s"[VER-517] calling without a valid help key($helpKey): request.headers => ${request.headers}")
-        Future.successful(Ok(incomeTaxPayePage(backCall)))
+        Future.successful(Ok(generalEnquiriesPage(backCall)))
     }
   }
 

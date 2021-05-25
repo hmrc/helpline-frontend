@@ -31,10 +31,10 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "income-tax-paye",
     "national-insurance",
     "self-assessment",
-    "seiss",
+    "SEISS",
     "state-pension",
     "tax-credits",
-    "default"
+    "general-enquiries"
   )
 
   val callOptionsList: List[String] =

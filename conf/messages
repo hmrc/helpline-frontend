@@ -14,9 +14,13 @@ call-option.label.national-insurance=National Insurance
 call-option.label.self-assessment=Self Assessment
 call-option.label.state-pension=State Pension
 call-option.label.tax-credits=Tax Credits
-call-option.label.seiss=Self-Employment Income Support Scheme (SEISS)
-call-option.label.default=Something else
+call-option.label.SEISS=Self-Employment Income Support Scheme (SEISS)
+call-option.label.general-enquiries=Something else
 
+default.title=Call an HMRC helpline
+default.need-help.heading=If you need help signing in
+default.need-help.p1=If you need help recovering your user ID, resetting your password or changing how you get your access codes, you need to contact the Online Services helpdesk on <span class="govuk-!-font-weight-bold">0300 200 3600</span>.
+default.need-help.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Online Services helpdesk</a>.
 label.telephone=Telephone
 label.outside-uk=Outside UK
 label.monday-friday=Monday to Friday
@@ -27,55 +31,37 @@ contact_hours.temp.weekday=Monday to Friday: 8am to 4pm
 contact_hours.temp.text2=This is due to having fewer advisers available to answer calls because of the measures put in place to stop the spread of coronavirus.
 more-details=<a class="govuk-link" href="{0}">More contact details (including webchat)</a>
 
-child-benefit.title=Call the Child Benefits helpline
-child-benefit.telephone=0300 200 3100
-child-benefit.telephone.international=+44 161 210 3086
-child-benefit.hours.monday-friday=8:30am to 5pm
-child-benefit.closed=Closed weekends and bank holidays.
+child-benefit.query.heading=If you have a Child Benefit query
+child-benefit.query.p1=If you do not need help signing in but have another query about Child Benefit, you need to contact the Child Benefit helpline on <span class="govuk-!-font-weight-bold">0300 200 3100</span>.
+child-benefit.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Child Benefit helpline</a>.
 
-income-tax-paye.title=Call the Income tax helpline
-income-tax-paye.telephone=0300 200 3300
-income-tax-paye.telephone.international=+44 135 535 9022
-income-tax-paye.hours.monday-friday=8am to 6pm
-income-tax-paye.closed=Closed weekends and bank holidays.
+income-tax-paye.query.heading=If you have an Income Tax or PAYE query
+income-tax-paye.query.p1=If you do not need help signing in but have another query about Income Tax or PAYE, you need to contact the Income Tax helpline on <span class="govuk-!-font-weight-bold">0300 200 3300</span>.
+income-tax-paye.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Income Tax helpline</a>.
 
-national-insurance.title=Call the National Insurance helpline
-national-insurance.telephone=0300 200 3500
-national-insurance.telephone.international=+44 191 203 7010
-national-insurance.hours.monday-friday=8:30am to 5pm
-national-insurance.closed=Closed weekends and bank holidays.
+national-insurance.query.heading=If you have a National Insurance query
+national-insurance.query.p1=If you do not need help signing in but have another query about National Insurance, you need to contact the National Insurance helpline on <span class="govuk-!-font-weight-bold">0300 200 3500</span>.
+national-insurance.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the National Insurance helpline</a>.
 
-paye-employers.title=Call the PAYE for employers helpline
-paye-employers.telephone=0300 200 3200
-paye-employers.telephone.international=+44 151 268 0558
-paye-employers.hours.monday-friday=8am to 4pm
-paye-employers.closed=Closed weekends and bank holidays.
+self-assessment.query.heading=If you have a Self-Assessment query
+self-assessment.query.p1=If you do not need help signing in but have another query about Self-Assessment, you need to contact the Self-Assessment helpline on <span class="govuk-!-font-weight-bold">0300 200 3310</span>.
+self-assessment.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Self-Assessment helpline</a>.
 
-self-assessment.title=Call the Self Assessment helpline
-self-assessment.telephone=0300 200 3310
-self-assessment.telephone.international=+44 161 931 9070
-self-assessment.hours.monday-friday=8am to 4pm
-self-assessment.closed=Closed weekends and bank holidays.
-
-state-pension.title=Call the Pensions helpline
-state-pension.telephone=0300 123 1079
-state-pension.telephone.international=+44 300 123 1079
-state-pension.hours.monday-friday=8am to 4pm
-state-pension.closed=Closed weekends and bank holidays.
-
-tax-credits.title=Call the Tax Credits helpline
-tax-credits.telephone=0345 300 3900
-tax-credits.telephone.international=+44 2890 538 192
-tax-credits.hours.monday-friday=8:30am to 5pm
-tax-credits.closed=Closed weekends and bank holidays.
-
-seiss.title=Call an HMRC helpline
-seiss.need-help.heading=If you need help signing in
-seiss.need-help.p1=If you need help recovering your user ID, resetting your password or changing how you get your access codes, you need to contact the Online Services helpdesk on <span class="govuk-!-font-weight-bold">0300 200 3600</span>.
-seiss.need-help.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Online Services helpdesk</a>.
 seiss.query.heading=If you have a Self-Assessment Income Support Scheme query
 seiss.query.p1=If you do not need help signing in but have another query about the Self-Assessment Income Support Scheme, you need to contact the Self-Assessment Income Support Scheme helpline on <span class="govuk-!-font-weight-bold">0800 024 1222</span>.
 seiss.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Self-Assessment Income Support Scheme helpline</a>.
+
+state-pension.query.heading=If you have a State Pension query
+state-pension.query.p1=If you do not need help signing in but have another query about a State Pension, you need to contact the State Pension helpline on <span class="govuk-!-font-weight-bold">0300 200 3500</span>.
+state-pension.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the State Pension helpline</a>.
+
+tax-credits.query.heading=If you have a tax credits query
+tax-credits.query.p1=If you do not need help signing in but have another query about tax credits, you need to contact the tax credits helpline on <span class="govuk-!-font-weight-bold">0345 300 3900</span>.
+tax-credits.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the tax credits helpline</a>.
+
+general-enquiries.query.heading=If you have a query about something else
+general-enquiries.query.p1=If you do not need help signing in but have a query about something else, you need to contact the Income Tax general enquiries helpline on <span class="govuk-!-font-weight-bold">0300 200 3300</span>.
+general-enquiries.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Income Tax general enquiries helpline</a>.
 
 contact_us.deceased.h1=Has this person died?
 contact_us.deceased.call_hmrc=Call HMRC for help with tax after someone dies.
