@@ -26,20 +26,20 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
   val welshLanguageSupportEnabled: Boolean = config.getOptional[Boolean]("features.welsh-language-support").getOrElse(true)
   val backCallEnabled: Boolean = config.getOptional[Boolean]("features.back-call-support").getOrElse(false)
 
- private val defaultCallOptions = List(
-    "child-benefit",
-    "income-tax-paye",
-    "national-insurance",
-    "self-assessment",
-    "SEISS",
-    "state-pension",
-    "tax-credits",
-    "general-enquiries"
+   val defaultCallOptionsAndGAEventMapper = Map(
+    "child-benefit" -> "contact_childbenefits",
+    "income-tax-paye" -> "contact_incometaxpaye",
+    "national-insurance" -> "contact_natinsurance",
+    "self-assessment" -> "contact_sa",
+    "SEISS" -> "contact_seiss",
+    "state-pension" -> "contact_pension",
+    "tax-credits" -> "contact_taxcred",
+    "general-enquiries" -> "contact_other"
   )
 
   val callOptionsList: List[String] =
     config.getOptional[String]("features.call-options")
-      .fold(defaultCallOptions)(_.split(",").toList)
+      .fold(defaultCallOptionsAndGAEventMapper.keySet.toList)(_.split(",").toList)
 
   lazy val platformAnalyticsUrl = servicesConfig.baseUrl("platform-analytics")
 }

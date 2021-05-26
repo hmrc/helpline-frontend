@@ -20,4 +20,5 @@ sealed trait MonitoringEvent
 
 case object ContactLink extends MonitoringEvent
 
+case class ContactType(value: String) extends MonitoringEvent
 
