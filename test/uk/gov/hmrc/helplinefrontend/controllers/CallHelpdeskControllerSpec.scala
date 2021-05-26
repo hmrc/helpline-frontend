@@ -160,14 +160,14 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
     "return Self Assessment help page if the help key is 'SELF-ASSESSMENT' but there is no go back url" in {
       val result: Future[Result] = controller.getHelpdeskPage(selfAssessmentHelpKey, None)(fakeRequest)
       status(result) shouldBe Status.OK
-      contentAsString(result).contains("If you have a Self-Assessment query") shouldBe true
+      contentAsString(result).contains("If you have a Self Assessment query") shouldBe true
       contentAsString(result).contains("Back") shouldBe false
     }
 
-    "return Self Assessment help page if the help key is 'SELF-ASSESSMENT' and there is a go back url" in {
+    "return Self Assessment help page if the help key is 'SELF ASSESSMENT' and there is a go back url" in {
       val result: Future[Result] = controller.getHelpdeskPage(selfAssessmentHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
-      contentAsString(result).contains("If you have a Self-Assessment query") shouldBe true
+      contentAsString(result).contains("If you have a Self Assessment query") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
     }
   }
@@ -208,14 +208,14 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
     "return Seiss help page if the help key is 'SEISS' but there is no go back url" in {
       val result: Future[Result] = controller.getHelpdeskPage(seissHelpKey, None)(fakeRequest)
       status(result) shouldBe Status.OK
-      contentAsString(result).contains("If you have a Self-Assessment Income Support Scheme query") shouldBe true
+      contentAsString(result).contains("If you have a Self-Employment Income Support Scheme query") shouldBe true
       contentAsString(result).contains("Back") shouldBe false
     }
 
     "return Seiss help page if the help key is 'SEISS' and there is a go back url" in {
       val result: Future[Result] = controller.getHelpdeskPage(seissHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
-      contentAsString(result).contains("If you have a Self-Assessment Income Support Scheme query") shouldBe true
+      contentAsString(result).contains("If you have a Self-Employment Income Support Scheme query") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
     }
   }
