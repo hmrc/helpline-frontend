@@ -43,17 +43,17 @@ national-insurance.query.heading=If you have a National Insurance query
 national-insurance.query.p1=If you do not need help signing in but have another query about National Insurance, you need to contact the National Insurance helpline on <span class="govuk-!-font-weight-bold">0300 200 3500</span>.
 national-insurance.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the National Insurance helpline</a>.
 
-self-assessment.query.heading=If you have a Self-Assessment query
-self-assessment.query.p1=If you do not need help signing in but have another query about Self-Assessment, you need to contact the Self-Assessment helpline on <span class="govuk-!-font-weight-bold">0300 200 3310</span>.
-self-assessment.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Self-Assessment helpline</a>.
+self-assessment.query.heading=If you have a Self Assessment query
+self-assessment.query.p1=If you do not need help signing in but have another query about Self Assessment, you need to contact the Self Assessment helpline on <span class="govuk-!-font-weight-bold">0300 200 3310</span>.
+self-assessment.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Self Assessment helpline</a>.
 
-seiss.query.heading=If you have a Self-Assessment Income Support Scheme query
-seiss.query.p1=If you do not need help signing in but have another query about the Self-Assessment Income Support Scheme, you need to contact the Self-Assessment Income Support Scheme helpline on <span class="govuk-!-font-weight-bold">0800 024 1222</span>.
-seiss.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Self-Assessment Income Support Scheme helpline</a>.
+seiss.query.heading=If you have a Self-Employment Income Support Scheme query
+seiss.query.p1=If you do not need help signing in but have another query about the Self-Employment Income Support Scheme, you need to contact the Self-Employment Income Support Scheme helpline on <span class="govuk-!-font-weight-bold">0800 024 1222</span>.
+seiss.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Self-Employment Income Support Scheme helpline</a>.
 
 state-pension.query.heading=If you have a State Pension query
-state-pension.query.p1=If you do not need help signing in but have another query about a State Pension, you need to contact the State Pension helpline on <span class="govuk-!-font-weight-bold">0300 200 3500</span>.
-state-pension.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the State Pension helpline</a>.
+state-pension.query.p1=If you do not need help signing in but have another query about a State Pension, you need to contact the Pension Service helpline on <span class="govuk-!-font-weight-bold">0300 200 3500</span>.
+state-pension.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Pension Service helpline</a>.
 
 tax-credits.query.heading=If you have a tax credits query
 tax-credits.query.p1=If you do not need help signing in but have another query about tax credits, you need to contact the tax credits helpline on <span class="govuk-!-font-weight-bold">0345 300 3900</span>.
