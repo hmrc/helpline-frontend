@@ -271,7 +271,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       status(result) shouldBe Status.SEE_OTHER
       eventually {
         analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
-          Event("sos_iv", "more_info", "contact_childbenefits")))
+          Event("sos_iv", "more_info", "contact_childbenefit")))
       }
     }
     "fire contact_incometaxpaye ga event when user clicks on Child benefit" in {

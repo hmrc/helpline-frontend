@@ -27,7 +27,7 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
   val backCallEnabled: Boolean = config.getOptional[Boolean]("features.back-call-support").getOrElse(false)
 
    val defaultCallOptionsAndGAEventMapper = Map(
-    "child-benefit" -> "contact_childbenefits",
+    "child-benefit" -> "contact_childbenefit",
     "income-tax-paye" -> "contact_incometaxpaye",
     "national-insurance" -> "contact_natinsurance",
     "self-assessment" -> "contact_sa",
