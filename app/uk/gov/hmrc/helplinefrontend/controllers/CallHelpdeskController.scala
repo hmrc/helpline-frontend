@@ -21,7 +21,7 @@ import play.api.Logger.logger
 import play.api.mvc._
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.helplinefrontend.models.form.CallOptionForm
-import uk.gov.hmrc.helplinefrontend.monitoring.{ContactLink, EventDispatcher}
+import uk.gov.hmrc.helplinefrontend.monitoring.{ContactLink, ContactType, EventDispatcher}
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
@@ -74,7 +74,10 @@ class CallHelpdeskController @Inject()(implicit
   def selectCallOption(): Action[AnyContent] = Action.async { implicit request =>
    val result = CallOptionForm.callOptionForm(appConfig.callOptionsList).bindFromRequest.fold(
       errors ⇒ BadRequest(callOptionsNoAnswers(errors)),
-      value => Redirect(routes.CallHelpdeskController.getHelpdeskPage(value, Some(routes.CallHelpdeskController.callOptionsNoAnswersPage().url)))
+      value => {
+        eventDispatcher.dispatchEvent(ContactType(appConfig.defaultCallOptionsAndGAEventMapper(value)))
+        Redirect(routes.CallHelpdeskController.getHelpdeskPage(value, Some(routes.CallHelpdeskController.callOptionsNoAnswersPage().url)))
+      }
     )
     Future.successful(result)
   }
