@@ -1,3 +1,4 @@
+import scoverage.ScoverageKeys
 import uk.gov.hmrc.DefaultBuildSettings.integrationTestSettings
 import uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin.publishingSettings
 
@@ -7,10 +8,11 @@ val silencerVersion = "1.7.3"
 
 lazy val microservice = Project(appName, file("."))
   .enablePlugins(play.sbt.PlayScala, SbtAutoBuildPlugin, SbtGitVersioning, SbtDistributablesPlugin)
+  .disablePlugins(JUnitXmlReportPlugin)
   .settings(PlayKeys.playDefaultPort := 10102)
   .settings(
     majorVersion                     := 0,
-    scalaVersion                     := "2.12.13",
+    scalaVersion                     := "2.12.12",
     libraryDependencies              ++= AppDependencies.compile ++ AppDependencies.test,
     TwirlKeys.templateImports ++= Seq(
       "uk.gov.hmrc.helplinefrontend.config.AppConfig",
@@ -33,3 +35,16 @@ lazy val microservice = Project(appName, file("."))
   .configs(IntegrationTest)
   .settings(integrationTestSettings(): _*)
   .settings(resolvers += Resolver.jcenterRepo)
+  .settings(
+    Seq(
+      ScoverageKeys.coverageExcludedPackages :=
+        """<empty>;
+          |Reverse.*;
+          |.*BuildInfo.*;
+          |.*Routes.*;
+          |.*RoutesPrefix.*;""".stripMargin,
+      ScoverageKeys.coverageMinimum := 80,
+      ScoverageKeys.coverageFailOnMinimum := false,
+      ScoverageKeys.coverageHighlighting := true
+    )
+  )
