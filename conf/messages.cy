@@ -4,18 +4,23 @@ title.suffix=- GOV.UK
 back=Yn ôl
 continue=Yn eich blaen
 
-call-options-no-answers.h1=Pa wasanaeth ydych yn ceisio cael ato?
+call-options-no-answers.h1=Pa wasanaeth yr ydych yn ceisio cael ato?
 call-options-no-answers.h2-error=Mae problem wedi codi
 call-options-no-answers.error=Dewiswch pa wasanaeth yr oeddech yn ceisio cael mynediad ato gan ddefnyddio’r cyfrif hwn
 
 call-option.label.child-benefit=Budd-dal Plant
-call-option.label.income-tax-paye=Treth Incwm
+call-option.label.income-tax-paye=Treth Incwm a TWE
 call-option.label.national-insurance=Yswiriant Gwladol
 call-option.label.self-assessment=Hunanasesiad
 call-option.label.state-pension=Pensiwn y Wladwriaeth
 call-option.label.tax-credits=Credydau Treth
+call-option.label.SEISS=Gwasanaeth Cymhorthdal Incwm Hunangyflogaeth (SEISS)
 call-option.label.general-enquiries=Rhywbeth arall
 
+default.title=Ffoniwch linell gymorth CThEM
+default.need-help.heading=Os oes angen help arnoch i fewngofnodi
+default.need-help.p1=Os oes angen help arnoch i adfer eich dynodydd defnyddiwr (ID), ailosod eich cyfrinair neu newid sut rydych yn cael eich codau cyrchu, mae angen i chi gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM drwy ffonio <span class="govuk-!-font-weight-bold">0300 200 1900</span>.
+default.need-help.p2=Mae ffyrdd eraill o <a class="govuk-link" href="{0}">gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM</a>.
 label.telephone=Ffôn
 label.outside-uk=Y tu allan i’r DU
 label.monday-friday=Dydd Llun – Dydd Gwener
@@ -25,6 +30,38 @@ contact_hours.temp.text1=
 contact_hours.temp.weekday=Dydd Llun i Ddydd Gwener: 08:30 i 17:00
 contact_hours.temp.text2=
 more-details=<a class="govuk-link" href="{0}">Mwy o fanylion cyswllt (gan gynnwys gwasanaeth sgwrs dros y we)</a>
+
+child-benefit.query.heading=Os oes gennych ymholiad am Fudd-dal Plant
+child-benefit.query.p1=Os nad oes angen help arnoch i fewngofnodi, ond bod gennych ymholiad arall am Fudd-dal Plant, gallwch gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM drwy ffonio <span class="govuk-!-font-weight-bold">0300 200 1900</span>.
+child-benefit.query.p2=Mae ffyrdd eraill o <a class="govuk-link" href="{0}">gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM</a>.
+
+income-tax-paye.query.heading=Os oes gennych ymholiad am Dreth Incwm neu TWE
+income-tax-paye.query.p1=Os nad oes angen help arnoch i fewngofnodi, ond bod gennych ymholiad arall am Dreth Incwm neu TWE, gallwch gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM drwy ffonio <span class="govuk-!-font-weight-bold">0300 200 1900</span>.
+income-tax-paye.query.p2=Mae ffyrdd eraill o <a class="govuk-link" href="{0}">gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM</a>.
+
+national-insurance.query.heading=Os oes gennych ymholiad am Yswiriant Gwladol
+national-insurance.query.p1=Os nad oes angen help arnoch i fewngofnodi, ond bod gennych ymholiad arall am Yswiriant Gwladol, gallwch gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM drwy ffonio <span class="govuk-!-font-weight-bold">0300 200 1900</span>.
+national-insurance.query.p2=Mae ffyrdd eraill o <a class="govuk-link" href="{0}">gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM</a>.
+
+self-assessment.query.heading=Os oes gennych ymholiad am Hunanasesiad
+self-assessment.query.p1=Os nad oes angen help arnoch i fewngofnodi, ond bod gennych ymholiad arall am Hunanasesiad, gallwch gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM drwy ffonio <span class="govuk-!-font-weight-bold">0300 200 1900</span>.
+self-assessment.query.p2=Mae ffyrdd eraill o <a class="govuk-link" href="{0}">gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM</a>.
+
+seiss.query.heading=Os oes gennych ymholiad am y Cynllun Cymhorthdal Incwm Hunangyflogaeth
+seiss.query.p1=Os nad oes angen help arnoch i fewngofnodi, ond bod gennych ymholiad arall y Cynllun Cymhorthdal Incwm Hunangyflogaeth, gallwch gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM drwy ffonio <span class="govuk-!-font-weight-bold">0300 200 1900</span>.
+seiss.query.p2=Mae ffyrdd eraill o <a class="govuk-link" href="{0}">gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM</a>.
+
+state-pension.query.heading=Os oes gennych ymholiad am Bensiwn y Wladwriaeth
+state-pension.query.p1=Os nad oes angen help arnoch i fewngofnodi, ond bod gennych ymholiad arall am Bensiwn y Wladwriaeth, gallwch gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM drwy ffonio <span class="govuk-!-font-weight-bold">0300 200 1900</span>.
+state-pension.query.p2=Mae ffyrdd eraill o <a class="govuk-link" href="{0}">gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM</a>.
+
+tax-credits.query.heading=Os oes gennych ymholiad am gredydau treth
+tax-credits.query.p1=Os nad oes angen help arnoch i fewngofnodi, ond bod gennych ymholiad arall am gredydau treth, gallwch gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM drwy ffonio <span class="govuk-!-font-weight-bold">0300 200 1900</span>.
+tax-credits.query.p2=Mae ffyrdd eraill o <a class="govuk-link" href="{0}">gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM</a>.
+
+general-enquiries.query.heading=Os oes gennych ymholiad am rywbeth arall
+general-enquiries.query.p1=Os nad oes angen help arnoch i fewngofnodi, ond bod gennych ymholiad am rywbeth arall, gallwch gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM drwy ffonio <span class="govuk-!-font-weight-bold">0300 200 1900</span>.
+general-enquiries.query.p2=Mae ffyrdd eraill o <a class="govuk-link" href="{0}">gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM</a>.
 
 contact_us.deceased.h1=A yw’r person hwn wedi marw?
 contact_us.deceased.call_hmrc=Ffoniwch CThEM am help gyda threth ar ôl i rywun farw.
