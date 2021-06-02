@@ -17,7 +17,7 @@
 package uk.gov.hmrc.helplinefrontend.controllers
 
 import javax.inject.{Inject, Singleton}
-import play.api.Logger.logger
+import play.api.Logging
 import play.api.mvc._
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.helplinefrontend.models.form.CallOptionForm
@@ -43,10 +43,10 @@ class CallHelpdeskController @Inject()(implicit
    callOptionsNoAnswers: CallOptionsNoAnswers,
    val eventDispatcher: EventDispatcher,
    ec: ExecutionContext)
-  extends FrontendController(mcc) {
+  extends FrontendController(mcc) with Logging {
 
   def getHelpdeskPage(helpKey: String, back: Option[String]): Action[AnyContent] = Action.async { implicit request =>
-    logger.warn(s"[VER-517] calling for $helpKey")
+    logger.info(s"[VER-517] calling for $helpKey")
     val backCall: Option[String] = if (appConfig.backCallEnabled) back else None
     helpKey.toLowerCase match {
       case "deceased" => Future.successful(Ok(ivDeceased(backCall)))
