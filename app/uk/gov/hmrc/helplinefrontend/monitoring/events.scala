@@ -22,3 +22,4 @@ case object ContactLink extends MonitoringEvent
 
 case class ContactType(value: String) extends MonitoringEvent
 
+case object ContactOnlineLink extends MonitoringEvent
