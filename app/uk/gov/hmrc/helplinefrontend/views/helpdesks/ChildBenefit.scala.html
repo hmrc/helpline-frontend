@@ -28,7 +28,7 @@
     @h2(messages("default.need-help.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
     @p(messages("default.need-help.p1"))
 
-    @p(messages("default.need-help.p2", routes.EventHandlerController.eventRedirect("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/online-services-helpdesk")), Some("govuk-!-margin-bottom-8"))
+    @p(messages("default.need-help.p2", java.net.URLDecoder.decode(routes.RedirectController.contactHelpdesk("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/online-services-helpdesk").url, "UTF-8"), Some("govuk-!-margin-bottom-8")))
 
     @h2(messages("child-benefit.query.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
     @p(messages("child-benefit.query.p1"))

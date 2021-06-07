@@ -19,7 +19,7 @@ package uk.gov.hmrc.helplinefrontend.monitoring.analytics
 import javax.inject.{Inject, Singleton}
 import play.api.Logging
 import play.api.mvc.Request
-import uk.gov.hmrc.helplinefrontend.monitoring.{ContactLink, ContactOnlineLink, ContactType, EventHandler, MonitoringEvent}
+import uk.gov.hmrc.helplinefrontend.monitoring.{ContactLink, ContactHelpdesk, ContactType, EventHandler, MonitoringEvent}
 import uk.gov.hmrc.http.{HeaderCarrier, HeaderNames}
 
 import scala.concurrent.ExecutionContext
@@ -33,7 +33,7 @@ class AnalyticsEventHandler @Inject()(connector: AnalyticsConnector) extends Eve
     event match {
       case ContactLink => sendEvent(factory.contactLink)
       case e: ContactType => sendEvent(factory.contactType(e.value))
-      case ContactOnlineLink =>  sendEvent(factory.contactLink)
+      case ContactHelpdesk =>  sendEvent(factory.contactHelpLine)
       case _ => ()
     }
   }
@@ -45,6 +45,7 @@ class AnalyticsEventHandler @Inject()(connector: AnalyticsConnector) extends Eve
     val  xSessionId: Option[String] = request.headers.get(HeaderNames.xSessionId)
     if(clientId.isDefined || xSessionId.isDefined) {
       val analyticsRequest = reqCreator(clientId)
+      println("+++++++++++++++++++++++++++++++++ "+analyticsRequest)
       connector.sendEvent(analyticsRequest)
     } else  {
       logger.info("VER-381 - No sessionId found in request")
@@ -61,6 +62,11 @@ private class AnalyticsRequestFactory() {
 
   def contactType(contactType: String)(clientId: Option[String]): AnalyticsRequest = {
     val gaEvent = Event("sos_iv", "more_info", contactType)
+    AnalyticsRequest(clientId, Seq(gaEvent))
+  }
+
+  def contactHelpLine(clientId: Option[String]): AnalyticsRequest = {
+    val gaEvent = Event("sos_iv", "more_info", "contact_online_services_helpdesk")
     AnalyticsRequest(clientId, Seq(gaEvent))
   }
 }

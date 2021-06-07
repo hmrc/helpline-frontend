@@ -20,21 +20,21 @@ import javax.inject.{Inject, Singleton}
 import play.api.Logging
 import play.api.mvc._
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
-import uk.gov.hmrc.helplinefrontend.monitoring.{ContactOnlineLink, EventDispatcher}
+import uk.gov.hmrc.helplinefrontend.monitoring.{ContactHelpdesk, EventDispatcher}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
 import scala.concurrent.ExecutionContext
 
 @Singleton
-class EventHandlerController @Inject()(implicit
+class RedirectController @Inject()(implicit
                                              appConfig: AppConfig,
                                              mcc: MessagesControllerComponents,
                                              val eventDispatcher: EventDispatcher,
                                              ec: ExecutionContext)
   extends FrontendController(mcc) with Logging {
 
-  def eventRedirect(redirectUrl: String): Action[AnyContent] = Action { implicit request =>
-    eventDispatcher.dispatchEvent(ContactOnlineLink)
+  def contactHelpdesk(redirectUrl: String): Action[AnyContent] = Action { implicit request =>
+    eventDispatcher.dispatchEvent(ContactHelpdesk)
     Redirect(redirectUrl)
   }
 
