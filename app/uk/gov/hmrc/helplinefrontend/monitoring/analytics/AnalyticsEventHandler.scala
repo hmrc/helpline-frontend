@@ -45,7 +45,6 @@ class AnalyticsEventHandler @Inject()(connector: AnalyticsConnector) extends Eve
     val  xSessionId: Option[String] = request.headers.get(HeaderNames.xSessionId)
     if(clientId.isDefined || xSessionId.isDefined) {
       val analyticsRequest = reqCreator(clientId)
-      println("+++++++++++++++++++++++++++++++++ "+analyticsRequest)
       connector.sendEvent(analyticsRequest)
     } else  {
       logger.info("VER-381 - No sessionId found in request")
