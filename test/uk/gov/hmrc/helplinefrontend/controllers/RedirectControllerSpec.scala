@@ -63,6 +63,15 @@ class RedirectControllerSpec extends AnyWordSpec with Matchers with GuiceOneAppP
       }
     }
 
+    "fire contact_online_services_helpline ga event when user clicks on helpline link" in {
+      val result: Future[Result] = controller.contactHelpline(url, "child-benefit")(request)
+      status(result) shouldBe Status.SEE_OTHER
+      eventually {
+        analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
+          Event("sos_iv", "more_info", "further-contact_childbenefit")))
+      }
+    }
+
   }
 
 }

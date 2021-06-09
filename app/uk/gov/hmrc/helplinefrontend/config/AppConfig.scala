@@ -38,6 +38,18 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "general-enquiries" -> "contact_other"
   )
 
+  val contactHelplineGAEventMapper = Map(
+    "child-benefit" -> "further-contact_childbenefit",
+    "income-tax-paye" -> "further-contact_incometaxpaye",
+    "national-insurance" -> "further-contact_natinsurance",
+    "self-assessment" -> "further-contact_sa",
+    "SEISS" -> "further-contact_seiss",
+    "state-pension" -> "further-contact_pension",
+    "tax-credits" -> "further-contact_taxcred",
+    "general-enquiries" -> "further-contact_other"
+  )
+
+
   val callOptionsList: List[String] =
     config.getOptional[String]("features.call-options")
       .fold(defaultCallOptionsAndGAEventMapper.keySet.toList)(_.split(",").toList)

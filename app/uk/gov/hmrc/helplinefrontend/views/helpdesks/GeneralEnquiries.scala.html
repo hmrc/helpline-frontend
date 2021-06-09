@@ -33,6 +33,8 @@
 
     @h2(messages("general-enquiries.query.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
     @p(messages("general-enquiries.query.p1"))
-    @p(messages("general-enquiries.query.p2", "https://www.gov.uk/government/organisations/hm-revenue-customs/contact/income-tax-enquiries-for-individuals-pensioners-and-employees"))
+
+    @p(messages("general-enquiries.query.p2", URLDecoder.decode(routes.RedirectController.contactHelpline("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/income-tax-enquiries-for-individuals-pensioners-and-employees", "general-enquiries").url, "UTF-8")))
+
 }
 
