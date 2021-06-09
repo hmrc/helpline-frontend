@@ -19,6 +19,7 @@ package uk.gov.hmrc.helplinefrontend.config
 import javax.inject.{Inject, Singleton}
 import play.api.Configuration
 import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
+import scala.collection.mutable
 
 @Singleton
 class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig) {
@@ -26,7 +27,7 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
   val welshLanguageSupportEnabled: Boolean = config.getOptional[Boolean]("features.welsh-language-support").getOrElse(true)
   val backCallEnabled: Boolean = config.getOptional[Boolean]("features.back-call-support").getOrElse(false)
 
-   val defaultCallOptionsAndGAEventMapper = Map(
+   val defaultCallOptionsAndGAEventMapper = mutable.LinkedHashMap(
     "child-benefit" -> "contact_childbenefit",
     "income-tax-paye" -> "contact_incometaxpaye",
     "national-insurance" -> "contact_natinsurance",
