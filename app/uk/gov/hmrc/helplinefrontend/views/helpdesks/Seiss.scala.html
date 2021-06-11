@@ -32,6 +32,8 @@
     @p(messages("default.need-help.p2", URLDecoder.decode(routes.RedirectController.contactHelpdesk("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/online-services-helpdesk").url, "UTF-8"), Some("govuk-!-margin-bottom-8")))
     @h2(messages("seiss.query.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
     @p(messages("seiss.query.p1"))
-    @p(messages("seiss.query.p2", "https://www.gov.uk/government/organisations/hm-revenue-customs/contact/get-help-with-the-self-employment-income-support-scheme"))
+
+    @p(messages("seiss.query.p2", URLDecoder.decode(routes.RedirectController.contactHelpline("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/get-help-with-the-self-employment-income-support-scheme", "SEISS").url, "UTF-8")))
+
 }
 

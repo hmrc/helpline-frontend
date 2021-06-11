@@ -33,6 +33,7 @@
 
     @h2(messages("child-benefit.query.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
     @p(messages("child-benefit.query.p1"))
-    @p(messages("child-benefit.query.p2", "https://www.gov.uk/government/organisations/hm-revenue-customs/contact/child-benefit"))
+
+    @p(messages("child-benefit.query.p2", URLDecoder.decode(routes.RedirectController.contactHelpline("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/child-benefit", "child-benefit").url, "UTF-8"), Some("govuk-!-margin-bottom-8")))
 }
 

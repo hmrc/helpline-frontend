@@ -20,7 +20,7 @@ import javax.inject.{Inject, Singleton}
 import play.api.Logging
 import play.api.mvc._
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
-import uk.gov.hmrc.helplinefrontend.monitoring.{ContactHelpdesk, EventDispatcher}
+import uk.gov.hmrc.helplinefrontend.monitoring.{ContactHelpdesk, ContactHelpline, EventDispatcher}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
 import scala.concurrent.ExecutionContext
@@ -35,6 +35,11 @@ class RedirectController @Inject()(implicit
 
   def contactHelpdesk(redirectUrl: String): Action[AnyContent] = Action { implicit request =>
     eventDispatcher.dispatchEvent(ContactHelpdesk)
+    Redirect(redirectUrl)
+  }
+
+  def contactHelpline(redirectUrl: String, origin: String): Action[AnyContent] = Action { implicit request =>
+    eventDispatcher.dispatchEvent(ContactHelpline(appConfig.contactHelplineGAEventMapper(origin)))
     Redirect(redirectUrl)
   }
 

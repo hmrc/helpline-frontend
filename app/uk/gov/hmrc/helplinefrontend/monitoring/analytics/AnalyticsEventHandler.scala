@@ -19,7 +19,7 @@ package uk.gov.hmrc.helplinefrontend.monitoring.analytics
 import javax.inject.{Inject, Singleton}
 import play.api.Logging
 import play.api.mvc.Request
-import uk.gov.hmrc.helplinefrontend.monitoring.{ContactLink, ContactHelpdesk, ContactType, EventHandler, MonitoringEvent}
+import uk.gov.hmrc.helplinefrontend.monitoring.{ContactHelpdesk, ContactHelpline, ContactLink, ContactType, EventHandler, MonitoringEvent}
 import uk.gov.hmrc.http.{HeaderCarrier, HeaderNames}
 
 import scala.concurrent.ExecutionContext
@@ -33,7 +33,8 @@ class AnalyticsEventHandler @Inject()(connector: AnalyticsConnector) extends Eve
     event match {
       case ContactLink => sendEvent(factory.contactLink)
       case e: ContactType => sendEvent(factory.contactType(e.value))
-      case ContactHelpdesk =>  sendEvent(factory.contactHelpLine)
+      case ContactHelpdesk =>  sendEvent(factory.contactHelpdesk)
+      case e: ContactHelpline =>  sendEvent(factory.contactHelpline(e.value))
       case _ => ()
     }
   }
@@ -64,8 +65,13 @@ private class AnalyticsRequestFactory() {
     AnalyticsRequest(clientId, Seq(gaEvent))
   }
 
-  def contactHelpLine(clientId: Option[String]): AnalyticsRequest = {
+  def contactHelpdesk(clientId: Option[String]): AnalyticsRequest = {
     val gaEvent = Event("sos_iv", "more_info", "contact_online_services_helpdesk")
+    AnalyticsRequest(clientId, Seq(gaEvent))
+  }
+
+  def contactHelpline(label: String)(clientId: Option[String]): AnalyticsRequest = {
+    val gaEvent = Event("sos_iv", "more_info", label)
     AnalyticsRequest(clientId, Seq(gaEvent))
   }
 }

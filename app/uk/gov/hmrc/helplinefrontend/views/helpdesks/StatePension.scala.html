@@ -33,5 +33,5 @@
 
     @h2(messages("state-pension.query.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
     @p(messages("state-pension.query.p1"))
-    @p(messages("state-pension.query.p2", "https://www.gov.uk/contact-pension-service"))
+    @p(messages("state-pension.query.p2", URLDecoder.decode(routes.RedirectController.contactHelpline("https://www.gov.uk/contact-pension-service", "state-pension").url, "UTF-8")))
 }

@@ -11,5 +11,6 @@ GET        /call-options-no-answers   uk.gov.hmrc.helplinefrontend.controllers.C
 POST       /call-options-no-answers   uk.gov.hmrc.helplinefrontend.controllers.CallHelpdeskController.selectCallOption()
 
 GET       /contact-helpdesk             uk.gov.hmrc.helplinefrontend.controllers.RedirectController.contactHelpdesk(redirectUrl: String)
+GET       /contact-helpline             uk.gov.hmrc.helplinefrontend.controllers.RedirectController.contactHelpline(redirectUrl: String, origin: String)
 
 GET        /:helpKey            uk.gov.hmrc.helplinefrontend.controllers.CallHelpdeskController.getHelpdeskPage(helpKey: String, back: Option[String])
