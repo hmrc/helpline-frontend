@@ -30,6 +30,7 @@ import scala.concurrent.{ExecutionContext, Future}
 class AnalyticsConnector @Inject() (appConfig: AppConfig, http: HttpClient) extends Logging {
   def serviceUrl: String = appConfig.platformAnalyticsUrl
 
+  private implicit val dimensionValueWrites = Json.writes[DimensionValue]
   private implicit val eventWrites = Json.writes[Event]
   private implicit val analyticsWrites = Json.writes[AnalyticsRequest]
 

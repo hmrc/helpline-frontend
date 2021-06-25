@@ -28,7 +28,7 @@ import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.helplinefrontend.monitoring.EventDispatcher
-import uk.gov.hmrc.helplinefrontend.monitoring.analytics.{AnalyticsConnector, AnalyticsEventHandler, AnalyticsRequest, Event}
+import uk.gov.hmrc.helplinefrontend.monitoring.analytics.{AnalyticsConnector, AnalyticsEventHandler, AnalyticsRequest, DimensionValue, Event}
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
 import uk.gov.hmrc.http.{HeaderCarrier, HttpClient}
 import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
@@ -59,8 +59,11 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
   val gaClientId = "GA1.1.283183975.1456746121"
   var analyticsRequests = Seq.empty[AnalyticsRequest]
-  val request: FakeRequest[AnyContentAsEmpty.type] = FakeRequest().withCookies(Cookie("_ga", gaClientId))
+  val request = FakeRequest()
+    .withCookies(Cookie("_ga", gaClientId))
+    .withSession("dimensions" -> """[{"index":2,"value":"ma"},{"index":3,"value":"UpliftNino"},{"index":4,"value":"200-MEO"},{"index":5,"value":"No Enrolments"}]""")
 
+  val expectedDimensions = Seq(DimensionValue(2,"ma"), DimensionValue(3,"UpliftNino"), DimensionValue(4,"200-MEO"), DimensionValue(5,"No Enrolments"))
   val httpClient: HttpClient = app.injector.instanceOf[HttpClient]
 
   object TestConnector extends AnalyticsConnector(appConfig, httpClient) {
@@ -271,7 +274,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       status(result) shouldBe Status.SEE_OTHER
       eventually {
         analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
-          Event("sos_iv", "more_info", "contact_childbenefit")))
+          Event("sos_iv", "more_info", "contact_childbenefit", expectedDimensions)))
       }
     }
     "fire contact_incometaxpaye ga event when user clicks on Child benefit" in {
@@ -279,7 +282,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       status(result) shouldBe Status.SEE_OTHER
       eventually {
         analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
-          Event("sos_iv", "more_info", "contact_incometaxpaye")))
+          Event("sos_iv", "more_info", "contact_incometaxpaye", expectedDimensions)))
       }
     }
     "fire contact_natinsurance ga event when user clicks on Child benefit" in {
@@ -287,7 +290,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       status(result) shouldBe Status.SEE_OTHER
       eventually {
         analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
-          Event("sos_iv", "more_info", "contact_natinsurance")))
+          Event("sos_iv", "more_info", "contact_natinsurance", expectedDimensions)))
       }
     }
     "fire contact_sa ga event when user clicks on Child benefit" in {
@@ -295,7 +298,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       status(result) shouldBe Status.SEE_OTHER
       eventually {
         analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
-          Event("sos_iv", "more_info", "contact_sa")))
+          Event("sos_iv", "more_info", "contact_sa", expectedDimensions)))
       }
     }
     "fire contact_seiss ga event when user clicks on Child benefit" in {
@@ -303,7 +306,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       status(result) shouldBe Status.SEE_OTHER
       eventually {
         analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
-          Event("sos_iv", "more_info", "contact_seiss")))
+          Event("sos_iv", "more_info", "contact_seiss", expectedDimensions)))
       }
     }
     "fire contact_pension ga event when user clicks on Child benefit" in {
@@ -311,7 +314,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       status(result) shouldBe Status.SEE_OTHER
       eventually {
         analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
-          Event("sos_iv", "more_info", "contact_pension")))
+          Event("sos_iv", "more_info", "contact_pension", expectedDimensions)))
       }
     }
     "fire contact_taxcred ga event when user clicks on Child benefit" in {
@@ -319,7 +322,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       status(result) shouldBe Status.SEE_OTHER
       eventually {
         analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
-          Event("sos_iv", "more_info", "contact_taxcred")))
+          Event("sos_iv", "more_info", "contact_taxcred", expectedDimensions)))
       }
     }
     "fire contact_other ga event when user clicks on Child benefit" in {
@@ -327,7 +330,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       status(result) shouldBe Status.SEE_OTHER
       eventually {
         analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
-          Event("sos_iv", "more_info", "contact_other")))
+          Event("sos_iv", "more_info", "contact_other", expectedDimensions)))
       }
     }
   }
