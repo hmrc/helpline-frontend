@@ -18,13 +18,9 @@ package uk.gov.hmrc.helplinefrontend.controllers
 
 import javax.inject.{Inject, Singleton}
 import play.api.Logging
-import play.api.libs.json.Format.GenericFormat
-import play.api.libs.json.OFormat.oFormatFromReadsAndOWrites
-import play.api.libs.json.{JsResult, JsValue, Json}
 import play.api.mvc._
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.helplinefrontend.models.form.CallOptionForm
-import uk.gov.hmrc.helplinefrontend.monitoring.analytics.DimensionValue
 import uk.gov.hmrc.helplinefrontend.monitoring.{ContactLink, ContactType, EventDispatcher}
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
