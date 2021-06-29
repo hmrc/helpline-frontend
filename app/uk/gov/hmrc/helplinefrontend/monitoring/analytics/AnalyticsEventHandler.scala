@@ -18,6 +18,7 @@ package uk.gov.hmrc.helplinefrontend.monitoring.analytics
 
 import javax.inject.{Inject, Singleton}
 import play.api.Logging
+import play.api.libs.json.{JsValue, Json}
 import play.api.mvc.Request
 import uk.gov.hmrc.helplinefrontend.monitoring.{ContactHelpdesk, ContactHelpline, ContactLink, ContactType, EventHandler, MonitoringEvent}
 import uk.gov.hmrc.http.{HeaderCarrier, HeaderNames}
@@ -55,23 +56,31 @@ class AnalyticsEventHandler @Inject()(connector: AnalyticsConnector) extends Eve
 
 private class AnalyticsRequestFactory() {
 
-  def contactLink(clientId: Option[String]): AnalyticsRequest = {
-    val gaEvent = Event("sos_iv", "more_info", "contact_hmrc")
+  private implicit val dimensionReads = Json.reads[DimensionValue]
+
+  private def getDimensions(request: Request[_]) = {
+    val jsonString: JsValue = Json.parse(request.session.data.getOrElse("dimensions", "{}"))
+    val dimensions: Seq[DimensionValue] = Json.fromJson[Seq[DimensionValue]](jsonString).getOrElse(Seq())
+    dimensions
+  }
+
+  def contactLink(clientId: Option[String])(implicit request: Request[_]): AnalyticsRequest = {
+    val gaEvent = Event("sos_iv", "more_info", "contact_hmrc", getDimensions(request))
     AnalyticsRequest(clientId, Seq(gaEvent))
   }
 
-  def contactType(contactType: String)(clientId: Option[String]): AnalyticsRequest = {
-    val gaEvent = Event("sos_iv", "more_info", contactType)
+  def contactType(contactType: String)(clientId: Option[String])(implicit request: Request[_]): AnalyticsRequest = {
+    val gaEvent = Event("sos_iv", "more_info", contactType, getDimensions(request))
     AnalyticsRequest(clientId, Seq(gaEvent))
   }
 
-  def contactHelpdesk(clientId: Option[String]): AnalyticsRequest = {
-    val gaEvent = Event("sos_iv", "more_info", "contact_online_services_helpdesk")
+  def contactHelpdesk(clientId: Option[String])(implicit request: Request[_]): AnalyticsRequest = {
+    val gaEvent = Event("sos_iv", "more_info", "contact_online_services_helpdesk", getDimensions(request))
     AnalyticsRequest(clientId, Seq(gaEvent))
   }
 
-  def contactHelpline(label: String)(clientId: Option[String]): AnalyticsRequest = {
-    val gaEvent = Event("sos_iv", "more_info", label)
+  def contactHelpline(label: String)(clientId: Option[String])(implicit request: Request[_]): AnalyticsRequest = {
+    val gaEvent = Event("sos_iv", "more_info", label, getDimensions(request))
     AnalyticsRequest(clientId, Seq(gaEvent))
   }
 }

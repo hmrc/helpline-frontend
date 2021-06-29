@@ -75,7 +75,7 @@ class RedirectControllerSpec extends AnyWordSpec with Matchers with GuiceOneAppP
       status(result) shouldBe Status.SEE_OTHER
       eventually {
         analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
-          Event("sos_iv", "more_info", "contact_online_services_helpdesk")))
+          Event("sos_iv", "more_info", "contact_online_services_helpdesk", Seq())))
       }
     }
 
@@ -84,7 +84,7 @@ class RedirectControllerSpec extends AnyWordSpec with Matchers with GuiceOneAppP
       status(result) shouldBe Status.SEE_OTHER
       eventually {
         analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
-          Event("sos_iv", "more_info", "further-contact_childbenefit")))
+          Event("sos_iv", "more_info", "further-contact_childbenefit", Seq())))
       }
     }
 

@@ -43,7 +43,7 @@ class AnalyticsEventHandlerSpec
       dispatcher.dispatchEvent(ContactLink)(request, hc, global)
       eventually {
         analyticsRequests.head shouldBe AnalyticsRequest(Some(gaClientId), Seq(
-          Event("sos_iv", "more_info", "contact_hmrc")))
+          Event("sos_iv", "more_info", "contact_hmrc", Seq())))
       }
     }
 
@@ -51,7 +51,7 @@ class AnalyticsEventHandlerSpec
       dispatcher.dispatchEvent(ContactType("test"))(request, hc, global)
       eventually {
         analyticsRequests.head shouldBe AnalyticsRequest(Some(gaClientId), Seq(
-          Event("sos_iv", "more_info", "test")))
+          Event("sos_iv", "more_info", "test", Seq())))
       }
     }
   }
