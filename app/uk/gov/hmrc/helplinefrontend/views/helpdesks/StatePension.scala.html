@@ -26,12 +26,12 @@
 
 @layout(pageTitle = Some(s"${messages("default.title")} ${messages("title.suffix")}"), backLinkLocation = back.getOrElse("")) {
     @h1(messages("default.title"))
-    @h2(messages("default.need-help.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
-    @p(messages("default.need-help.p1"))
-
-    @p(messages("default.need-help.p2", URLDecoder.decode(routes.RedirectController.contactHelpdesk("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/online-services-helpdesk").url, "UTF-8"), Some("govuk-!-margin-bottom-8")))
 
     @h2(messages("state-pension.query.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
     @p(messages("state-pension.query.p1"))
     @p(messages("state-pension.query.p2", URLDecoder.decode(routes.RedirectController.contactHelpline("https://www.gov.uk/contact-pension-service", "state-pension").url, "UTF-8")))
+
+    @h2(messages("default.need-help.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
+    @p(messages("default.need-help.p1"))
+    @p(messages("default.need-help.p2", URLDecoder.decode(routes.RedirectController.contactHelpdesk("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/online-services-helpdesk").url, "UTF-8"), Some("govuk-!-margin-bottom-8")))
 }
