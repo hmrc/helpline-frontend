@@ -63,7 +63,7 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
       .fold(defaultCallOptionsAndGAEventMapper.keySet.toList)(_.split(",").toList)
 
   val callOptionsOrganisationList: List[String] =
-    config.getOptional[String]("features.call-options")
+    config.getOptional[String]("features.organisation.call-options")
       .fold(defaultCallOptionsOrganisationAndGAEventMapper.keySet.toList)(_.split(",").toList)
 
   lazy val platformAnalyticsUrl = servicesConfig.baseUrl("platform-analytics")

@@ -65,7 +65,6 @@ class CallHelpdeskController @Inject()(implicit
       case "state-pension" => Future.successful(Ok(statePensionPage(backCall)))
       case "tax-credits" => Future.successful(Ok(taxCreditsPage(backCall)))
       case "seiss" => Future.successful(Ok(seissPage(backCall)))
-      case "vat" => Future.successful(Ok(ivDeceased(backCall)))
       case "general-enquiries" => Future.successful(Ok(generalEnquiriesPage(backCall)))
 
       case _ => // default help page
