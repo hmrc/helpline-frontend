@@ -21,6 +21,7 @@ import play.api.Logging
 import play.api.mvc._
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.helplinefrontend.models.form.CallOptionForm
+import uk.gov.hmrc.helplinefrontend.models.form.CallOptionOrganisationForm
 import uk.gov.hmrc.helplinefrontend.monitoring.{ContactLink, ContactType, EventDispatcher}
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
@@ -40,7 +41,14 @@ class CallHelpdeskController @Inject()(implicit
    taxCreditsPage: TaxCredits,
    seissPage: Seiss,
    generalEnquiriesPage: GeneralEnquiries,
+   generalEnquiriesOrganisationPage: GeneralEnquiriesOrganisation,
+   corporationTaxPage: CorporationTax,
+   machineGamingDutyPage: MachineGamingDuty,
+   payeForEmployersPage: PayeForEmployers,
+   selfAssessmentOrganisationPage: SelfAssessmentOrganisation,
+   vatPage: Vat,
    callOptionsNoAnswers: CallOptionsNoAnswers,
+   callOptionsOrganisationNoAnswers: CallOptionsOrganisationNoAnswers,
    val eventDispatcher: EventDispatcher,
    ec: ExecutionContext)
   extends FrontendController(mcc) with Logging {
@@ -57,11 +65,26 @@ class CallHelpdeskController @Inject()(implicit
       case "state-pension" => Future.successful(Ok(statePensionPage(backCall)))
       case "tax-credits" => Future.successful(Ok(taxCreditsPage(backCall)))
       case "seiss" => Future.successful(Ok(seissPage(backCall)))
+      case "vat" => Future.successful(Ok(ivDeceased(backCall)))
       case "general-enquiries" => Future.successful(Ok(generalEnquiriesPage(backCall)))
 
       case _ => // default help page
         logger.warn(s"[VER-517] calling without a valid help key($helpKey): request.headers => ${request.headers}")
         Future.successful(Ok(generalEnquiriesPage(backCall)))
+    }
+  }
+
+  def getHelpdeskOrganisationPage(helpKey: String, back: Option[String]): Action[AnyContent] = Action.async { implicit request =>
+    val backCall: Option[String] = if (appConfig.backCallEnabled) back else None
+    helpKey.toLowerCase match {
+      case "corporation-tax" => Future.successful(Ok(corporationTaxPage(backCall)))
+      case "machine-gaming-duty" => Future.successful(Ok(machineGamingDutyPage(backCall)))
+      case "paye-for-employers" => Future.successful(Ok(payeForEmployersPage(backCall)))
+      case "self-assessment" => Future.successful(Ok(selfAssessmentOrganisationPage(backCall)))
+      case "vat" => Future.successful(Ok(vatPage(backCall)))
+
+      case _ => // default help page
+        Future.successful(Ok(generalEnquiriesOrganisationPage(backCall)))
     }
   }
 
@@ -71,12 +94,28 @@ class CallHelpdeskController @Inject()(implicit
     Future.successful(Ok(callOptionsNoAnswers(CallOptionForm.callOptionForm(appConfig.callOptionsList))))
   }
 
+  def callOptionsNoAnswersOrganisationPage(): Action[AnyContent] = Action.async { implicit request =>
+    eventDispatcher.dispatchEvent(ContactLink)
+    Future.successful(Ok(callOptionsOrganisationNoAnswers(CallOptionForm.callOptionForm(appConfig.callOptionsList))))
+  }
+
   def selectCallOption(): Action[AnyContent] = Action.async { implicit request =>
    val result = CallOptionForm.callOptionForm(appConfig.callOptionsList).bindFromRequest.fold(
       errors ⇒ BadRequest(callOptionsNoAnswers(errors)),
       value => {
         eventDispatcher.dispatchEvent(ContactType(appConfig.defaultCallOptionsAndGAEventMapper(value)))
         Redirect(routes.CallHelpdeskController.getHelpdeskPage(value, Some(routes.CallHelpdeskController.callOptionsNoAnswersPage().url)))
+      }
+    )
+    Future.successful(result)
+  }
+
+  def selectOrganisationCallOption(): Action[AnyContent] = Action.async { implicit request =>
+    val result = CallOptionOrganisationForm.callOptionOrganisationForm(appConfig.callOptionsOrganisationList).bindFromRequest.fold(
+      errors ⇒ BadRequest(callOptionsOrganisationNoAnswers(errors)),
+      value => {
+        eventDispatcher.dispatchEvent(ContactType(appConfig.defaultCallOptionsOrganisationAndGAEventMapper(value)))
+        Redirect(routes.CallHelpdeskController.getHelpdeskOrganisationPage(value, Some(routes.CallHelpdeskController.callOptionsNoAnswersOrganisationPage().url)))
       }
     )
     Future.successful(result)

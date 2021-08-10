@@ -1,0 +1,72 @@
+@*
+ * Copyright 2021 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import uk.gov.hmrc.helplinefrontend.config.AppConfig
+@import uk.gov.hmrc.helplinefrontend.views.html.Layout
+@import uk.gov.hmrc.helplinefrontend.controllers.routes
+@import uk.gov.hmrc.govukfrontend.views.Aliases.Text
+
+@this(
+      layout: Layout,
+      formWithCsrf: FormWithCSRF,
+      govukErrorSummary: GovukErrorSummary,
+      govukRadios: GovukRadios,
+      govukButton: GovukButton
+)
+
+@(callOptionsOrganisationForm: Form[String])(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
+
+@layout(pageTitle = Some(s"${messages("call-options-no-answers.h1")} ${messages("title.suffix")}")) {
+
+    @formWithCsrf(routes.CallHelpdeskController.selectOrganisationCallOption()) {
+
+        @if(callOptionsOrganisationForm.hasErrors) {
+            @govukErrorSummary(ErrorSummary(
+                title = Text(messages("call-options-no-answers.h2-error")),
+                errorList = callOptionsOrganisationForm.errors.map(err => ErrorLink(href = Some("#selected-call-option-error"), content = Text(messages("call-options-no-answers.error")))
+                ))
+            )
+        }
+
+        @govukRadios(Radios(
+            fieldset = Some(Fieldset(
+                legend = Some(Legend(
+                    content = Text(messages("call-options-no-answers.h1")),
+                    classes = "govuk-fieldset__legend--xl",
+                    isPageHeading = true
+                ))
+            )),
+            hint = None,
+            errorMessage = if(callOptionsOrganisationForm.hasErrors)Some(ErrorMessage(
+                content = Text(messages("call-options-no-answers.error"))))
+            else None,
+            idPrefix = Some("selected-call-option"),
+            name = "selected-call-option",
+            items = appConfig.callOptionsOrganisationList.map { selectedCallOption =>
+                RadioItem(
+                    id = Some(selectedCallOption),
+                    content = Text(Messages("call-option.label." + selectedCallOption)),
+                    value = Some(selectedCallOption)
+                )
+            }
+        ))
+
+        @govukButton(Button(
+            content = Text(Messages("continue"))
+        ))
+    }
+}
+    
