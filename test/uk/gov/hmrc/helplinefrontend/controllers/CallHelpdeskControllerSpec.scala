@@ -54,6 +54,13 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   val taxCredits: TaxCredits = app.injector.instanceOf[TaxCredits]
   val seiss: Seiss = app.injector.instanceOf[Seiss]
   val generalEnquiries: GeneralEnquiries = app.injector.instanceOf[GeneralEnquiries]
+  val generalEnquiriesOrganisation: GeneralEnquiriesOrganisation = app.injector.instanceOf[GeneralEnquiriesOrganisation]
+  val corporationTax: CorporationTax = app.injector.instanceOf[CorporationTax]
+  val machineGamingDuty: MachineGamingDuty = app.injector.instanceOf[MachineGamingDuty]
+  val payeForEmployers: PayeForEmployers = app.injector.instanceOf[PayeForEmployers]
+  val selfAssessmentOrganisation: SelfAssessmentOrganisation = app.injector.instanceOf[SelfAssessmentOrganisation]
+  val vat: Vat = app.injector.instanceOf[Vat]
+  val callOptionsOrganisationNoAnswers: CallOptionsOrganisationNoAnswers =  app.injector.instanceOf[CallOptionsOrganisationNoAnswers]
   val callOptionsNoAnswers: CallOptionsNoAnswers = app.injector.instanceOf[CallOptionsNoAnswers]
   val ec: ExecutionContext =  app.injector.instanceOf[ExecutionContext]
 
@@ -89,7 +96,14 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
                                  taxCredits,
                                  seiss,
                                  generalEnquiries,
+                                 generalEnquiriesOrganisation,
+                                 corporationTax,
+                                 machineGamingDuty,
+                                 payeForEmployers,
+                                 selfAssessmentOrganisation,
+                                 vat,
                                  callOptionsNoAnswers,
+                                 callOptionsOrganisationNoAnswers,
                                  eventDispatcher,
                                  ec)
 
@@ -170,7 +184,8 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
     "return National Insurance help page if the help key is 'NATIONAL-INSURANCE' and there is a go back url, but back call is not supported" in {
       val controller: CallHelpdeskController =
         new CallHelpdeskController()(customiseAppConfig, messagesCC, contactUsDeceased, childBenefit, incomeTaxPaye, nationalInsurance,
-          selfAssessment, statePension, taxCredits, seiss, generalEnquiries, callOptionsNoAnswers, eventDispatcher, ec)
+          selfAssessment, statePension, taxCredits, seiss, generalEnquiries, generalEnquiriesOrganisation, corporationTax, machineGamingDuty,
+          payeForEmployers, selfAssessmentOrganisation, vat, callOptionsNoAnswers, callOptionsOrganisationNoAnswers, eventDispatcher, ec)
 
       val result: Future[Result] = controller.getHelpdeskPage(nationalInsuranceHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK

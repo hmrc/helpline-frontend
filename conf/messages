@@ -15,6 +15,10 @@ call-option.label.self-assessment=Self Assessment
 call-option.label.state-pension=State Pension
 call-option.label.tax-credits=Tax Credits
 call-option.label.SEISS=Self-Employment Income Support Scheme (SEISS)
+call-option.label.corporation-tax=Corporation Tax
+call-option.label.machine-gaming-duty=Machine Gaming Duty
+call-option.label.paye-for-employers=PAYE
+call-option.label.vat=VAT
 call-option.label.general-enquiries=Something else
 
 default.title=Call an HMRC helpline
