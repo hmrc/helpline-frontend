@@ -77,6 +77,9 @@ general-enquiries.query.heading=Os oes gennych ymholiad am rywbeth arall
 general-enquiries.query.p1=Os nad oes angen help arnoch i fewngofnodi, ond bod gennych ymholiad am rywbeth arall, gallwch gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM drwy ffonio <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>.
 general-enquiries.query.p2=Mae ffyrdd eraill o <a class="govuk-link" href="{0}">gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM</a>.
 
+general-enquiries-organisation.query.heading=Os oes angen help arnoch gyda gwasanaeth
+general-enquiries-organisation.query.p=Gallwch <a class="govuk-link" href="{0}">ddod o hyd i fanylion cyswllt y gwasanaeth rydych yn ceisio cael mynediad ato</a>.
+
 contact_us.deceased.h1=A yw’r person hwn wedi marw?
 contact_us.deceased.call_hmrc=Ffoniwch CThEM am help gyda threth ar ôl i rywun farw.
 contact_us.deceased.contact_number.telephone.number=0300 200 1900
