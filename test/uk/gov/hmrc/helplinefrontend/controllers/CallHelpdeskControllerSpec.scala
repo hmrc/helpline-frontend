@@ -115,7 +115,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   val machineGamingDutyHelpKey: String = "machine-gaming-duty"
   val payeForEmployersHelpKey: String = "paye-for-employers"
   val selfAssessmentHelpKey: String = "SELF-ASSESSMENT"
-  val selfAssessmentOrganisationHelpKey: String = "self-assessment"
+  val selfAssessmentOrganisationHelpKey: String = "SELF-ASSESSMENT-ORG"
   val statePensionHelpKey: String = "STATE-PENSION"
   val taxCreditsHelpKey: String = "TAX-CREDITS"
   val generalEnquiriesHelpKey: String = "GENERAL-ENQUIRIES"
@@ -280,14 +280,14 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   }
 
   "CallHelpdeskController get Self Assessment help page" should {
-    "return Self Assessment help page if the help key is 'self-assessment' but there is no go back url" in {
+    "return Self Assessment help page if the help key is 'SELF-ASSESSMENT-ORG' but there is no go back url" in {
       val result: Future[Result] = controller.getHelpdeskOrganisationPage(selfAssessmentOrganisationHelpKey, None)(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("If you need help with Self Assessment") shouldBe true
       contentAsString(result).contains("Back") shouldBe false
     }
 
-    "return Self Assessment help page if the help key is 'self-assessment' and there is a go back url" in {
+    "return Self Assessment help page if the help key is 'SELF-ASSESSMENT-ORG' and there is a go back url" in {
       val result: Future[Result] = controller.getHelpdeskOrganisationPage(selfAssessmentOrganisationHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("If you need help with Self Assessment") shouldBe true
