@@ -112,6 +112,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   val deceasedHelpKey: String = "deceased"
   val incomeTaxPayeHelpKey: String = "INCOME-TAX-PAYE"
   val nationalInsuranceHelpKey: String = "NATIONAL-INSURANCE"
+  val machineGamingDutyHelpKey: String = "machine-gaming-duty"
   val selfAssessmentHelpKey: String = "SELF-ASSESSMENT"
   val statePensionHelpKey: String = "STATE-PENSION"
   val taxCreditsHelpKey: String = "TAX-CREDITS"
@@ -208,6 +209,22 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       status(result) shouldBe Status.OK
       contentAsString(result).contains("If you have a National Insurance query") shouldBe true
       contentAsString(result).contains("Back") shouldBe false
+    }
+  }
+
+  "CallHelpdeskController get machine gaming duty help page" should {
+    "return machine gaming duty help page if the help key is 'machine-gaming-duty' but there is no go back url" in {
+      val result: Future[Result] = controller.getHelpdeskOrganisationPage(machineGamingDutyHelpKey, None)(fakeRequest)
+      status(result) shouldBe Status.OK
+      contentAsString(result).contains("If you need help with Machine Gaming Duty") shouldBe true
+      contentAsString(result).contains("Back") shouldBe false
+    }
+
+    "return machine gaming duty help page if the help key is 'machine-gaming-duty' and there is a go back url" in {
+      val result: Future[Result] = controller.getHelpdeskOrganisationPage(machineGamingDutyHelpKey, Some("backURL"))(fakeRequest)
+      status(result) shouldBe Status.OK
+      contentAsString(result).contains("If you need help with Machine Gaming Duty") shouldBe true
+      contentAsString(result).contains("Back") shouldBe true
     }
   }
 
