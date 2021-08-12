@@ -53,7 +53,10 @@ national-insurance.query.p2=There are <a class="govuk-link" href="{0}">other way
 machine-gaming-duty.query.heading=If you need help with Machine Gaming Duty
 machine-gaming-duty.query.p=You need to contact the excise and gambling duties helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3701</span>. You can find <a class="govuk-link" href="{0}">other ways to contact the excise and gambling duties helpline</a>.
 
-online-services.need-help.p=To get help recovering your sign in details or changing how you get your access codes, you need to contact the Online Services helpdesk on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3600</span>. You can find <a class="govuk-link" href="{0}">other ways to contact the Online Services helpdesk</a>.
+online-services.need-help.p=To get help recovering your sign in details or changing how you get your access codes, you need to contact the Online Services helpdesk on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3600</span>. You can <a class="govuk-link" href="{0}">find other ways to contact Online Services</a>.
+
+paye-for-employers.query.heading=If you need help with PAYE for employers
+paye-for-employers.query.p=You need to contact the employers helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3200</span>. You can <a class="govuk-link" href="{0}">find other ways to contact us about PAYE for employers</a>.
 
 self-assessment.query.heading=If you have a Self Assessment query
 self-assessment.query.p1=If you do not need help signing in but have another query about Self Assessment, you need to contact the Self Assessment helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3310</span>.
