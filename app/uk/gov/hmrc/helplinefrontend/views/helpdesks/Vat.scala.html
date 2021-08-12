@@ -27,12 +27,10 @@
 @layout(pageTitle = Some(s"${messages("default.title")} ${messages("title.suffix")}"), backLinkLocation = back.getOrElse("")) {
     @h1(messages("default.title"))
 
-    @h2(messages("general-enquiries.query.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
-    @p(messages("general-enquiries.query.p1"))
-    @p(messages("general-enquiries.query.p2", URLDecoder.decode(routes.RedirectController.contactHelpline("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/income-tax-enquiries-for-individuals-pensioners-and-employees", "general-enquiries").url, "UTF-8")))
+    @h2(messages("vat.query.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
+    @p(messages("vat.query.p", URLDecoder.decode(routes.RedirectController.contactHelpline("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/vat-enquiries", "general-enquiries").url, "UTF-8")))
 
     @h2(messages("default.need-help.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
-    @p(messages("default.need-help.p1"))
-    @p(messages("default.need-help.p2", URLDecoder.decode(routes.RedirectController.contactHelpdesk("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/online-services-helpdesk").url, "UTF-8"), Some("govuk-!-margin-bottom-8")))
+    @p(messages("online-services.need-help.p", URLDecoder.decode(routes.RedirectController.contactHelpdesk("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/online-services-helpdesk").url, "UTF-8"), Some("govuk-!-margin-bottom-8")))
 }
 

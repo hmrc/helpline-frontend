@@ -74,6 +74,9 @@ tax-credits.query.heading=If you have a tax credits query
 tax-credits.query.p1=If you do not need help signing in but have another query about tax credits, you need to contact the tax credits helpline on <span class="govuk-!-font-weight-bold no-wrap">0345 300 3900</span>.
 tax-credits.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the tax credits helpline</a>.
 
+vat.query.heading=If you need help with VAT
+vat.query.p=You need to contact the VAT helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3700</span>. You can <a class="govuk-link" href="{0}">find other ways to contact us about VAT</a>.
+
 general-enquiries.query.heading=If you have a query about something else
 general-enquiries.query.p1=If you do not need help signing in but have a query about something else, you need to contact the Income Tax general enquiries helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3300</span>.
 general-enquiries.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Income Tax general enquiries helpline</a>.
