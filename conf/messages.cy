@@ -51,6 +51,9 @@ machine-gaming-duty.query.p=Mae angen i chi gysylltu â Gwasanaeth Cwsmeriaid Cy
 
 online-services.need-help.p=I gael help i adfer eich manylion mewngofnodi neu newid sut rydych yn cael eich codau cyrchu, mae angen i chi gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM drwy ffonio <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>. Gallwch <a class="govuk-link" href="{0}">ddod o hyd i ffyrdd eraill o gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM</a>.
 
+paye-for-employers.query.heading=Os oes angen help arnoch gyda TWE i gyflogwyr
+paye-for-employers.query.p=Mae angen i chi gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM ar <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>. Gallwch <a class="govuk-link" href="{0}">ddod o hyd i ffyrdd eraill o gysylltu â ni am TWE i gyflogwyr</a>.
+
 self-assessment.query.heading=Os oes gennych ymholiad am Hunanasesiad
 self-assessment.query.p1=Os nad oes angen help arnoch i fewngofnodi, ond bod gennych ymholiad arall am Hunanasesiad, gallwch gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM drwy ffonio <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>.
 self-assessment.query.p2=Mae ffyrdd eraill o <a class="govuk-link" href="{0}">gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM</a>.
