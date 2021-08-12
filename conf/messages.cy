@@ -35,6 +35,9 @@ child-benefit.query.heading=Os oes gennych ymholiad am Fudd-dal Plant
 child-benefit.query.p1=Os nad oes angen help arnoch i fewngofnodi, ond bod gennych ymholiad arall am Fudd-dal Plant, gallwch gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM drwy ffonio <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>.
 child-benefit.query.p2=Mae ffyrdd eraill o <a class="govuk-link" href="{0}">gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM</a>.
 
+corporation-tax.query.heading=Os oes angen help arnoch gyda Threth Gorfforaeth
+corporation-tax.query.p=Mae angen i chi gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM ar <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>. Gallwch <a class="govuk-link" href="{0}">ddod o hyd i ffyrdd eraill o gysylltu â ni ynglyn â Threth Gorfforaeth</a>.
+
 income-tax-paye.query.heading=Os oes gennych ymholiad am Dreth Incwm neu TWE
 income-tax-paye.query.p1=Os nad oes angen help arnoch i fewngofnodi, ond bod gennych ymholiad arall am Dreth Incwm neu TWE, gallwch gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM drwy ffonio <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>.
 income-tax-paye.query.p2=Mae ffyrdd eraill o <a class="govuk-link" href="{0}">gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM</a>.
@@ -42,6 +45,8 @@ income-tax-paye.query.p2=Mae ffyrdd eraill o <a class="govuk-link" href="{0}">gy
 national-insurance.query.heading=Os oes gennych ymholiad am Yswiriant Gwladol
 national-insurance.query.p1=Os nad oes angen help arnoch i fewngofnodi, ond bod gennych ymholiad arall am Yswiriant Gwladol, gallwch gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM drwy ffonio <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>.
 national-insurance.query.p2=Mae ffyrdd eraill o <a class="govuk-link" href="{0}">gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM</a>.
+
+online-services.need-help.p=I gael help i adfer eich manylion mewngofnodi neu newid sut rydych yn cael eich codau cyrchu, mae angen i chi gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM drwy ffonio <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>. Gallwch <a class="govuk-link" href="{0}">ddod o hyd i ffyrdd eraill o gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM</a>.
 
 self-assessment.query.heading=Os oes gennych ymholiad am Hunanasesiad
 self-assessment.query.p1=Os nad oes angen help arnoch i fewngofnodi, ond bod gennych ymholiad arall am Hunanasesiad, gallwch gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM drwy ffonio <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>.
