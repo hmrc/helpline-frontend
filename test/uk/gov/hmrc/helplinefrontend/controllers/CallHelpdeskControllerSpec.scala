@@ -108,6 +108,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
                                  ec)
 
   val childBenefitHelpKey: String = "CHILD-BENEFIT"
+  val corporationTaxHelpKey: String = "corporation-tax"
   val deceasedHelpKey: String = "deceased"
   val incomeTaxPayeHelpKey: String = "INCOME-TAX-PAYE"
   val nationalInsuranceHelpKey: String = "NATIONAL-INSURANCE"
@@ -146,6 +147,22 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       val result: Future[Result] = controller.getHelpdeskPage(childBenefitHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("If you have a Child Benefit query") shouldBe true
+      contentAsString(result).contains("Back") shouldBe true
+    }
+  }
+
+  "CallHelpdeskController get corporation tax help page" should {
+    "return corporation tax help page if the help key is 'corporation-tax' but there is no go back url" in {
+      val result: Future[Result] = controller.getHelpdeskOrganisationPage(corporationTaxHelpKey, None)(fakeRequest)
+      status(result) shouldBe Status.OK
+      contentAsString(result).contains("If you need help with Corporation Tax") shouldBe true
+      contentAsString(result).contains("Back") shouldBe false
+    }
+
+    "return corporation tax help page if the help key is 'corporation-tax' and there is a go back url" in {
+      val result: Future[Result] = controller.getHelpdeskOrganisationPage(corporationTaxHelpKey, Some("backURL"))(fakeRequest)
+      status(result) shouldBe Status.OK
+      contentAsString(result).contains("If you need help with Corporation Tax") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
     }
   }
