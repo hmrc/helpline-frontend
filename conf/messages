@@ -62,6 +62,9 @@ self-assessment.query.heading=If you have a Self Assessment query
 self-assessment.query.p1=If you do not need help signing in but have another query about Self Assessment, you need to contact the Self Assessment helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3310</span>.
 self-assessment.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Self Assessment helpline</a>.
 
+self-assessment-organisation.query.heading=If you need help with Self Assessment
+self-assessment-organisation.query.p=You need to contact the Self Assessment helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3310</span>. You can <a class="govuk-link" href="{0}">find other ways to contact us about Self Assessment</a>.
+
 seiss.query.heading=If you have a Self-Employment Income Support Scheme query
 seiss.query.p1=If you do not need help signing in but have another query about the Self-Employment Income Support Scheme, you need to contact the Self-Employment Income Support Scheme helpline on <span class="govuk-!-font-weight-bold no-wrap">0800 024 1222</span>.
 seiss.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Self-Employment Income Support Scheme helpline</a>.
