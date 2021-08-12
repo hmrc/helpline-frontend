@@ -81,6 +81,9 @@ general-enquiries.query.heading=If you have a query about something else
 general-enquiries.query.p1=If you do not need help signing in but have a query about something else, you need to contact the Income Tax general enquiries helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3300</span>.
 general-enquiries.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Income Tax general enquiries helpline</a>.
 
+general-enquiries-organisation.query.heading=If you need help with a service
+general-enquiries-organisation.query.p=You can <a class="govuk-link" href="{0}">find contact details for the service you are trying to access</a>.
+
 contact_us.deceased.h1=Has this person died?
 contact_us.deceased.call_hmrc=Call HMRC for help with tax after someone dies.
 contact_us.deceased.contact_number.telephone.number=0300 200 3300
