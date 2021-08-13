@@ -58,6 +58,9 @@ self-assessment.query.heading=Os oes gennych ymholiad am Hunanasesiad
 self-assessment.query.p1=Os nad oes angen help arnoch i fewngofnodi, ond bod gennych ymholiad arall am Hunanasesiad, gallwch gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM drwy ffonio <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>.
 self-assessment.query.p2=Mae ffyrdd eraill o <a class="govuk-link" href="{0}">gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM</a>.
 
+self-assessment-organisation.query.heading=Os oes angen help arnoch gyda Hunanasesiad
+self-assessment-organisation.query.p=Mae angen i chi gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM ar <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>. Gallwch <a class="govuk-link" href="{0}">ddod o hyd i ffyrdd eraill o gysylltu â ni am Hunanasesiad</a>.
+
 seiss.query.heading=Os oes gennych ymholiad am y Cynllun Cymhorthdal Incwm Hunangyflogaeth
 seiss.query.p1=Os nad oes angen help arnoch i fewngofnodi, ond bod gennych ymholiad arall y Cynllun Cymhorthdal Incwm Hunangyflogaeth, gallwch gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM drwy ffonio <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>.
 seiss.query.p2=Mae ffyrdd eraill o <a class="govuk-link" href="{0}">gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM</a>.
