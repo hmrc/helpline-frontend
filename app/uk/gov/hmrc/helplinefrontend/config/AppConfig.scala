@@ -44,7 +44,7 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "paye-for-employers" -> "contact_paye_for_employers",
     "self-assessment" -> "contact_organisation_sa",
     "vat" -> "contact_organisation_vat",
-    "general-enquiries" -> "contact_organisation_other"
+    "help-with-a-service" -> "contact_organisation_other"
   )
 
   val contactHelplineGAEventMapper = Map(
