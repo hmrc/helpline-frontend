@@ -6,11 +6,12 @@ helpline-frontend is a service that will display contact pages on demand.
 ### Running
 To run the application, use `sbt run`. 
 
-## API
+## INDIVIDUAL API
 
 | Method | Path                                        | Description                                      |
 |--------|---------------------------------------------|--------------------------------------------------|
 | GET    | /helpline/call-options-no-answers           | display the list of contact pages selectable     |
+| POST   | /helpline/call-options-no-answers           | handles submission of above     |
 | GET    | /helpline/:helpKey?back=backURL             | display contact pages on demand                  |
 
 Eg./helpline/deceased?back=backURL (the helpKey is case-insensitive)
@@ -30,6 +31,26 @@ Several alternatives will be available and can be selected by indicating the hel
 | TAX-CREDITS           | details about TAX-CREDITS information         |
 | SEISS                 | details about SEISS information               |
 | anything else         | DEFAULT page                                  |
+
+## ORGANISATION API
+
+| Method | Path                                        | Description                                      |
+|--------|---------------------------------------------|--------------------------------------------------|
+| GET    | /helpline/organisation/select-a-service           | display the list of org contact pages selectable     |
+| POST   | /helpline/organisation/select-a-service           | handles the submission of the above    |
+| GET    | /helpline/organisation/:helpKey?back=backURL             | display org contact pages on demand                  |
+
+Several alternatives will be available and can be selected by indicating the helpKey that represents the particular helpdesk using the URL.
+
+| helpKey               | Page                                          |
+|-----------------------|-----------------------------------------------|
+| CORPORATION-TAX       | details about CORPORATION-TAX information       |
+| MACHINE-GAMING-DUTY   | details about MACHINE-GAMING-DUTY information     |
+| PAYE-FOR-EMPLOYERS    | details about PAYE-FOR-EMPLOYERS information  |
+| SELF-ASSESSMENT       | details about SELF-ASSESSMENT information     |
+| VAT                   | details about VAT information       |
+| anything else         | DEFAULT page                                  |
+
 
 
 ### License

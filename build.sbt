@@ -12,7 +12,7 @@ lazy val microservice = Project(appName, file("."))
   .settings(PlayKeys.playDefaultPort := 10102)
   .settings(
     majorVersion                     := 1,
-    scalaVersion                     := "2.12.12",
+    scalaVersion                     := "2.12.13",
     libraryDependencies              ++= AppDependencies.compile ++ AppDependencies.test,
     TwirlKeys.templateImports ++= Seq(
       "uk.gov.hmrc.helplinefrontend.config.AppConfig",
@@ -24,7 +24,11 @@ lazy val microservice = Project(appName, file("."))
     // ***************
     // Use the silencer plugin to suppress warnings
     // You may turn it on for `views` too to suppress warnings from unused imports in compiled twirl templates, but this will hide other warnings.
-    scalacOptions += "-P:silencer:pathFilters=routes",
+    scalacOptions ++= Seq(
+      "-P:silencer:pathFilters=routes",
+      "-Wconf:cat=other-match-analysis:error"
+    )
+    ,
     libraryDependencies ++= Seq(
       compilerPlugin("com.github.ghik" % "silencer-plugin" % silencerVersion cross CrossVersion.full),
       "com.github.ghik" % "silencer-lib" % silencerVersion % Provided cross CrossVersion.full

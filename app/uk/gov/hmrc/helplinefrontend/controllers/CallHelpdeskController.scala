@@ -20,8 +20,7 @@ import javax.inject.{Inject, Singleton}
 import play.api.Logging
 import play.api.mvc._
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
-import uk.gov.hmrc.helplinefrontend.models.form.CallOptionForm
-import uk.gov.hmrc.helplinefrontend.models.form.CallOptionOrganisationForm
+import uk.gov.hmrc.helplinefrontend.models.form.{CallOptionForm, CallOptionOrganisationForm, OrgPageType, PageType}
 import uk.gov.hmrc.helplinefrontend.monitoring.{ContactLink, ContactType, EventDispatcher}
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
@@ -56,35 +55,37 @@ class CallHelpdeskController @Inject()(implicit
   def getHelpdeskPage(helpKey: String, back: Option[String]): Action[AnyContent] = Action.async { implicit request =>
     logger.info(s"[VER-517] calling for $helpKey")
     val backCall: Option[String] = if (appConfig.backCallEnabled) back else None
-    helpKey.toLowerCase match {
-      case "deceased" => Future.successful(Ok(ivDeceased(backCall)))
-      case "child-benefit" => Future.successful(Ok(childBenefitPage(backCall)))
-      case "income-tax-paye" => Future.successful(Ok(incomeTaxPayePage(backCall)))
-      case "national-insurance" => Future.successful(Ok(nationalInsurancePage(backCall)))
-      case "self-assessment" => Future.successful(Ok(selfAssessmentPage(backCall)))
-      case "state-pension" => Future.successful(Ok(statePensionPage(backCall)))
-      case "tax-credits" => Future.successful(Ok(taxCreditsPage(backCall)))
-      case "seiss" => Future.successful(Ok(seissPage(backCall)))
-      case "general-enquiries" => Future.successful(Ok(generalEnquiriesPage(backCall)))
+    import uk.gov.hmrc.helplinefrontend.models.form.PageType._
+    val pageTypeOption = PageType.withNameInsensitiveOption(helpKey)
 
-      case _ => // default help page
-        logger.warn(s"[VER-517] calling without a valid help key($helpKey): request.headers => ${request.headers}")
-        Future.successful(Ok(generalEnquiriesPage(backCall)))
-    }
+    Future.successful(Ok(pageTypeOption.map {
+      case Deceased => ivDeceased(backCall)
+      case ChildBenefit => childBenefitPage(backCall)
+      case IncomeTaxPaye => incomeTaxPayePage(backCall)
+      case NationalInsurance => nationalInsurancePage(backCall)
+      case SelfAssessment => selfAssessmentPage(backCall)
+      case StatePension => statePensionPage(backCall)
+      case TaxCredits => taxCreditsPage(backCall)
+      case Seiss => seissPage(backCall)
+      case GeneralEnquiries => generalEnquiriesPage(backCall)
+    }.getOrElse {
+      logger.warn(s"[VER-517] calling without a valid help key($helpKey): request.headers => ${request.headers}")
+      generalEnquiriesPage(backCall)
+    }))
   }
 
   def getHelpdeskOrganisationPage(helpKey: String, back: Option[String]): Action[AnyContent] = Action.async { implicit request =>
     val backCall: Option[String] = if (appConfig.backCallEnabled) back else None
-    helpKey.toLowerCase match {
-      case "corporation-tax" => Future.successful(Ok(corporationTaxPage(backCall)))
-      case "machine-gaming-duty" => Future.successful(Ok(machineGamingDutyPage(backCall)))
-      case "paye-for-employers" => Future.successful(Ok(payeForEmployersPage(backCall)))
-      case "self-assessment" => Future.successful(Ok(selfAssessmentOrganisationPage(backCall)))
-      case "vat" => Future.successful(Ok(vatPage(backCall)))
+    import uk.gov.hmrc.helplinefrontend.models.form.OrgPageType._
+    val orgPageTypeOption = OrgPageType.withNameInsensitiveOption(helpKey)
 
-      case _ => // default help page
-        Future.successful(Ok(generalEnquiriesOrganisationPage(backCall)))
-    }
+    Future.successful(Ok(orgPageTypeOption.map {
+      case CorporationTax => corporationTaxPage(backCall)
+      case MachineGamingDuty => machineGamingDutyPage(backCall)
+      case PayeForEmployers => payeForEmployersPage(backCall)
+      case SelfAssessment => selfAssessmentOrganisationPage(backCall)
+      case Vat => vatPage(backCall)
+    }.getOrElse(generalEnquiriesOrganisationPage(backCall))))
   }
 
   def callOptionsNoAnswersPage(): Action[AnyContent] = Action.async { implicit request =>
