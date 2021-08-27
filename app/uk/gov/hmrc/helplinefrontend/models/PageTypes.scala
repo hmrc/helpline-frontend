@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.helplinefrontend.models.form
+package uk.gov.hmrc.helplinefrontend.models
 
 import enumeratum.EnumEntry.UpperHyphencase
 import enumeratum._

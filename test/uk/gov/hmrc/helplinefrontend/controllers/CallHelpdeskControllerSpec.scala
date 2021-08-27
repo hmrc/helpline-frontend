@@ -27,6 +27,7 @@ import play.api.mvc.{AnyContentAsEmpty, Cookie, MessagesControllerComponents, Re
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
+import uk.gov.hmrc.helplinefrontend.models.{OrgPageType, PageType}
 import uk.gov.hmrc.helplinefrontend.monitoring.EventDispatcher
 import uk.gov.hmrc.helplinefrontend.monitoring.analytics.{AnalyticsConnector, AnalyticsEventHandler, AnalyticsRequest, DimensionValue, Event}
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
@@ -107,22 +108,25 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
                                  eventDispatcher,
                                  ec)
 
-  val childBenefitHelpKey: String = "CHILD-BENEFIT"
-  val corporationTaxHelpKey: String = "CORPORATION-TAX"
-  val deceasedHelpKey: String = "deceased"
-  val incomeTaxPayeHelpKey: String = "INCOME-TAX-PAYE"
-  val nationalInsuranceHelpKey: String = "NATIONAL-INSURANCE"
-  val machineGamingDutyHelpKey: String = "MACHINE-GAMING-DUTY"
-  val payeForEmployersHelpKey: String = "PAYE-FOR-EMPLOYERS"
-  val selfAssessmentHelpKey: String = "SELF-ASSESSMENT"
-  val selfAssessmentOrganisationHelpKey: String = "self-assessment"
-  val statePensionHelpKey: String = "STATE-PENSION"
-  val taxCreditsHelpKey: String = "TAX-CREDITS"
-  val generalEnquiriesHelpKey: String = "GENERAL-ENQUIRIES"
-  val generalEnquiriesOrganisationHelpKey: String = "SOMETHING-ELSE"
-  val seissHelpKey: String = "SEISS"
-  val vatHelpKey: String = "VAT"
+  val childBenefitHelpKey: String = PageType.ChildBenefit.entryName
+
+  val deceasedHelpKey: String = PageType.Deceased.entryName
+  val incomeTaxPayeHelpKey: String = PageType.IncomeTaxPaye.entryName
+  val nationalInsuranceHelpKey: String = PageType.NationalInsurance.entryName
+  val selfAssessmentHelpKey: String = PageType.SelfAssessment.entryName
+  val statePensionHelpKey: String = PageType.StatePension.entryName
+  val taxCreditsHelpKey: String = PageType.TaxCredits.entryName
+  val generalEnquiriesHelpKey: String = PageType.GeneralEnquiries.entryName
+  val seissHelpKey: String = PageType.Seiss.entryName
+
   val defaultHelpKey: String = "GENERAL-ENQUIRIES"
+
+  val corporationTaxHelpKey: String = OrgPageType.CorporationTax.entryName
+  val machineGamingDutyHelpKey: String = OrgPageType.MachineGamingDuty.entryName
+  val payeForEmployersHelpKey: String = OrgPageType.PayeForEmployers.entryName
+  val selfAssessmentOrganisationHelpKey: String =OrgPageType.SelfAssessment.entryName
+  val vatHelpKey: String = OrgPageType.Vat.entryName
+  val generalEnquiriesOrganisationHelpKey: String = "SOMETHING-ELSE"
 
   "CallHelpdeskController get deceased help page" should {
     "return deceased help page if the help key is 'deceased' but there is no go back url" in {

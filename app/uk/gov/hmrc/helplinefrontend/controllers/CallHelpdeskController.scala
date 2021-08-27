@@ -20,7 +20,8 @@ import javax.inject.{Inject, Singleton}
 import play.api.Logging
 import play.api.mvc._
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
-import uk.gov.hmrc.helplinefrontend.models.form.{CallOptionForm, CallOptionOrganisationForm, OrgPageType, PageType}
+import uk.gov.hmrc.helplinefrontend.models.{OrgPageType, PageType}
+import uk.gov.hmrc.helplinefrontend.models.form.{CallOptionForm, CallOptionOrganisationForm}
 import uk.gov.hmrc.helplinefrontend.monitoring.{ContactLink, ContactType, EventDispatcher}
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
@@ -55,7 +56,7 @@ class CallHelpdeskController @Inject()(implicit
   def getHelpdeskPage(helpKey: String, back: Option[String]): Action[AnyContent] = Action.async { implicit request =>
     logger.info(s"[VER-517] calling for $helpKey")
     val backCall: Option[String] = if (appConfig.backCallEnabled) back else None
-    import uk.gov.hmrc.helplinefrontend.models.form.PageType._
+    import uk.gov.hmrc.helplinefrontend.models.PageType._
     val pageTypeOption = PageType.withNameInsensitiveOption(helpKey)
 
     Future.successful(Ok(pageTypeOption.map {
@@ -76,7 +77,7 @@ class CallHelpdeskController @Inject()(implicit
 
   def getHelpdeskOrganisationPage(helpKey: String, back: Option[String]): Action[AnyContent] = Action.async { implicit request =>
     val backCall: Option[String] = if (appConfig.backCallEnabled) back else None
-    import uk.gov.hmrc.helplinefrontend.models.form.OrgPageType._
+    import uk.gov.hmrc.helplinefrontend.models.OrgPageType._
     val orgPageTypeOption = OrgPageType.withNameInsensitiveOption(helpKey)
 
     Future.successful(Ok(orgPageTypeOption.map {
