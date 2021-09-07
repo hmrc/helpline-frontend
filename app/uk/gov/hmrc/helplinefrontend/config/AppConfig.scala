@@ -55,7 +55,13 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "SEISS" -> "further-contact_seiss",
     "state-pension" -> "further-contact_pension",
     "tax-credits" -> "further-contact_taxcred",
-    "general-enquiries" -> "further-contact_other"
+    "general-enquiries" -> "further-contact_other",
+    "corporation-tax" -> "further-contact_corporationtax",
+    "machine-gaming-duty" -> "further-contact_machinegamingduty",
+    "paye-for-employers" -> "further-contact_paye",
+    "self-assessment-org" -> "further-contact_sa_org",
+    "vat" -> "further-contact_vat",
+    "general-enquiries-org" -> "further-contact_other_org"
   )
 
   val callOptionsList: List[String] =

@@ -29,7 +29,6 @@ import play.api.test.Helpers.{defaultAwaitTimeout, status}
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.helplinefrontend.monitoring.EventDispatcher
 import uk.gov.hmrc.helplinefrontend.monitoring.analytics.{AnalyticsConnector, AnalyticsEventHandler, AnalyticsRequest, Event}
-import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
 import uk.gov.hmrc.http.{HeaderCarrier, HttpClient}
 import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
 
@@ -68,23 +67,28 @@ class RedirectControllerSpec extends AnyWordSpec with Matchers with GuiceOneAppP
 
   val url = "https://www.gov.uk/government/organisations/hm-revenue-customs/contact/online-services-helpdesk"
 
+  val contactUrl = "https://www.gov.uk/government/service-specific-url"
+
   "RedirectController" should {
 
-    "fire contact_online_services_helpdesk ga event when user clicks on helpdesk link" in {
+    appConfig.contactHelplineGAEventMapper.foreach {
+      entry =>
+        s"send ${entry._1} ga event when user clicks on helpline link" in {
+          val result: Future[Result] = controller.contactHelpline(url, entry._1)(request)
+          status(result) shouldBe Status.SEE_OTHER
+          eventually {
+            analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
+              Event("sos_iv", "more_info", entry._2, Seq())))
+          }
+        }
+    }
+
+    "send contact_online_services_helpdesk ga event when user clicks on helpdesk link" in {
       val result: Future[Result] = controller.contactHelpdesk(url)(request)
       status(result) shouldBe Status.SEE_OTHER
       eventually {
         analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
           Event("sos_iv", "more_info", "contact_online_services_helpdesk", Seq())))
-      }
-    }
-
-    "fire contact_online_services_helpline ga event when user clicks on helpline link" in {
-      val result: Future[Result] = controller.contactHelpline(url, "child-benefit")(request)
-      status(result) shouldBe Status.SEE_OTHER
-      eventually {
-        analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
-          Event("sos_iv", "more_info", "further-contact_childbenefit", Seq())))
       }
     }
 
