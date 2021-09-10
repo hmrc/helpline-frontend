@@ -48,6 +48,7 @@ national-insurance.query.p2=Mae ffyrdd eraill o <a class="govuk-link" href="{0}"
 
 machine-gaming-duty.query.heading=Os oes angen help arnoch gyda Tholl Peiriannau Hapchwarae
 machine-gaming-duty.query.p=Mae angen i chi gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM ar <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>. Gallwch <a class="govuk-link" href="{0}">ddod o hyd i ffyrdd eraill o gysylltu â ni am Doll Peiriannau Hapchwarae</a>.
+machine-gaming-duty.need-help.p=I gael help i adfer eich manylion mewngofnodi neu newid sut rydych yn cael eich codau cyrchu, mae angen i chi gysylltu â’r Gwasanaeth TAW trwy ffonio <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>. Gallwch <a class="govuk-link" href="{0}">ddod o hyd i ffyrdd eraill o gysylltu â Gwasanaethau Ar-lein TAW</a>.
 
 online-services.need-help.p=I gael help i adfer eich manylion mewngofnodi neu newid sut rydych yn cael eich codau cyrchu, mae angen i chi gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM drwy ffonio <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>. Gallwch <a class="govuk-link" href="{0}">ddod o hyd i ffyrdd eraill o gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM</a>.
 
@@ -75,6 +76,7 @@ tax-credits.query.p2=Mae ffyrdd eraill o <a class="govuk-link" href="{0}">gysyll
 
 vat.query.heading=Os oes angen help arnoch gyda TAW
 vat.query.p=Mae angen i chi gysylltu â’r Llinell Gymorth TAW ar <span class="govuk-!-font-weight-bold no-wrap">0300 200 3705</span>. Gallwch <a class="govuk-link" href="{0}">ddod o hyd i ffyrdd eraill o gysylltu â ni am TAW</a>.
+vat.need-help.p=I gael help i adfer eich manylion mewngofnodi neu newid sut rydych yn cael eich codau cyrchu, mae angen i chi gysylltu â’r Gwasanaeth TAW trwy ffonio <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>. Gallwch <a class="govuk-link" href="{0}">ddod o hyd i ffyrdd eraill o gysylltu â Gwasanaethau Ar-lein TAW</a>.
 
 general-enquiries.query.heading=Os oes gennych ymholiad am rywbeth arall
 general-enquiries.query.p1=Os nad oes angen help arnoch i fewngofnodi, ond bod gennych ymholiad am rywbeth arall, gallwch gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM drwy ffonio <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>.
