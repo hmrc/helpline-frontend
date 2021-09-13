@@ -24,4 +24,6 @@ case class ContactType(value: String) extends MonitoringEvent
 
 case object ContactHelpdesk extends MonitoringEvent
 
+case object ContactHelpdeskOrg extends MonitoringEvent
+
 case class ContactHelpline(value: String) extends MonitoringEvent
