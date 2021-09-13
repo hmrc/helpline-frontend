@@ -39,12 +39,12 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
   )
 
   val defaultCallOptionsOrganisationAndGAEventMapper = mutable.LinkedHashMap(
-    "corporation-tax" -> "contact_corporation_tax",
-    "machine-gaming-duty" -> "contact_machine_gaming_duty",
-    "paye-for-employers" -> "contact_paye_for_employers",
-    "self-assessment" -> "contact_organisation_sa",
-    "vat" -> "contact_organisation_vat",
-    "help-with-a-service" -> "contact_organisation_other"
+    "corporation-tax" -> "contact_corporationtax",
+    "machine-gaming-duty" -> "contact_machinegamingduty",
+    "paye-for-employers" -> "contact_paye",
+    "self-assessment" -> "contact_sa_org",
+    "vat" -> "contact_vat",
+    "help-with-a-service" -> "contact_other_org"
   )
 
   val contactHelplineGAEventMapper = Map(
