@@ -22,7 +22,7 @@ import play.api.mvc._
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.helplinefrontend.models.form.CallOptionForm
 import uk.gov.hmrc.helplinefrontend.models.form.CallOptionOrganisationForm
-import uk.gov.hmrc.helplinefrontend.monitoring.{ContactLink, ContactType, EventDispatcher}
+import uk.gov.hmrc.helplinefrontend.monitoring.{ContactHmrcOrg, ContactLink, ContactType, EventDispatcher}
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
@@ -94,7 +94,7 @@ class CallHelpdeskController @Inject()(implicit
   }
 
   def callOptionsNoAnswersOrganisationPage(): Action[AnyContent] = Action.async { implicit request =>
-    eventDispatcher.dispatchEvent(ContactLink)
+    eventDispatcher.dispatchEvent(ContactHmrcOrg)
     Future.successful(Ok(callOptionsOrganisationNoAnswers(CallOptionForm.callOptionForm(appConfig.callOptionsList))))
   }
 

@@ -20,7 +20,7 @@ import javax.inject.{Inject, Singleton}
 import play.api.Logging
 import play.api.libs.json.{JsValue, Json}
 import play.api.mvc.Request
-import uk.gov.hmrc.helplinefrontend.monitoring.{ContactHelpdesk, ContactHelpdeskOrg, ContactHelpline, ContactLink, ContactType, EventHandler, MonitoringEvent}
+import uk.gov.hmrc.helplinefrontend.monitoring._
 import uk.gov.hmrc.http.{HeaderCarrier, HeaderNames}
 
 import scala.concurrent.ExecutionContext
@@ -33,6 +33,7 @@ class AnalyticsEventHandler @Inject()(connector: AnalyticsConnector) extends Eve
   override def handleEvent(event: MonitoringEvent)(implicit request: Request[_], hc: HeaderCarrier, ec: ExecutionContext): Unit = {
     event match {
       case ContactLink => sendEvent(factory.contactLink)
+      case ContactHmrcOrg => sendEvent(factory.contactHmrcOrg)
       case e: ContactType => sendEvent(factory.contactType(e.value))
       case ContactHelpdesk =>  sendEvent(factory.contactHelpdesk)
       case ContactHelpdeskOrg =>  sendEvent(factory.contactHelpdeskOrg)
@@ -68,6 +69,10 @@ private class AnalyticsRequestFactory() {
   def contactLink(clientId: Option[String])(implicit request: Request[_]): AnalyticsRequest = {
     val gaEvent = Event("sos_iv", "more_info", "contact_hmrc", getDimensions(request))
     AnalyticsRequest(clientId, Seq(gaEvent))
+  }
+
+  def contactHmrcOrg(clientId: Option[String])(implicit request: Request[_]): AnalyticsRequest = {
+    AnalyticsRequest(clientId, Seq(Event("sos_iv", "more_info", "contact_hmrc_org", getDimensions(request))))
   }
 
   def contactType(contactType: String)(clientId: Option[String])(implicit request: Request[_]): AnalyticsRequest = {

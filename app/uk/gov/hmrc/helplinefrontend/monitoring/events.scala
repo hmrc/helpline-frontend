@@ -20,6 +20,8 @@ sealed trait MonitoringEvent
 
 case object ContactLink extends MonitoringEvent
 
+case object ContactHmrcOrg extends MonitoringEvent
+
 case class ContactType(value: String) extends MonitoringEvent
 
 case object ContactHelpdesk extends MonitoringEvent
