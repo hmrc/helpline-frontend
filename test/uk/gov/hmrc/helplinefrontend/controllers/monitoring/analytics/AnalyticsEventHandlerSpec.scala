@@ -25,7 +25,7 @@ import play.api.mvc.Cookie
 import play.api.test.FakeRequest
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.helplinefrontend.monitoring.analytics.{AnalyticsConnector, AnalyticsEventHandler, AnalyticsRequest, Event}
-import uk.gov.hmrc.helplinefrontend.monitoring.{ContactLink, ContactType, EventDispatcher}
+import uk.gov.hmrc.helplinefrontend.monitoring._
 import uk.gov.hmrc.http.{HeaderCarrier, HttpClient}
 
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -38,6 +38,14 @@ class AnalyticsEventHandlerSpec
     with Matchers {
 
   "dispatcher" should {
+
+    "send more_info/contact_hmrc_org event when ContactHmrcOrg dispatched " in new Setup {
+      dispatcher.dispatchEvent(ContactHmrcOrg)(request, hc, global)
+      eventually {
+        analyticsRequests.head shouldBe AnalyticsRequest(Some(gaClientId), Seq(
+          Event("sos_iv", "more_info", "contact_hmrc_org", Seq())))
+      }
+    }
 
     "send more_info/contact_hmrc event when user clicks on contact link " in new Setup {
       dispatcher.dispatchEvent(ContactLink)(request, hc, global)
