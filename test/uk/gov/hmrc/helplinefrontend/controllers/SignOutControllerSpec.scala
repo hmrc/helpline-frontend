@@ -55,7 +55,7 @@ class SignOutControllerSpec extends AnyWordSpec with Matchers with GuiceOneAppPe
     "Redirect to the logout page" in {
       val result = controller.signedOut().apply(request)
 
-      val expectedRedirectLocation = Some("https://www.access.service.gov.uk/logout")
+      val expectedRedirectLocation = Some("https://www.ete.access.service.gov.uk/logout")
 
       status(result) shouldBe 303
       redirectLocation(result) shouldBe expectedRedirectLocation
