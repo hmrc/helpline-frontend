@@ -26,6 +26,7 @@ import play.api.http.Status
 import play.api.mvc.{AnyContentAsEmpty, Cookie, MessagesControllerComponents, Result}
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
+import uk.gov.hmrc.auth.core.AuthConnector
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.helplinefrontend.monitoring.EventDispatcher
 import uk.gov.hmrc.helplinefrontend.monitoring.analytics.{AnalyticsConnector, AnalyticsEventHandler, AnalyticsRequest, DimensionValue, Event}
@@ -44,6 +45,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   val customiseAppConfig = new AppConfig(config, new ServicesConfig(config))
 
   val appConfig: AppConfig = app.injector.instanceOf[AppConfig]
+  val authConnector: AuthConnector = app.injector.instanceOf[AuthConnector]
   val messagesCC: MessagesControllerComponents = app.injector.instanceOf[MessagesControllerComponents]
   val contactUsDeceased: IVDeceased = app.injector.instanceOf[IVDeceased]
   val childBenefit: ChildBenefit = app.injector.instanceOf[ChildBenefit]
@@ -85,7 +87,8 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   val eventDispatcher = new EventDispatcher(TestHandler)
 
   val controller: CallHelpdeskController =
-    new CallHelpdeskController()(appConfig,
+    new CallHelpdeskController()(authConnector,
+                                 appConfig,
                                  messagesCC,
                                  contactUsDeceased,
                                  childBenefit,
@@ -205,7 +208,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
     "return National Insurance help page if the help key is 'NATIONAL-INSURANCE' and there is a go back url, but back call is not supported" in {
       val controller: CallHelpdeskController =
-        new CallHelpdeskController()(customiseAppConfig, messagesCC, contactUsDeceased, childBenefit, incomeTaxPaye, nationalInsurance,
+        new CallHelpdeskController()(authConnector, customiseAppConfig, messagesCC, contactUsDeceased, childBenefit, incomeTaxPaye, nationalInsurance,
           selfAssessment, statePension, taxCredits, seiss, generalEnquiries, generalEnquiriesOrganisation, corporationTax, machineGamingDuty,
           payeForEmployers, selfAssessmentOrganisation, vat, callOptionsNoAnswers, callOptionsOrganisationNoAnswers, eventDispatcher, ec)
 

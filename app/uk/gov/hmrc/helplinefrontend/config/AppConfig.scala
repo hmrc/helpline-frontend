@@ -19,7 +19,9 @@ package uk.gov.hmrc.helplinefrontend.config
 import javax.inject.{Inject, Singleton}
 import play.api.Configuration
 import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
+
 import scala.collection.mutable
+import scala.concurrent.Future
 
 @Singleton
 class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig) {
@@ -73,4 +75,15 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
       .fold(defaultCallOptionsOrganisationAndGAEventMapper.keySet.toList)(_.split(",").toList)
 
   lazy val platformAnalyticsUrl = servicesConfig.baseUrl("platform-analytics")
+
+  lazy val signOutEnabled: Boolean = config.get[Boolean]("isSignOutEnabled")
+
+  var isLoggedInUser: Boolean = false
+
+  lazy val logoutPage: String = servicesConfig.getConfString("logoutPage", "https://www.access.service.gov.uk/logout")
+  lazy val basGatewayUrl: String = servicesConfig.getConfString("auth.bas-gateway.url", throw new RuntimeException("Bas gateway url required"))
+  lazy val logoutPath: String = servicesConfig.getConfString("auth.logOutUrl", "")
+  lazy val ggLogoutUrl = s"$basGatewayUrl$logoutPath"
+  lazy val logoutCallback: String = servicesConfig.getConfString("auth.logoutCallbackUrl", "/helpline/signed-out")
+
 }
