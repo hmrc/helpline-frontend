@@ -112,7 +112,7 @@ class CallHelpdeskController @Inject()(implicit
     checkIsAuthorisedUser().flatMap{ _ =>
       logger.debug(s"[VER-539] Showing options for ${ appConfig.callOptionsList.mkString(", ")}")
       eventDispatcher.dispatchEvent(ContactLink)
-      Future.successful(Ok(callOptionsNoAnswers(CallOptionForm.callOptionForm(appConfig.callOptionsList))))
+      Future.successful(Ok(callOptionsNoAnswers(CallOptionForm.callOptionForm(appConfig.callOptionsList))).addingToSession("affinityGroup" -> "Individual"))
     }
 
   }
@@ -121,7 +121,7 @@ class CallHelpdeskController @Inject()(implicit
 
     checkIsAuthorisedUser().flatMap{ _ =>
       eventDispatcher.dispatchEvent(ContactHmrcOrg)
-      Future.successful(Ok(callOptionsOrganisationNoAnswers(CallOptionForm.callOptionForm(appConfig.callOptionsList))))
+      Future.successful(Ok(callOptionsOrganisationNoAnswers(CallOptionForm.callOptionForm(appConfig.callOptionsList))).addingToSession("affinityGroup" -> "Organisation"))
     }
 
   }

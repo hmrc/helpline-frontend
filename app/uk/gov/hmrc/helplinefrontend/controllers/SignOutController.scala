@@ -32,8 +32,8 @@ class SignOutController @Inject()(cc: MessagesControllerComponents)
   def signOut(): Action[AnyContent] = Action.async { implicit request =>
 
     request.session.get("affinityGroup") match {
-      case Some("Individual") => eventDispatcher.dispatchEvent(SignedOut)
       case Some("Organisation") =>  eventDispatcher.dispatchEvent(SignedOutOrg)
+      case _ => eventDispatcher.dispatchEvent(SignedOut)
     }
 
     val ggRedirectParms = Map(
