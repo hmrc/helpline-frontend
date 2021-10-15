@@ -26,11 +26,10 @@ import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import scala.concurrent.ExecutionContext
 
 @Singleton
-class RedirectController @Inject()(implicit
-                                             appConfig: AppConfig,
-                                             mcc: MessagesControllerComponents,
-                                             val eventDispatcher: EventDispatcher,
-                                             ec: ExecutionContext)
+class RedirectController @Inject()(implicit appConfig: AppConfig,
+                                   mcc: MessagesControllerComponents,
+                                   val eventDispatcher: EventDispatcher,
+                                   ec: ExecutionContext)
   extends FrontendController(mcc) with Logging {
 
   def contactHelpdesk(redirectUrl: String): Action[AnyContent] = Action { implicit request =>

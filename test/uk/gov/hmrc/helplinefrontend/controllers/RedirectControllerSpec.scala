@@ -36,7 +36,6 @@ import scala.concurrent.{ExecutionContext, Future}
 
 class RedirectControllerSpec extends AnyWordSpec with Matchers with GuiceOneAppPerSuite with Eventually {
 
-  private val fakeRequest = FakeRequest("GET", "/")
   val config: Configuration = Configuration.from(Map(
     "features.back-call-support" -> false
   ))

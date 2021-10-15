@@ -15,9 +15,11 @@
  *@
 
 @import uk.gov.hmrc.helplinefrontend.config.AppConfig
+@import uk.gov.hmrc.hmrcfrontend.views.viewmodels.header.Header
 
 @this(govukLayout: GovukLayout,
       head: Head,
+      hmrcHeader: hmrcHeader,
       hmrcStandardFooter: HmrcStandardFooter,
       languageSelect: LanguageSelect,
       govukBackLink : GovukBackLink)
@@ -28,6 +30,20 @@
   scriptsBlock: Option[Html] = None,
   backLinkLocation: String = ""
 )(contentBlock: Html)(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
+
+
+@isloggedInUser = @{
+    appConfig.isLoggedInUser && appConfig.signOutEnabled
+}
+
+@headerBlock = {
+    @hmrcHeader(Header(
+        language = if(messages.lang.code == "cy") Cy else En,
+        displayHmrcBanner = false,
+        signOutHref =
+            if (isloggedInUser) Some(s"${uk.gov.hmrc.helplinefrontend.controllers.routes.SignOutController.signOut()}") else None
+    ))
+}
 
 @beforeContentBlock = {
     @if(appConfig.welshLanguageSupportEnabled) {@languageSelect()}
@@ -42,6 +58,7 @@
 @govukLayout(
     pageTitle = pageTitle,
     headBlock = Some(head(headBlock)),
+    headerBlock = Some(headerBlock),
     scriptsBlock = scriptsBlock,
     beforeContentBlock = Some(beforeContentBlock),
     footerBlock = Some(hmrcStandardFooter())
