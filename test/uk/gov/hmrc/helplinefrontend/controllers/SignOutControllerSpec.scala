@@ -16,6 +16,7 @@
 
 package uk.gov.hmrc.helplinefrontend.controllers
 
+import akka.Done
 import akka.util.Timeout
 import org.scalatest.concurrent.Eventually
 import org.scalatest.matchers.should.Matchers
@@ -25,7 +26,9 @@ import play.api.mvc.{AnyContentAsEmpty, MessagesControllerComponents, Result}
 import play.api.test.FakeRequest
 import play.api.test.Helpers.{redirectLocation, status}
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
-import uk.gov.hmrc.http.HeaderCarrier
+import uk.gov.hmrc.helplinefrontend.monitoring.EventDispatcher
+import uk.gov.hmrc.helplinefrontend.monitoring.analytics.{AnalyticsConnector, AnalyticsEventHandler, AnalyticsRequest}
+import uk.gov.hmrc.http.{HeaderCarrier, HttpClient}
 
 import scala.concurrent.duration.DurationInt
 import scala.concurrent.{ExecutionContext, Future}
@@ -34,8 +37,19 @@ class SignOutControllerSpec extends AnyWordSpec with Matchers with GuiceOneAppPe
 
   val mcc: MessagesControllerComponents = app.injector.instanceOf[MessagesControllerComponents]
   val appConfig: AppConfig = app.injector.instanceOf[AppConfig]
+  var analyticsRequests = Seq.empty[AnalyticsRequest]
+  val httpClient: HttpClient = app.injector.instanceOf[HttpClient]
 
-  val controller = new SignOutController(mcc)(appConfig, ExecutionContext.global)
+  object TestConnector extends AnalyticsConnector(appConfig, httpClient) {
+    override def sendEvent(request: AnalyticsRequest)(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[Done] = {
+      analyticsRequests = analyticsRequests :+ request
+      Future.successful(Done)
+    }
+  }
+  object TestHandler extends AnalyticsEventHandler(TestConnector)
+  val eventDispatcher = new EventDispatcher(TestHandler)
+
+  val controller = new SignOutController(mcc)(appConfig, ExecutionContext.global, eventDispatcher)
 
   implicit val request: FakeRequest[AnyContentAsEmpty.type] = FakeRequest()
   implicit val hc: HeaderCarrier = HeaderCarrier()
@@ -43,7 +57,8 @@ class SignOutControllerSpec extends AnyWordSpec with Matchers with GuiceOneAppPe
 
   "SignOut Controller" should {
     "Redirect to logout" in {
-      val result: Future[Result]  = controller.signOut().apply(request)
+
+      val result: Future[Result]  = controller.signOut().apply(request.withSession(("affinityGroup" -> "Organisation")))
 
       val expectedRedirectLocation =
         Some("http://localhost:9553/bas-gateway/sign-out-without-state?continue=http%3A%2F%2Flocalhost%3A10102%2Fhelpline%2Fsigned-out&origin=helpline")

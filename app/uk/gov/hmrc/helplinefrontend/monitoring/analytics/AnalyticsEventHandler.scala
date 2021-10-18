@@ -38,6 +38,8 @@ class AnalyticsEventHandler @Inject()(connector: AnalyticsConnector) extends Eve
       case ContactHelpdesk =>  sendEvent(factory.contactHelpdesk)
       case ContactHelpdeskOrg =>  sendEvent(factory.contactHelpdeskOrg)
       case e: ContactHelpline =>  sendEvent(factory.contactHelpline(e.value))
+      case SignedOut => sendEvent(factory.signOut())
+      case SignedOutOrg => sendEvent(factory.signOutOrg())
       case _ => ()
     }
   }
@@ -92,6 +94,16 @@ private class AnalyticsRequestFactory() {
 
   def contactHelpline(label: String)(clientId: Option[String])(implicit request: Request[_]): AnalyticsRequest = {
     val gaEvent = Event("sos_iv", "more_info", label, getDimensions(request))
+    AnalyticsRequest(clientId, Seq(gaEvent))
+  }
+
+  def signOut()(clientId: Option[String])(implicit request: Request[_]): AnalyticsRequest = {
+    val gaEvent = Event("sos_iv", "iv_end", "sign_out_indvhelpline", getDimensions(request))
+    AnalyticsRequest(clientId, Seq(gaEvent))
+  }
+
+  def signOutOrg()(clientId: Option[String])(implicit request: Request[_]): AnalyticsRequest = {
+    val gaEvent = Event("sos_iv", "iv_end", "sign_out_orghelpline", getDimensions(request))
     AnalyticsRequest(clientId, Seq(gaEvent))
   }
 }
