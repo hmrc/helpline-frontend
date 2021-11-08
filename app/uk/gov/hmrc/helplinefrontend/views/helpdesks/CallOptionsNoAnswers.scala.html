@@ -29,7 +29,7 @@
 
 @(callOptionForm: Form[String])(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
 
-@layout(pageTitle = Some(s"${messages("call-options-no-answers.h1")} ${messages("title.suffix")}")) {
+@layout(pageTitle = s"${messages("call-options-no-answers.h1")} ${messages("title.suffix")}", formErrors = callOptionForm.errors) {
 
 
     @formWithCsrf(routes.CallHelpdeskController.selectCallOption()) {

@@ -49,6 +49,13 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "help-with-a-service" -> "contact_other_org"
   )
 
+  val standaloneOrganisationAndGAEventMapper = mutable.LinkedHashMap(
+    "corporation-tax" -> "contact_corporationtax",
+    "machine-gaming-duty" -> "contact_machinegamingduty",
+    "vat" -> "contact_vat",
+    "help-with-a-service" -> "contact_other_org"
+  )
+
   val contactHelplineGAEventMapper = Map(
     "child-benefit" -> "further-contact_childbenefit",
     "income-tax-paye" -> "further-contact_incometaxpaye",
@@ -73,6 +80,10 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
   val callOptionsOrganisationList: List[String] =
     config.getOptional[String]("features.organisation.call-options")
       .fold(defaultCallOptionsOrganisationAndGAEventMapper.keySet.toList)(_.split(",").toList)
+
+  val standaloneOrganisationList: List[String] =
+    config.getOptional[String]("features.standalone.organisation.call-options")
+      .fold(standaloneOrganisationAndGAEventMapper.keySet.toList)(_.split(",").toList)
 
   lazy val platformAnalyticsUrl = servicesConfig.baseUrl("platform-analytics")
 

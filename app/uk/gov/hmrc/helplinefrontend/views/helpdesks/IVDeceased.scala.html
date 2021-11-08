@@ -20,7 +20,7 @@
 @this(layout: Layout)
 @(back: Option[String])(implicit request: Request[_], appConfig: AppConfig, messages: Messages)
 
-@layout(pageTitle = Some("helpline-frontend"), backLinkLocation = back.getOrElse("")) {
+@layout(pageTitle = "helpline-frontend", backLinkLocation = back.getOrElse("")) {
 
     <h1 class="govuk-heading-xl">
         @messages("contact_us.deceased.h1")

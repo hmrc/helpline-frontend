@@ -24,19 +24,19 @@
       formWithCsrf: FormWithCSRF,
       govukErrorSummary: GovukErrorSummary,
       govukRadios: GovukRadios,
-      govukButton: GovukButton
+      govukButton: GovukButton,
 )
 
-@(callOptionsOrganisationForm: Form[String])(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
+@(callOptionForm: Form[String])(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
 
-@layout(pageTitle = s"${messages("call-options-no-answers.h1")} ${messages("title.suffix")}", formErrors = callOptionsOrganisationForm.errors) {
+@layout(pageTitle = s"${messages("call-options-no-answers.h1")} ${messages("title.suffix")}", formErrors = callOptionForm.errors, backLinkLocation = routes.CallHelpdeskController.callOptionsNoAnswersOrganisationPage().url) {
 
-    @formWithCsrf(routes.CallHelpdeskController.selectOrganisationCallOption()) {
+    @formWithCsrf(routes.CallHelpdeskController.selectServiceAccessOtherOption()) {
 
-        @if(callOptionsOrganisationForm.hasErrors) {
+        @if(callOptionForm.hasErrors) {
             @govukErrorSummary(ErrorSummary(
                 title = Text(messages("call-options-no-answers.h2-error")),
-                errorList = callOptionsOrganisationForm.errors.map(err => ErrorLink(href = Some("#selected-call-option-error"), content = Text(messages("call-options-no-answers.error")))
+                errorList = callOptionForm.errors.map(err => ErrorLink(href = Some("#selected-call-option-error"), content = Text(messages("call-options-no-answers.error")))
                 ))
             )
         }
@@ -50,12 +50,12 @@
                 ))
             )),
             hint = None,
-            errorMessage = if(callOptionsOrganisationForm.hasErrors)Some(ErrorMessage(
+            errorMessage = if(callOptionForm.hasErrors)Some(ErrorMessage(
                 content = Text(messages("call-options-no-answers.error"))))
             else None,
             idPrefix = Some("selected-call-option"),
             name = "selected-call-option",
-            items = appConfig.callOptionsOrganisationList.map { selectedCallOption =>
+            items = appConfig.standaloneOrganisationList.map { selectedCallOption =>
                 RadioItem(
                     id = Some(selectedCallOption),
                     content = Text(Messages("call-option.label." + selectedCallOption)),
@@ -69,4 +69,4 @@
         ))
     }
 }
-
+    
