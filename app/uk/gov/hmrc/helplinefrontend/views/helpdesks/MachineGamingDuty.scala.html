@@ -24,7 +24,7 @@
 
 @(back: Option[String])(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
 
-@layout(pageTitle = Some(s"${messages("default.title")} ${messages("title.suffix")}"), backLinkLocation = back.getOrElse("")) {
+@layout(pageTitle = s"${messages("default.title")} ${messages("title.suffix")}", backLinkLocation = back) {
     @h1(messages("default.title"))
 
     @h2(messages("machine-gaming-duty.query.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))

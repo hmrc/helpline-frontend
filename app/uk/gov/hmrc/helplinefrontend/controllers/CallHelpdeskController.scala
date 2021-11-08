@@ -52,6 +52,7 @@ class CallHelpdeskController @Inject()(implicit
    vatPage: Vat,
    callOptionsNoAnswers: CallOptionsNoAnswers,
    callOptionsOrganisationNoAnswers: CallOptionsOrganisationNoAnswers,
+   whichServiceAccessOther: WhichServiceAccessOther,
    val eventDispatcher: EventDispatcher,
    ec: ExecutionContext)
   extends FrontendController(mcc) with Logging with AuthorisedFunctions {
@@ -143,6 +144,24 @@ class CallHelpdeskController @Inject()(implicit
       value => {
         eventDispatcher.dispatchEvent(ContactType(appConfig.defaultCallOptionsOrganisationAndGAEventMapper(value)))
         Redirect(routes.CallHelpdeskController.getHelpdeskOrganisationPage(value, Some(routes.CallHelpdeskController.callOptionsNoAnswersOrganisationPage().url)))
+      }
+    )
+    Future.successful(result)
+  }
+
+  def whichServiceAccessOtherPage(): Action[AnyContent] = Action.async { implicit request =>
+    checkIsAuthorisedUser().flatMap{ _ =>
+      eventDispatcher.dispatchEvent(ContactHmrcOrg)
+      Future.successful(Ok(whichServiceAccessOther(CallOptionForm.callOptionForm(appConfig.standaloneOrganisationList))).addingToSession("affinityGroup" -> "Organisation"))
+    }
+  }
+
+  def selectServiceAccessOtherOption(): Action[AnyContent] = Action.async { implicit request =>
+    val result = CallOptionForm.callOptionForm(appConfig.standaloneOrganisationList).bindFromRequest.fold(
+      errors ⇒ BadRequest(whichServiceAccessOther(errors)),
+      value => {
+        eventDispatcher.dispatchEvent(ContactType(appConfig.standaloneOrganisationAndGAEventMapper(value)))
+        Redirect(routes.CallHelpdeskController.getHelpdeskOrganisationPage(value, Some(routes.CallHelpdeskController.whichServiceAccessOtherPage().url)))
       }
     )
     Future.successful(result)
