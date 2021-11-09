@@ -12,10 +12,15 @@ call-option.label.child-benefit=Budd-dal Plant
 call-option.label.income-tax-paye=Treth Incwm a TWE
 call-option.label.national-insurance=Yswiriant Gwladol
 call-option.label.self-assessment=Hunanasesiad
+call-option.label.corporation-tax=Treth Gorfforaeth
+call-option.label.machine-games-duty=Toll Peiriannau Hapchwarae (MGD)
 call-option.label.state-pension=Pensiwn y Wladwriaeth
 call-option.label.tax-credits=Credydau Treth
 call-option.label.SEISS=Gwasanaeth Cymhorthdal Incwm Hunangyflogaeth (SEISS)
+call-option.label.help-with-a-service=Rhywbeth arall
 call-option.label.general-enquiries=Rhywbeth arall
+call-option.label.paye-for-employers=TWE i gyflogwyr
+call-option.label.vat=TAW
 
 default.title=Ffoniwch linell gymorth CThEM
 default.need-help.heading=Os oes angen help arnoch i fewngofnodi
@@ -46,7 +51,7 @@ national-insurance.query.heading=Os oes gennych ymholiad am Yswiriant Gwladol
 national-insurance.query.p1=Os nad oes angen help arnoch i fewngofnodi, ond bod gennych ymholiad arall am Yswiriant Gwladol, gallwch gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM drwy ffonio <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>.
 national-insurance.query.p2=Mae ffyrdd eraill o <a class="govuk-link" href="{0}">gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM</a>.
 
-machine-games-duty.query.heading=Os oes angen help arnoch gyda Tholl Peiriannau Hapchwarae
+machine-games-duty.query.heading=Os oes angen help arnoch gyda Toll Peiriannau Hapchwarae
 machine-games-duty.query.p=Mae angen i chi gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM ar <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>. Gallwch <a class="govuk-link" href="{0}">ddod o hyd i ffyrdd eraill o gysylltu â ni am Tholl Peiriannau Hapchwarae</a>.
 machine-games-duty.need-help.p=I gael help i adfer eich manylion mewngofnodi neu newid sut rydych yn cael eich codau cyrchu, mae angen i chi gysylltu â’r Gwasanaeth TAW trwy ffonio <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>. Gallwch <a class="govuk-link" href="{0}">ddod o hyd i ffyrdd eraill o gysylltu â Gwasanaethau Ar-lein TAW</a>.
 
