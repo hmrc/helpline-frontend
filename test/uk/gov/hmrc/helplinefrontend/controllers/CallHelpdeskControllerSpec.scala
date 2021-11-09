@@ -23,7 +23,7 @@ import org.scalatest.wordspec.AnyWordSpec
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.Configuration
 import play.api.http.Status
-import play.api.mvc.{AnyContentAsEmpty, Cookie, MessagesControllerComponents, Result}
+import play.api.mvc.{Cookie, MessagesControllerComponents, Result}
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import uk.gov.hmrc.auth.core.AuthConnector
@@ -58,7 +58,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   val generalEnquiries: GeneralEnquiries = app.injector.instanceOf[GeneralEnquiries]
   val generalEnquiriesOrganisation: GeneralEnquiriesOrganisation = app.injector.instanceOf[GeneralEnquiriesOrganisation]
   val corporationTax: CorporationTax = app.injector.instanceOf[CorporationTax]
-  val machineGamingDuty: MachineGamingDuty = app.injector.instanceOf[MachineGamingDuty]
+  val machineGamingDuty: MachineGamesDuty = app.injector.instanceOf[MachineGamesDuty]
   val payeForEmployers: PayeForEmployers = app.injector.instanceOf[PayeForEmployers]
   val selfAssessmentOrganisation: SelfAssessmentOrganisation = app.injector.instanceOf[SelfAssessmentOrganisation]
   val vat: Vat = app.injector.instanceOf[Vat]
@@ -221,18 +221,18 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
     }
   }
 
-  "CallHelpdeskController get machine gaming duty help page" should {
-    "return machine gaming duty help page if the help key is 'MACHINE-GAMING-DUTY' but there is no go back url" in {
+  "CallHelpdeskController get Machine Games Duty help page" should {
+    "return Machine Games Duty help page if the help key is 'MACHINE-GAMING-DUTY' but there is no go back url" in {
       val result: Future[Result] = controller.getHelpdeskOrganisationPage(machineGamingDutyHelpKey, None)(fakeRequest)
       status(result) shouldBe Status.OK
-      contentAsString(result).contains("If you need help with Machine Gaming Duty") shouldBe true
+      contentAsString(result).contains("If you need help with Machine Games Duty") shouldBe true
       contentAsString(result).contains("Back") shouldBe false
     }
 
-    "return machine gaming duty help page if the help key is 'MACHINE-GAMING-DUTY' and there is a go back url" in {
+    "return Machine Games Duty help page if the help key is 'MACHINE-GAMING-DUTY' and there is a go back url" in {
       val result: Future[Result] = controller.getHelpdeskOrganisationPage(machineGamingDutyHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
-      contentAsString(result).contains("If you need help with Machine Gaming Duty") shouldBe true
+      contentAsString(result).contains("If you need help with Machine Games Duty") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
     }
   }
