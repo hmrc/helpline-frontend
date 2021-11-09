@@ -17,12 +17,14 @@
 @import uk.gov.hmrc.helplinefrontend.config.AppConfig
 @import uk.gov.hmrc.hmrcfrontend.views.viewmodels.header.Header
 
-@this(govukLayout: GovukLayout,
-      head: Head,
-      hmrcHeader: hmrcHeader,
-      hmrcStandardFooter: HmrcStandardFooter,
-      languageSelect: LanguageSelect,
-      govukBackLink : GovukBackLink)
+@this(
+    govukLayout: GovukLayout,
+    head: Head,
+    hmrcHeader: hmrcHeader,
+    hmrcStandardFooter: HmrcStandardFooter,
+    hmrcLanguageSelectHelper: HmrcLanguageSelectHelper,
+    govukBackLink : GovukBackLink
+)
 
 
 @(pageTitle: String = "",
@@ -47,7 +49,7 @@
 }
 
 @beforeContentBlock = {
-    @if(appConfig.welshLanguageSupportEnabled) {@languageSelect()}
+    @if(appConfig.welshLanguageSupportEnabled) { @hmrcLanguageSelectHelper()}
     @if(backLinkLocation.nonEmpty) {
         @govukBackLink(BackLink(
             href = backLinkLocation.getOrElse(""),
