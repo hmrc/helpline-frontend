@@ -1,4 +1,4 @@
-machine-games-dutyservice.name=
+service.name=
 title.suffix=- GOV.UK
 error.prefix=Gwall:
 back=Yn ôl
