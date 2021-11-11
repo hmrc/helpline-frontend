@@ -64,6 +64,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   val vat: Vat = app.injector.instanceOf[Vat]
   val callOptionsOrganisationNoAnswers: CallOptionsOrganisationNoAnswers =  app.injector.instanceOf[CallOptionsOrganisationNoAnswers]
   val callOptionsNoAnswers: CallOptionsNoAnswers = app.injector.instanceOf[CallOptionsNoAnswers]
+  val whichServiceAccess: WhichServiceAccess = app.injector.instanceOf[WhichServiceAccess]
   val whichServiceAccessOther: WhichServiceAccessOther = app.injector.instanceOf[WhichServiceAccessOther]
   val ec: ExecutionContext =  app.injector.instanceOf[ExecutionContext]
 
@@ -108,6 +109,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
                                  vat,
                                  callOptionsNoAnswers,
                                  callOptionsOrganisationNoAnswers,
+                                 whichServiceAccess,
                                  whichServiceAccessOther,
                                  eventDispatcher,
                                  ec)
@@ -212,7 +214,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       val controller: CallHelpdeskController =
         new CallHelpdeskController()(authConnector, customiseAppConfig, messagesCC, contactUsDeceased, childBenefit, incomeTaxPaye, nationalInsurance,
           selfAssessment, statePension, taxCredits, seiss, generalEnquiries, generalEnquiriesOrganisation, corporationTax, machineGamingDuty,
-          payeForEmployers, selfAssessmentOrganisation, vat, callOptionsNoAnswers, callOptionsOrganisationNoAnswers, whichServiceAccessOther, eventDispatcher, ec)
+          payeForEmployers, selfAssessmentOrganisation, vat, callOptionsNoAnswers, callOptionsOrganisationNoAnswers, whichServiceAccess, whichServiceAccessOther, eventDispatcher, ec)
 
       val result: Future[Result] = controller.getHelpdeskPage(nationalInsuranceHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
@@ -357,7 +359,15 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
     }
   }
 
-  "CallHelpdeskController get which-service-access-other page" should {
+  "CallHelpdeskController get which-service-are-you-trying-to-access page" should {
+    "return a page with a list all the available help pages as radio buttons, and no back url" in {
+      val result: Future[Result] = controller.whichServiceAccessPage()(fakeRequest)
+      status(result) shouldBe Status.OK
+      contentAsString(result).contains("Back") shouldBe false
+    }
+  }
+
+  "CallHelpdeskController get which-service-are-you-trying-to-access-other page" should {
     "return a page with a list all the available help pages as radio buttons, and a back url" in {
       val result: Future[Result] = controller.whichServiceAccessOtherPage()(fakeRequest)
       status(result) shouldBe Status.OK

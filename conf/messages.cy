@@ -16,7 +16,7 @@ call-option.label.corporation-tax=Treth Gorfforaeth
 call-option.label.machine-games-duty=Toll Peiriannau Hapchwarae (MGD)
 call-option.label.state-pension=Pensiwn y Wladwriaeth
 call-option.label.tax-credits=Credydau Treth
-call-option.label.SEISS=Gwasanaeth Cymhorthdal Incwm Hunangyflogaeth (SEISS)
+call-option.label.SEISS=Cynllun Cymhorthdal Incwm Hunangyflogaeth (SEISS)
 call-option.label.help-with-a-service=Rhywbeth arall
 call-option.label.general-enquiries=Rhywbeth arall
 call-option.label.paye-for-employers=TWE i gyflogwyr
@@ -107,3 +107,4 @@ contact_us.deceased.contact_hours.text2=Mae hyn oherwydd bod llai o ymgynghorwyr
 contact_us.deceased.getHelp=Help i <a href=>ddelio â CThEM os oes gennych anghenion ychwanegol</a>
 contact_us.deceased.callCharges=<a href="{0}">Gwybodaeth am gostau galwadau</a>
 
+which_service_access.link=Gwasanaethau eraill

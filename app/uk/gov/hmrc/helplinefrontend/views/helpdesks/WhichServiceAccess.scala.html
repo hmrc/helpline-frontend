@@ -1,0 +1,54 @@
+
+
+@import uk.gov.hmrc.helplinefrontend.config.AppConfig
+@import uk.gov.hmrc.helplinefrontend.views.html.Layout
+@import uk.gov.hmrc.helplinefrontend.controllers.routes
+@import uk.gov.hmrc.govukfrontend.views.Aliases.Text
+@import uk.gov.hmrc.helplinefrontend.views.html.components.{InputRadio, Link}
+
+@this(
+    layout: Layout,
+    formWithCsrf: FormWithCSRF,
+    govukErrorSummary: GovukErrorSummary,
+    inputRadio: InputRadio,
+    govukButton: GovukButton,
+    a: Link
+)
+
+@(callOptionForm: Form[String])(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
+
+@layout(pageTitle = s"${messages("call-options-no-answers.h1")} ${messages("title.suffix")}", formErrors = callOptionForm.errors) {
+
+@formWithCsrf(routes.CallHelpdeskController.selectServiceAccessOption()) {
+
+@if(callOptionForm.hasErrors) {
+    @govukErrorSummary(ErrorSummary(
+        title = Text(messages("call-options-no-answers.h2-error")),
+        errorList = callOptionForm.errors.map(err => ErrorLink(href = Some("#selected-call-option-error"), content = Text(messages("call-options-no-answers.error")))
+        ))
+    )
+}
+
+@inputRadio(
+    callOptionForm,
+    name = "selected-call-option",
+    legend = messages("call-options-no-answers.h1"),
+    legendAsHeading = true,
+    classes = "govuk-fieldset__legend--xl",
+    items = appConfig.standaloneIndividualList.map { selectedCallOption =>
+        RadioItem(
+            id = Some(selectedCallOption),
+            content = Text(messages("call-option.label." + selectedCallOption)),
+            value = Some(selectedCallOption)
+        )
+    },
+    errorMessage = if(callOptionForm.hasErrors)Some(messages("call-options-no-answers.error")) else None,
+)
+
+    @govukButton(Button(
+        content = Text(messages("continue"))
+        ))
+    }
+
+    @a(messages("which_service_access.link"), id=Some("other-services"), href = routes.CallHelpdeskController.whichServiceAccessOtherPage().url)
+}
