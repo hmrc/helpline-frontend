@@ -23,7 +23,7 @@ import org.scalatest.wordspec.AnyWordSpec
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.Configuration
 import play.api.http.Status
-import play.api.mvc.{AnyContentAsEmpty, Cookie, MessagesControllerComponents, Result}
+import play.api.mvc.{Cookie, MessagesControllerComponents, Result}
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import uk.gov.hmrc.auth.core.AuthConnector
@@ -58,12 +58,13 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   val generalEnquiries: GeneralEnquiries = app.injector.instanceOf[GeneralEnquiries]
   val generalEnquiriesOrganisation: GeneralEnquiriesOrganisation = app.injector.instanceOf[GeneralEnquiriesOrganisation]
   val corporationTax: CorporationTax = app.injector.instanceOf[CorporationTax]
-  val machineGamingDuty: MachineGamingDuty = app.injector.instanceOf[MachineGamingDuty]
+  val machineGamingDuty: MachineGamesDuty = app.injector.instanceOf[MachineGamesDuty]
   val payeForEmployers: PayeForEmployers = app.injector.instanceOf[PayeForEmployers]
   val selfAssessmentOrganisation: SelfAssessmentOrganisation = app.injector.instanceOf[SelfAssessmentOrganisation]
   val vat: Vat = app.injector.instanceOf[Vat]
   val callOptionsOrganisationNoAnswers: CallOptionsOrganisationNoAnswers =  app.injector.instanceOf[CallOptionsOrganisationNoAnswers]
   val callOptionsNoAnswers: CallOptionsNoAnswers = app.injector.instanceOf[CallOptionsNoAnswers]
+  val whichServiceAccessOther: WhichServiceAccessOther = app.injector.instanceOf[WhichServiceAccessOther]
   val ec: ExecutionContext =  app.injector.instanceOf[ExecutionContext]
 
   val gaClientId = "GA1.1.283183975.1456746121"
@@ -107,6 +108,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
                                  vat,
                                  callOptionsNoAnswers,
                                  callOptionsOrganisationNoAnswers,
+                                 whichServiceAccessOther,
                                  eventDispatcher,
                                  ec)
 
@@ -210,7 +212,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       val controller: CallHelpdeskController =
         new CallHelpdeskController()(authConnector, customiseAppConfig, messagesCC, contactUsDeceased, childBenefit, incomeTaxPaye, nationalInsurance,
           selfAssessment, statePension, taxCredits, seiss, generalEnquiries, generalEnquiriesOrganisation, corporationTax, machineGamingDuty,
-          payeForEmployers, selfAssessmentOrganisation, vat, callOptionsNoAnswers, callOptionsOrganisationNoAnswers, eventDispatcher, ec)
+          payeForEmployers, selfAssessmentOrganisation, vat, callOptionsNoAnswers, callOptionsOrganisationNoAnswers, whichServiceAccessOther, eventDispatcher, ec)
 
       val result: Future[Result] = controller.getHelpdeskPage(nationalInsuranceHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
@@ -219,18 +221,18 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
     }
   }
 
-  "CallHelpdeskController get machine gaming duty help page" should {
-    "return machine gaming duty help page if the help key is 'MACHINE-GAMING-DUTY' but there is no go back url" in {
+  "CallHelpdeskController get Machine Games Duty help page" should {
+    "return Machine Games Duty help page if the help key is 'MACHINE-GAMING-DUTY' but there is no go back url" in {
       val result: Future[Result] = controller.getHelpdeskOrganisationPage(machineGamingDutyHelpKey, None)(fakeRequest)
       status(result) shouldBe Status.OK
-      contentAsString(result).contains("If you need help with Machine Gaming Duty") shouldBe true
+      contentAsString(result).contains("If you need help with Machine Games Duty") shouldBe true
       contentAsString(result).contains("Back") shouldBe false
     }
 
-    "return machine gaming duty help page if the help key is 'MACHINE-GAMING-DUTY' and there is a go back url" in {
+    "return Machine Games Duty help page if the help key is 'MACHINE-GAMING-DUTY' and there is a go back url" in {
       val result: Future[Result] = controller.getHelpdeskOrganisationPage(machineGamingDutyHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
-      contentAsString(result).contains("If you need help with Machine Gaming Duty") shouldBe true
+      contentAsString(result).contains("If you need help with Machine Games Duty") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
     }
   }
@@ -352,6 +354,14 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       val result: Future[Result] = controller.callOptionsNoAnswersPage()(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Back") shouldBe false
+    }
+  }
+
+  "CallHelpdeskController get which-service-access-other page" should {
+    "return a page with a list all the available help pages as radio buttons, and a back url" in {
+      val result: Future[Result] = controller.whichServiceAccessOtherPage()(fakeRequest)
+      status(result) shouldBe Status.OK
+      contentAsString(result).contains("Back") shouldBe true
     }
   }
 

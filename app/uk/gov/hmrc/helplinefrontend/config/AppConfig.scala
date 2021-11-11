@@ -42,9 +42,16 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
 
   val defaultCallOptionsOrganisationAndGAEventMapper = mutable.LinkedHashMap(
     "corporation-tax" -> "contact_corporationtax",
-    "machine-gaming-duty" -> "contact_machinegamingduty",
+    "machine-games-duty" -> "contact_machinegamingduty",
     "paye-for-employers" -> "contact_paye",
     "self-assessment" -> "contact_sa_org",
+    "vat" -> "contact_vat",
+    "help-with-a-service" -> "contact_other_org"
+  )
+
+  val standaloneOrganisationAndGAEventMapper = mutable.LinkedHashMap(
+    "corporation-tax" -> "contact_corporationtax",
+    "machine-games-duty" -> "contact_machinegamingduty",
     "vat" -> "contact_vat",
     "help-with-a-service" -> "contact_other_org"
   )
@@ -59,7 +66,7 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "tax-credits" -> "further-contact_taxcred",
     "general-enquiries" -> "further-contact_other",
     "corporation-tax" -> "further-contact_corporationtax",
-    "machine-gaming-duty" -> "further-contact_machinegamingduty",
+    "machine-games-duty" -> "further-contact_machinegamingduty",
     "paye-for-employers" -> "further-contact_paye",
     "self-assessment-org" -> "further-contact_sa_org",
     "vat" -> "further-contact_vat",
@@ -87,6 +94,10 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
   val callOptionsOrganisationList: List[String] =
     config.getOptional[String]("features.organisation.call-options")
       .fold(defaultCallOptionsOrganisationAndGAEventMapper.keySet.toList)(_.split(",").toList)
+
+  val standaloneOrganisationList: List[String] =
+    config.getOptional[String]("features.standalone.organisation.call-options")
+      .fold(standaloneOrganisationAndGAEventMapper.keySet.toList)(_.split(",").toList)
 
   lazy val platformAnalyticsUrl = servicesConfig.baseUrl("platform-analytics")
 

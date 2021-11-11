@@ -28,7 +28,7 @@ import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
-import scala.concurrent.{ExecutionContext, Future, future}
+import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
 class CallHelpdeskController @Inject()(implicit
@@ -46,13 +46,14 @@ class CallHelpdeskController @Inject()(implicit
    generalEnquiriesPage: GeneralEnquiries,
    generalEnquiriesOrganisationPage: GeneralEnquiriesOrganisation,
    corporationTaxPage: CorporationTax,
-   machineGamingDutyPage: MachineGamingDuty,
+   machineGamesDutyPage: MachineGamesDuty,
    payeForEmployersPage: PayeForEmployers,
    selfAssessmentOrganisationPage: SelfAssessmentOrganisation,
    vatPage: Vat,
    callOptionsNoAnswers: CallOptionsNoAnswers,
    callOptionsOrganisationNoAnswers: CallOptionsOrganisationNoAnswers,
    whichServiceAccess: WhichServiceAccess,
+   whichServiceAccessOther: WhichServiceAccessOther,
    val eventDispatcher: EventDispatcher,
    ec: ExecutionContext)
   extends FrontendController(mcc) with Logging with AuthorisedFunctions {
@@ -97,11 +98,11 @@ class CallHelpdeskController @Inject()(implicit
       val backCall: Option[String] = if (appConfig.backCallEnabled) back else None
       helpKey.toLowerCase match {
         case "corporation-tax" => Future.successful(Ok(corporationTaxPage(backCall)))
-        case "machine-gaming-duty" => Future.successful(Ok(machineGamingDutyPage(backCall)))
+        //machine-gaming-duty is replaced with machine-games-duty now. have left gaming-duty in here in case anyone clicks on history
+        case "machine-games-duty" | "machine-gaming-duty" => Future.successful(Ok(machineGamesDutyPage(backCall)))
         case "paye-for-employers" => Future.successful(Ok(payeForEmployersPage(backCall)))
         case "self-assessment" => Future.successful(Ok(selfAssessmentOrganisationPage(backCall)))
         case "vat" => Future.successful(Ok(vatPage(backCall)))
-
         case _ => // default help page
           Future.successful(Ok(generalEnquiriesOrganisationPage(backCall)))
       }
@@ -162,6 +163,20 @@ class CallHelpdeskController @Inject()(implicit
       value => {
         eventDispatcher.dispatchEvent(ContactType(appConfig.standaloneIndividualAndGAEventMapper(value)))
         Redirect(routes.CallHelpdeskController.getHelpdeskPage(value, Some(routes.CallHelpdeskController.whichServiceAccessPage().url)))
+
+  def whichServiceAccessOtherPage(): Action[AnyContent] = Action.async { implicit request =>
+    checkIsAuthorisedUser().flatMap{ _ =>
+      eventDispatcher.dispatchEvent(ContactHmrcOrg)
+      Future.successful(Ok(whichServiceAccessOther(CallOptionForm.callOptionForm(appConfig.standaloneOrganisationList))).addingToSession("affinityGroup" -> "Organisation"))
+    }
+  }
+
+  def selectServiceAccessOtherOption(): Action[AnyContent] = Action.async { implicit request =>
+    val result = CallOptionForm.callOptionForm(appConfig.standaloneOrganisationList).bindFromRequest.fold(
+      errors ⇒ BadRequest(whichServiceAccessOther(errors)),
+      value => {
+        eventDispatcher.dispatchEvent(ContactType(appConfig.standaloneOrganisationAndGAEventMapper(value)))
+        Redirect(routes.CallHelpdeskController.getHelpdeskOrganisationPage(value, Some(routes.CallHelpdeskController.whichServiceAccessOtherPage().url)))
       }
     )
     Future.successful(result)

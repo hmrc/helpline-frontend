@@ -1,0 +1,30 @@
+
+
+@this(govukRadios: GovukRadios)
+
+@(
+    form: Form[_],
+    errorMessage: Option[String] = None,
+    legend: String,
+    name: String,
+    items: Seq[RadioItem],
+    legendAsHeading: Boolean = true,
+    hint: Option[Hint] = None,
+    classes: String = "govuk-fieldset__legend--xl",
+    inline: Boolean = false
+)(implicit messages: Messages)
+
+@govukRadios(Radios(
+    classes = s"${if(inline){"govuk-radios--inline"}}",
+    name = name,
+    fieldset = Some(Fieldset(
+        legend = Some(Legend(
+            content = Text(messages(legend)),
+            isPageHeading = legendAsHeading,
+            classes = classes
+        ))
+    )),
+    hint = hint,
+    items = items,
+    errorMessage = errorMessage.map(msg=> ErrorMessage(content = Text(msg)))
+))

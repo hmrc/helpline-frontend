@@ -22,3 +22,14 @@ $hmrc-assets-path: "/helpline/assets/lib/hmrc-frontend/hmrc/";
   white-space: nowrap;
 }
 
+.hmrc-language-select__list-item {
+  &:first-child{
+    border-right: 0.09375em solid black;
+    line-height: 0.9em;
+    padding-right: 0.22em;
+  }
+  &:first-child::after {
+      display:none;
+    }
+}
+
