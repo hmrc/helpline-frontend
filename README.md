@@ -11,6 +11,7 @@ To run the application, use `sbt run`.
 | Method | Path                                        | Description                                      |
 |--------|---------------------------------------------|--------------------------------------------------|
 | GET    | /helpline/call-options-no-answers           | display the list of contact pages selectable     |
+| GET    | /helpline/which-service-access              | contact pages for standalone IV journey          |
 | GET    | /helpline/:helpKey?back=backURL             | display contact pages on demand                  |
 
 Eg./helpline/deceased?back=backURL (the helpKey is case-insensitive)

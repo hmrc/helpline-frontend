@@ -66,6 +66,20 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "general-enquiries-org" -> "further-contact_other_org"
   )
 
+   val standaloneIndividualAndGAEventMapper = mutable.LinkedHashMap(
+    "child-benefit" -> "contact_childbenefit",
+    "income-tax-paye" -> "contact_incometaxpaye",
+    "national-insurance" -> "contact_natinsurance",
+    "self-assessment" -> "contact_sa",
+    "SEISS" -> "contact_seiss",
+    "state-pension" -> "contact_pension",
+    "tax-credits" -> "contact_taxcred"
+  )
+
+  val standaloneIndividualList: List[String] =
+    config.getOptional[String]("features.standalone.individual.call-options")
+      .fold(standaloneIndividualAndGAEventMapper.keySet.toList)(_.split(",").toList)
+
   val callOptionsList: List[String] =
     config.getOptional[String]("features.call-options")
       .fold(defaultCallOptionsAndGAEventMapper.keySet.toList)(_.split(",").toList)
