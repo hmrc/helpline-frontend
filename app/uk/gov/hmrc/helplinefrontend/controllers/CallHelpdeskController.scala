@@ -32,30 +32,30 @@ import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
 class CallHelpdeskController @Inject()(implicit
-   val authConnector: AuthConnector,
-   appConfig: AppConfig,
-   mcc: MessagesControllerComponents,
-   ivDeceased: IVDeceased,
-   childBenefitPage: ChildBenefit,
-   incomeTaxPayePage: IncomeTaxPaye,
-   nationalInsurancePage: NationalInsurance,
-   selfAssessmentPage: SelfAssessment,
-   statePensionPage: StatePension,
-   taxCreditsPage: TaxCredits,
-   seissPage: Seiss,
-   generalEnquiriesPage: GeneralEnquiries,
-   generalEnquiriesOrganisationPage: GeneralEnquiriesOrganisation,
-   corporationTaxPage: CorporationTax,
-   machineGamesDutyPage: MachineGamesDuty,
-   payeForEmployersPage: PayeForEmployers,
-   selfAssessmentOrganisationPage: SelfAssessmentOrganisation,
-   vatPage: Vat,
-   callOptionsNoAnswers: CallOptionsNoAnswers,
-   callOptionsOrganisationNoAnswers: CallOptionsOrganisationNoAnswers,
-   whichServiceAccess: WhichServiceAccess,
-   whichServiceAccessOther: WhichServiceAccessOther,
-   val eventDispatcher: EventDispatcher,
-   ec: ExecutionContext)
+                                       val authConnector: AuthConnector,
+                                       appConfig: AppConfig,
+                                       mcc: MessagesControllerComponents,
+                                       ivDeceased: IVDeceased,
+                                       childBenefitPage: ChildBenefit,
+                                       incomeTaxPayePage: IncomeTaxPaye,
+                                       nationalInsurancePage: NationalInsurance,
+                                       selfAssessmentPage: SelfAssessment,
+                                       statePensionPage: StatePension,
+                                       taxCreditsPage: TaxCredits,
+                                       seissPage: Seiss,
+                                       generalEnquiriesPage: GeneralEnquiries,
+                                       generalEnquiriesOrganisationPage: GeneralEnquiriesOrganisation,
+                                       corporationTaxPage: CorporationTax,
+                                       machineGamesDutyPage: MachineGamesDuty,
+                                       payeForEmployersPage: PayeForEmployers,
+                                       selfAssessmentOrganisationPage: SelfAssessmentOrganisation,
+                                       vatPage: Vat,
+                                       callOptionsNoAnswers: CallOptionsNoAnswers,
+                                       callOptionsOrganisationNoAnswers: CallOptionsOrganisationNoAnswers,
+                                       whichServiceAccess: WhichServiceAccess,
+                                       whichServiceAccessOther: WhichServiceAccessOther,
+                                       val eventDispatcher: EventDispatcher,
+                                       ec: ExecutionContext)
   extends FrontendController(mcc) with Logging with AuthorisedFunctions {
 
   def checkIsAuthorisedUser()(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[Boolean] = {
@@ -129,7 +129,7 @@ class CallHelpdeskController @Inject()(implicit
   }
 
   def selectCallOption(): Action[AnyContent] = Action.async { implicit request =>
-   val result = CallOptionForm.callOptionForm(appConfig.callOptionsList).bindFromRequest.fold(
+    val result = CallOptionForm.callOptionForm(appConfig.callOptionsList).bindFromRequest.fold(
       errors ⇒ BadRequest(callOptionsNoAnswers(errors)),
       value => {
         eventDispatcher.dispatchEvent(ContactType(appConfig.defaultCallOptionsAndGAEventMapper(value)))
@@ -157,12 +157,16 @@ class CallHelpdeskController @Inject()(implicit
     }
   }
 
-  def selectWhichService(): Action[AnyContent] = Action.async { implicit request =>
+  def selectServiceAccessOption(): Action[AnyContent] = Action.async { implicit request =>
     val result = CallOptionForm.callOptionForm(appConfig.standaloneIndividualList).bindFromRequest.fold(
       errors ⇒ BadRequest(whichServiceAccess(errors)),
       value => {
         eventDispatcher.dispatchEvent(ContactType(appConfig.standaloneIndividualAndGAEventMapper(value)))
         Redirect(routes.CallHelpdeskController.getHelpdeskPage(value, Some(routes.CallHelpdeskController.whichServiceAccessPage().url)))
+      }
+    )
+    Future.successful(result)
+  }
 
   def whichServiceAccessOtherPage(): Action[AnyContent] = Action.async { implicit request =>
     checkIsAuthorisedUser().flatMap{ _ =>
