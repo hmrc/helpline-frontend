@@ -23,7 +23,7 @@ import uk.gov.hmrc.auth.core.{AuthConnector, AuthorisedFunctions}
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.helplinefrontend.models.form.CallOptionForm
 import uk.gov.hmrc.helplinefrontend.models.form.CallOptionOrganisationForm
-import uk.gov.hmrc.helplinefrontend.monitoring.{ContactHmrcOrg, ContactLink, ContactType, EventDispatcher}
+import uk.gov.hmrc.helplinefrontend.monitoring.{ContactHmrcInd, ContactHmrcOrg, ContactHmrcSa, ContactType, EventDispatcher}
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
@@ -113,7 +113,7 @@ class CallHelpdeskController @Inject()(implicit
 
     checkIsAuthorisedUser().flatMap{ _ =>
       logger.debug(s"[VER-539] Showing options for ${ appConfig.callOptionsList.mkString(", ")}")
-      eventDispatcher.dispatchEvent(ContactLink)
+      eventDispatcher.dispatchEvent(ContactHmrcInd)
       Future.successful(Ok(callOptionsNoAnswers(CallOptionForm.callOptionForm(appConfig.callOptionsList))).addingToSession("affinityGroup" -> "Individual"))
     }
 
@@ -152,7 +152,7 @@ class CallHelpdeskController @Inject()(implicit
 
   def whichServiceAccessPage(): Action[AnyContent] = Action.async { implicit request =>
     checkIsAuthorisedUser().flatMap{ _ =>
-      eventDispatcher.dispatchEvent(ContactHmrcOrg)
+      eventDispatcher.dispatchEvent(ContactHmrcSa)
       Future.successful(Ok(whichServiceAccess(CallOptionForm.callOptionForm(appConfig.standaloneIndividualList))).addingToSession("affinityGroup" -> "Individual"))
     }
   }

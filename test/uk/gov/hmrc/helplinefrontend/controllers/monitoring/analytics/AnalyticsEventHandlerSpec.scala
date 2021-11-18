@@ -47,11 +47,19 @@ class AnalyticsEventHandlerSpec
       }
     }
 
-    "send more_info/contact_hmrc event when user clicks on contact link " in new Setup {
-      dispatcher.dispatchEvent(ContactLink)(request, hc, global)
+    "send more_info/contact_hmrc event when user clicks on contact link in IV" in new Setup {
+      dispatcher.dispatchEvent(ContactHmrcInd)(request, hc, global)
       eventually {
         analyticsRequests.head shouldBe AnalyticsRequest(Some(gaClientId), Seq(
-          Event("sos_iv", "more_info", "contact_hmrc", Seq())))
+          Event("sos_iv", "more_info", "contact_hmrc_individual", Seq())))
+      }
+    }
+
+    "send more_info/which-service-are-you-trying-to-access event when user clicks on contact link in IV" in new Setup {
+      dispatcher.dispatchEvent(ContactHmrcSa)(request, hc, global)
+      eventually {
+        analyticsRequests.head shouldBe AnalyticsRequest(Some(gaClientId), Seq(
+          Event("sos_iv", "more_info", "contact_hmrc_sa", Seq())))
       }
     }
 

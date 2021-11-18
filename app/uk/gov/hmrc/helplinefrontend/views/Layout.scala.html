@@ -16,6 +16,7 @@
 
 @import uk.gov.hmrc.helplinefrontend.config.AppConfig
 @import uk.gov.hmrc.hmrcfrontend.views.viewmodels.header.Header
+@import uk.gov.hmrc.helplinefrontend.views.html.Head
 
 @this(
     govukLayout: GovukLayout,
@@ -25,7 +26,6 @@
     hmrcLanguageSelectHelper: HmrcLanguageSelectHelper,
     govukBackLink : GovukBackLink
 )
-
 
 @(pageTitle: String = "",
   headBlock: Option[Html] = None,
