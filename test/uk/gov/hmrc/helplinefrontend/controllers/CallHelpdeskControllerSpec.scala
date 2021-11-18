@@ -23,13 +23,13 @@ import org.scalatest.wordspec.AnyWordSpec
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.Configuration
 import play.api.http.Status
-import play.api.mvc.{Cookie, MessagesControllerComponents, Result}
+import play.api.mvc.{AnyContentAsEmpty, Cookie, MessagesControllerComponents, Result}
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import uk.gov.hmrc.auth.core.AuthConnector
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.helplinefrontend.monitoring.EventDispatcher
-import uk.gov.hmrc.helplinefrontend.monitoring.analytics.{AnalyticsConnector, AnalyticsEventHandler, AnalyticsRequest, DimensionValue, Event}
+import uk.gov.hmrc.helplinefrontend.monitoring.analytics._
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
 import uk.gov.hmrc.http.{HeaderCarrier, HttpClient}
 import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
@@ -70,7 +70,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
   val gaClientId = "GA1.1.283183975.1456746121"
   var analyticsRequests = Seq.empty[AnalyticsRequest]
-  val request = FakeRequest()
+  val request: FakeRequest[AnyContentAsEmpty.type] = FakeRequest()
     .withCookies(Cookie("_ga", gaClientId))
     .withSession("dimensions" -> """[{"index":2,"value":"ma"},{"index":3,"value":"UpliftNino"},{"index":4,"value":"200-MEO"},{"index":5,"value":"No Enrolments"}]""")
 
@@ -361,8 +361,12 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
   "CallHelpdeskController get which-service-are-you-trying-to-access page" should {
     "return a page with a list all the available help pages as radio buttons, and no back url" in {
-      val result: Future[Result] = controller.whichServiceAccessPage()(fakeRequest)
+      val result: Future[Result] = controller.whichServiceAccessPage()(request)
       status(result) shouldBe Status.OK
+      eventually {
+        analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
+          Event("sos_iv", "more_info", "contact_hmrc_sa", expectedDimensions)))
+      }
       contentAsString(result).contains("Back") shouldBe false
     }
   }

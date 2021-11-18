@@ -21,7 +21,7 @@ import org.scalatest.wordspec.AnyWordSpec
 import play.api.mvc.Request
 import play.api.test.FakeRequest
 import uk.gov.hmrc.helplinefrontend.monitoring.analytics.{AnalyticsConnector, AnalyticsEventHandler}
-import uk.gov.hmrc.helplinefrontend.monitoring.{ContactLink, EventDispatcher, MonitoringEvent}
+import uk.gov.hmrc.helplinefrontend.monitoring.{ContactHmrcInd, EventDispatcher, MonitoringEvent}
 import uk.gov.hmrc.http.HeaderCarrier
 import org.scalatest.matchers.should.Matchers
 import scala.concurrent.ExecutionContext
@@ -50,13 +50,13 @@ class EventDispatcherSpec extends AnyWordSpec with Matchers with MockFactory {
     
     "sends event successfully" in new Setup {
       val eventDispatcher = new EventDispatcher(workingEventDispatcher)
-      eventDispatcher.dispatchEvent(ContactLink)
+      eventDispatcher.dispatchEvent(ContactHmrcInd)
       invoked shouldBe true
     }
 
     "send events and returned with error" in new Setup {
       val eventDispatcher = new EventDispatcher(brokenEventDispatcher)
-      eventDispatcher.dispatchEvent(ContactLink)
+      eventDispatcher.dispatchEvent(ContactHmrcInd)
       invoked shouldBe false
     }
   }

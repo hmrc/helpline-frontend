@@ -18,7 +18,9 @@ package uk.gov.hmrc.helplinefrontend.monitoring
 
 sealed trait MonitoringEvent
 
-case object ContactLink extends MonitoringEvent
+case object ContactHmrcSa extends MonitoringEvent
+
+case object ContactHmrcInd extends MonitoringEvent
 
 case object ContactHmrcOrg extends MonitoringEvent
 
