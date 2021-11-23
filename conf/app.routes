@@ -1,7 +1,6 @@
 # microservice specific routes
 
 
-->         /govuk-frontend                                  govuk.Routes
 ->         /hmrc-frontend                                   hmrcfrontend.Routes
 
 GET        /sign-out                                        uk.gov.hmrc.helplinefrontend.controllers.SignOutController.signOut()

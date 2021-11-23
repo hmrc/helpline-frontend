@@ -14,18 +14,10 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.helplinefrontend.config.AppConfig
-@import uk.gov.hmrc.hmrcfrontend.views.viewmodels.header.Header
-@import uk.gov.hmrc.helplinefrontend.views.html.Head
+@import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcLayout
+@import uk.gov.hmrc.helplinefrontend.views.html.AdditionalHead
 
-@this(
-    govukLayout: GovukLayout,
-    head: Head,
-    hmrcHeader: hmrcHeader,
-    hmrcStandardFooter: HmrcStandardFooter,
-    hmrcLanguageSelectHelper: HmrcLanguageSelectHelper,
-    govukBackLink : GovukBackLink
-)
+@this(hmrcLayout: HmrcLayout, head: AdditionalHead)
 
 @(pageTitle: String = "",
   headBlock: Option[Html] = None,
@@ -35,43 +27,23 @@
 )(contentBlock: Html)(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
 
 
-@isloggedInUser = @{
-    appConfig.isLoggedInUser && appConfig.signOutEnabled
+@signOutUrl = @{
+    if(appConfig.isLoggedInUser && appConfig.signOutEnabled)
+        Some(s"${uk.gov.hmrc.helplinefrontend.controllers.routes.SignOutController.signOut()}")
+    else None
 }
 
-@headerBlock = {
-    @hmrcHeader(Header(
-        language = if(messages.lang.code == "cy") Cy else En,
-        displayHmrcBanner = false,
-        signOutHref =
-            if (isloggedInUser) Some(s"${uk.gov.hmrc.helplinefrontend.controllers.routes.SignOutController.signOut()}") else None
-    ))
+
+@actualPageTitle = @{
+    if(formErrors.nonEmpty) Some(messages("error.prefix") + " " + pageTitle)
+    else Some(pageTitle)
 }
 
-@beforeContentBlock = {
-    @if(appConfig.welshLanguageSupportEnabled) { @hmrcLanguageSelectHelper()}
-    @if(backLinkLocation.nonEmpty) {
-        @govukBackLink(BackLink(
-            href = backLinkLocation.getOrElse(""),
-            content = Text(messages("back"))
-        ))
-    }
-}
-
-@pageTitleWithForm = @{
-    if(formErrors.nonEmpty) {
-        messages("error.prefix") + " " + pageTitle
-    }
-    else {
-        pageTitle
-    }
-}
-
-@govukLayout(
-    pageTitle = Some(pageTitleWithForm),
-    headBlock = Some(head(headBlock)),
-    headerBlock = Some(headerBlock),
-    scriptsBlock = scriptsBlock,
-    beforeContentBlock = Some(beforeContentBlock),
-    footerBlock = Some(hmrcStandardFooter())
+@hmrcLayout(
+    pageTitle = actualPageTitle,
+    backLinkUrl = backLinkLocation,
+    isWelshTranslationAvailable = appConfig.welshLanguageSupportEnabled,
+    signOutUrl = signOutUrl,
+    additionalScriptsBlock = scriptsBlock,
+    additionalHeadBlock = Some(head(headBlock)),
 )(contentBlock)
