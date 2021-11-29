@@ -16,18 +16,19 @@
 
 package uk.gov.hmrc.helplinefrontend.controllers
 
-import javax.inject.{Inject, Singleton}
 import play.api.Logging
 import play.api.mvc._
 import uk.gov.hmrc.auth.core.{AuthConnector, AuthorisedFunctions}
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
-import uk.gov.hmrc.helplinefrontend.models.form.CallOptionForm
-import uk.gov.hmrc.helplinefrontend.models.form.CallOptionOrganisationForm
-import uk.gov.hmrc.helplinefrontend.monitoring.{ContactHmrcInd, ContactHmrcOrg, ContactHmrcSa, ContactType, EventDispatcher}
+import uk.gov.hmrc.helplinefrontend.models.CallOption._
+import uk.gov.hmrc.helplinefrontend.models._
+import uk.gov.hmrc.helplinefrontend.models.form.{CallOptionForm, CallOptionOrganisationForm}
+import uk.gov.hmrc.helplinefrontend.monitoring._
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
+import javax.inject.{Inject, Singleton}
 import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
@@ -69,43 +70,47 @@ class CallHelpdeskController @Inject()(implicit
     }
   }
 
+  def getGoBackURl(callBackUrl: Option[String]): Option[String] = {
+    if (appConfig.backCallEnabled) callBackUrl else None
+  }
+
   def getHelpdeskPage(helpKey: String, back: Option[String]): Action[AnyContent] = Action.async { implicit request =>
 
     checkIsAuthorisedUser().flatMap{ _ =>
-      logger.info(s"[VER-517] calling for $helpKey")
-      val backCall: Option[String] = if (appConfig.backCallEnabled) back else None
-      helpKey.toLowerCase match {
-        case "deceased" => Future.successful(Ok(ivDeceased(backCall)))
-        case "child-benefit" => Future.successful(Ok(childBenefitPage(backCall)))
-        case "income-tax-paye" => Future.successful(Ok(incomeTaxPayePage(backCall)))
-        case "national-insurance" => Future.successful(Ok(nationalInsurancePage(backCall)))
-        case "self-assessment" => Future.successful(Ok(selfAssessmentPage(backCall)))
-        case "state-pension" => Future.successful(Ok(statePensionPage(backCall)))
-        case "tax-credits" => Future.successful(Ok(taxCreditsPage(backCall)))
-        case "seiss" => Future.successful(Ok(seissPage(backCall)))
-        case "general-enquiries" => Future.successful(Ok(generalEnquiriesPage(backCall)))
-
-        case _ => // default help page
-          logger.warn(s"[VER-517] calling without a valid help key($helpKey): request.headers => ${request.headers}")
-          Future.successful(Ok(generalEnquiriesPage(backCall)))
-      }
+      val backCall: Option[String] = getGoBackURl(back)
+      val callOption: CallOption = CallOption.withNameInsensitiveOption(helpKey).getOrElse(GeneralEnquiries)
+      Future.successful(Ok(
+        callOption match {
+          case Deceased          => ivDeceased(backCall)
+          case ChildBenefit      => childBenefitPage(backCall)
+          case IncomeTaxPaye     => incomeTaxPayePage(backCall)
+          case NationalInsurance => nationalInsurancePage(backCall)
+          case SelfAssessment    => selfAssessmentPage(backCall)
+          case StatePension      => statePensionPage(backCall)
+          case TaxCredits        => taxCreditsPage(backCall)
+          case Seiss             => seissPage(backCall)
+          case _                 => generalEnquiriesPage(backCall)
+        }
+      ))
     }
   }
 
   def getHelpdeskOrganisationPage(helpKey: String, back: Option[String]): Action[AnyContent] = Action.async { implicit request =>
 
     checkIsAuthorisedUser().flatMap{ _ =>
-      val backCall: Option[String] = if (appConfig.backCallEnabled) back else None
-      helpKey.toLowerCase match {
-        case "corporation-tax" => Future.successful(Ok(corporationTaxPage(backCall)))
-        //machine-gaming-duty is replaced with machine-games-duty now. have left gaming-duty in here in case anyone clicks on history
-        case "machine-games-duty" | "machine-gaming-duty" => Future.successful(Ok(machineGamesDutyPage(backCall)))
-        case "paye-for-employers" => Future.successful(Ok(payeForEmployersPage(backCall)))
-        case "self-assessment" => Future.successful(Ok(selfAssessmentOrganisationPage(backCall)))
-        case "vat" => Future.successful(Ok(vatPage(backCall)))
-        case _ => // default help page
-          Future.successful(Ok(generalEnquiriesOrganisationPage(backCall)))
-      }
+      val backCall: Option[String] = getGoBackURl(back)
+      val callOption: CallOption = CallOption.withNameInsensitiveOption(helpKey).getOrElse(GeneralEnquiries)
+      Future.successful(Ok(
+        callOption match {
+          //machine-gaming-duty is replaced with machine-games-duty now. have left gaming-duty in here in case anyone clicks on history
+          case MachineGamesDuty | MachineGamingDuty => machineGamesDutyPage(backCall)
+          case CorporationTax                       => corporationTaxPage(backCall)
+          case PayeForEmployers                     => payeForEmployersPage(backCall)
+          case SelfAssessment                       => selfAssessmentOrganisationPage(backCall)
+          case Vat                                  => vatPage(backCall)
+          case _                                    => generalEnquiriesOrganisationPage(backCall)
+        }
+      ))
     }
   }
 
