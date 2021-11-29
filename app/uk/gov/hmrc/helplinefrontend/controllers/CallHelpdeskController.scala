@@ -21,6 +21,7 @@ import play.api.Logging
 import play.api.mvc._
 import uk.gov.hmrc.auth.core.{AuthConnector, AuthorisedFunctions}
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
+import uk.gov.hmrc.helplinefrontend.models._
 import uk.gov.hmrc.helplinefrontend.models.form.CallOptionForm
 import uk.gov.hmrc.helplinefrontend.models.form.CallOptionOrganisationForm
 import uk.gov.hmrc.helplinefrontend.monitoring.{ContactHmrcInd, ContactHmrcOrg, ContactHmrcSa, ContactType, EventDispatcher}
@@ -69,21 +70,21 @@ class CallHelpdeskController @Inject()(implicit
     }
   }
 
-  def getHelpdeskPage(helpKey: String, back: Option[String]): Action[AnyContent] = Action.async { implicit request =>
+  def getHelpdeskPage(helpKey: CallOption, back: Option[String]): Action[AnyContent] = Action.async { implicit request =>
 
     checkIsAuthorisedUser().flatMap{ _ =>
       logger.info(s"[VER-517] calling for $helpKey")
       val backCall: Option[String] = if (appConfig.backCallEnabled) back else None
-      helpKey.toLowerCase match {
-        case "deceased" => Future.successful(Ok(ivDeceased(backCall)))
-        case "child-benefit" => Future.successful(Ok(childBenefitPage(backCall)))
-        case "income-tax-paye" => Future.successful(Ok(incomeTaxPayePage(backCall)))
-        case "national-insurance" => Future.successful(Ok(nationalInsurancePage(backCall)))
-        case "self-assessment" => Future.successful(Ok(selfAssessmentPage(backCall)))
-        case "state-pension" => Future.successful(Ok(statePensionPage(backCall)))
-        case "tax-credits" => Future.successful(Ok(taxCreditsPage(backCall)))
-        case "seiss" => Future.successful(Ok(seissPage(backCall)))
-        case "general-enquiries" => Future.successful(Ok(generalEnquiriesPage(backCall)))
+      helpKey match {
+        case Deceased => Future.successful(Ok(ivDeceased(backCall)))
+        case ChildBenefit => Future.successful(Ok(childBenefitPage(backCall)))
+        case IncomeTaxPaye=> Future.successful(Ok(incomeTaxPayePage(backCall)))
+        case NationalInsurance => Future.successful(Ok(nationalInsurancePage(backCall)))
+        case SelfAssessment => Future.successful(Ok(selfAssessmentPage(backCall)))
+        case StatePension => Future.successful(Ok(statePensionPage(backCall)))
+        case TaxCredits => Future.successful(Ok(taxCreditsPage(backCall)))
+        case Seiss => Future.successful(Ok(seissPage(backCall)))
+        case GeneralEnquiries => Future.successful(Ok(generalEnquiriesPage(backCall)))
 
         case _ => // default help page
           logger.warn(s"[VER-517] calling without a valid help key($helpKey): request.headers => ${request.headers}")
@@ -92,19 +93,18 @@ class CallHelpdeskController @Inject()(implicit
     }
   }
 
-  def getHelpdeskOrganisationPage(helpKey: String, back: Option[String]): Action[AnyContent] = Action.async { implicit request =>
+  def getHelpdeskOrganisationPage(helpKey: CallOption, back: Option[String]): Action[AnyContent] = Action.async { implicit request =>
 
     checkIsAuthorisedUser().flatMap{ _ =>
       val backCall: Option[String] = if (appConfig.backCallEnabled) back else None
-      helpKey.toLowerCase match {
-        case "corporation-tax" => Future.successful(Ok(corporationTaxPage(backCall)))
+      helpKey match {
+        case CorporationTax => Future.successful(Ok(corporationTaxPage(backCall)))
         //machine-gaming-duty is replaced with machine-games-duty now. have left gaming-duty in here in case anyone clicks on history
-        case "machine-games-duty" | "machine-gaming-duty" => Future.successful(Ok(machineGamesDutyPage(backCall)))
-        case "paye-for-employers" => Future.successful(Ok(payeForEmployersPage(backCall)))
-        case "self-assessment" => Future.successful(Ok(selfAssessmentOrganisationPage(backCall)))
-        case "vat" => Future.successful(Ok(vatPage(backCall)))
-        case _ => // default help page
-          Future.successful(Ok(generalEnquiriesOrganisationPage(backCall)))
+        case MachineGamesDuty | MachineGamingDuty => Future.successful(Ok(machineGamesDutyPage(backCall)))
+        case PayeForEmployers => Future.successful(Ok(payeForEmployersPage(backCall)))
+        case SelfAssessment => Future.successful(Ok(selfAssessmentOrganisationPage(backCall)))
+        case VAT => Future.successful(Ok(vatPage(backCall)))
+        case _ => Future.successful(Ok(generalEnquiriesOrganisationPage(backCall)))
       }
     }
   }
@@ -130,10 +130,11 @@ class CallHelpdeskController @Inject()(implicit
 
   def selectCallOption(): Action[AnyContent] = Action.async { implicit request =>
     val result = CallOptionForm.callOptionForm(appConfig.callOptionsList).bindFromRequest.fold(
-      errors ⇒ BadRequest(callOptionsNoAnswers(errors)),
-      value => {
+      errors => BadRequest(callOptionsNoAnswers(errors)),
+      value  => {
         eventDispatcher.dispatchEvent(ContactType(appConfig.defaultCallOptionsAndGAEventMapper(value)))
-        Redirect(routes.CallHelpdeskController.getHelpdeskPage(value, Some(routes.CallHelpdeskController.callOptionsNoAnswersPage().url)))
+        Redirect(routes.CallHelpdeskController.getHelpdeskPage(CallOption.string2ServiceKey(value).right.getOrElse(GeneralEnquiries),
+          Some(routes.CallHelpdeskController.callOptionsNoAnswersPage().url)))
       }
     )
     Future.successful(result)
@@ -144,7 +145,8 @@ class CallHelpdeskController @Inject()(implicit
       errors ⇒ BadRequest(callOptionsOrganisationNoAnswers(errors)),
       value => {
         eventDispatcher.dispatchEvent(ContactType(appConfig.defaultCallOptionsOrganisationAndGAEventMapper(value)))
-        Redirect(routes.CallHelpdeskController.getHelpdeskOrganisationPage(value, Some(routes.CallHelpdeskController.callOptionsNoAnswersOrganisationPage().url)))
+        Redirect(routes.CallHelpdeskController.getHelpdeskOrganisationPage(CallOption.string2ServiceKey(value).right.getOrElse(GeneralEnquiries),
+          Some(routes.CallHelpdeskController.callOptionsNoAnswersOrganisationPage().url)))
       }
     )
     Future.successful(result)
@@ -162,7 +164,8 @@ class CallHelpdeskController @Inject()(implicit
       errors ⇒ BadRequest(whichServiceAccess(errors)),
       value => {
         eventDispatcher.dispatchEvent(ContactType(appConfig.standaloneIndividualAndGAEventMapper(value)))
-        Redirect(routes.CallHelpdeskController.getHelpdeskPage(value, Some(routes.CallHelpdeskController.whichServiceAccessPage().url)))
+        Redirect(routes.CallHelpdeskController.getHelpdeskPage(CallOption.string2ServiceKey(value).right.getOrElse(GeneralEnquiries),
+          Some(routes.CallHelpdeskController.whichServiceAccessPage().url)))
       }
     )
     Future.successful(result)
@@ -177,10 +180,11 @@ class CallHelpdeskController @Inject()(implicit
 
   def selectServiceAccessOtherOption(): Action[AnyContent] = Action.async { implicit request =>
     val result = CallOptionForm.callOptionForm(appConfig.standaloneOrganisationList).bindFromRequest.fold(
-      errors ⇒ BadRequest(whichServiceAccessOther(errors)),
-      value => {
+      errors => BadRequest(whichServiceAccessOther(errors)),
+      value  => {
         eventDispatcher.dispatchEvent(ContactType(appConfig.standaloneOrganisationAndGAEventMapper(value)))
-        Redirect(routes.CallHelpdeskController.getHelpdeskOrganisationPage(value, Some(routes.CallHelpdeskController.whichServiceAccessOtherPage().url)))
+        Redirect(routes.CallHelpdeskController.getHelpdeskOrganisationPage(CallOption.string2ServiceKey(value).right.getOrElse(GeneralEnquiries),
+          Some(routes.CallHelpdeskController.whichServiceAccessOtherPage().url)))
       }
     )
     Future.successful(result)

@@ -28,6 +28,7 @@ import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import uk.gov.hmrc.auth.core.AuthConnector
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
+import uk.gov.hmrc.helplinefrontend.models._
 import uk.gov.hmrc.helplinefrontend.monitoring.EventDispatcher
 import uk.gov.hmrc.helplinefrontend.monitoring.analytics._
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
@@ -114,22 +115,20 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
                                  eventDispatcher,
                                  ec)
 
-  val childBenefitHelpKey: String = "CHILD-BENEFIT"
-  val corporationTaxHelpKey: String = "CORPORATION-TAX"
-  val deceasedHelpKey: String = "deceased"
-  val incomeTaxPayeHelpKey: String = "INCOME-TAX-PAYE"
-  val nationalInsuranceHelpKey: String = "NATIONAL-INSURANCE"
-  val machineGamingDutyHelpKey: String = "MACHINE-GAMING-DUTY"
-  val payeForEmployersHelpKey: String = "PAYE-FOR-EMPLOYERS"
-  val selfAssessmentHelpKey: String = "SELF-ASSESSMENT"
-  val selfAssessmentOrganisationHelpKey: String = "self-assessment"
-  val statePensionHelpKey: String = "STATE-PENSION"
-  val taxCreditsHelpKey: String = "TAX-CREDITS"
-  val generalEnquiriesHelpKey: String = "GENERAL-ENQUIRIES"
-  val generalEnquiriesOrganisationHelpKey: String = "SOMETHING-ELSE"
-  val seissHelpKey: String = "SEISS"
-  val vatHelpKey: String = "VAT"
-  val defaultHelpKey: String = "GENERAL-ENQUIRIES"
+  val deceasedHelpKey: CallOption                   = Deceased
+  val childBenefitHelpKey: CallOption               = ChildBenefit
+  val incomeTaxPayeHelpKey: CallOption              = IncomeTaxPaye
+  val nationalInsuranceHelpKey: CallOption          = NationalInsurance
+  val selfAssessmentHelpKey: CallOption             = SelfAssessment
+  val statePensionHelpKey: CallOption               = StatePension
+  val taxCreditsHelpKey: CallOption                 = TaxCredits
+  val seissHelpKey: CallOption                      = Seiss
+  val selfAssessmentOrganisationHelpKey: CallOption = SelfAssessment
+  val corporationTaxHelpKey: CallOption             = CorporationTax
+  val machineGamingDutyHelpKey: CallOption          = MachineGamingDuty
+  val payeForEmployersHelpKey: CallOption           = PayeForEmployers
+  val vatHelpKey: CallOption                        = VAT
+  val defaultHelpKey: CallOption                    = GeneralEnquiries
 
   "CallHelpdeskController get deceased help page" should {
     "return deceased help page if the help key is 'deceased' but there is no go back url" in {
@@ -397,14 +396,14 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
   "CallHelpdeskController get General Enquiries help page" should {
     "return General Enquiries help page if the help key is 'SOMETHING-ELSE' but there is no go back url" in {
-      val result: Future[Result] = controller.getHelpdeskOrganisationPage(generalEnquiriesOrganisationHelpKey, None)(fakeRequest)
+      val result: Future[Result] = controller.getHelpdeskOrganisationPage(defaultHelpKey, None)(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("If you need help with a service") shouldBe true
       contentAsString(result).contains("Back") shouldBe false
     }
 
     "return General Enquiries help page if the help key is 'SOMETHING-ELSE' and there is a go back url" in {
-      val result: Future[Result] = controller.getHelpdeskOrganisationPage(generalEnquiriesOrganisationHelpKey, Some("backURL"))(fakeRequest)
+      val result: Future[Result] = controller.getHelpdeskOrganisationPage(defaultHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("If you need help with a service") shouldBe true
       contentAsString(result).contains("Back") shouldBe true

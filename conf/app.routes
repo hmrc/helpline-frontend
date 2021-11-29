@@ -22,11 +22,11 @@ GET        /contact-helpdesk                                uk.gov.hmrc.helpline
 GET        /contact-helpdesk-org                            uk.gov.hmrc.helplinefrontend.controllers.RedirectController.contactHelpdeskOrg(redirectUrl: String)
 GET        /contact-helpline                                uk.gov.hmrc.helplinefrontend.controllers.RedirectController.contactHelpline(redirectUrl: String, origin: String)
 
-GET        /:helpKey                                        uk.gov.hmrc.helplinefrontend.controllers.CallHelpdeskController.getHelpdeskPage(helpKey: String, back: Option[String])
+GET        /:helpKey                                        uk.gov.hmrc.helplinefrontend.controllers.CallHelpdeskController.getHelpdeskPage(helpKey: uk.gov.hmrc.helplinefrontend.models.CallOption, back: Option[String])
 
 GET        /organisation/select-a-service                   uk.gov.hmrc.helplinefrontend.controllers.CallHelpdeskController.callOptionsNoAnswersOrganisationPage()
 POST       /organisation/select-a-service                   uk.gov.hmrc.helplinefrontend.controllers.CallHelpdeskController.selectOrganisationCallOption()
 
-GET        /organisation/:helpKey                           uk.gov.hmrc.helplinefrontend.controllers.CallHelpdeskController.getHelpdeskOrganisationPage(helpKey: String, back: Option[String])
+GET        /organisation/:helpKey                           uk.gov.hmrc.helplinefrontend.controllers.CallHelpdeskController.getHelpdeskOrganisationPage(helpKey: uk.gov.hmrc.helplinefrontend.models.CallOption, back: Option[String])
 
 
