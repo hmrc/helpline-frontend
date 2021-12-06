@@ -88,7 +88,6 @@ class CallHelpdeskController @Inject()(implicit
           case SelfAssessment    => selfAssessmentPage(backCall)
           case StatePension      => statePensionPage(backCall)
           case TaxCredits        => taxCreditsPage(backCall)
-          case Seiss             => seissPage(backCall)
           case _                 => generalEnquiriesPage(backCall)
         }
       ))

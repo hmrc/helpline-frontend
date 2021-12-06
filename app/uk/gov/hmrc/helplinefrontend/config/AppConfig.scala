@@ -34,7 +34,6 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "income-tax-paye" -> "contact_incometaxpaye",
     "national-insurance" -> "contact_natinsurance",
     "self-assessment" -> "contact_sa",
-    "SEISS" -> "contact_seiss",
     "state-pension" -> "contact_pension",
     "tax-credits" -> "contact_taxcred",
     "general-enquiries" -> "contact_other"
@@ -54,7 +53,6 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "income-tax-paye" -> "contact_incometaxpaye",
     "national-insurance" -> "contact_natinsurance",
     "self-assessment" -> "contact_sa",
-    "SEISS" -> "contact_seiss",
     "state-pension" -> "contact_pension",
     "tax-credits" -> "contact_taxcred"
   )
