@@ -335,7 +335,9 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
     }
   }
 
+  //VER-1648 The business have asked us to remove SEISS references, but may add back later
   "CallHelpdeskController get Seiss help page" should {
+    pending
     "return Seiss help page if the help key is 'SEISS' but there is no go back url" in {
       val result: Future[Result] = controller.getHelpdeskPage(seissHelpKey, None)(fakeRequest)
       status(result) shouldBe Status.OK
@@ -421,7 +423,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
           Event("sos_iv", "more_info", "contact_childbenefit", expectedDimensions)))
       }
     }
-    "fire contact_incometaxpaye ga event when user clicks on Child benefit" in {
+    "fire contact_incometaxpaye ga event when user clicks on income tax" in {
       val result: Future[Result] = controller.selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "income-tax-paye"))
       status(result) shouldBe Status.SEE_OTHER
       eventually {
@@ -429,7 +431,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
           Event("sos_iv", "more_info", "contact_incometaxpaye", expectedDimensions)))
       }
     }
-    "fire contact_natinsurance ga event when user clicks on Child benefit" in {
+    "fire contact_natinsurance ga event when user clicks on national insurance" in {
       val result: Future[Result] = controller.selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "national-insurance"))
       status(result) shouldBe Status.SEE_OTHER
       eventually {
@@ -437,7 +439,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
           Event("sos_iv", "more_info", "contact_natinsurance", expectedDimensions)))
       }
     }
-    "fire contact_sa ga event when user clicks on Child benefit" in {
+    "fire contact_sa ga event when user clicks on self assessment" in {
       val result: Future[Result] = controller.selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "self-assessment"))
       status(result) shouldBe Status.SEE_OTHER
       eventually {
@@ -445,7 +447,8 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
           Event("sos_iv", "more_info", "contact_sa", expectedDimensions)))
       }
     }
-    "fire contact_seiss ga event when user clicks on Child benefit" in {
+    "fire contact_seiss ga event when user clicks on SEISS" in {
+      pending //VER-1648 The business have asked us to remove SEISS references, but may add back later
       val result: Future[Result] = controller.selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "SEISS"))
       status(result) shouldBe Status.SEE_OTHER
       eventually {
@@ -453,7 +456,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
           Event("sos_iv", "more_info", "contact_seiss", expectedDimensions)))
       }
     }
-    "fire contact_pension ga event when user clicks on Child benefit" in {
+    "fire contact_pension ga event when user clicks on state pension" in {
       val result: Future[Result] = controller.selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "state-pension"))
       status(result) shouldBe Status.SEE_OTHER
       eventually {
@@ -461,7 +464,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
           Event("sos_iv", "more_info", "contact_pension", expectedDimensions)))
       }
     }
-    "fire contact_taxcred ga event when user clicks on Child benefit" in {
+    "fire contact_taxcred ga event when user clicks on tax credits" in {
       val result: Future[Result] = controller.selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "tax-credits"))
       status(result) shouldBe Status.SEE_OTHER
       eventually {
@@ -469,7 +472,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
           Event("sos_iv", "more_info", "contact_taxcred", expectedDimensions)))
       }
     }
-    "fire contact_other ga event when user clicks on Child benefit" in {
+    "fire contact_other ga event when user clicks on other" in {
       val result: Future[Result] = controller.selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "general-enquiries"))
       status(result) shouldBe Status.SEE_OTHER
       eventually {
