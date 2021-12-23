@@ -99,8 +99,7 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
 
   lazy val platformAnalyticsUrl = servicesConfig.baseUrl("platform-analytics")
 
-  lazy val signOutEnabled: Boolean = config.get[Boolean]("isSignOutEnabled")
-
+  //TODO:Is this really the way to store state in a play app?
   var isLoggedInUser: Boolean = false
 
   lazy val logoutPage: String = servicesConfig.getConfString("logoutPage", "https://www.access.service.gov.uk/logout")

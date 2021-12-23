@@ -28,7 +28,7 @@
 
 
 @signOutUrl = @{
-    if(appConfig.isLoggedInUser && appConfig.signOutEnabled)
+    if(appConfig.isLoggedInUser)
         Some(s"${uk.gov.hmrc.helplinefrontend.controllers.routes.SignOutController.signOut()}")
     else None
 }
