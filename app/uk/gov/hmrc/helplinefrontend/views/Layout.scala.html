@@ -16,6 +16,7 @@
 
 @import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcLayout
 @import uk.gov.hmrc.helplinefrontend.views.html.AdditionalHead
+@import views.html.helper.CSPNonce
 
 @this(hmrcLayout: HmrcLayout, head: AdditionalHead)
 
@@ -46,4 +47,5 @@
     signOutUrl = signOutUrl,
     additionalScriptsBlock = scriptsBlock,
     additionalHeadBlock = Some(head(headBlock)),
+    nonce = CSPNonce.get
 )(contentBlock)
