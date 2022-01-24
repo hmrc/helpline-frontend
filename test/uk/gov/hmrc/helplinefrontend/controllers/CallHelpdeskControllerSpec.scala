@@ -150,7 +150,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
     "pass accessibility checks" in {
       val result: Future[Result] = controller.getHelpdeskPage(deceasedHelpKey, None)(fakeRequest)
       status(result) shouldBe Status.OK
-      contentAsString(result) must passAccessibilityChecks
+      contentAsString(result) should passAccessibilityChecks
       }
 
   }
