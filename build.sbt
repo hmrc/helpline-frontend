@@ -46,3 +46,6 @@ lazy val microservice = Project(appName, file("."))
       ScoverageKeys.coverageHighlighting := true
     )
   )
+  .settings(
+    A11yTest / unmanagedSourceDirectories += (baseDirectory.value / "test" / "accessibility")
+  )
