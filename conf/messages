@@ -104,7 +104,7 @@ contact_us.deceased.contact_number.no_uk_telephone.number=+44 135 535 9022
 contact_us.deceased.contact_hours.text1=Our phone line opening hours have temporarily changed to:
 contact_us.deceased.contact_hours.weekday=Monday to Friday: 8am to 4pm
 contact_us.deceased.contact_hours.text2=This is due to having fewer advisers available to answer calls because of the measures put in place to stop the spread of coronavirus.
-contact_us.deceased.getHelp=Get help <a href=>dealing with HMRC if you have additional needs</a>
+contact_us.deceased.getHelp=Get help <a href="{0}">dealing with HMRC if you have additional needs</a>
 contact_us.deceased.callCharges=<a href="{0}">Find out about call charges</a>
 
 which_service_access.link=Other services
