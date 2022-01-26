@@ -33,11 +33,10 @@ import uk.gov.hmrc.helplinefrontend.monitoring.analytics._
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
 import uk.gov.hmrc.http.{HeaderCarrier, HttpClient}
 import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
-import uk.gov.hmrc.scalatestaccessibilitylinter.AccessibilityMatchers
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOneAppPerSuite with Eventually with AccessibilityMatchers {
+class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOneAppPerSuite with Eventually {
 
   private val fakeRequest = FakeRequest("GET", "/")
   val config: Configuration = Configuration.from(Map(
@@ -146,13 +145,6 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       contentAsString(result).contains("Has this person died?") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
     }
-
-//    "pass accessibility checks" in {
-//      val result: Future[Result] = controller.getHelpdeskPage(deceasedHelpKey, None)(fakeRequest)
-//      status(result) shouldBe Status.OK
-//      contentAsString(result) should passAccessibilityChecks
-//      }
-
   }
 
   "CallHelpdeskController get child benefit help page" should {
