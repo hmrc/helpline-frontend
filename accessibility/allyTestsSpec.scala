@@ -134,11 +134,11 @@ class allyTestsSpec extends AnyWordSpec with Matchers with GuiceOneAppPerSuite w
 
   "CallHelpdeskController get deceased help page" should {
 
-//    "pass accessibility checks" in {
-//      val result: Future[Result] = controller.getHelpdeskPage(deceasedHelpKey, None)(fakeRequest)
-//      status(result) shouldBe Status.OK
-//      contentAsString(result) should passAccessibilityChecks
-//      }
+    "pass accessibility checks" in {
+      val result: Future[Result] = controller.getHelpdeskPage(deceasedHelpKey, None)(fakeRequest)
+      status(result) shouldBe Status.OK
+      contentAsString(result) should passAccessibilityChecks
+      }
 
   }
 }
