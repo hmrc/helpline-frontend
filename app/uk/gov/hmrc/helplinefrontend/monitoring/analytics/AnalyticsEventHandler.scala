@@ -70,7 +70,7 @@ private class AnalyticsRequestFactory() {
   }
 
   def contactHmrcSa(clientId: Option[String])(implicit request: Request[_]): AnalyticsRequest = {
-    val gaEvent = Event("sos_iv", "more_info", "contact_hmrc_sa", getDimensions(request))
+    val gaEvent = Event("sos_iv", "more_info", "contact_hmrc_standalone", getDimensions(request))
     AnalyticsRequest(clientId, Seq(gaEvent))
   }
 

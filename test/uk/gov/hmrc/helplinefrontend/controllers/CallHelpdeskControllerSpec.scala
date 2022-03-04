@@ -367,7 +367,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       status(result) shouldBe Status.OK
       eventually {
         analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
-          Event("sos_iv", "more_info", "contact_hmrc_sa", expectedDimensions)))
+          Event("sos_iv", "more_info", "contact_hmrc_standalone", expectedDimensions)))
       }
       contentAsString(result).contains("Back") shouldBe false
     }
