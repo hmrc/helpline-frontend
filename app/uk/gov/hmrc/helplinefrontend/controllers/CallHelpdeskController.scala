@@ -116,7 +116,6 @@ class CallHelpdeskController @Inject()(implicit
   def callOptionsNoAnswersPage(): Action[AnyContent] = Action.async { implicit request =>
 
     checkIsAuthorisedUser().flatMap{ _ =>
-      logger.debug(s"[VER-539] Showing options for ${ appConfig.callOptionsList.mkString(", ")}")
       eventDispatcher.dispatchEvent(ContactHmrcInd)
       Future.successful(Ok(callOptionsNoAnswers(CallOptionForm.callOptionForm(appConfig.callOptionsList))).addingToSession("affinityGroup" -> "Individual"))
     }
