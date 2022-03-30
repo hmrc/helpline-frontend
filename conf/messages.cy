@@ -107,4 +107,4 @@ contact_us.deceased.contact_hours.text2=Mae hyn oherwydd bod llai o ymgynghorwyr
 contact_us.deceased.getHelp=Help i <a href="{0}">ddelio â CThEM os oes gennych anghenion ychwanegol</a>
 contact_us.deceased.callCharges=<a href="{0}">Gwybodaeth am gostau galwadau</a>
 
-which_service_access.link=Gwasanaethau eraill
+which_service_access.link=<a href={0}>Gwasanaethau eraill</a>
