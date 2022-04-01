@@ -44,9 +44,6 @@
     },
     errorMessage = if(callOptionForm.hasErrors)Some(messages("call-options-no-answers.error")) else None,
 )
-
-    @p(key = messages("which_service_access.link", routes.CallHelpdeskController.whichServiceAccessOtherPage().url), id = Some("other-services"), classes = Some("govuk-!-margin-bottom-7"))
-
     @govukButton(Button(
         content = Text(messages("continue"))
         ))
