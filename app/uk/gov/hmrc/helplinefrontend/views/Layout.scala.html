@@ -36,7 +36,7 @@
 
 
 @actualPageTitle = @{
-    if(formErrors.nonEmpty) Some(messages("error.prefix") + " " + pageTitle)
+    if(formErrors.nonEmpty) Some(messages("error.prefix") + ": " + pageTitle)
     else Some(pageTitle)
 }
 

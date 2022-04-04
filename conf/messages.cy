@@ -5,6 +5,7 @@ back=Yn ôl
 continue=Yn eich blaen
 
 call-options-no-answers.h1=Pa wasanaeth yr ydych yn ceisio cael ato?
+call-options-no-answers.other.h1=Pa wasanaeth eraill yr ydych yn ceisio cael ato?
 call-options-no-answers.h2-error=Mae problem wedi codi
 call-options-no-answers.error=Dewiswch pa wasanaeth yr oeddech yn ceisio cael mynediad ato gan ddefnyddio’r cyfrif hwn
 
@@ -21,6 +22,7 @@ call-option.label.help-with-a-service=Rhywbeth arall
 call-option.label.general-enquiries=Rhywbeth arall
 call-option.label.paye-for-employers=TWE i gyflogwyr
 call-option.label.vat=TAW
+call-option.label.which-service-are-you-trying-to-access-other=Rhywbeth arall
 
 default.title=Ffoniwch linell gymorth CThEM
 default.need-help.heading=Os oes angen help arnoch i fewngofnodi
@@ -106,5 +108,3 @@ contact_us.deceased.contact_hours.weekday=Dydd Llun i Ddydd Gwener: 08:00 i 16:0
 contact_us.deceased.contact_hours.text2=Mae hyn oherwydd bod llai o ymgynghorwyr ar gael i ateb galwadau, oherwydd y gweithdrefnau sydd wedi’u rhoi ar waith er mwyn atal coronafeirws rhag ymledu.
 contact_us.deceased.getHelp=Help i <a href="{0}">ddelio â CThEM os oes gennych anghenion ychwanegol</a>
 contact_us.deceased.callCharges=<a href="{0}">Gwybodaeth am gostau galwadau</a>
-
-which_service_access.link=Gwasanaethau eraill
