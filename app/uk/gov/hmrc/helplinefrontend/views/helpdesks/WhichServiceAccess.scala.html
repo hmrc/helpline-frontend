@@ -4,15 +4,14 @@
 @import uk.gov.hmrc.helplinefrontend.views.html.Layout
 @import uk.gov.hmrc.helplinefrontend.controllers.routes
 @import uk.gov.hmrc.govukfrontend.views.Aliases.Text
-@import uk.gov.hmrc.helplinefrontend.views.html.components.{InputRadio, Paragraph}
+@import uk.gov.hmrc.helplinefrontend.views.html.components.InputRadio
 
 @this(
     layout: Layout,
     formWithCsrf: FormWithCSRF,
     govukErrorSummary: GovukErrorSummary,
     inputRadio: InputRadio,
-    govukButton: GovukButton,
-    p: Paragraph
+    govukButton: GovukButton
 )
 
 @(callOptionForm: Form[String])(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
@@ -48,6 +47,5 @@
         content = Text(messages("continue"))
         ))
     }
-
 
 }
