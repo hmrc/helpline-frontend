@@ -1,6 +1,6 @@
 service.name=Llinellau Cymorth CThEM
 title.suffix=- Llinellau Cymorth CThEM - GOV.UK
-error.prefix=Gwall:
+error.prefix=Gwall
 back=Yn ôl
 continue=Yn eich blaen
 
