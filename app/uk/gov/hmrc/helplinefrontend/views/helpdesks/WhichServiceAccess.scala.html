@@ -4,15 +4,14 @@
 @import uk.gov.hmrc.helplinefrontend.views.html.Layout
 @import uk.gov.hmrc.helplinefrontend.controllers.routes
 @import uk.gov.hmrc.govukfrontend.views.Aliases.Text
-@import uk.gov.hmrc.helplinefrontend.views.html.components.{InputRadio, Link}
+@import uk.gov.hmrc.helplinefrontend.views.html.components.InputRadio
 
 @this(
     layout: Layout,
     formWithCsrf: FormWithCSRF,
     govukErrorSummary: GovukErrorSummary,
     inputRadio: InputRadio,
-    govukButton: GovukButton,
-    a: Link
+    govukButton: GovukButton
 )
 
 @(callOptionForm: Form[String])(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
@@ -44,11 +43,9 @@
     },
     errorMessage = if(callOptionForm.hasErrors)Some(messages("call-options-no-answers.error")) else None,
 )
-
     @govukButton(Button(
         content = Text(messages("continue"))
         ))
     }
 
-    @a(messages("which_service_access.link"), id=Some("other-services"), href = routes.CallHelpdeskController.whichServiceAccessOtherPage().url)
 }

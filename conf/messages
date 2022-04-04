@@ -21,6 +21,7 @@ call-option.label.paye-for-employers=PAYE
 call-option.label.vat=VAT
 call-option.label.general-enquiries=Something else
 call-option.label.help-with-a-service=Something else
+call-option.label.which-service-are-you-trying-to-access-other=Something else
 
 default.title=Call an HMRC helpline
 default.need-help.heading=If you need help signing in
@@ -106,6 +107,4 @@ contact_us.deceased.contact_hours.weekday=Monday to Friday: 8am to 4pm
 contact_us.deceased.contact_hours.text2=This is due to having fewer advisers available to answer calls because of the measures put in place to stop the spread of coronavirus.
 contact_us.deceased.getHelp=Get help <a href="{0}">dealing with HMRC if you have additional needs</a>
 contact_us.deceased.callCharges=<a href="{0}">Find out about call charges</a>
-
-which_service_access.link=Other services
 

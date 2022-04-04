@@ -54,7 +54,8 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "national-insurance" -> "contact_natinsurance",
     "self-assessment" -> "contact_sa",
     "state-pension" -> "contact_pension",
-    "tax-credits" -> "contact_taxcred"
+    "tax-credits" -> "contact_taxcred",
+    "which-service-are-you-trying-to-access-other" -> "which-service-are-you-trying-to-access-other"
   )
 
   val standaloneOrganisationAndGAEventMapper = mutable.LinkedHashMap(
