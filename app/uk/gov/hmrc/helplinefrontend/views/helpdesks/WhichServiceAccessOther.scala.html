@@ -37,7 +37,7 @@
         @if(callOptionForm.hasErrors) {
             @govukErrorSummary(ErrorSummary(
                 title = Text(messages("call-options-no-answers.h2-error")),
-                errorList = callOptionForm.errors.map(err => ErrorLink(href = Some("#selected-call-option-error"), content = Text(messages("call-options-no-answers.error")))
+                errorList = callOptionForm.errors.map(err => ErrorLink(href = Some("#selected-call-option"), content = Text(messages("call-options-no-answers.error")))
                 ))
             )
         }
@@ -50,7 +50,6 @@
             classes = "govuk-fieldset__legend--xl",
             items = appConfig.standaloneOrganisationList.map { selectedCallOption =>
                 RadioItem(
-                    id = Some(selectedCallOption),
                     content = Text(messages("call-option.label." + selectedCallOption)),
                     value = Some(selectedCallOption)
                 )

@@ -36,7 +36,7 @@
         @if(callOptionsOrganisationForm.hasErrors) {
             @govukErrorSummary(ErrorSummary(
                 title = Text(messages("call-options-no-answers.h2-error")),
-                errorList = callOptionsOrganisationForm.errors.map(err => ErrorLink(href = Some("#selected-call-option-error"), content = Text(messages("call-options-no-answers.error")))
+                errorList = callOptionsOrganisationForm.errors.map(err => ErrorLink(href = Some("#selected-call-option"), content = Text(messages("call-options-no-answers.error")))
                 ))
             )
         }
@@ -57,7 +57,6 @@
             name = "selected-call-option",
             items = appConfig.callOptionsOrganisationList.map { selectedCallOption =>
                 RadioItem(
-                    id = Some(selectedCallOption),
                     content = Text(Messages("call-option.label." + selectedCallOption)),
                     value = Some(selectedCallOption)
                 )
