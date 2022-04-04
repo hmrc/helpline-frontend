@@ -59,7 +59,7 @@ class AnalyticsEventHandlerSpec
       dispatcher.dispatchEvent(ContactHmrcSa)(request, hc, global)
       eventually {
         analyticsRequests.head shouldBe AnalyticsRequest(Some(gaClientId), Seq(
-          Event("sos_iv", "more_info", "contact_hmrc_sa", Seq())))
+          Event("sos_iv", "more_info", "contact_hmrc_standalone", Seq())))
       }
     }
 

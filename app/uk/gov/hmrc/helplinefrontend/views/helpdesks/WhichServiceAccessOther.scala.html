@@ -30,14 +30,14 @@
 
 @(callOptionForm: Form[String])(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
 
-@layout(pageTitle = s"${messages("call-options-no-answers.h1")} ${messages("title.suffix")}", formErrors = callOptionForm.errors, backLinkLocation = Some(routes.CallHelpdeskController.whichServiceAccessPage().url)) {
+@layout(pageTitle = s"${messages("call-options-no-answers.other.h1")} ${messages("title.suffix")}", formErrors = callOptionForm.errors, backLinkLocation = Some(routes.CallHelpdeskController.whichServiceAccessPage().url)) {
 
     @formWithCsrf(routes.CallHelpdeskController.selectServiceAccessOtherOption()) {
 
         @if(callOptionForm.hasErrors) {
             @govukErrorSummary(ErrorSummary(
                 title = Text(messages("call-options-no-answers.h2-error")),
-                errorList = callOptionForm.errors.map(err => ErrorLink(href = Some("#selected-call-option-error"), content = Text(messages("call-options-no-answers.error")))
+                errorList = callOptionForm.errors.map(err => ErrorLink(href = Some("#selected-call-option"), content = Text(messages("call-options-no-answers.error")))
                 ))
             )
         }
@@ -45,12 +45,11 @@
         @inputRadio(
             callOptionForm,
             name = "selected-call-option",
-            legend = Messages("call-options-no-answers.h1"),
+            legend = Messages("call-options-no-answers.other.h1"),
             legendAsHeading = true,
             classes = "govuk-fieldset__legend--xl",
             items = appConfig.standaloneOrganisationList.map { selectedCallOption =>
                 RadioItem(
-                    id = Some(selectedCallOption),
                     content = Text(messages("call-option.label." + selectedCallOption)),
                     value = Some(selectedCallOption)
                 )

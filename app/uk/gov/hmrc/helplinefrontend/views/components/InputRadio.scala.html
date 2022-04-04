@@ -26,5 +26,9 @@
     )),
     hint = hint,
     items = items,
-    errorMessage = errorMessage.map(msg=> ErrorMessage(content = Text(msg)))
+    errorMessage = errorMessage.map(
+        msg=> ErrorMessage(
+            content = Text(msg),
+            visuallyHiddenText = Some(messages("error.prefix")
+            )))
 ))
