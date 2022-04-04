@@ -52,7 +52,8 @@
             )),
             hint = None,
             errorMessage = if(callOptionForm.hasErrors)Some(ErrorMessage(
-                content = Text(messages("call-options-no-answers.error")), visuallyHiddenText = Some(messages("error.prefix"))
+                content = Text(messages("call-options-no-answers.error")),
+                visuallyHiddenText = Some(messages("error.prefix"))
             ))
             else None,
             idPrefix = Some("selected-call-option"),
