@@ -1,6 +1,6 @@
 service.name=
 title.suffix=- HMRC Helplines - GOV.UK
-error.prefix=Error:
+error.prefix=Error
 back=Back
 continue=Continue
 

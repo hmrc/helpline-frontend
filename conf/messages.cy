@@ -1,6 +1,6 @@
 service.name=
 title.suffix=- GOV.UK
-error.prefix=Gwall:
+error.prefix=Gwall
 back=Yn ôl
 continue=Yn eich blaen
 
