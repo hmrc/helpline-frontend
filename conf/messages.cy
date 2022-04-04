@@ -1,6 +1,6 @@
 service.name=
-title.suffix=- GOV.UK
-error.prefix=Gwall
+title.suffix=- Llinellau Cymorth CThEM - GOV.UK
+error.prefix=Gwall:
 back=Yn ôl
 continue=Yn eich blaen
 
