@@ -30,7 +30,7 @@
 
 @(callOptionForm: Form[String])(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
 
-@layout(pageTitle = s"${messages("call-options-no-answers.h1")} ${messages("title.suffix")}", formErrors = callOptionForm.errors, backLinkLocation = Some(routes.CallHelpdeskController.whichServiceAccessPage().url)) {
+@layout(pageTitle = s"${messages("call-options-no-answers.other.h1")} ${messages("title.suffix")}", formErrors = callOptionForm.errors, backLinkLocation = Some(routes.CallHelpdeskController.whichServiceAccessPage().url)) {
 
     @formWithCsrf(routes.CallHelpdeskController.selectServiceAccessOtherOption()) {
 
@@ -45,7 +45,7 @@
         @inputRadio(
             callOptionForm,
             name = "selected-call-option",
-            legend = Messages("call-options-no-answers.h1"),
+            legend = Messages("call-options-no-answers.other.h1"),
             legendAsHeading = true,
             classes = "govuk-fieldset__legend--xl",
             items = appConfig.standaloneOrganisationList.map { selectedCallOption =>
