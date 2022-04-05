@@ -38,23 +38,23 @@ contact_hours.temp.weekday=Monday to Friday: 8am to 4pm
 contact_hours.temp.text2=This is due to having fewer advisers available to answer calls because of the measures put in place to stop the spread of coronavirus.
 more-details=<a class="govuk-link" href="{0}">More contact details (including webchat)</a>
 
-child-benefit.query.heading=If you have a Child Benefit query
+child-benefit.query.heading=Child Benefit query
 child-benefit.query.p1=If you do not need help signing in but have another query about Child Benefit, you need to contact the Child Benefit helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3100</span>.
 child-benefit.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Child Benefit helpline</a>.
 
-corporation-tax.query.heading=If you need help with Corporation Tax
+corporation-tax.query.heading=Help with Corporation Tax
 corporation-tax.query.p1=You need to contact the Corporation Tax helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3410</span>.
 corporation-tax.query.p2=You can <a class="govuk-link" href="{0}">find other ways to contact us about Corporation Tax</a>.
 
-income-tax-paye.query.heading=If you have an Income Tax or PAYE query
+income-tax-paye.query.heading=Income Tax and PAYE query
 income-tax-paye.query.p1=If you do not need help signing in but have another query about Income Tax or PAYE, you need to contact the Income Tax helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3300</span>.
 income-tax-paye.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Income Tax helpline</a>.
 
-national-insurance.query.heading=If you have a National Insurance query
+national-insurance.query.heading=National Insurance query
 national-insurance.query.p1=If you do not need help signing in but have another query about National Insurance, you need to contact the National Insurance helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3500</span>.
 national-insurance.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the National Insurance helpline</a>.
 
-machine-games-duty.query.heading=If you need help with Machine Games Duty
+machine-games-duty.query.heading=Help with Machine Games Duty
 machine-games-duty.query.p1=You need to contact the excise and gambling duties helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3701</span>.
 machine-games-duty.query.p2=You can <a class="govuk-link" href="{0}">find other ways to contact us about Machine Games Duty</a>.
 
@@ -64,15 +64,15 @@ machine-games-duty.need-help.p2=You can <a class="govuk-link" href="{0}">find ot
 online-services.need-help.p1=To get help recovering your sign in details or changing how you get your access codes, you need to contact the Online Services helpdesk on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3600</span>.
 online-services.need-help.p2=You can <a class="govuk-link" href="{0}">find other ways to contact Online Services</a>.
 
-paye-for-employers.query.heading=If you need help with PAYE for employers
+paye-for-employers.query.heading=Help with PAYE for employers
 paye-for-employers.query.p1=You need to contact the employers helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3200</span>.
 paye-for-employers.query.p2=You can <a class="govuk-link" href="{0}">find other ways to contact us about PAYE for employers</a>.
 
-self-assessment.query.heading=If you have a Self Assessment query
+self-assessment.query.heading=Self Assessment query
 self-assessment.query.p1=If you do not need help signing in but have another query about Self Assessment, you need to contact the Self Assessment helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3310</span>.
 self-assessment.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Self Assessment helpline</a>.
 
-self-assessment-organisation.query.heading=If you need help with Self Assessment
+self-assessment-organisation.query.heading=Help with Self Assessment
 self-assessment-organisation.query.p1=You need to contact the Self Assessment helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3310</span>.
 self-assessment-organisation.query.p2=You can <a class="govuk-link" href="{0}">find other ways to contact us about Self Assessment</a>.
 
@@ -80,26 +80,26 @@ seiss.query.heading=If you have a Self-Employment Income Support Scheme query
 seiss.query.p1=If you do not need help signing in but have another query about the Self-Employment Income Support Scheme, you need to contact the Self-Employment Income Support Scheme helpline on <span class="govuk-!-font-weight-bold no-wrap">0800 024 1222</span>.
 seiss.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Self-Employment Income Support Scheme helpline</a>.
 
-state-pension.query.heading=If you have a State Pension query
+state-pension.query.heading=State Pension query
 state-pension.query.p1=If you do not need help signing in but have another query about a State Pension, you need to contact the Pension Service helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3500</span>.
 state-pension.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Pension Service helpline</a>.
 
-tax-credits.query.heading=If you have a tax credits query
+tax-credits.query.heading=Tax Credits query
 tax-credits.query.p1=If you do not need help signing in but have another query about tax credits, you need to contact the tax credits helpline on <span class="govuk-!-font-weight-bold no-wrap">0345 300 3900</span>.
 tax-credits.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the tax credits helpline</a>.
 
-vat.query.heading=If you need help with VAT
+vat.query.heading=Help with VAT
 vat.query.p1=You need to contact the VAT helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3701</span>.
 vat.query.p2=You can <a class="govuk-link" href="{0}">find other ways to contact us about VAT</a>.
 
 vat.need-help.p1=To get help recovering your sign in details or changing how you get your access codes, you need to contact the VAT Online Services helpdesk on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3701</span>.
 vat.need-help.p2=You can <a class="govuk-link" href="{0}">find other ways to contact VAT Online Services</a>.
 
-general-enquiries.query.heading=If you have a query about something else
+general-enquiries.query.heading=Query about something else
 general-enquiries.query.p1=If you do not need help signing in but have a query about something else, you need to contact the Income Tax general enquiries helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3300</span>.
 general-enquiries.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Income Tax general enquiries helpline</a>.
 
-general-enquiries-organisation.query.heading=If you need help with a service
+general-enquiries-organisation.query.heading=Help with a service
 general-enquiries-organisation.query.p=You can <a class="govuk-link" href="{0}">find contact details for the service you are trying to access</a>.
 
 contact_us.deceased.h1=Has this person died?

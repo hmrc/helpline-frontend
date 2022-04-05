@@ -24,10 +24,10 @@
 
 @(back: Option[String])(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
 
-@layout(pageTitle = s"${messages("default.title")} ${messages("title.suffix")}", backLinkLocation = back) {
-    @h1(messages("default.title"))
+@layout(pageTitle = s"${messages("paye-for-employers.query.heading")} ${messages("title.suffix")}", backLinkLocation = back) {
+    @h1(messages("paye-for-employers.query.heading"))
 
-    @h2(messages("paye-for-employers.query.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
+    @h2(messages("default.title"), Some("govuk-body-l govuk-!-font-weight-bold"))
     @p(messages("paye-for-employers.query.p1"))
     @p(messages("paye-for-employers.query.p2", URLDecoder.decode(routes.RedirectController.contactHelpline("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/employer-enquiries", "paye-for-employers").url, "UTF-8")))
 
