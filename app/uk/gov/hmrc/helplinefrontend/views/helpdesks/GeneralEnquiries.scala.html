@@ -24,10 +24,10 @@
 
 @(back: Option[String])(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
 
-@layout(pageTitle = s"${messages("default.title")} ${messages("title.suffix")}", backLinkLocation = back) {
-    @h1(messages("default.title"))
+@layout(pageTitle = s"${messages("general-enquiries.query.heading")} ${messages("title.suffix")}", backLinkLocation = back) {
+    @h1(messages("general-enquiries.query.heading"))
 
-    @h2(messages("general-enquiries.query.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
+    @h2(messages("default.title"), Some("govuk-body-l govuk-!-font-weight-bold"))
     @p(messages("general-enquiries.query.p1"))
     @p(messages("general-enquiries.query.p2", URLDecoder.decode(routes.RedirectController.contactHelpline("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/income-tax-enquiries-for-individuals-pensioners-and-employees", "general-enquiries").url, "UTF-8")))
 

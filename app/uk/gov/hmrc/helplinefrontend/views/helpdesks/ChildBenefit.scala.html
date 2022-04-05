@@ -24,10 +24,10 @@
 
 @(back: Option[String])(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
 
-@layout(pageTitle = s"${messages("default.title")} ${messages("title.suffix")}", backLinkLocation = back) {
-    @h1(messages("default.title"))
+@layout(pageTitle = s"${messages("child-benefit.query.heading")} ${messages("title.suffix")}", backLinkLocation = back) {
+    @h1(messages("child-benefit.query.heading"))
 
-    @h2(messages("child-benefit.query.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
+    @h2(messages("default.title"), Some("govuk-body-l govuk-!-font-weight-bold"))
     @p(messages("child-benefit.query.p1"))
     @p(messages("child-benefit.query.p2", URLDecoder.decode(routes.RedirectController.contactHelpline("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/child-benefit", "child-benefit").url, "UTF-8"), Some("govuk-!-margin-bottom-8")))
 
