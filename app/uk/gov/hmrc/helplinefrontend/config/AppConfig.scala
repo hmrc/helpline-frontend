@@ -36,6 +36,7 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "self-assessment" -> "contact_sa",
     "state-pension" -> "contact_pension",
     "tax-credits" -> "contact_taxcred",
+    "divider" -> "divider",
     "general-enquiries" -> "contact_other"
   )
 
@@ -45,6 +46,7 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "paye-for-employers" -> "contact_paye",
     "self-assessment" -> "contact_sa_org",
     "vat" -> "contact_vat",
+    "divider" -> "divider",
     "help-with-a-service" -> "contact_other_org"
   )
 
@@ -55,6 +57,7 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "self-assessment" -> "contact_sa",
     "state-pension" -> "contact_pension",
     "tax-credits" -> "contact_taxcred",
+    "divider" -> "divider",
     "which-service-are-you-trying-to-access-other" -> "which-service-are-you-trying-to-access-other"
   )
 
@@ -62,6 +65,7 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "corporation-tax" -> "contact_corporationtax",
     "machine-games-duty" -> "contact_machinegamingduty",
     "vat" -> "contact_vat",
+    "divider" -> "divider",
     "help-with-a-service" -> "contact_other_org"
   )
 

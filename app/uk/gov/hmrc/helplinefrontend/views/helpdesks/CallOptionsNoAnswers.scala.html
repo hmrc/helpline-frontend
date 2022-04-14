@@ -59,10 +59,16 @@
             idPrefix = Some("selected-call-option"),
             name = "selected-call-option",
             items = appConfig.callOptionsList.map { selectedCallOption =>
-                RadioItem(
-                    content = Text(Messages("call-option.label." + selectedCallOption)),
-                    value = Some(selectedCallOption)
-                )
+                if(selectedCallOption == "divider"){
+                    RadioItem(
+                        divider = Some(messages("call-option.label.or"))
+                    )
+                } else{
+                    RadioItem(
+                        content = Text(Messages("call-option.label." + selectedCallOption)),
+                        value = Some(selectedCallOption)
+                    )
+                }
             }
         ))
 
