@@ -9,6 +9,7 @@ call-options-no-answers.other.h1=Pa wasanaeth eraill yr ydych yn ceisio cael ato
 call-options-no-answers.h2-error=Mae problem wedi codi
 call-options-no-answers.error=Dewiswch pa wasanaeth yr oeddech yn ceisio cael mynediad ato gan ddefnyddio’r cyfrif hwn
 
+call-option.label.or=neu
 call-option.label.child-benefit=Budd-dal Plant
 call-option.label.income-tax-paye=Treth Incwm a TWE
 call-option.label.national-insurance=Yswiriant Gwladol

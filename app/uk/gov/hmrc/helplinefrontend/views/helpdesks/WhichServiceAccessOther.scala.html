@@ -49,10 +49,16 @@
             legendAsHeading = true,
             classes = "govuk-fieldset__legend--xl",
             items = appConfig.standaloneOrganisationList.map { selectedCallOption =>
-                RadioItem(
-                    content = Text(messages("call-option.label." + selectedCallOption)),
-                    value = Some(selectedCallOption)
-                )
+                if(selectedCallOption == "divider"){
+                    RadioItem(
+                        divider = Some(messages("call-option.label.or"))
+                    )
+                } else {
+                    RadioItem(
+                        content = Text(messages("call-option.label." + selectedCallOption)),
+                        value = Some(selectedCallOption)
+                    )
+                }
             },
             errorMessage = if(callOptionForm.hasErrors)Some(messages("call-options-no-answers.error")) else None,
         )
