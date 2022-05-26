@@ -25,6 +25,12 @@ GET        /contact-helpline                                uk.gov.hmrc.helpline
 GET        /helplines-by-service                            uk.gov.hmrc.helplinefrontend.controllers.CallHelpdeskController.helpLinesByServicePage()
 POST       /helplines-by-service                            uk.gov.hmrc.helplinefrontend.controllers.CallHelpdeskController.submitHelplinesByServicePage()
 
+GET        /helplines-by-service/charities                  uk.gov.hmrc.helplinefrontend.controllers.CallHelpdeskController.helpLinesByServiceCharitiesPage(heading: String)
+GET        /helplines-by-service/osh                        uk.gov.hmrc.helplinefrontend.controllers.CallHelpdeskController.helpLinesByServiceOshPage(heading: String)
+GET        /helplines-by-service/pensions                   uk.gov.hmrc.helplinefrontend.controllers.CallHelpdeskController.helpLinesByServicePensionsPage(heading: String)
+GET        /helplines-by-service/vat                        uk.gov.hmrc.helplinefrontend.controllers.CallHelpdeskController.helpLinesByServiceVatPage(heading: String)
+GET        /helplines-by-service/voa                        uk.gov.hmrc.helplinefrontend.controllers.CallHelpdeskController.helpLinesByServiceVoaPage(heading: String)
+
 GET        /:helpKey                                        uk.gov.hmrc.helplinefrontend.controllers.CallHelpdeskController.getHelpdeskPage(helpKey: String, back: Option[String])
 
 GET        /organisation/select-a-service                   uk.gov.hmrc.helplinefrontend.controllers.CallHelpdeskController.callOptionsNoAnswersOrganisationPage()

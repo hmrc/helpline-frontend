@@ -1,0 +1,45 @@
+@*
+* Copyright 2021 HM Revenue & Customs
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*@
+
+@import uk.gov.hmrc.helplinefrontend.config.AppConfig
+@import uk.gov.hmrc.helplinefrontend.views.html.Layout
+@import uk.gov.hmrc.helplinefrontend.views.html.components.{Paragraph, H1, H2, preH1}
+@import uk.gov.hmrc.helplinefrontend.controllers.routes
+@import java.net.URLDecoder
+
+@this(
+        layout: Layout,
+        p: Paragraph,
+        preHeading: preH1,
+        h1: H1,
+        h2: H2)
+
+@(heading: String)(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
+
+@layout(pageTitle = s"${messages("vat.query.heading")} ${messages("title.suffix")}") {
+    @preHeading(messages(heading))
+    @h1(messages("vat.query.heading"))
+
+    @h2(messages("default.title"), Some("govuk-body-l govuk-!-font-weight-bold"))
+    @p(messages("vat.query.p1"))
+    @p(messages("vat.query.p2", URLDecoder.decode(routes.RedirectController.contactHelpline("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/vat-enquiries", "vat").url, "UTF-8")))
+
+    @h2(messages("default.need-help.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
+    @p(messages("vat.need-help.p1"))
+    @p(messages("vat.need-help.p2", URLDecoder.decode(routes.RedirectController.contactHelpdeskOrg("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/vat-online-services-helpdesk").url, "UTF-8"), Some("govuk-!-margin-bottom-8")))
+
+}
+

@@ -25,6 +25,8 @@ import uk.gov.hmrc.helplinefrontend.models._
 import uk.gov.hmrc.helplinefrontend.models.form.{CallOptionForm, CallOptionOrganisationForm, HelplinesByServiceForm}
 import uk.gov.hmrc.helplinefrontend.monitoring._
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
+import uk.gov.hmrc.helplinefrontend.views.html.helplinesByService.HelplinesByService
+import uk.gov.hmrc.helplinefrontend.views.html.helplinesByService.helpline._
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
@@ -56,6 +58,11 @@ class CallHelpdeskController @Inject()(implicit
                                        whichServiceAccess: WhichServiceAccess,
                                        whichServiceAccessOther: WhichServiceAccessOther,
                                        helplinesByService: HelplinesByService,
+                                       charities: Charities,
+                                       osh: Osh,
+                                       pensions: Pensions,
+                                       vat: VatHelpline,
+                                       voa: Voa,
                                        val eventDispatcher: EventDispatcher,
                                        ec: ExecutionContext)
   extends FrontendController(mcc) with Logging with AuthorisedFunctions {
@@ -191,11 +198,33 @@ class CallHelpdeskController @Inject()(implicit
   }
 
   def helpLinesByServicePage(): Action[AnyContent] = Action.async { implicit request =>
-      Future.successful(Ok(helplinesByService(HelplinesByServiceForm.helplinesByServiceForm(appConfig.helplinesByServiceList))))
+      Future.successful(Ok(helplinesByService(HelplinesByServiceForm.helplinesByServiceForm(appConfig.helplinesByService))))
   }
 
   def submitHelplinesByServicePage(): Action[AnyContent] = Action.async { implicit request =>
-      Future.successful(Ok(helplinesByService(HelplinesByServiceForm.helplinesByServiceForm(appConfig.helplinesByServiceList))))
+      Future.successful(Ok(helplinesByService(HelplinesByServiceForm.helplinesByServiceForm(appConfig.helplinesByService))))
   }
+
+  def helpLinesByServiceCharitiesPage(heading: String): Action[AnyContent] = Action { implicit request =>
+      Ok(charities(heading))
+  }
+
+  def helpLinesByServiceOshPage(heading: String): Action[AnyContent] = Action { implicit request =>
+    Ok(osh(heading))
+  }
+
+  def helpLinesByServicePensionsPage(heading: String): Action[AnyContent] = Action { implicit request =>
+    Ok(pensions(heading))
+  }
+
+  def helpLinesByServiceVatPage(heading: String): Action[AnyContent] = Action { implicit request =>
+    Ok(vat(heading))
+  }
+
+  def helpLinesByServiceVoaPage(heading: String): Action[AnyContent] = Action { implicit request =>
+    Ok(voa(heading))
+  }
+
+
 
 }
