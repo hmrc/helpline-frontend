@@ -22,7 +22,7 @@ import uk.gov.hmrc.auth.core.{AuthConnector, AuthorisedFunctions}
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.helplinefrontend.models.CallOption._
 import uk.gov.hmrc.helplinefrontend.models._
-import uk.gov.hmrc.helplinefrontend.models.form.{CallOptionForm, CallOptionOrganisationForm}
+import uk.gov.hmrc.helplinefrontend.models.form.{CallOptionForm, CallOptionOrganisationForm, HelplinesByServiceForm}
 import uk.gov.hmrc.helplinefrontend.monitoring._
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
 import uk.gov.hmrc.http.HeaderCarrier
@@ -55,6 +55,7 @@ class CallHelpdeskController @Inject()(implicit
                                        callOptionsOrganisationNoAnswers: CallOptionsOrganisationNoAnswers,
                                        whichServiceAccess: WhichServiceAccess,
                                        whichServiceAccessOther: WhichServiceAccessOther,
+                                       helplinesByService: HelplinesByService,
                                        val eventDispatcher: EventDispatcher,
                                        ec: ExecutionContext)
   extends FrontendController(mcc) with Logging with AuthorisedFunctions {
@@ -187,6 +188,14 @@ class CallHelpdeskController @Inject()(implicit
       }
     )
     Future.successful(result)
+  }
+
+  def helpLinesByServicePage(): Action[AnyContent] = Action.async { implicit request =>
+      Future.successful(Ok(helplinesByService(HelplinesByServiceForm.helplinesByServiceForm(appConfig.helplinesByServiceList))))
+  }
+
+  def submitHelplinesByServicePage(): Action[AnyContent] = Action.async { implicit request =>
+      Future.successful(Ok(helplinesByService(HelplinesByServiceForm.helplinesByServiceForm(appConfig.helplinesByServiceList))))
   }
 
 }
