@@ -28,7 +28,7 @@
     <div class="row">
         <div class="govuk-grid-column-one-third">
             <!-- Autocomplete -->
-            <form action="" method="get">
+            <form action="/helpline-page" method="get">
                 <div class="govuk-form-group">
                     <label class="govuk-label" for="helpline-service">
                         Search
@@ -37,7 +37,7 @@
                         <select id="helpline-service" class="govuk-!-width-full govuk-select" name="helpline-service">
                             <option value=""></option>
                             @for(question <- appConfig.helplinesByService) {
-                                <option value="@question._1.toLowerCase().replaceAll(" ", "-").replaceAll("\\(", "").replaceAll("\\)", "")">@question</option>
+                                <option value="@question._2">@question._1</option>
                             }
                         </select>
                         <button class="button-search-inline" type="submit">Search</button>
@@ -70,13 +70,13 @@
         }
         </div>
     </div>
-    <script @{
-        CSPNonce.attr
-    } src="/helpline/assets/javascript/accessible-autocomplete.min.js"></script>
-    <script @{
-        CSPNonce.attr
-    }>
+    <script @{CSPNonce.attr} src="/helpline/assets/javascript/accessible-autocomplete.min.js"></script>
+    <script @{CSPNonce.attr}>
             accessibleAutocomplete.enhanceSelectElement({
+                autoselect: true,
+                confirmOnBlur: true,
+                defaultValue: "",
+                minLength: 2,
                 selectElement: document.querySelector("#helpline-service")
             })
     </script>
