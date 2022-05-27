@@ -16,30 +16,36 @@
 
 @import uk.gov.hmrc.helplinefrontend.config.AppConfig
 @import uk.gov.hmrc.helplinefrontend.views.html.Layout
-@import uk.gov.hmrc.helplinefrontend.views.html.components.{Paragraph, H1, H2, preH1, SummaryList}
-@import uk.gov.hmrc.helplinefrontend.controllers.routes
-@import java.net.URLDecoder
+@import uk.gov.hmrc.helplinefrontend.views.html.components.{Paragraph, H1, H2, preH1, SummaryList, InsetText}
+@import uk.gov.hmrc.helplinefrontend.models.ui.{SummaryRowData => Row}
+@import scala.collection.mutable.ListBuffer
 
 @this(
         layout: Layout,
         p: Paragraph,
         preHeading: preH1,
         h1: H1,
-        h2: H2)
+        h2: H2,
+        summaryList: SummaryList,
+        insetText: InsetText)
+
 
 @(heading: String)(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
+
+@rows = @{
+    val rws = ListBuffer[Row]()
+    rws.append(Row(key = "helplines-search.telephone", value = "helplines-search.vat.tel"))
+    rws.append(Row(key = "helplines-search.outside-uk", value = "helplines-search.vat.int"))
+    rws.append(Row(key = "helplines-search.opening-times", value = "helplines-search.vat.times"))
+    rws
+}
 
 @layout(pageTitle = s"${messages("helplines-search.vat.h1")} ${messages("title.suffix")}") {
     @preHeading(messages(heading))
     @h1(messages("helplines-search.vat.h1"))
-
-    @h2(messages("default.title"), Some("govuk-body-l govuk-!-font-weight-bold"))
-    @p(messages("vat.query.p1"))
-    @p(messages("vat.query.p2", URLDecoder.decode(routes.RedirectController.contactHelpline("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/vat-enquiries", "vat").url, "UTF-8")))
-
-    @h2(messages("default.need-help.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
-    @p(messages("vat.need-help.p1"))
-    @p(messages("vat.need-help.p2", URLDecoder.decode(routes.RedirectController.contactHelpdeskOrg("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/vat-online-services-helpdesk").url, "UTF-8"), Some("govuk-!-margin-bottom-8")))
-
+    @summaryList(rows = rows, classes = "govuk-summary-list--no-border")
+    @p("helplines-search.more-contact-details", Some("https://www.tax.service.gov.uk/ask-hmrc/webchat/corporation-tax-enquiries"))
+    @insetText(html = Html(messages("helplines-search.additional-needs", Some("https://www.gov.uk/dealing-hmrc-additional-needs/overview"))))
+    @p("helplines-search.call-charges", Some("https://www.gov.uk/call-charges"))
 }
 
