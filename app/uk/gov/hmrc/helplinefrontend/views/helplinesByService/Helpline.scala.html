@@ -30,19 +30,19 @@
         insetText: InsetText)
 
 
-@(heading: String)(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
+@(heading: String, helpdesk: String)(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
 
 @rows = @{
     val rws = ListBuffer[Row]()
-    rws.append(Row(key = "helplines-search.telephone", value = "helplines-search.vat.tel"))
-    rws.append(Row(key = "helplines-search.outside-uk", value = "helplines-search.vat.int"))
-    rws.append(Row(key = "helplines-search.opening-times", value = "helplines-search.vat.times"))
+    rws.append(Row(key = "helplines-search.telephone", value = s"helplines-search.${helpdesk}.tel"))
+    rws.append(Row(key = "helplines-search.outside-uk", value = s"helplines-search.${helpdesk}.int"))
+    rws.append(Row(key = "helplines-search.opening-times", value = s"helplines-search.${helpdesk}.times"))
     rws
 }
 
-@layout(pageTitle = s"${messages("helplines-search.vat.h1")} ${messages("title.suffix")}") {
+@layout(pageTitle = s"${messages(s"helplines-search.vat.h1")} ${messages("title.suffix")}") {
     @preHeading(messages(heading))
-    @h1(messages("helplines-search.vat.h1"))
+    @h1(messages(s"helplines-search.${helpdesk}.h1"))
     @summaryList(rows = rows, classes = "govuk-summary-list--no-border")
     @p("helplines-search.more-contact-details", Some("https://www.tax.service.gov.uk/ask-hmrc/webchat/corporation-tax-enquiries"))
     @insetText(html = Html(messages("helplines-search.additional-needs", Some("https://www.gov.uk/dealing-hmrc-additional-needs/overview"))))

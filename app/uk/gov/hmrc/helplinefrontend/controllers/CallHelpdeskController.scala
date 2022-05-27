@@ -25,8 +25,7 @@ import uk.gov.hmrc.helplinefrontend.models._
 import uk.gov.hmrc.helplinefrontend.models.form.{CallOptionForm, CallOptionOrganisationForm, HelplinesByServiceForm, HelplinesByServiceSearchForm}
 import uk.gov.hmrc.helplinefrontend.monitoring._
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
-import uk.gov.hmrc.helplinefrontend.views.html.helplinesByService.HelplinesByService
-import uk.gov.hmrc.helplinefrontend.views.html.helplinesByService.helpline._
+import uk.gov.hmrc.helplinefrontend.views.html.helplinesByService.{HelplinesByService, Helpline}
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
@@ -58,11 +57,7 @@ class CallHelpdeskController @Inject()(implicit
                                        whichServiceAccess: WhichServiceAccess,
                                        whichServiceAccessOther: WhichServiceAccessOther,
                                        helplinesByService: HelplinesByService,
-                                       charities: Charities,
-                                       osh: Osh,
-                                       pensions: Pensions,
-                                       vat: VatHelpline,
-                                       voa: Voa,
+                                       helpline: Helpline,
                                        val eventDispatcher: EventDispatcher,
                                        ec: ExecutionContext)
   extends FrontendController(mcc) with Logging with AuthorisedFunctions {
@@ -206,23 +201,23 @@ class CallHelpdeskController @Inject()(implicit
   }
 
   def helpLinesByServiceCharitiesPage(heading: String): Action[AnyContent] = Action { implicit request =>
-      Ok(charities(heading))
+    Ok(helpline(heading, "charities"))
   }
 
   def helpLinesByServiceOshPage(heading: String): Action[AnyContent] = Action { implicit request =>
-    Ok(osh(heading))
+    Ok(helpline(heading, "osh"))
   }
 
   def helpLinesByServicePensionsPage(heading: String): Action[AnyContent] = Action { implicit request =>
-    Ok(pensions(heading))
+    Ok(helpline(heading, "pensions"))
   }
 
   def helpLinesByServiceVatPage(heading: String): Action[AnyContent] = Action { implicit request =>
-    Ok(vat(heading))
+    Ok(helpline(heading, "vat"))
   }
 
   def helpLinesByServiceVoaPage(heading: String): Action[AnyContent] = Action { implicit request =>
-    Ok(voa(heading))
+    Ok(helpline(heading, "voa"))
   }
 
   def helpLinesByServiceServicePage(): Action[AnyContent] = Action.async { implicit request =>
