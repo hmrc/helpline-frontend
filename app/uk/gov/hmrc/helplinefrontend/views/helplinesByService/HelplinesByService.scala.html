@@ -20,6 +20,7 @@
     <link href="/helpline/assets/stylesheets/accessible-autocomplete.min.css" media="all" rel="stylesheet" type="text/css" />
     <div class="row">
         <div class="govuk-grid-column-two-thirds">
+            @HelplinesByServiceForm.errors
             @h1(msgs("helplines-search.h1"), Some("govuk-heading-l"))
             @p(msgs("helplines-search.p"))
             @h2(msgs("helplines-search.h2"), Some("govuk-body govuk-!-font-weight-bold"))
@@ -28,22 +29,22 @@
     <div class="row">
         <div class="govuk-grid-column-one-third">
             <!-- Autocomplete -->
-            <form action="/helpline-page" method="get">
+            @formWithCsrf(routes.CallHelpdeskController.helpLinesByServiceServicePage()) {
                 <div class="govuk-form-group">
                     <label class="govuk-label" for="helpline-service">
                         Search
                     </label>
                     <div class="govuk-input__wrapper govuk-!-width-full autocomplete-container">
-                        <select id="helpline-service" class="govuk-!-width-full govuk-select" name="helpline-service">
+                        <select id="helpline-service" class="govuk-!-width-full govuk-select" name="service">
                             <option value=""></option>
                             @for(question <- appConfig.helplinesByService) {
-                                <option value="@question._2">@question._1</option>
+                                <option value="@question._1">@question._1</option>
                             }
                         </select>
                         <button class="button-search-inline" type="submit">Search</button>
                     </div>
                 </div>
-            </form>
+            }
         </div>
         <div class="govuk-grid-column-two-thirds">
         @formWithCsrf(routes.CallHelpdeskController.submitHelplinesByServicePage()) {

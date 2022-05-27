@@ -22,7 +22,7 @@ import uk.gov.hmrc.auth.core.{AuthConnector, AuthorisedFunctions}
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.helplinefrontend.models.CallOption._
 import uk.gov.hmrc.helplinefrontend.models._
-import uk.gov.hmrc.helplinefrontend.models.form.{CallOptionForm, CallOptionOrganisationForm, HelplinesByServiceForm}
+import uk.gov.hmrc.helplinefrontend.models.form.{CallOptionForm, CallOptionOrganisationForm, HelplinesByServiceForm, HelplinesByServiceSearchForm}
 import uk.gov.hmrc.helplinefrontend.monitoring._
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
 import uk.gov.hmrc.helplinefrontend.views.html.helplinesByService.HelplinesByService
@@ -225,6 +225,27 @@ class CallHelpdeskController @Inject()(implicit
     Ok(voa(heading))
   }
 
-
+  def helpLinesByServiceServicePage(): Action[AnyContent] = Action.async { implicit request =>
+    val result = HelplinesByServiceSearchForm.helplinesByServiceSearchForm(appConfig.helplinesByService).bindFromRequest.fold(
+      errors ⇒ BadRequest(helplinesByService(errors)),
+      value => {
+          var helpdesk : String = ""
+          for(question <- appConfig.helplinesByService) {
+            if(question._1 == value){
+              helpdesk = question._2
+            }
+          }
+          helpdesk match {
+            case "vat" =>         Redirect(routes.CallHelpdeskController.helpLinesByServiceVatPage(value))
+            case "osh" =>         Redirect(routes.CallHelpdeskController.helpLinesByServiceOshPage(value))
+            case "charities" =>   Redirect(routes.CallHelpdeskController.helpLinesByServiceCharitiesPage(value))
+            case "pensions" =>    Redirect(routes.CallHelpdeskController.helpLinesByServicePensionsPage(value))
+            case "voa" =>         Redirect(routes.CallHelpdeskController.helpLinesByServiceVoaPage(value))
+            case _ =>             Redirect(routes.CallHelpdeskController.helpLinesByServiceOshPage(value))
+          }
+      }
+    )
+    Future.successful(result)
+  }
 
 }

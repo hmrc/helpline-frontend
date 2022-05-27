@@ -18,12 +18,11 @@ package uk.gov.hmrc.helplinefrontend.models.form
 
 import play.api.data.Form
 import play.api.data.Forms.{nonEmptyText, single}
-import uk.gov.hmrc.helplinefrontend.models.form.Mappings.oneOfConstraint
 
-object HelplinesByServiceForm {
+object HelplinesByServiceSearchForm {
 
-  def helplinesByServiceForm(callOptionsList: Map[String,String]): Form[String] = {
+  def helplinesByServiceSearchForm(callOptionsList: Map[String,String]): Form[String] = {
     Form(
-      single("selected-call-option" -> nonEmptyText))
+      single("service" -> nonEmptyText))
   }
 }
