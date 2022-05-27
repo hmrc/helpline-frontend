@@ -1,0 +1,23 @@
+@*
+ * Copyright 2021 HM Revenue & Customs
+ *
+ *@
+
+@this(govukSummaryList: GovukSummaryList)
+
+@(
+    rows: Seq[SummaryRowData],
+    classes: String = "" //eg govuk-summary-list--no-border for no border
+)(implicit msgs: Messages)
+
+@govukSummaryList(
+    SummaryList(
+        rows = rows.map(rowData =>
+            SummaryListRow(
+                key = Key(content = HtmlContent(msgs(rowData.key))),
+                value = Value(content = HtmlContent(msgs(rowData.value)))
+            )
+        ), classes = classes
+    )
+)
+

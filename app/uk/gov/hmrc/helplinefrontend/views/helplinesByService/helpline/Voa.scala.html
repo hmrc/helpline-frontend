@@ -16,9 +16,10 @@
 
 @import uk.gov.hmrc.helplinefrontend.config.AppConfig
 @import uk.gov.hmrc.helplinefrontend.views.html.Layout
-@import uk.gov.hmrc.helplinefrontend.views.html.components.{Paragraph, H1, H2, preH1}
+@import uk.gov.hmrc.helplinefrontend.views.html.components.{Paragraph, H1, H2, preH1, SummaryList}
 @import uk.gov.hmrc.helplinefrontend.controllers.routes
 @import java.net.URLDecoder
+@import uk.gov.hmrc.helplinefrontend.models.ui.{SummaryRowData => Row}
 
 @this(
         layout: Layout,
@@ -29,9 +30,9 @@
 
 @(heading: String)(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
 
-@layout(pageTitle = s"${messages("vat.query.heading")} ${messages("title.suffix")}") {
+@layout(pageTitle = s"${messages("helplines-search.voa.h1")} ${messages("title.suffix")}") {
     @preHeading(messages(heading))
-    @h1(messages("vat.query.heading"))
+    @h1(messages("helplines-search.voa.h1"))
 
     @h2(messages("default.title"), Some("govuk-body-l govuk-!-font-weight-bold"))
     @p(messages("vat.query.p1"))
