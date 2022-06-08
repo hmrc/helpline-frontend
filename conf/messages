@@ -171,7 +171,7 @@ helplines-search.non-taxable-trust-registration=Contact the Online Services help
 helplines-search.notification-of-vehicle-arrivals-nova=Contact the VAT helpline to recover your sign in details for NOVA.
 helplines-search.other-business-taxes-duties-and-schemes=Contact the VAT helpline to recover your sign in details for other business taxes, duties and schemes.
 helplines-search.paye-for-employers=Contact the Online Services helpdesk to recover your sign in details for PAYE for employers.
-helplines-search.pension-schemes-online-service=Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vehicula mi nec urna varius, ac mollis purus vulputate. Etiam sit amet est sit amet felis ornare consectetur ac ac libero.
+helplines-search.pension-schemes-online-service=Contact the Pension schemes helpline to recover your sign in details for pension schemes online services.
 helplines-search.pension-schemes-for-administrators=Contact the Pension schemes helpline to recover your sign in details for pension schemes for administrators.
 helplines-search.pension-schemes-for-practitioners=Contact the Pension schemes helpline to recover your sign in details for pension schemes for practitioners.
 helplines-search.plastic-packaging-tax=Contact the Online Services helpdesk to recover your sign in details for Plastic Packaging Tax.
@@ -229,11 +229,11 @@ helplines-search.charities.int=+44 161 930 8445
 helplines-search.charities.times=Monday to Friday: 8am to 6pm<br>Closed weekends and bank holidays.
 
 helplines-search.pensions.h1=Call the pensions helpline
-helplines-search.pensions.tel=0800 731 7898
-helplines-search.pensions.textphone=0800 731 7339
+helplines-search.pensions.tel=0300 123 1079
+helplines-search.pensions.int=+44 300 123 1079
 helplines-search.pensions.times=Monday to Friday: 8am to 6pm<br>Closed weekends and bank holidays.
 
 helplines-search.voa.h1=Call the Valuation Office Agency helpline
-helplines-search.voa.tel=0300 200 3600
-helplines-search.voa.int=+44 161 930 8445
+helplines-search.voa.tel=0300 050 1501
+helplines-search.voa.int=+44 300 050 1501
 helplines-search.voa.times=Monday to Friday: 8am to 6pm<br>Closed weekends and bank holidays.
