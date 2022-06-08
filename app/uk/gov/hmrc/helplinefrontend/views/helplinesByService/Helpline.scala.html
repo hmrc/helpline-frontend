@@ -1,0 +1,51 @@
+@*
+* Copyright 2021 HM Revenue & Customs
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*@
+
+@import uk.gov.hmrc.helplinefrontend.config.AppConfig
+@import uk.gov.hmrc.helplinefrontend.views.html.Layout
+@import uk.gov.hmrc.helplinefrontend.views.html.components.{Paragraph, H1, H2, preH1, SummaryList, InsetText}
+@import uk.gov.hmrc.helplinefrontend.models.ui.{SummaryRowData => Row}
+@import scala.collection.mutable.ListBuffer
+
+@this(
+        layout: Layout,
+        p: Paragraph,
+        preHeading: preH1,
+        h1: H1,
+        h2: H2,
+        summaryList: SummaryList,
+        insetText: InsetText)
+
+
+@(heading: String, helpdesk: String)(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
+
+@rows = @{
+    val rws = ListBuffer[Row]()
+    rws.append(Row(key = "helplines-search.telephone", value = s"helplines-search.${helpdesk}.tel"))
+    rws.append(Row(key = "helplines-search.outside-uk", value = s"helplines-search.${helpdesk}.int"))
+    rws.append(Row(key = "helplines-search.opening-times", value = s"helplines-search.${helpdesk}.times"))
+    rws
+}
+
+@layout(pageTitle = s"${messages(s"helplines-search.vat.h1")} ${messages("title.suffix")}") {
+    @preHeading(heading.replaceAll("_", " "))
+    @h1(messages(s"helplines-search.${helpdesk}.h1"))
+    @summaryList(rows = rows, classes = "govuk-summary-list--no-border")
+    @p("helplines-search.more-contact-details", Some("https://www.tax.service.gov.uk/ask-hmrc/webchat/corporation-tax-enquiries"))
+    @insetText(html = Html(messages("helplines-search.additional-needs", Some("https://www.gov.uk/dealing-hmrc-additional-needs/overview"))))
+    @p("helplines-search.call-charges", Some("https://www.gov.uk/call-charges"))
+}
+

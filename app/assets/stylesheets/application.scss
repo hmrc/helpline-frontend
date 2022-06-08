@@ -17,13 +17,62 @@
 }
 
 .hmrc-language-select__list-item {
-  &:first-child{
+  &:first-child {
     border-right: 0.09375em solid black;
     line-height: 0.9em;
     padding-right: 0.22em;
   }
+
   &:first-child::after {
-      display:none;
-    }
+    display: none;
+  }
 }
 
+.button-search-inline {
+  border: 0;
+  cursor: pointer;
+  border-radius: 0;
+  position: relative;
+  padding: 0;
+  width: 39px;
+  height: 39px;
+  background-image: url("../images/search-button.png");
+  background-repeat: no-repeat;
+  text-indent: -5000px;
+  overflow: hidden;
+  background-color: #1d70b8;
+  color: #fff;
+  background-size: 52.5px auto;
+  background-position: 115% 50%;
+}
+
+@media (max-width: 640px){
+
+  .button-search-inline {
+    width: 34px;
+    height: 34px;
+    background-position: 100% 50%;
+  }
+}
+
+.autocomplete-container > div {
+  width: 100%;
+}
+
+.autocomplete__option {
+  font-family: GDS Transport,arial,sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.25;
+  color: #0b0c0c;
+  display: block;
+}
+
+.row:after {
+  content: "";
+  display: block;
+  clear: both;
+}

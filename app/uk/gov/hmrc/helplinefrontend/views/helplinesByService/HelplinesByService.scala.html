@@ -1,0 +1,82 @@
+@import uk.gov.hmrc.helplinefrontend.config.AppConfig
+@import uk.gov.hmrc.helplinefrontend.views.html.Layout
+@import uk.gov.hmrc.helplinefrontend.controllers.routes
+@import uk.gov.hmrc.govukfrontend.views.Aliases.Text
+@import uk.gov.hmrc.helplinefrontend.views.html.components._
+@import views.html.helper.CSPNonce
+
+
+@this(
+        layout: Layout,
+        formWithCsrf: FormWithCSRF,
+        h1: H1,
+        h2: H2,
+        p: Paragraph
+)
+
+@(HelplinesByServiceForm: Form[String])(implicit request: Request[_], msgs: Messages, appConfig: AppConfig)
+
+@layout(pageTitle = s"${msgs("helplines-search.h1")} ${msgs("title.suffix")}", fullWidth = true) {
+    <link href="/helpline/assets/stylesheets/accessible-autocomplete.min.css" media="all" rel="stylesheet" type="text/css" />
+    <div class="row">
+        <div class="govuk-grid-column-two-thirds">
+            @h1(msgs("helplines-search.h1"), Some("govuk-heading-l"))
+            @p(msgs("helplines-search.p"))
+            @h2(msgs("helplines-search.h2"), Some("govuk-body govuk-!-font-weight-bold"))
+        </div>
+    </div>
+    <div class="row">
+        <div class="govuk-grid-column-one-third">
+            <!-- Autocomplete -->
+            @formWithCsrf(routes.CallHelpdeskController.helpLinesByServiceServicePage()) {
+                <div class="govuk-form-group">
+                    <label class="govuk-label" for="helpline-service">
+                        Search
+                    </label>
+                    <div class="govuk-input__wrapper govuk-!-width-full autocomplete-container">
+                        <select id="helpline-service" class="govuk-!-width-full govuk-select" name="service">
+                            <option value="">@msgs(s"helplines-search.default.select")</option>
+                            @for(question <- appConfig.helplinesByService) {
+                                <option value="@question._1">@question._1</option>
+                            }
+                        </select>
+                        <button class="button-search-inline" type="submit">Search</button>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="govuk-grid-column-two-thirds">
+        @formWithCsrf(routes.CallHelpdeskController.submitHelplinesByServicePage()) {
+            <table class="govuk-table">
+                <thead class="govuk-table__head">
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">@appConfig.helplinesByService.size @msgs(s"helplines-search.contacts")</th>
+                    </tr>
+                </thead>
+                <tbody class="govuk-table__body">
+                @for(question <- appConfig.helplinesByService) {
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell">
+                            <ul class="govuk-list">
+                                <li class="govuk-body-l govuk-!-font-weight-bold"><a class="govuk-link govuk-link--no-underline" href="/helpline/helplines-by-service/@question._2?heading=@question._1.replaceAll(" ", "_")">@question._1</a></li>
+                                <li><p class="govuk-body">@msgs(s"helplines-search.${question._1.toLowerCase().replaceAll(" ", "-").replaceAll("\\(", "").replaceAll("\\)", "")}")</p></li>
+                            </ul>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        }
+        </div>
+    </div>
+    <script @{CSPNonce.attr} src="/helpline/assets/javascript/accessible-autocomplete.min.js"></script>
+    <script @{CSPNonce.attr}>
+            accessibleAutocomplete.enhanceSelectElement({
+                autoselect: true,
+                confirmOnBlur: true,
+                defaultValue: "",
+                minLength: 2,
+                selectElement: document.querySelector("#helpline-service")
+            })
+    </script>
+}

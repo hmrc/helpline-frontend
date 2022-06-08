@@ -31,6 +31,7 @@ import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.helplinefrontend.monitoring.EventDispatcher
 import uk.gov.hmrc.helplinefrontend.monitoring.analytics._
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
+import uk.gov.hmrc.helplinefrontend.views.html.helplinesByService.{Helpline, HelplinesByService}
 import uk.gov.hmrc.http.{HeaderCarrier, HttpClient}
 import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
 
@@ -66,6 +67,9 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   val callOptionsNoAnswers: CallOptionsNoAnswers = app.injector.instanceOf[CallOptionsNoAnswers]
   val whichServiceAccess: WhichServiceAccess = app.injector.instanceOf[WhichServiceAccess]
   val whichServiceAccessOther: WhichServiceAccessOther = app.injector.instanceOf[WhichServiceAccessOther]
+  val helplinesByService: HelplinesByService = app.injector.instanceOf[HelplinesByService]
+  val helpline: Helpline = app.injector.instanceOf[Helpline]
+
   val ec: ExecutionContext =  app.injector.instanceOf[ExecutionContext]
 
   val gaClientId = "GA1.1.283183975.1456746121"
@@ -111,6 +115,8 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
                                  callOptionsOrganisationNoAnswers,
                                  whichServiceAccess,
                                  whichServiceAccessOther,
+                                 helplinesByService,
+                                 helpline,
                                  eventDispatcher,
                                  ec)
 
@@ -130,6 +136,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   val seissHelpKey: String = "SEISS"
   val vatHelpKey: String = "VAT"
   val defaultHelpKey: String = "GENERAL-ENQUIRIES"
+  val secondaryHeading: String = "Capital Gains Tax"
 
   "CallHelpdeskController get deceased help page" should {
     "return deceased help page if the help key is 'deceased' but there is no go back url" in {
@@ -214,7 +221,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       val controller: CallHelpdeskController =
         new CallHelpdeskController()(authConnector, customiseAppConfig, messagesCC, contactUsDeceased, childBenefit, incomeTaxPaye, nationalInsurance,
           selfAssessment, statePension, taxCredits, seiss, generalEnquiries, generalEnquiriesOrganisation, corporationTax, machineGamingDuty,
-          payeForEmployers, selfAssessmentOrganisation, vat, callOptionsNoAnswers, callOptionsOrganisationNoAnswers, whichServiceAccess, whichServiceAccessOther, eventDispatcher, ec)
+          payeForEmployers, selfAssessmentOrganisation, vat, callOptionsNoAnswers, callOptionsOrganisationNoAnswers, whichServiceAccess, whichServiceAccessOther, helplinesByService, helpline, eventDispatcher, ec)
 
       val result: Future[Result] = controller.getHelpdeskPage(nationalInsuranceHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
@@ -479,6 +486,45 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
         analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
           Event("sos_iv", "more_info", "contact_other", expectedDimensions)))
       }
+    }
+  }
+
+  "CallHelpdeskController get helplines by service" should {
+
+    "return search page" in {
+      val result: Future[Result] = controller.helpLinesByServicePage()(fakeRequest)
+      status(result) shouldBe Status.OK
+      contentAsString(result).contains("Which service are you trying to access?") shouldBe true
+    }
+
+    "return charities page" in {
+      val result: Future[Result] = controller.helpLinesByServiceCharitiesPage(secondaryHeading)(fakeRequest)
+      status(result) shouldBe Status.OK
+      contentAsString(result).contains("Call the Charities helpline") shouldBe true
+    }
+
+    "return OSH page" in {
+      val result: Future[Result] = controller.helpLinesByServiceOshPage(secondaryHeading)(fakeRequest)
+      status(result) shouldBe Status.OK
+      contentAsString(result).contains("Call the online services helpline") shouldBe true
+    }
+
+    "return Pensions page" in {
+      val result: Future[Result] = controller.helpLinesByServicePensionsPage(secondaryHeading)(fakeRequest)
+      status(result) shouldBe Status.OK
+      contentAsString(result).contains("Call the pensions helpline") shouldBe true
+    }
+
+    "return VOA page" in {
+      val result: Future[Result] = controller.helpLinesByServiceVoaPage(secondaryHeading)(fakeRequest)
+      status(result) shouldBe Status.OK
+      contentAsString(result).contains("Call the Valuation Office Agency helpline") shouldBe true
+    }
+
+    "return VAT page" in {
+      val result: Future[Result] = controller.helpLinesByServiceVatPage(secondaryHeading)(fakeRequest)
+      status(result) shouldBe Status.OK
+      contentAsString(result).contains("Call the VAT helpline") shouldBe true
     }
   }
 }

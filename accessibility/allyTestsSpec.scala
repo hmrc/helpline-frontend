@@ -31,6 +31,7 @@ import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.helplinefrontend.monitoring.EventDispatcher
 import uk.gov.hmrc.helplinefrontend.monitoring.analytics._
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
+import uk.gov.hmrc.helplinefrontend.views.html.helplinesByService.{Helpline, HelplinesByService}
 import uk.gov.hmrc.http.{HeaderCarrier, HttpClient}
 import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
 import uk.gov.hmrc.scalatestaccessibilitylinter.AccessibilityMatchers
@@ -67,6 +68,8 @@ class allyTestsSpec extends AnyWordSpec with Matchers with GuiceOneAppPerSuite w
   val callOptionsNoAnswers: CallOptionsNoAnswers = app.injector.instanceOf[CallOptionsNoAnswers]
   val whichServiceAccess: WhichServiceAccess = app.injector.instanceOf[WhichServiceAccess]
   val whichServiceAccessOther: WhichServiceAccessOther = app.injector.instanceOf[WhichServiceAccessOther]
+  val helplinesByService: HelplinesByService = app.injector.instanceOf[HelplinesByService]
+  val helpline: Helpline = app.injector.instanceOf[Helpline]
   val ec: ExecutionContext =  app.injector.instanceOf[ExecutionContext]
 
   val gaClientId = "GA1.1.283183975.1456746121"
@@ -112,6 +115,8 @@ class allyTestsSpec extends AnyWordSpec with Matchers with GuiceOneAppPerSuite w
                                  callOptionsOrganisationNoAnswers,
                                  whichServiceAccess,
                                  whichServiceAccessOther,
+                                 helplinesByService,
+                                 helpline,
                                  eventDispatcher,
                                  ec)
 
@@ -139,6 +144,16 @@ class allyTestsSpec extends AnyWordSpec with Matchers with GuiceOneAppPerSuite w
       status(result) shouldBe Status.OK
       contentAsString(result) should passAccessibilityChecks
       }
+
+  }
+
+  "CallHelpdeskController get helplines by service page" should {
+
+    "pass accessibility checks" in {
+      val result: Future[Result] = controller.helpLinesByServicePage()(fakeRequest)
+      status(result) shouldBe Status.OK
+      contentAsString(result) should passAccessibilityChecks
+    }
 
   }
 }

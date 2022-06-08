@@ -120,3 +120,120 @@ contact_us.deceased.contact_hours.text2=This is due to having fewer advisers ava
 contact_us.deceased.getHelp=Get help <a href="{0}">dealing with HMRC if you have additional needs</a>
 contact_us.deceased.callCharges=<a href="{0}">Find out about call charges</a>
 
+helplines-search.h1=Which service are you trying to access?
+helplines-search.p=You cannot recover your sign in details until we have verified your email address. For security reasons you need to call an HMRC helpline.
+helplines-search.h2=Find an HMRC helpline
+helplines-search.contacts=contacts
+
+helplines-search.advance-tariff-ruling=Contact the VAT helpline to recover your sign in details for Advance Tariff Ruling.
+helplines-search.aggregate-levy=Contact the VAT helpline to recover your sign in details for Aggregate Levy.
+helplines-search.air-passenger-duty=Contact the VAT helpline to recover your sign in details for Alcohol Wholesaler Registration Scheme.
+helplines-search.alcohol-and-tobacco-warehousing-declarations=Contact the VAT helpline to recover your sign in details for Alcohol and Tobacco Warehousing Declarations.
+helplines-search.alcoholic-ingredients-relief=Contact the VAT helpline to recover your sign in details for Alcoholic Ingredients Relief.
+helplines-search.alcohol-wholesaler-registration-scheme=Contact the VAT helpline to recover your sign in details for Alcohol Wholesaler Registration Scheme.
+helplines-search.annual-tax-on-enveloped-dwellings=Contact the Online Services helpdesk to recover your sign in details for Annual Tax on Enveloped Dwellings.
+helplines-search.anti-money-laundering-registration=Contact the VAT helpline to recover your sign in details for anti-money laundering registration.
+helplines-search.automatic-exchange-of-information=Contact the Online Services helpdesk to recover your sign in details for Automatic Exchange of Information.
+helplines-search.bingo-duty=Contact the VAT helpline to recover your sign in details for Bingo Duty.
+helplines-search.biodiesel-and-fuels-production-duty=Contact the VAT helpline to recover your sign in details for Biodiesel and Fuels Production Duty.
+helplines-search.capital-gains-tax=Contact the Online Services helpdesk to recover your sign in details for Capital Gains Tax.
+helplines-search.change-vat-registration-details=Contact the VAT helpline to recover your sign in details for Change VAT registration details.
+helplines-search.charities-and-community-amateur-sports-clubs=Contact the Charities helpline to recover your sign in details for Charities and Community Amateur Sports Clubs.
+helplines-search.child-trust-fund=Contact the Online Services helpdesk to recover your sign in details for the Child Trust Fund.
+helplines-search.claims-for-refund-of-vat-by-certain-bodies=Contact the VAT helpline to recover your sign in details for Claims for Refund of VAT by Certain Bodies.
+helplines-search.construction-industry-scheme-cis=Contact the Online Services helpdesk to recover your sign in details for CIS.
+helplines-search.corporation-tax=Contact the Online Services helpdesk to recover your sign in details for Corporation Tax.
+helplines-search.country-by-country-reporting=Contact the Online Services helpdesk to recover your sign in details for country by country reporting.
+helplines-search.cross-border-arrangement=Contact the Online Services helpdesk to recover your sign in details for cross-border arrangement.
+helplines-search.customs-declaration-service=Contact the VAT helpline to recover your sign in details for Customs Declaration Service.
+helplines-search.customs-trader-services-cts=Contact the VAT helpline to recover your sign in details for CTS.
+helplines-search.digital-services-tax=Contact the VAT helpline to recover your sign in details for Digital Services Tax.
+helplines-search.duty-deferment-electronic-statements=Contact the VAT helpline to recover your sign in details for Duty Deferment Electronic Statements.
+helplines-search.electronic-binding-tariff-information=Contact the VAT helpline to recover your sign in details for Electronic Binding Tariff Information.
+helplines-search.excise-movement-and-control-system=Contact the VAT helpline to recover your sign in details for Excise Movement and Control System.
+helplines-search.fuels-duty=Contact the VAT helpline to recover your sign in details for Fuels Duty.
+helplines-search.fulfilment-house-due-diligence-scheme=Contact the VAT helpline to recover your sign in details for Fulfilment House Due Diligence Scheme .
+helplines-search.gaming-duty=Contact the VAT helpline to recover your sign in details for Gaming Duty.
+helplines-search.gas-for-use-as-road-fuel-duty=Contact the VAT helpline to recover your sign in details for Gas for use as Road Fuel Duty.
+helplines-search.general-betting-duty=Contact the VAT helpline to recover your sign in details for General Betting Duty.
+helplines-search.goods-vehicle-movement-service=Contact the Online Services helpdesk to recover your sign in details for Goods Vehicle Movement Service.
+helplines-search.import-control-system-ics=Contact the VAT helpline to recover your sign in details for ICS.
+helplines-search.insurance-premium-tax=Contact the VAT helpline to recover your sign in details for Insurance Premium Tax.
+helplines-search.landfill-tax=Contact the VAT helpline to recover your sign in details for Landfill Tax.
+helplines-search.lifetime-isa=Contact the Online Services helpdesk to recover your sign in details for Lifetime ISA.
+helplines-search.lottery-duty=Contact the VAT helpline to recover your sign in details for Lottery Duty.
+helplines-search.machine-games-duty=Contact the VAT helpline to recover your sign in details for Machine Games Duty.
+helplines-search.making-tax-digital-for-income-tax=Contact the Online Services helpdesk to recover your sign in details for Making Tax Digital for Income Tax.
+helplines-search.making-tax-digital-for-vat=Contact the VAT helpline to recover your sign in details for Making Tax Digital for VAT.
+helplines-search.new-computerised-transit-system=Contact the VAT helpline to recover your sign in details for New Computerised Transit System.
+helplines-search.new-export-system-nes=Contact the VAT helpline to recover your sign in details for NES.
+helplines-search.non-taxable-trust-registration=Contact the Online Services helpdesk to recover your sign in details for non-taxable trust registration.
+helplines-search.notification-of-vehicle-arrivals-nova=Contact the VAT helpline to recover your sign in details for NOVA.
+helplines-search.other-business-taxes-duties-and-schemes=Contact the VAT helpline to recover your sign in details for other business taxes, duties and schemes.
+helplines-search.paye-for-employers=Contact the Online Services helpdesk to recover your sign in details for PAYE for employers.
+helplines-search.pension-schemes-online-service=Contact the Pension schemes helpline to recover your sign in details for pension schemes online services.
+helplines-search.pension-schemes-for-administrators=Contact the Pension schemes helpline to recover your sign in details for pension schemes for administrators.
+helplines-search.pension-schemes-for-practitioners=Contact the Pension schemes helpline to recover your sign in details for pension schemes for practitioners.
+helplines-search.plastic-packaging-tax=Contact the Online Services helpdesk to recover your sign in details for Plastic Packaging Tax.
+helplines-search.pool-betting-duty=Contact the VAT helpline to recover your sign in details for Pool Betting Duty.
+helplines-search.qualifying-recognised-overseas-pension-scheme-qrops=Contact the Online Services helpdesk to recover your sign in details for QROPS.
+helplines-search.rebated-oils-enquiry-service=Contact the VAT helpline to recover your sign in details for Rebated Oils Enquiry Service.
+helplines-search.remote-gambling-duty=Contact the VAT helpline to recover your sign in details for Remote Gambling Duty.
+helplines-search.report-pay-import-vat-ni=Contact the VAT helpline to recover your sign in details for report & pay import VAT (NI).
+helplines-search.report-pay-import-vat-tsp=Contact the VAT helpline to recover your sign in details for report & pay import VAT (TSP).
+helplines-search.safety-and-security=Contact the VAT helpline to recover your sign in details for safety and security.
+helplines-search.self-assessment=Contact the Online Services helpdesk to recover your sign in details for Self Assessment.
+helplines-search.self-assessment-online-for-partnerships=Contact the Online Services helpdesk to recover your sign in details for Self Assessment Online for Partnerships.
+helplines-search.self-assessment-online-for-trusts=Contact the Online Services helpdesk to recover your sign in details for Self Assessment Online for Trusts.
+helplines-search.secure-electronic-transfer-set=Contact the VAT helpline to recover your sign in details for SET.
+helplines-search.shared-workspace=Contact the Online Services helpdesk to recover your sign in details for Shared Workspace.
+helplines-search.soft-drinks-industry-levy=Contact the VAT helpline to recover your sign in details for Soft Drinks Industry Levy.
+helplines-search.stamp-duty-land-tax-for-organisations=Contact the Online Services helpdesk to recover your sign in details for Stamp Duty Land Tax for Organisations.
+helplines-search.employment-intermediary-report=Contact the Online Services helpdesk to recover your sign in details for employment intermediary report.
+helplines-search.vat-returns=Contact the VAT helpline to recover your sign in details for VAT Returns.
+helplines-search.tailored-support-programme=Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vehicula mi nec urna varius, ac mollis purus vulputate. Etiam sit amet est sit amet felis ornare consectetur ac ac libero.
+helplines-search.imports-from-ireland=Contact the VAT helpline to recover your sign in details for Imports for Ireland.
+helplines-search.tied-oils-enquiry-service=Contact the VAT helpline to recover your sign in details for Tied Oils Enquiry Service.
+helplines-search.trust-registration-service=Contact the Online Services helpdesk to recover your sign in details for the trust registration service.
+helplines-search.vat-ec-sales-list-ecsl=Contact the VAT helpline to recover your sign in details for ECSL.
+helplines-search.vat-eu-refunds=Contact the VAT helpline to recover your sign in details for VAT EU Refunds.
+helplines-search.vat-for-government-and-nhs=Contact the VAT helpline to recover your sign in details for VAT for Government and NHS.
+helplines-search.vat-mini-one-stop-shop---for-businesses-based-in-the-uk-and-eu=Contact the VAT helpline to recover your sign in details for VAT Mini One Stop Shop.
+helplines-search.vat-mini-one-stop-shop---for-businesses-based-outside-the-uk-and-eu=Contact the VAT helpline to recover your sign in details for VAT Mini One Stop Shop.
+helplines-search.vat-reverse-charge-sales-list-rcsl=Contact the VAT helpline to recover your sign in details for RCSL.
+helplines-search.voa-check-and-challenge-your-business-rates-valuation=Contact the Valuation Office Agency (VOA) helpline to recover your sign in details for VOA check and challenge your business rates valuation.
+
+helplines-search.default.select=Select a service
+helplines-search.telephone=Telephone:
+helplines-search.opening-times=Opening times:
+helplines-search.textphone=Textphone:
+helplines-search.outside-uk=Outside UK:
+helplines-search.closed=Closed weekends and bank holidays.
+helplines-search.more-contact-details=<a href={0} class="govuk-link">More contact details (including webchat)</a>
+helplines-search.additional-needs=Get help <a href={0} class="govuk-link">dealing with HMRC if you have additional needs</a>.
+helplines-search.call-charges=<a href={0} class="govuk-link">Find out about call charges</a>
+
+helplines-search.vat.h1=Call the VAT helpline
+helplines-search.vat.tel=0300 200 3701
+helplines-search.vat.int=+44 161 930 8445
+helplines-search.vat.times=Monday to Friday: 8am to 6pm
+
+helplines-search.osh.h1=Call the online services helpline
+helplines-search.osh.tel=0300 200 3600
+helplines-search.osh.int=+44 161 930 8445
+helplines-search.osh.times=Monday to Friday: 8am to 6pm<br>Closed weekends and bank holidays.
+
+helplines-search.charities.h1=Call the Charities helpline
+helplines-search.charities.tel=0300 123 1073
+helplines-search.charities.int=+44 161 930 8445
+helplines-search.charities.times=Monday to Friday: 8am to 6pm<br>Closed weekends and bank holidays.
+
+helplines-search.pensions.h1=Call the pensions helpline
+helplines-search.pensions.tel=0300 123 1079
+helplines-search.pensions.int=+44 300 123 1079
+helplines-search.pensions.times=Monday to Friday: 8am to 6pm<br>Closed weekends and bank holidays.
+
+helplines-search.voa.h1=Call the Valuation Office Agency helpline
+helplines-search.voa.tel=0300 050 1501
+helplines-search.voa.int=+44 300 050 1501
+helplines-search.voa.times=Monday to Friday: 8am to 6pm<br>Closed weekends and bank holidays.

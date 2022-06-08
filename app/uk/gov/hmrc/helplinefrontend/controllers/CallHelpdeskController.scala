@@ -22,9 +22,10 @@ import uk.gov.hmrc.auth.core.{AuthConnector, AuthorisedFunctions}
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.helplinefrontend.models.CallOption._
 import uk.gov.hmrc.helplinefrontend.models._
-import uk.gov.hmrc.helplinefrontend.models.form.{CallOptionForm, CallOptionOrganisationForm}
+import uk.gov.hmrc.helplinefrontend.models.form.{CallOptionForm, CallOptionOrganisationForm, HelplinesByServiceForm, HelplinesByServiceSearchForm}
 import uk.gov.hmrc.helplinefrontend.monitoring._
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
+import uk.gov.hmrc.helplinefrontend.views.html.helplinesByService.{HelplinesByService, Helpline}
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
@@ -55,6 +56,8 @@ class CallHelpdeskController @Inject()(implicit
                                        callOptionsOrganisationNoAnswers: CallOptionsOrganisationNoAnswers,
                                        whichServiceAccess: WhichServiceAccess,
                                        whichServiceAccessOther: WhichServiceAccessOther,
+                                       helplinesByService: HelplinesByService,
+                                       helpline: Helpline,
                                        val eventDispatcher: EventDispatcher,
                                        ec: ExecutionContext)
   extends FrontendController(mcc) with Logging with AuthorisedFunctions {
@@ -184,6 +187,57 @@ class CallHelpdeskController @Inject()(implicit
       value => {
         eventDispatcher.dispatchEvent(ContactType(appConfig.standaloneOrganisationAndGAEventMapper(value)))
         Redirect(routes.CallHelpdeskController.getHelpdeskOrganisationPage(value, Some(routes.CallHelpdeskController.whichServiceAccessOtherPage().url)))
+      }
+    )
+    Future.successful(result)
+  }
+
+  def helpLinesByServicePage(): Action[AnyContent] = Action.async { implicit request =>
+      Future.successful(Ok(helplinesByService(HelplinesByServiceForm.helplinesByServiceForm(appConfig.helplinesByService))))
+  }
+
+  def submitHelplinesByServicePage(): Action[AnyContent] = Action.async { implicit request =>
+      Future.successful(Ok(helplinesByService(HelplinesByServiceForm.helplinesByServiceForm(appConfig.helplinesByService))))
+  }
+
+  def helpLinesByServiceCharitiesPage(heading: String): Action[AnyContent] = Action { implicit request =>
+    Ok(helpline(heading, "charities"))
+  }
+
+  def helpLinesByServiceOshPage(heading: String): Action[AnyContent] = Action { implicit request =>
+    Ok(helpline(heading, "osh"))
+  }
+
+  def helpLinesByServicePensionsPage(heading: String): Action[AnyContent] = Action { implicit request =>
+    Ok(helpline(heading, "pensions"))
+  }
+
+  def helpLinesByServiceVatPage(heading: String): Action[AnyContent] = Action { implicit request =>
+    Ok(helpline(heading, "vat"))
+  }
+
+  def helpLinesByServiceVoaPage(heading: String): Action[AnyContent] = Action { implicit request =>
+    Ok(helpline(heading, "voa"))
+  }
+
+  def helpLinesByServiceServicePage(): Action[AnyContent] = Action.async { implicit request =>
+    val result = HelplinesByServiceSearchForm.helplinesByServiceSearchForm(appConfig.helplinesByService).bindFromRequest.fold(
+      errors ⇒ BadRequest(helplinesByService(errors)),
+      value => {
+          var helpdesk : String = ""
+          for(question <- appConfig.helplinesByService) {
+            if(question._1 == value){
+              helpdesk = question._2
+            }
+          }
+          helpdesk match {
+            case "vat" =>         Redirect(routes.CallHelpdeskController.helpLinesByServiceVatPage(value))
+            case "osh" =>         Redirect(routes.CallHelpdeskController.helpLinesByServiceOshPage(value))
+            case "charities" =>   Redirect(routes.CallHelpdeskController.helpLinesByServiceCharitiesPage(value))
+            case "pensions" =>    Redirect(routes.CallHelpdeskController.helpLinesByServicePensionsPage(value))
+            case "voa" =>         Redirect(routes.CallHelpdeskController.helpLinesByServiceVoaPage(value))
+            case _ =>             Redirect(routes.CallHelpdeskController.helpLinesByServiceOshPage(value))
+          }
       }
     )
     Future.successful(result)
