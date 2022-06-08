@@ -146,4 +146,14 @@ class allyTestsSpec extends AnyWordSpec with Matchers with GuiceOneAppPerSuite w
       }
 
   }
+
+  "CallHelpdeskController get helplines by service page" should {
+
+    "pass accessibility checks" in {
+      val result: Future[Result] = controller.helpLinesByServicePage()(fakeRequest)
+      status(result) shouldBe Status.OK
+      contentAsString(result) should passAccessibilityChecks
+    }
+
+  }
 }

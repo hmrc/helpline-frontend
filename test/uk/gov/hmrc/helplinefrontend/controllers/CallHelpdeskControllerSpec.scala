@@ -490,6 +490,13 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   }
 
   "CallHelpdeskController get helplines by service" should {
+
+    "return search page" in {
+      val result: Future[Result] = controller.helpLinesByServicePage()(fakeRequest)
+      status(result) shouldBe Status.OK
+      contentAsString(result).contains("Which service are you trying to access?") shouldBe true
+    }
+
     "return charities page" in {
       val result: Future[Result] = controller.helpLinesByServiceCharitiesPage(secondaryHeading)(fakeRequest)
       status(result) shouldBe Status.OK
