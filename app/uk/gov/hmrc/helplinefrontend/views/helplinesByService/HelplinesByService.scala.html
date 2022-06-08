@@ -58,7 +58,7 @@
                     <tr class="govuk-table__row">
                         <td class="govuk-table__cell">
                             <ul class="govuk-list">
-                                <li class="govuk-body-l govuk-!-font-weight-bold"><a class="govuk-link govuk-link--no-underline" href="/helpline/helplines-by-service/@question._2?heading=@question._1">@question._1</a></li>
+                                <li class="govuk-body-l govuk-!-font-weight-bold"><a class="govuk-link govuk-link--no-underline" href="/helpline/helplines-by-service/@question._2?heading=@question._1.replaceAll(" ", "_")">@question._1</a></li>
                                 <li><p class="govuk-body">@msgs(s"helplines-search.${question._1.toLowerCase().replaceAll(" ", "-").replaceAll("\\(", "").replaceAll("\\)", "")}")</p></li>
                             </ul>
                         </td>
