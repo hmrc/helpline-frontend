@@ -44,7 +44,11 @@
     @preHeading(heading.replaceAll("_", " "))
     @h1(messages(s"helplines-search.${helpdesk}.h1"))
     @summaryList(rows = rows, classes = "govuk-summary-list--no-border")
-    @p(messages("helplines-search.more-contact-details", "https://www.tax.service.gov.uk/ask-hmrc/webchat/corporation-tax-enquiries"))
+    @if(helpdesk == "vat" || helpdesk == "charities") {
+        @p(messages("helplines-search.more-contact-details", "https://www.tax.service.gov.uk/ask-hmrc/webchat/service-unavailable"))
+    } else if(helpdesk == "osh") {
+        @p(messages("helplines-search.more-contact-details", "https://www.tax.service.gov.uk/ask-hmrc/chat/online-services-helpdesk"))
+    }
     @insetText(html = Html(messages("helplines-search.additional-needs", "https://www.gov.uk/dealing-hmrc-additional-needs/overview")))
     @p(messages("helplines-search.call-charges", "https://www.gov.uk/call-charges"))
 }
