@@ -37,7 +37,7 @@
                         <select id="helpline-service" class="govuk-!-width-full govuk-select" name="service">
                             <option value="">@msgs(s"helplines-search.default.select")</option>
                             @for(question <- appConfig.helplinesByService) {
-                                <option value="@question._1">@question._1</option>
+                                <option value="@question._1.replaceAll(" ", "_")">@question._1</option>
                             }
                         </select>
                         <button class="button-search-inline" type="submit">Search</button>
