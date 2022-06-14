@@ -152,7 +152,7 @@ helplines-search.duty-deferment-electronic-statements=Contact the VAT helpline t
 helplines-search.electronic-binding-tariff-information=Contact the VAT helpline to recover your sign in details for Electronic Binding Tariff Information.
 helplines-search.excise-movement-and-control-system=Contact the VAT helpline to recover your sign in details for Excise Movement and Control System.
 helplines-search.fuels-duty=Contact the VAT helpline to recover your sign in details for Fuels Duty.
-helplines-search.fulfilment-house-due-diligence-scheme=Contact the VAT helpline to recover your sign in details for Fulfilment House Due Diligence Scheme .
+helplines-search.fulfilment-house-due-diligence-scheme=Contact the VAT helpline to recover your sign in details for Fulfilment House Due Diligence Scheme.
 helplines-search.gaming-duty=Contact the VAT helpline to recover your sign in details for Gaming Duty.
 helplines-search.gas-for-use-as-road-fuel-duty=Contact the VAT helpline to recover your sign in details for Gas for use as Road Fuel Duty.
 helplines-search.general-betting-duty=Contact the VAT helpline to recover your sign in details for General Betting Duty.
@@ -192,7 +192,7 @@ helplines-search.stamp-duty-land-tax-for-organisations=Contact the Online Servic
 helplines-search.employment-intermediary-report=Contact the Online Services helpdesk to recover your sign in details for employment intermediary report.
 helplines-search.vat-returns=Contact the VAT helpline to recover your sign in details for VAT Returns.
 helplines-search.tailored-support-programme=Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vehicula mi nec urna varius, ac mollis purus vulputate. Etiam sit amet est sit amet felis ornare consectetur ac ac libero.
-helplines-search.imports-from-ireland=Contact the VAT helpline to recover your sign in details for Imports for Ireland.
+helplines-search.imports-from-ireland=Contact the VAT helpline to recover your sign in details for Imports from Ireland.
 helplines-search.tied-oils-enquiry-service=Contact the VAT helpline to recover your sign in details for Tied Oils Enquiry Service.
 helplines-search.trust-registration-service=Contact the Online Services helpdesk to recover your sign in details for the trust registration service.
 helplines-search.vat-ec-sales-list-ecsl=Contact the VAT helpline to recover your sign in details for ECSL.
@@ -215,7 +215,7 @@ helplines-search.call-charges=<a href={0} class="govuk-link">Find out about call
 
 helplines-search.vat.h1=Call the VAT helpline
 helplines-search.vat.tel=0300 200 3701
-helplines-search.vat.int=+44 161 930 8445
+helplines-search.vat.int=+44 292 050 1261
 helplines-search.vat.times=Monday to Friday: 8am to 6pm
 
 helplines-search.osh.h1=Call the online services helpline
