@@ -39,6 +39,7 @@ class CallHelpdeskController @Inject()(implicit
                                        mcc: MessagesControllerComponents,
                                        ivDeceased: IVDeceased,
                                        childBenefitPage: ChildBenefit,
+                                       childcareServicePage: ChildcareService,
                                        incomeTaxPayePage: IncomeTaxPaye,
                                        nationalInsurancePage: NationalInsurance,
                                        selfAssessmentPage: SelfAssessment,
@@ -86,6 +87,7 @@ class CallHelpdeskController @Inject()(implicit
         callOption match {
           case Deceased          => ivDeceased(backCall)
           case ChildBenefit      => childBenefitPage(backCall)
+          case ChildcareService  => childcareServicePage(backCall)
           case IncomeTaxPaye     => incomeTaxPayePage(backCall)
           case NationalInsurance => nationalInsurancePage(backCall)
           case SelfAssessment    => selfAssessmentPage(backCall)
