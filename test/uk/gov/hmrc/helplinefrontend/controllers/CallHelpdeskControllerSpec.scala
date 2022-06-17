@@ -177,14 +177,14 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
     "return childcare service help page if the help key is 'CHILDCARE-SERVICE' but there is no go back url" in {
       val result: Future[Result] = controller.getHelpdeskPage(childcareServiceHelpKey, None)(fakeRequest)
       status(result) shouldBe Status.OK
-      contentAsString(result).contains("Childcare Service query") shouldBe true
+      contentAsString(result).contains("Call an HMRC helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe false
     }
 
     "return childcare service help page if the help key is 'CHILDCARE-SERVICE' and there is a go back url" in {
       val result: Future[Result] = controller.getHelpdeskPage(childcareServiceHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
-      contentAsString(result).contains("Childcare Service query") shouldBe true
+      contentAsString(result).contains("Call an HMRC helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
     }
   }

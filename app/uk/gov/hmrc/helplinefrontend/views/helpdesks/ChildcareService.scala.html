@@ -27,7 +27,7 @@
 @layout(pageTitle = s"${messages("childcare-service.query.heading")} ${messages("title.suffix")}", backLinkLocation = back) {
     @h1(messages("childcare-service.query.heading"))
 
-    @h2(messages("default.title"), Some("govuk-body-l govuk-!-font-weight-bold"))
+    @h2(messages("childcare-service.query.h2"), Some("govuk-body-l govuk-!-font-weight-bold"))
     @p(messages("childcare-service.query.p1"))
     @p(messages("childcare-service.query.p2", URLDecoder.decode(routes.RedirectController.contactHelpline("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/childcare-service-helpline", "childcare-service").url, "UTF-8"), Some("govuk-!-margin-bottom-8")))
 
