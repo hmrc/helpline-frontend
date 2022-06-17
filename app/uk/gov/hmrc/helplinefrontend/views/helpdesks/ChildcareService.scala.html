@@ -1,0 +1,39 @@
+@*
+ * Copyright 2021 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import uk.gov.hmrc.helplinefrontend.config.AppConfig
+@import uk.gov.hmrc.helplinefrontend.views.html.Layout
+@import uk.gov.hmrc.helplinefrontend.views.html.components.{Paragraph, H1, H2}
+@import uk.gov.hmrc.helplinefrontend.controllers.routes
+@import java.net.URLDecoder
+
+@this(layout: Layout, p: Paragraph, h1: H1, h2: H2)
+
+@(back: Option[String])(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
+
+@layout(pageTitle = s"${messages("childcare-service.query.heading")} ${messages("title.suffix")}", backLinkLocation = back) {
+    @h1(messages("childcare-service.query.heading"))
+
+    @h2(messages("childcare-service.query.h2"), Some("govuk-body-l govuk-!-font-weight-bold"))
+    @p(messages("childcare-service.query.p1"))
+    @p(messages("childcare-service.query.p2", URLDecoder.decode(routes.RedirectController.contactHelpline("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/childcare-service-helpline", "childcare-service").url, "UTF-8"), Some("govuk-!-margin-bottom-8")))
+
+    @h2(messages("default.need-help.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
+    @p(messages("default.need-help.p1"))
+    @p(messages("default.need-help.p2", URLDecoder.decode(routes.RedirectController.contactHelpdesk("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/online-services-helpdesk").url, "UTF-8"), Some("govuk-!-margin-bottom-8")))
+}
+
+

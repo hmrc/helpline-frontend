@@ -50,6 +50,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   val messagesCC: MessagesControllerComponents = app.injector.instanceOf[MessagesControllerComponents]
   val contactUsDeceased: IVDeceased = app.injector.instanceOf[IVDeceased]
   val childBenefit: ChildBenefit = app.injector.instanceOf[ChildBenefit]
+  val childcareService: ChildcareService = app.injector.instanceOf[ChildcareService]
   val incomeTaxPaye: IncomeTaxPaye = app.injector.instanceOf[IncomeTaxPaye]
   val nationalInsurance: NationalInsurance = app.injector.instanceOf[NationalInsurance]
   val selfAssessment: SelfAssessment = app.injector.instanceOf[SelfAssessment]
@@ -98,6 +99,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
                                  messagesCC,
                                  contactUsDeceased,
                                  childBenefit,
+                                 childcareService,
                                  incomeTaxPaye,
                                  nationalInsurance,
                                  selfAssessment,
@@ -121,6 +123,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
                                  ec)
 
   val childBenefitHelpKey: String = "CHILD-BENEFIT"
+  val childcareServiceHelpKey: String = "CHILDCARE-SERVICE"
   val corporationTaxHelpKey: String = "CORPORATION-TAX"
   val deceasedHelpKey: String = "deceased"
   val incomeTaxPayeHelpKey: String = "INCOME-TAX-PAYE"
@@ -166,6 +169,22 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       val result: Future[Result] = controller.getHelpdeskPage(childBenefitHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Child Benefit query") shouldBe true
+      contentAsString(result).contains("Back") shouldBe true
+    }
+  }
+
+  "CallHelpdeskController get childcare service help page" should {
+    "return childcare service help page if the help key is 'CHILDCARE-SERVICE' but there is no go back url" in {
+      val result: Future[Result] = controller.getHelpdeskPage(childcareServiceHelpKey, None)(fakeRequest)
+      status(result) shouldBe Status.OK
+      contentAsString(result).contains("Call an HMRC helpline") shouldBe true
+      contentAsString(result).contains("Back") shouldBe false
+    }
+
+    "return childcare service help page if the help key is 'CHILDCARE-SERVICE' and there is a go back url" in {
+      val result: Future[Result] = controller.getHelpdeskPage(childcareServiceHelpKey, Some("backURL"))(fakeRequest)
+      status(result) shouldBe Status.OK
+      contentAsString(result).contains("Call an HMRC helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
     }
   }
@@ -219,7 +238,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
     "return National Insurance help page if the help key is 'NATIONAL-INSURANCE' and there is a go back url, but back call is not supported" in {
       val controller: CallHelpdeskController =
-        new CallHelpdeskController()(authConnector, customiseAppConfig, messagesCC, contactUsDeceased, childBenefit, incomeTaxPaye, nationalInsurance,
+        new CallHelpdeskController()(authConnector, customiseAppConfig, messagesCC, contactUsDeceased, childBenefit, childcareService, incomeTaxPaye, nationalInsurance,
           selfAssessment, statePension, taxCredits, seiss, generalEnquiries, generalEnquiriesOrganisation, corporationTax, machineGamingDuty,
           payeForEmployers, selfAssessmentOrganisation, vat, callOptionsNoAnswers, callOptionsOrganisationNoAnswers, whichServiceAccess, whichServiceAccessOther, helplinesByService, helpline, eventDispatcher, ec)
 
