@@ -12,7 +12,7 @@ object AppDependencies {
 
   val test = Seq(
     "com.typesafe.play"       %% "play-test"                % PlayVersion.current  % Test,
-    "uk.gov.hmrc"             %% "bootstrap-test-play-28"   % "5.3.0"              % Test, //  <-- doesn't seem to do anything
+    "uk.gov.hmrc"             %% "bootstrap-test-play-28"   % "5.3.0"              % Test,
     "uk.gov.hmrc"             %% "service-integration-test" % "1.3.0-play-28"      % IntegrationTest,
     "org.jsoup"               %  "jsoup"                    % "1.13.1"             % Test,
     "org.scalamock"           %% "scalamock"                % "5.1.0"              % Test,

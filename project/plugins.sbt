@@ -1,4 +1,3 @@
-resolvers += Resolver.bintrayIvyRepo("hmrc", "sbt-plugin-releases")
 resolvers += Resolver.bintrayRepo("hmrc", "releases")
 resolvers += Resolver.typesafeRepo("releases")
 resolvers += MavenRepository("HMRC-open-artefacts-maven2", "https://open.artefacts.tax.service.gov.uk/maven2")
