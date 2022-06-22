@@ -58,7 +58,7 @@ class SignOutControllerSpec extends AnyWordSpec with Matchers with GuiceOneAppPe
   "SignOut Controller" should {
     "Redirect to logout" in {
 
-      val result: Future[Result]  = controller.signOut().apply(request.withSession(("affinityGroup" -> "Organisation")))
+      val result: Future[Result]  = controller.signOut().apply(request.withSession("affinityGroup" -> "Organisation"))
 
       val expectedRedirectLocation =
         Some("http://localhost:9553/bas-gateway/sign-out-without-state?continue=http%3A%2F%2Flocalhost%3A10102%2Fhelpline%2Fsigned-out&origin=helpline")

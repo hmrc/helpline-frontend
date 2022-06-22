@@ -77,9 +77,9 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   var analyticsRequests = Seq.empty[AnalyticsRequest]
   val request: FakeRequest[AnyContentAsEmpty.type] = FakeRequest()
     .withCookies(Cookie("_ga", gaClientId))
-    .withSession("dimensions" -> """[{"index":2,"value":"ma"},{"index":3,"value":"UpliftNino"},{"index":4,"value":"200-MEO"},{"index":5,"value":"No Enrolments"}]""")
+    .withSession("dimensions" -> """[{"index":2,"value":"ma"},{"index":3,"value":"UpliftNino"},{"index":4,"value":"200-MEO"},{"index":5,"value":"No Enrolments"}]""").withMethod("POST")
 
-  val expectedDimensions = Seq(DimensionValue(2,"ma"), DimensionValue(3,"UpliftNino"), DimensionValue(4,"200-MEO"), DimensionValue(5,"No Enrolments"))
+  val expectedDimensions: Seq[DimensionValue] = Seq(DimensionValue(2,"ma"), DimensionValue(3,"UpliftNino"), DimensionValue(4,"200-MEO"), DimensionValue(5,"No Enrolments"))
   val httpClient: HttpClient = app.injector.instanceOf[HttpClient]
 
   object TestConnector extends AnalyticsConnector(appConfig, httpClient) {
