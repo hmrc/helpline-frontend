@@ -46,7 +46,7 @@ child-benefit.query.p2=Mae ffyrdd eraill o <a class="govuk-link" href="{0}">gysy
 
 childcare-service.query.heading=Ymholiad Gwasanaeth Gofal Plant
 childcare-service.query.p1=Os oes angen help arnoch gyda chais gwasanaeth gofal plant, cysylltwch â llinell gymorth y Gwasanaeth Gofal Plant ar <span class="govuk-!-font-weight-bold no-wrap">0300 123 8124</span>.
-childcare-service.query.p2=Mae ffyrdd eraill o <a class="govuk-link" href="{0}">gysylltu â’r Gwasanaeth Gofal Plant.</a>.
+childcare-service.query.p2=Mae ffyrdd eraill o <a class="govuk-link" href="{0}">gysylltu â’r Gwasanaeth Gofal Plant</a>.
 
 corporation-tax.query.heading=Help gyda Threth Gorfforaeth
 corporation-tax.query.p1=Mae angen i chi gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM ar <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>.
