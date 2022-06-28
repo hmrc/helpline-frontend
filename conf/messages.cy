@@ -11,6 +11,7 @@ call-options-no-answers.error=Dewiswch pa wasanaeth yr oeddech yn ceisio cael my
 
 call-option.label.or=neu
 call-option.label.child-benefit=Budd-dal Plant
+call-option.label.childcare-service=Gwasanaeth Gofal Plant
 call-option.label.income-tax-paye=Treth Incwm a TWE
 call-option.label.national-insurance=Yswiriant Gwladol
 call-option.label.self-assessment=Hunanasesiad
@@ -42,6 +43,10 @@ more-details=<a class="govuk-link" href="{0}">Mwy o fanylion cyswllt (gan gynnwy
 child-benefit.query.heading=Ymholiad Budd-dal Plant
 child-benefit.query.p1=Os nad oes angen help arnoch i fewngofnodi, ond bod gennych ymholiad arall am Fudd-dal Plant, gallwch gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM drwy ffonio <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>.
 child-benefit.query.p2=Mae ffyrdd eraill o <a class="govuk-link" href="{0}">gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM</a>.
+
+childcare-service.query.heading=Ymholiad Gwasanaeth Gofal Plant
+childcare-service.query.p1=Os oes angen help arnoch gyda chais gwasanaeth gofal plant, cysylltwch â llinell gymorth y Gwasanaeth Gofal Plant ar <span class="govuk-!-font-weight-bold no-wrap">0300 123 8124</span>.
+childcare-service.query.p2=Mae ffyrdd eraill o <a class="govuk-link" href="{0}">gysylltu â’r Gwasanaeth Gofal Plant.</a>.
 
 corporation-tax.query.heading=Help gyda Threth Gorfforaeth
 corporation-tax.query.p1=Mae angen i chi gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM ar <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>.

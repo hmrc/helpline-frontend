@@ -45,7 +45,6 @@ child-benefit.query.p1=If you do not need help signing in but have another query
 child-benefit.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Child Benefit helpline</a>.
 
 childcare-service.query.heading=Childcare Service query
-childcare-service.query.h2=Call an HMRC helpline
 childcare-service.query.p1=If you need help with a Childcare Service application, contact the Childcare Service helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 123 4097</span>.
 childcare-service.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Childcare Service helpline</a>.
 
