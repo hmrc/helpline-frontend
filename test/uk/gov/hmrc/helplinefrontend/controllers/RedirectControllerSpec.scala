@@ -81,6 +81,11 @@ class RedirectControllerSpec extends AnyWordSpec with Matchers with GuiceOneAppP
           }
         }
     }
+    "contactHelplineGAEventMapper" should {
+      "return the right name" in {
+        appConfig.contactHelplineGAEventMapper("childcare-service") shouldBe "further-contact_childcare-services"
+      }
+    }
 
     "send contact_online_services_helpdesk ga event when user clicks on helpdesk link" in {
       val result: Future[Result] = controller.contactHelpdesk(url)(request)

@@ -20,6 +20,8 @@ sealed trait MonitoringEvent
 
 case object ContactHmrcSa extends MonitoringEvent
 
+case object ContactHmrcChildcare extends MonitoringEvent
+
 case object ContactHmrcInd extends MonitoringEvent
 
 case object ContactHmrcOrg extends MonitoringEvent

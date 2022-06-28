@@ -72,7 +72,7 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
 
   val contactHelplineGAEventMapper = Map(
     "child-benefit" -> "further-contact_childbenefit",
-    "childcare-service" -> "further-contact_childcareservice",
+    "childcare-service" -> "further-contact_childcare-services",
     "income-tax-paye" -> "further-contact_incometaxpaye",
     "national-insurance" -> "further-contact_natinsurance",
     "self-assessment" -> "further-contact_sa",
