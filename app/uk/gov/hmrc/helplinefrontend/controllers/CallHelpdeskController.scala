@@ -87,7 +87,9 @@ class CallHelpdeskController @Inject()(implicit
         callOption match {
           case Deceased          => ivDeceased(backCall)
           case ChildBenefit      => childBenefitPage(backCall)
-          case ChildcareService  => childcareServicePage(backCall)
+          case ChildcareService  =>
+            eventDispatcher.dispatchEvent(ContactHmrcChildcare)
+            childcareServicePage(backCall)
           case IncomeTaxPaye     => incomeTaxPayePage(backCall)
           case NationalInsurance => nationalInsurancePage(backCall)
           case SelfAssessment    => selfAssessmentPage(backCall)

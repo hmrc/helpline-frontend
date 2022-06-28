@@ -32,6 +32,7 @@ class AnalyticsEventHandler @Inject()(connector: AnalyticsConnector) extends Eve
 
   override def handleEvent(event: MonitoringEvent)(implicit request: Request[_], hc: HeaderCarrier, ec: ExecutionContext): Unit = {
     event match {
+      case ContactHmrcChildcare => sendEvent(factory.contactHmrcChildcare)
       case ContactHmrcSa => sendEvent(factory.contactHmrcSa)
       case ContactHmrcInd => sendEvent(factory.contactHmrcInd)
       case ContactHmrcOrg => sendEvent(factory.contactHmrcOrg)
@@ -67,6 +68,11 @@ private class AnalyticsRequestFactory() {
     val jsonString: JsValue = Json.parse(request.session.data.getOrElse("dimensions", "{}"))
     val dimensions: Seq[DimensionValue] = Json.fromJson[Seq[DimensionValue]](jsonString).getOrElse(Seq())
     dimensions
+  }
+
+  def contactHmrcChildcare(clientId: Option[String])(implicit request: Request[_]): AnalyticsRequest = {
+    val gaEvent = Event("sos_iv", "more_info", "contact_childcare-services", getDimensions(request))
+    AnalyticsRequest(clientId, Seq(gaEvent))
   }
 
   def contactHmrcSa(clientId: Option[String])(implicit request: Request[_]): AnalyticsRequest = {
