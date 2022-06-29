@@ -30,7 +30,7 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
 
    val defaultCallOptionsAndGAEventMapper = mutable.LinkedHashMap(
     "child-benefit" -> "contact_childbenefit",
-    "childcare-service" -> "childcare_service",
+    "childcare-service" -> "contact_childcare-services",
     "income-tax-paye" -> "contact_incometaxpaye",
     "national-insurance" -> "contact_natinsurance",
     "self-assessment" -> "contact_sa",
@@ -52,7 +52,7 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
 
   val standaloneIndividualAndGAEventMapper = mutable.LinkedHashMap(
     "child-benefit" -> "contact_childbenefit",
-    "childcare-service" -> "childcare_service",
+    "childcare-service" -> "contact_childcare_services",
     "income-tax-paye" -> "contact_incometaxpaye",
     "national-insurance" -> "contact_natinsurance",
     "self-assessment" -> "contact_sa",
