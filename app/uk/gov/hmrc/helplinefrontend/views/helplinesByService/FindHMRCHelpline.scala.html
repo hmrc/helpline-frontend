@@ -1,0 +1,98 @@
+@*
+ * Copyright 2022 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import uk.gov.hmrc.helplinefrontend.config.AppConfig
+@import uk.gov.hmrc.helplinefrontend.views.html.Layout
+@import uk.gov.hmrc.helplinefrontend.views.html.components._
+@import uk.gov.hmrc.helplinefrontend.models.ui.{SummaryRowData => Row}
+@import scala.collection.mutable.ListBuffer
+@import uk.gov.hmrc.helplinefrontend.controllers.routes
+
+@this(
+layout: Layout,
+p: Paragraph,
+h1: H1,
+inputRadio: InputRadio,
+govukButton: GovukButton,
+formWithCsrf: FormWithCSRF,
+govukErrorSummary: GovukErrorSummary
+)
+
+
+@(findHMRCHelplineForm: Form[String])(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
+
+@layout(pageTitle = s"${messages(s"find-HMRC-helplines.h1")} ${messages("title.suffix")}") {
+
+@formWithCsrf(routes.CallHelpdeskController.processHMRCHelplinePage()) {
+
+@if(findHMRCHelplineForm.hasErrors) {
+    @govukErrorSummary(ErrorSummary(
+        title = Text(messages("call-options-no-answers.h2-error")),
+        errorList = findHMRCHelplineForm.errors.map(err => ErrorLink(href = Some("#find-HMRC-helplines"), content = Text(messages("find-HMRC-helplines.error")))
+        ))
+    )
+}
+
+@inputRadio(
+ findHMRCHelplineForm,
+ name = "find-HMRC-helplines",
+ legend = Messages("find-HMRC-helplines.h1"),
+ legendAsHeading = true,
+ classes = "govuk-fieldset__legend--xl",
+ items = Seq(
+            RadioItem(
+              content = Text(messages("find-HMRC-helplines.option1")),
+              hint = Some(Hint(content = Text(messages("find-HMRC-helplines.option1.hint")))),
+              value = Some(messages("find-HMRC-helplines.option1.value"))
+            ),
+            RadioItem(
+              content = Text(messages("find-HMRC-helplines.option2")),
+              hint = Some(Hint(content = Text(messages("find-HMRC-helplines.option2.hint")))),
+                value = Some(messages("find-HMRC-helplines.option2.value"))
+
+            ),
+            RadioItem(
+              content = Text(messages("find-HMRC-helplines.option3")),
+              hint = Some(Hint(content = Text(messages("find-HMRC-helplines.option3.hint")))),
+
+                value = Some(messages("find-HMRC-helplines.option3.value"))
+
+            ),
+            RadioItem(
+              content = Text(messages("find-HMRC-helplines.option4")),
+              hint = Some(Hint(content = Text(messages("find-HMRC-helplines.option4.hint")))),
+                value = Some(messages("find-HMRC-helplines.option4.value"))
+
+            ),
+            RadioItem(
+              divider = Some(messages("call-option.label.or"))
+            ),
+            RadioItem(
+              content = Text(messages("find-HMRC-helplines.option5")),
+                value = Some(messages("find-HMRC-helplines.option5.value"))
+
+            )
+   ),
+  errorMessage = if(findHMRCHelplineForm.hasErrors)Some(messages("find-HMRC-helplines.error")) else None,
+  )
+
+}
+
+    @govukButton(Button(
+        content = Text(messages("continue"))
+    ))
+}
+

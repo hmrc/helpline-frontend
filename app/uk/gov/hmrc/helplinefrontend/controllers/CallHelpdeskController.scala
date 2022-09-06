@@ -22,10 +22,10 @@ import uk.gov.hmrc.auth.core.{AuthConnector, AuthorisedFunctions}
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.helplinefrontend.models.CallOption._
 import uk.gov.hmrc.helplinefrontend.models._
-import uk.gov.hmrc.helplinefrontend.models.form.{CallOptionForm, CallOptionOrganisationForm, HelplinesByServiceForm, HelplinesByServiceSearchForm}
+import uk.gov.hmrc.helplinefrontend.models.form.{CallOptionForm, CallOptionOrganisationForm, FindHMRCHelplineForm, HelplinesByServiceForm, HelplinesByServiceSearchForm}
 import uk.gov.hmrc.helplinefrontend.monitoring._
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
-import uk.gov.hmrc.helplinefrontend.views.html.helplinesByService.{HelplinesByService, Helpline}
+import uk.gov.hmrc.helplinefrontend.views.html.helplinesByService._
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
@@ -59,6 +59,7 @@ class CallHelpdeskController @Inject()(implicit
                                        whichServiceAccessOther: WhichServiceAccessOther,
                                        helplinesByService: HelplinesByService,
                                        helpline: Helpline,
+                                       findHMRCHelpline: FindHMRCHelpline,
                                        val eventDispatcher: EventDispatcher,
                                        ec: ExecutionContext)
   extends FrontendController(mcc) with Logging with AuthorisedFunctions {
@@ -247,4 +248,25 @@ class CallHelpdeskController @Inject()(implicit
     Future.successful(result)
   }
 
+  def findHMRCHelplinePage(): Action[AnyContent] = Action { implicit request =>
+    Ok(findHMRCHelpline(FindHMRCHelplineForm.findHMRCHelplineForm()))
+  }
+
+  def processHMRCHelplinePage(): Action[AnyContent] = Action.async { implicit request =>
+    println("hello <<<<<<<<<<<")
+    val result = FindHMRCHelplineForm.findHMRCHelplineForm().bindFromRequest.fold(
+      errors ⇒ BadRequest(findHMRCHelpline(errors)),
+      value => {
+        value match {
+          case "pta" => Redirect(routes.CallHelpdeskController.helpLinesByServiceVatPage(value))
+          case "sa" => Redirect(routes.CallHelpdeskController.helpLinesByServiceOshPage(value))
+          case "vat" => Redirect(routes.CallHelpdeskController.helpLinesByServiceCharitiesPage(value))
+          case "charities" => Redirect(routes.CallHelpdeskController.helpLinesByServicePensionsPage(value))
+          case "other" => Redirect(routes.CallHelpdeskController.helpLinesByServiceVoaPage(value))
+          case _ => Redirect(routes.CallHelpdeskController.helpLinesByServiceOshPage(value))
+        }
+      }
+    )
+    Future.successful(result)
+  }
 }
