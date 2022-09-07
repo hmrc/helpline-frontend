@@ -441,6 +441,15 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
     }
   }
 
+  "CallHelpdeskController get findHMRCHelpline page" should {
+    "return find HMRC Helpline page" in {
+      val result: Future[Result] = controller.findHMRCHelplinePage()(fakeRequest)
+      status(result) shouldBe Status.OK
+      contentAsString(result).contains("Find an HMRC helpline") shouldBe true
+      contentAsString(result).contains("Back") shouldBe false
+    }
+  }
+
   "CallHelpdeskController " should {
 
     "fire contact_childbenefits ga event when user clicks on Child benefit" in {
