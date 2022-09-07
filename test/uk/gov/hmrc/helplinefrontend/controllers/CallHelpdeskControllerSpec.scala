@@ -31,7 +31,7 @@ import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.helplinefrontend.monitoring.EventDispatcher
 import uk.gov.hmrc.helplinefrontend.monitoring.analytics._
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
-import uk.gov.hmrc.helplinefrontend.views.html.helplinesByService.{Helpline, HelplinesByService}
+import uk.gov.hmrc.helplinefrontend.views.html.helplinesByService.{FindHMRCHelpline, Helpline, HelplinesByService}
 import uk.gov.hmrc.http.{HeaderCarrier, HttpClient}
 import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
 
@@ -70,6 +70,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   val whichServiceAccessOther: WhichServiceAccessOther = app.injector.instanceOf[WhichServiceAccessOther]
   val helplinesByService: HelplinesByService = app.injector.instanceOf[HelplinesByService]
   val helpline: Helpline = app.injector.instanceOf[Helpline]
+  val findHMRCHelpline: FindHMRCHelpline = app.injector.instanceOf[FindHMRCHelpline]
 
   val ec: ExecutionContext =  app.injector.instanceOf[ExecutionContext]
 
@@ -119,6 +120,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
                                  whichServiceAccessOther,
                                  helplinesByService,
                                  helpline,
+                                 findHMRCHelpline,
                                  eventDispatcher,
                                  ec)
 
@@ -240,7 +242,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       val controller: CallHelpdeskController =
         new CallHelpdeskController()(authConnector, customiseAppConfig, messagesCC, contactUsDeceased, childBenefit, childcareService, incomeTaxPaye, nationalInsurance,
           selfAssessment, statePension, taxCredits, seiss, generalEnquiries, generalEnquiriesOrganisation, corporationTax, machineGamingDuty,
-          payeForEmployers, selfAssessmentOrganisation, vat, callOptionsNoAnswers, callOptionsOrganisationNoAnswers, whichServiceAccess, whichServiceAccessOther, helplinesByService, helpline, eventDispatcher, ec)
+          payeForEmployers, selfAssessmentOrganisation, vat, callOptionsNoAnswers, callOptionsOrganisationNoAnswers, whichServiceAccess, whichServiceAccessOther, helplinesByService, helpline, findHMRCHelpline, eventDispatcher, ec)
 
       val result: Future[Result] = controller.getHelpdeskPage(nationalInsuranceHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
@@ -436,6 +438,15 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Help with a service") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
+    }
+  }
+
+  "CallHelpdeskController get findHMRCHelpline page" should {
+    "return find HMRC Helpline page" in {
+      val result: Future[Result] = controller.findHMRCHelplinePage()(fakeRequest)
+      status(result) shouldBe Status.OK
+      contentAsString(result).contains("Find an HMRC helpline") shouldBe true
+      contentAsString(result).contains("Back") shouldBe false
     }
   }
 
