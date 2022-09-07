@@ -253,17 +253,16 @@ class CallHelpdeskController @Inject()(implicit
   }
 
   def processHMRCHelplinePage(): Action[AnyContent] = Action.async { implicit request =>
-    println("hello <<<<<<<<<<<")
     val result = FindHMRCHelplineForm.findHMRCHelplineForm().bindFromRequest.fold(
       errors ⇒ BadRequest(findHMRCHelpline(errors)),
       value => {
         value match {
-          case "pta" => Redirect(routes.CallHelpdeskController.helpLinesByServiceVatPage(value))
-          case "sa" => Redirect(routes.CallHelpdeskController.helpLinesByServiceOshPage(value))
-          case "vat" => Redirect(routes.CallHelpdeskController.helpLinesByServiceCharitiesPage(value))
-          case "charities" => Redirect(routes.CallHelpdeskController.helpLinesByServicePensionsPage(value))
-          case "other" => Redirect(routes.CallHelpdeskController.helpLinesByServiceVoaPage(value))
-          case _ => Redirect(routes.CallHelpdeskController.helpLinesByServiceOshPage(value))
+          case "pta" => Redirect(routes.CallHelpdeskController.helpLinesByServiceOshPage("Personal Tax Account"))
+          case "sa" => Redirect(routes.CallHelpdeskController.helpLinesByServiceOshPage("Self Assessment"))
+          case "vat" => Redirect(routes.CallHelpdeskController.helpLinesByServiceVatPage("VAT"))
+          case "charities" => Redirect(routes.CallHelpdeskController.helpLinesByServiceCharitiesPage("Charities"))
+          case "other" => Redirect(routes.CallHelpdeskController.helpLinesByServicePage())
+          case _ => Redirect(routes.CallHelpdeskController.helpLinesByServicePage())
         }
       }
     )

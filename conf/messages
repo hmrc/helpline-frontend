@@ -257,5 +257,5 @@ find-HMRC-helplines.option4.value=charities
 find-HMRC-helplines.option4.hint=Includes Communities Amateur Sports Clubs
 find-HMRC-helplines.option5=Other services
 find-HMRC-helplines.option5.value=other
-find-HMRC-helplines.error=Error
+find-HMRC-helplines.error=Select the service you are trying to access
 find-HMRC-helplines.h1=Find an HMRC helpline

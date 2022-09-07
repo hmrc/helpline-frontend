@@ -67,9 +67,7 @@ govukErrorSummary: GovukErrorSummary
             RadioItem(
               content = Text(messages("find-HMRC-helplines.option3")),
               hint = Some(Hint(content = Text(messages("find-HMRC-helplines.option3.hint")))),
-
                 value = Some(messages("find-HMRC-helplines.option3.value"))
-
             ),
             RadioItem(
               content = Text(messages("find-HMRC-helplines.option4")),
@@ -86,13 +84,13 @@ govukErrorSummary: GovukErrorSummary
 
             )
    ),
-  errorMessage = if(findHMRCHelplineForm.hasErrors)Some(messages("find-HMRC-helplines.error")) else None,
+errorMessage = if(findHMRCHelplineForm.hasErrors)Some(messages("find-HMRC-helplines.error")) else None,
   )
 
-}
 
     @govukButton(Button(
         content = Text(messages("continue"))
     ))
+}
 }
 
