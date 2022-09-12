@@ -124,3 +124,15 @@ contact_us.deceased.contact_hours.weekday=Dydd Llun i Ddydd Gwener: 08:00 i 16:0
 contact_us.deceased.contact_hours.text2=Mae hyn oherwydd bod llai o ymgynghorwyr ar gael i ateb galwadau, oherwydd y gweithdrefnau sydd wedi’u rhoi ar waith er mwyn atal coronafeirws rhag ymledu.
 contact_us.deceased.getHelp=Help i <a href="{0}">ddelio â CThEM os oes gennych anghenion ychwanegol</a>
 contact_us.deceased.callCharges=<a href="{0}">Gwybodaeth am gostau galwadau</a>
+
+find-HMRC-helplines.h1=Dod o hyd i un o linellau cymorth CThEM
+find-HMRC-helplines.sub-heading=Dewch o hyd i’r llinell gymorth ar gyfer y gwasanaeth rydych yn ceisio cael mynediad ato.
+find-HMRC-helplines.option1=Cyfrif Treth Personol
+find-HMRC-helplines.option1.hint=Yn cynnwys newid cod treth, credydau treth, Cymorth i Gynilo, Budd-dal Plant, Gofal Plant sy’n Rhydd o Dreth a phensiwn personol
+find-HMRC-helplines.option2=Hunanasesiad
+find-HMRC-helplines.option2.hint=Yn cynnwys Hunanasesiad ar-lein ar gyfer Partneriaethau ac Ymddiriedolaethau
+find-HMRC-helplines.option3=TAW
+find-HMRC-helplines.option3.hint=Yn cynnwys Ffurflenni TAW, manylion cofrestru, Troi Treth yn Ddigidol a’r Gwasanaeth Un Cam
+find-HMRC-helplines.option4=Elusennau
+find-HMRC-helplines.option4.hint=Yn cynnwys Clybiau Chwaraeon Amatur Cymunedol
+find-HMRC-helplines.option5=Gwasanaethau eraill
