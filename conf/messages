@@ -243,6 +243,8 @@ helplines-search.voa.tel=0300 050 1501
 helplines-search.voa.int=+44 300 050 1501
 helplines-search.voa.times=Monday to Friday: 8am to 6pm<br>Closed weekends and bank holidays.
 
+find-HMRC-helplines.h1=Find an HMRC helpline
+find-HMRC-helplines.sub-heading=Find the HMRC helpline for the service you are trying to access.
 find-HMRC-helplines.option1=Personal Tax Account
 find-HMRC-helplines.option1.value=pta
 find-HMRC-helplines.option1.hint=Includes tax code change, tax credits, Help to Save, Child Benefit, Tax-Free Childcare and personal pension
@@ -258,4 +260,3 @@ find-HMRC-helplines.option4.hint=Includes Communities Amateur Sports Clubs
 find-HMRC-helplines.option5=Other services
 find-HMRC-helplines.option5.value=other
 find-HMRC-helplines.error=Select the service you are trying to access
-find-HMRC-helplines.h1=Find an HMRC helpline
