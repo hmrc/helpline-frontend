@@ -136,3 +136,4 @@ find-HMRC-helplines.option3.hint=Yn cynnwys Ffurflenni TAW, manylion cofrestru, 
 find-HMRC-helplines.option4=Elusennau
 find-HMRC-helplines.option4.hint=Yn cynnwys Clybiau Chwaraeon Amatur Cymunedol
 find-HMRC-helplines.option5=Gwasanaethau eraill
+find-HMRC-helplines.error=Dewiswch y gwasanaeth rydych yn ei ddefnyddio gyda'r cyfrif hwn
