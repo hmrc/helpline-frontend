@@ -34,7 +34,7 @@ govukErrorSummary: GovukErrorSummary
 
 @(findHMRCHelplineForm: Form[String])(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
 
-@layout(pageTitle = s"${messages(s"find-HMRC-helplines.h1")} ${messages("title.suffix")}") {
+@layout(pageTitle = s"${messages(s"find-HMRC-helplines.h1")} ${messages("title.suffix")}", formErrors = findHMRCHelplineForm.errors) {
 
 @formWithCsrf(routes.CallHelpdeskController.processHMRCHelplinePage()) {
 
