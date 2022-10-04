@@ -40,7 +40,7 @@
     rws
 }
 
-@layout(pageTitle = s"${messages(s"helplines-search.vat.h1")} ${messages("title.suffix")}") {
+@layout(pageTitle = s"${messages(s"helplines-search.${helpdesk}.h1")} ${messages("title.suffix")}") {
     @preHeading(heading.replaceAll("_", " "))
     @h1(messages(s"helplines-search.${helpdesk}.h1"))
     @summaryList(rows = rows, classes = "govuk-summary-list--no-border")
