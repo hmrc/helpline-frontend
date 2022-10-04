@@ -72,7 +72,7 @@ class allyTestsSpec extends AnyWordSpec with Matchers with GuiceOneAppPerSuite w
   val helplinesByService: HelplinesByService = app.injector.instanceOf[HelplinesByService]
   val helpline: Helpline = app.injector.instanceOf[Helpline]
   val findHMRCHelpline: FindHMRCHelpline = app.injector.instanceOf[FindHMRCHelpline]
-
+  val hasThisPersonDied: HasThisPersonDied = app.injector.instanceOf[HasThisPersonDied]
   val ec: ExecutionContext =  app.injector.instanceOf[ExecutionContext]
 
   val gaClientId = "GA1.1.283183975.1456746121"
@@ -96,34 +96,37 @@ class allyTestsSpec extends AnyWordSpec with Matchers with GuiceOneAppPerSuite w
   val eventDispatcher = new EventDispatcher(TestHandler)
 
   val controller: CallHelpdeskController =
-    new CallHelpdeskController()(authConnector,
-                                 appConfig,
-                                 messagesCC,
-                                 contactUsDeceased,
-                                 childBenefit,
-                                 childcareService,
-                                 incomeTaxPaye,
-                                 nationalInsurance,
-                                 selfAssessment,
-                                 statePension,
-                                 taxCredits,
-                                 seiss,
-                                 generalEnquiries,
-                                 generalEnquiriesOrganisation,
-                                 corporationTax,
-                                 machineGamingDuty,
-                                 payeForEmployers,
-                                 selfAssessmentOrganisation,
-                                 vat,
-                                 callOptionsNoAnswers,
-                                 callOptionsOrganisationNoAnswers,
-                                 whichServiceAccess,
-                                 whichServiceAccessOther,
-                                 helplinesByService,
-                                 helpline,
-                                 findHMRCHelpline,
-                                 eventDispatcher,
-                                 ec)
+    new CallHelpdeskController()(
+      authConnector,
+      appConfig,
+      messagesCC,
+      contactUsDeceased,
+      childBenefit,
+      childcareService,
+      incomeTaxPaye,
+      nationalInsurance,
+      selfAssessment,
+      statePension,
+      taxCredits,
+      seiss,
+      generalEnquiries,
+      generalEnquiriesOrganisation,
+      corporationTax,
+      machineGamingDuty,
+      payeForEmployers,
+      selfAssessmentOrganisation,
+      vat,
+      callOptionsNoAnswers,
+      callOptionsOrganisationNoAnswers,
+      whichServiceAccess,
+      whichServiceAccessOther,
+      hasThisPersonDied,
+      helplinesByService,
+      helpline,
+      findHMRCHelpline,
+      eventDispatcher,
+      ec
+    )
 
   val childBenefitHelpKey: String = "CHILD-BENEFIT"
   val childcareServiceHelpKey: String = "CHILDCARE-SERVICE"

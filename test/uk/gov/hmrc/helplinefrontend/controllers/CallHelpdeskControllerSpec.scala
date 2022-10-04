@@ -72,7 +72,6 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   val helpline: Helpline = app.injector.instanceOf[Helpline]
   val findHMRCHelpline: FindHMRCHelpline = app.injector.instanceOf[FindHMRCHelpline]
   val hasThisPersonDied: HasThisPersonDied = app.injector.instanceOf[HasThisPersonDied]
-
   val ec: ExecutionContext =  app.injector.instanceOf[ExecutionContext]
 
   val gaClientId = "GA1.1.283183975.1456746121"
@@ -120,13 +119,12 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       callOptionsOrganisationNoAnswers,
       whichServiceAccess,
       whichServiceAccessOther,
+      hasThisPersonDied,
       helplinesByService,
       helpline,
       findHMRCHelpline,
       eventDispatcher,
-      ec,
-      hasThisPersonDied
-    )
+      ec)
 
   val childBenefitHelpKey: String = "CHILD-BENEFIT"
   val childcareServiceHelpKey: String = "CHILDCARE-SERVICE"
@@ -285,12 +283,12 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
           callOptionsOrganisationNoAnswers,
           whichServiceAccess,
           whichServiceAccessOther,
+          hasThisPersonDied,
           helplinesByService,
           helpline,
           findHMRCHelpline,
           eventDispatcher,
-          ec,
-          hasThisPersonDied
+          ec
         )
 
       val result: Future[Result] = controller.getHelpdeskPage(nationalInsuranceHelpKey, Some("backURL"))(fakeRequest)
