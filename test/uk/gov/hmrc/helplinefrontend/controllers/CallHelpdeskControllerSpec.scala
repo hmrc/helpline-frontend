@@ -71,6 +71,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   val helplinesByService: HelplinesByService = app.injector.instanceOf[HelplinesByService]
   val helpline: Helpline = app.injector.instanceOf[Helpline]
   val findHMRCHelpline: FindHMRCHelpline = app.injector.instanceOf[FindHMRCHelpline]
+  val hasThisPersonDied: HasThisPersonDied = app.injector.instanceOf[HasThisPersonDied]
 
   val ec: ExecutionContext =  app.injector.instanceOf[ExecutionContext]
 
@@ -122,12 +123,14 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
                                  helpline,
                                  findHMRCHelpline,
                                  eventDispatcher,
-                                 ec)
+                                 ec,
+                                 hasThisPersonDied)
 
   val childBenefitHelpKey: String = "CHILD-BENEFIT"
   val childcareServiceHelpKey: String = "CHILDCARE-SERVICE"
   val corporationTaxHelpKey: String = "CORPORATION-TAX"
   val deceasedHelpKey: String = "deceased"
+  val hasThisPersonDiedHelpKey: String = "DIED"
   val incomeTaxPayeHelpKey: String = "INCOME-TAX-PAYE"
   val nationalInsuranceHelpKey: String = "NATIONAL-INSURANCE"
   val machineGamingDutyHelpKey: String = "MACHINE-GAMING-DUTY"
@@ -151,8 +154,16 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       contentAsString(result).contains("Back") shouldBe false
     }
 
-    "return deceased help page if the help key is 'deceased' and there is a go back url" in {
-      val result: Future[Result] = controller.getHelpdeskPage(deceasedHelpKey, Some("backURL"))(fakeRequest)
+  "CallHasThisPersonDiedController get has this person died help page" should {
+    "return hasThisPersonDied help page if the help key is 'DIED' but there is no go back url" in {
+      val result: Future[Result] = controller.getHelpdeskPage(hasThisPersonDiedHelpKey, None)(fakeRequest)
+      status(result) shouldBe Status.OK
+      contentAsString(result).contains("Has this person died?") shouldBe true
+      contentAsString(result).contains("Back") shouldBe false
+    }
+
+    "return hasThisPersonDied help page if the help key is 'DIED' and there is a go back url" in {
+      val result: Future[Result] = controller.getHelpdeskPage(hasThisPersonDiedHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Has this person died?") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
@@ -242,7 +253,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       val controller: CallHelpdeskController =
         new CallHelpdeskController()(authConnector, customiseAppConfig, messagesCC, contactUsDeceased, childBenefit, childcareService, incomeTaxPaye, nationalInsurance,
           selfAssessment, statePension, taxCredits, seiss, generalEnquiries, generalEnquiriesOrganisation, corporationTax, machineGamingDuty,
-          payeForEmployers, selfAssessmentOrganisation, vat, callOptionsNoAnswers, callOptionsOrganisationNoAnswers, whichServiceAccess, whichServiceAccessOther, helplinesByService, helpline, findHMRCHelpline, eventDispatcher, ec)
+          payeForEmployers, selfAssessmentOrganisation, vat, callOptionsNoAnswers, callOptionsOrganisationNoAnswers, whichServiceAccess, whichServiceAccessOther, helplinesByService, helpline, findHMRCHelpline, eventDispatcher, ec, hasThisPersonDied)
 
       val result: Future[Result] = controller.getHelpdeskPage(nationalInsuranceHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
