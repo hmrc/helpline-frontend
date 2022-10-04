@@ -153,6 +153,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       contentAsString(result).contains("Has this person died?") shouldBe true
       contentAsString(result).contains("Back") shouldBe false
     }
+  }
 
   "CallHasThisPersonDiedController get has this person died help page" should {
     "return hasThisPersonDied help page if the help key is 'DIED' but there is no go back url" in {
