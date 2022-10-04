@@ -108,6 +108,22 @@ general-enquiries.query.p2=Mae ffyrdd eraill o <a class="govuk-link" href="{0}">
 general-enquiries-organisation.query.heading=Help gyda gwasanaeth
 general-enquiries-organisation.query.p=Gallwch <a class="govuk-link" href="{0}">ddod o hyd i fanylion cyswllt y gwasanaeth rydych yn ceisio cael mynediad ato</a>.
 
+contact_us.died.h1=A yw’r person hwn wedi marw?
+contact_us.died.call_hmrc=Ffoniwch CThEM am help gyda threth ar ôl i rywun farw.
+contact_us.died.call_advice=Mae’r llinell gymorth hon yn defnyddio meddalwedd adnabod lleferydd, felly gofynnir i chi pam eich bod yn ffonio CThEM. Gwnewch eich gorau i ateb gan ddefnyddio brawddegau a geiriau byr, er enghraifft:
+contact_us.died.call_advice.bereavement=profedigaeth
+contact_us.died.call_advice.deceased=ymadawedig
+contact_us.died.contact_number.telephone.text=Ffôn:
+contact_us.died.contact_number.telephone.number=0300 200 1900
+contact_us.died.contact_number.textphone.text=Ffôn testun:
+contact_us.died.contact_number.textphone.number=0300 200 3319 (Saesneg yn unig)
+contact_us.died.contact_number.no_uk_telephone.text=Y tu allan i’r DU:
+contact_us.died.contact_number.no_uk_telephone.number=+44 300 200 1900
+contact_us.died.contact_number.opening-times=Oriau agor:
+contact_us.died.contact_number.times=Dydd Llun i Ddydd Gwener: 08:00 i 18:00<br><br>Ar gau ar benwythnosau a gwyliau banc.
+contact_us.died.getHelp=Help i <a href="{0}" class="govuk-link"> ddelio â CThEM os oes gennych anghenion ychwanegol</a>
+contact_us.died.callCharges=<a href="{0}" class="govuk-link">Gwybodaeth am gostau galwadau</a>
+
 contact_us.deceased.h1=A yw’r person hwn wedi marw?
 contact_us.deceased.call_hmrc=Ffoniwch CThEM am help gyda threth ar ôl i rywun farw.
 contact_us.deceased.contact_number.telephone.number=0300 200 1900

@@ -123,7 +123,6 @@ contact_us.died.contact_number.opening-times=Opening times:
 contact_us.died.contact_number.times=Monday to Friday: 8am to 6pm<br><br>Closed weekends and bank holidays.
 contact_us.died.getHelp=Get help <a href="{0}" class="govuk-link">dealing with HMRC if you have additional needs</a>
 contact_us.died.callCharges=<a href="{0}" class="govuk-link">Find out about call charges</a>
-contact_us.died.notWorking=<a href="{0}" class="govuk-link" target="_blank">Is this page not working properly? (opens in new tab)</a>
 
 contact_us.deceased.h1=Has this person died?
 contact_us.deceased.call_hmrc=Call HMRC for help with tax after someone dies.
