@@ -96,35 +96,37 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   val eventDispatcher = new EventDispatcher(TestHandler)
 
   val controller: CallHelpdeskController =
-    new CallHelpdeskController()(authConnector,
-                                 appConfig,
-                                 messagesCC,
-                                 contactUsDeceased,
-                                 childBenefit,
-                                 childcareService,
-                                 incomeTaxPaye,
-                                 nationalInsurance,
-                                 selfAssessment,
-                                 statePension,
-                                 taxCredits,
-                                 seiss,
-                                 generalEnquiries,
-                                 generalEnquiriesOrganisation,
-                                 corporationTax,
-                                 machineGamingDuty,
-                                 payeForEmployers,
-                                 selfAssessmentOrganisation,
-                                 vat,
-                                 callOptionsNoAnswers,
-                                 callOptionsOrganisationNoAnswers,
-                                 whichServiceAccess,
-                                 whichServiceAccessOther,
-                                 helplinesByService,
-                                 helpline,
-                                 findHMRCHelpline,
-                                 eventDispatcher,
-                                 ec,
-                                 hasThisPersonDied)
+    new CallHelpdeskController()(
+      authConnector,
+      appConfig,
+      messagesCC,
+      contactUsDeceased,
+      childBenefit,
+      childcareService,
+      incomeTaxPaye,
+      nationalInsurance,
+      selfAssessment,
+      statePension,
+      taxCredits,
+      seiss,
+      generalEnquiries,
+      generalEnquiriesOrganisation,
+      corporationTax,
+      machineGamingDuty,
+      payeForEmployers,
+      selfAssessmentOrganisation,
+      vat,
+      callOptionsNoAnswers,
+      callOptionsOrganisationNoAnswers,
+      whichServiceAccess,
+      whichServiceAccessOther,
+      helplinesByService,
+      helpline,
+      findHMRCHelpline,
+      eventDispatcher,
+      ec,
+      hasThisPersonDied
+    )
 
   val childBenefitHelpKey: String = "CHILD-BENEFIT"
   val childcareServiceHelpKey: String = "CHILDCARE-SERVICE"
@@ -153,9 +155,16 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       contentAsString(result).contains("Has this person died?") shouldBe true
       contentAsString(result).contains("Back") shouldBe false
     }
+
+    "return deceased help page if the help key is 'deceased' and there is a go back url" in {
+      val result: Future[Result] = controller.getHelpdeskPage(deceasedHelpKey, Some("backURL"))(fakeRequest)
+      status(result) shouldBe Status.OK
+      contentAsString(result).contains("Has this person died?") shouldBe true
+      contentAsString(result).contains("Back") shouldBe true
+    }
   }
 
-  "CallHasThisPersonDiedController get has this person died help page" should {
+  "CallHelpdeskController get has this person died help page" should {
     "return hasThisPersonDied help page if the help key is 'DIED' but there is no go back url" in {
       val result: Future[Result] = controller.getHelpdeskPage(hasThisPersonDiedHelpKey, None)(fakeRequest)
       status(result) shouldBe Status.OK
@@ -252,9 +261,37 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
     "return National Insurance help page if the help key is 'NATIONAL-INSURANCE' and there is a go back url, but back call is not supported" in {
       val controller: CallHelpdeskController =
-        new CallHelpdeskController()(authConnector, customiseAppConfig, messagesCC, contactUsDeceased, childBenefit, childcareService, incomeTaxPaye, nationalInsurance,
-          selfAssessment, statePension, taxCredits, seiss, generalEnquiries, generalEnquiriesOrganisation, corporationTax, machineGamingDuty,
-          payeForEmployers, selfAssessmentOrganisation, vat, callOptionsNoAnswers, callOptionsOrganisationNoAnswers, whichServiceAccess, whichServiceAccessOther, helplinesByService, helpline, findHMRCHelpline, eventDispatcher, ec, hasThisPersonDied)
+        new CallHelpdeskController()(
+          authConnector,
+          customiseAppConfig,
+          messagesCC,
+          contactUsDeceased,
+          childBenefit,
+          childcareService,
+          incomeTaxPaye,
+          nationalInsurance,
+          selfAssessment,
+          statePension,
+          taxCredits,
+          seiss,
+          generalEnquiries,
+          generalEnquiriesOrganisation,
+          corporationTax,
+          machineGamingDuty,
+          payeForEmployers,
+          selfAssessmentOrganisation,
+          vat,
+          callOptionsNoAnswers,
+          callOptionsOrganisationNoAnswers,
+          whichServiceAccess,
+          whichServiceAccessOther,
+          helplinesByService,
+          helpline,
+          findHMRCHelpline,
+          eventDispatcher,
+          ec,
+          hasThisPersonDied
+        )
 
       val result: Future[Result] = controller.getHelpdeskPage(nationalInsuranceHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
