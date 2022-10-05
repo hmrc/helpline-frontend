@@ -18,7 +18,7 @@ package uk.gov.hmrc.helplinefrontend.monitoring.analytics
 
 import javax.inject.{Inject, Singleton}
 import play.api.Logging
-import play.api.libs.json.{JsValue, Json}
+import play.api.libs.json.{JsValue, Json, Reads}
 import play.api.mvc.Request
 import uk.gov.hmrc.helplinefrontend.monitoring._
 import uk.gov.hmrc.http.{HeaderCarrier, HeaderNames}
@@ -42,13 +42,16 @@ class AnalyticsEventHandler @Inject()(connector: AnalyticsConnector) extends Eve
       case e: ContactHelpline =>  sendEvent(factory.contactHelpline(e.value))
       case SignedOut => sendEvent(factory.signOut())
       case SignedOutOrg => sendEvent(factory.signOutOrg())
+      case FindHmrcHelpline => sendEvent(factory.findHmrcHelpline())
+      case e: FindHmrcHelplinePage => sendEvent(factory.findHmrcHelplinePage(e.value))
+      case OtherHmrcHelpline => sendEvent(factory.otherHmrcHelpline())
       case _ => ()
     }
   }
 
   private def clientId(implicit request: Request[_]) = request.cookies.get("_ga").map(_.value)
 
-  private def sendEvent(reqCreator: (Option[String]) => AnalyticsRequest)
+  private def sendEvent(reqCreator: Option[String] => AnalyticsRequest)
                                              (implicit request: Request[_], hc: HeaderCarrier, ec: ExecutionContext): Unit = {
     val  xSessionId: Option[String] = request.headers.get(HeaderNames.xSessionId)
     if(clientId.isDefined || xSessionId.isDefined) {
@@ -62,7 +65,7 @@ class AnalyticsEventHandler @Inject()(connector: AnalyticsConnector) extends Eve
 
 private class AnalyticsRequestFactory() {
 
-  private implicit val dimensionReads = Json.reads[DimensionValue]
+  private implicit val dimensionReads: Reads[DimensionValue] = Json.reads[DimensionValue]
 
   private def getDimensions(request: Request[_]) = {
     val jsonString: JsValue = Json.parse(request.session.data.getOrElse("dimensions", "{}"))
@@ -116,6 +119,21 @@ private class AnalyticsRequestFactory() {
 
   def signOutOrg()(clientId: Option[String])(implicit request: Request[_]): AnalyticsRequest = {
     val gaEvent = Event("sos_iv", "iv_end", "sign_out_orghelpline", getDimensions(request))
+    AnalyticsRequest(clientId, Seq(gaEvent))
+  }
+
+  def findHmrcHelpline()(clientId: Option[String])(implicit request: Request[_]): AnalyticsRequest = {
+    val gaEvent = Event("lost_password", "lostpassword_find_helpline", "find_hmrc_helpline", getDimensions(request))
+    AnalyticsRequest(clientId, Seq(gaEvent))
+  }
+
+  def findHmrcHelplinePage(label: String)(clientId: Option[String])(implicit request: Request[_]): AnalyticsRequest = {
+    val gaEvent = Event("lost_password", "lostpassword_end", s"lostpassword_helpline_$label", getDimensions(request))
+    AnalyticsRequest(clientId, Seq(gaEvent))
+  }
+
+  def otherHmrcHelpline()(clientId: Option[String])(implicit request: Request[_]): AnalyticsRequest = {
+    val gaEvent = Event("lost_password", "lostpassword_find_helpline", "lostpassword_other_service_helpline", getDimensions(request))
     AnalyticsRequest(clientId, Seq(gaEvent))
   }
 }

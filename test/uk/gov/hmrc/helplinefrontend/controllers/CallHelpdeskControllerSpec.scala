@@ -17,18 +17,19 @@
 package uk.gov.hmrc.helplinefrontend.controllers
 
 import akka.Done
+import org.scalamock.scalatest.MockFactory
 import org.scalatest.concurrent.Eventually
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.Configuration
 import play.api.http.Status
-import play.api.mvc.{AnyContentAsEmpty, Cookie, MessagesControllerComponents, Result}
+import play.api.mvc.{AnyContentAsEmpty, Cookie, MessagesControllerComponents, Request, Result}
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import uk.gov.hmrc.auth.core.AuthConnector
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
-import uk.gov.hmrc.helplinefrontend.monitoring.EventDispatcher
+import uk.gov.hmrc.helplinefrontend.monitoring.{EventDispatcher, FindHmrcHelpline, FindHmrcHelplinePage, MonitoringEvent, OtherHmrcHelpline}
 import uk.gov.hmrc.helplinefrontend.monitoring.analytics._
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
 import uk.gov.hmrc.helplinefrontend.views.html.helplinesByService.{FindHMRCHelpline, Helpline, HelplinesByService}
@@ -37,7 +38,7 @@ import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOneAppPerSuite with Eventually {
+class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOneAppPerSuite with Eventually with MockFactory{
 
   private val fakeRequest = FakeRequest("GET", "/")
   val config: Configuration = Configuration.from(Map(
@@ -520,39 +521,88 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   }
 
   "CallHelpdeskController get helplines by service" should {
+    val mockEventDispatcher: EventDispatcher = mock[EventDispatcher]
+    val helpdeskController: CallHelpdeskController =
+      new CallHelpdeskController()(authConnector,
+        appConfig,
+        messagesCC,
+        contactUsDeceased,
+        childBenefit,
+        childcareService,
+        incomeTaxPaye,
+        nationalInsurance,
+        selfAssessment,
+        statePension,
+        taxCredits,
+        seiss,
+        generalEnquiries,
+        generalEnquiriesOrganisation,
+        corporationTax,
+        machineGamingDuty,
+        payeForEmployers,
+        selfAssessmentOrganisation,
+        vat,
+        callOptionsNoAnswers,
+        callOptionsOrganisationNoAnswers,
+        whichServiceAccess,
+        whichServiceAccessOther,
+        helplinesByService,
+        helpline,
+        findHMRCHelpline,
+        mockEventDispatcher,
+        ec)
 
     "return search page" in {
-      val result: Future[Result] = controller.helpLinesByServicePage()(fakeRequest)
+      (mockEventDispatcher.dispatchEvent(_:MonitoringEvent)(_: Request[_], _: HeaderCarrier, _: ExecutionContext)).expects(
+        OtherHmrcHelpline, *, *, *).returning(()).once()
+      val result: Future[Result] = helpdeskController.helpLinesByServicePage()(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Which service are you trying to access?") shouldBe true
     }
+    "return findHMRCHelplinePage page" in {
+      (mockEventDispatcher.dispatchEvent(_:MonitoringEvent)(_: Request[_], _: HeaderCarrier, _: ExecutionContext)).expects(
+        FindHmrcHelpline, *, *, *).returning(()).once()
+      val result: Future[Result] = helpdeskController.findHMRCHelplinePage()(fakeRequest)
+      status(result) shouldBe Status.OK
+      contentAsString(result).contains("Find an HMRC helpline") shouldBe true
+    }
 
     "return charities page" in {
-      val result: Future[Result] = controller.helpLinesByServiceCharitiesPage(secondaryHeading)(fakeRequest)
+      (mockEventDispatcher.dispatchEvent(_:MonitoringEvent)(_: Request[_], _: HeaderCarrier, _: ExecutionContext)).expects(
+        FindHmrcHelplinePage("charities"), *, *, *).returning(()).once()
+      val result: Future[Result] = helpdeskController.helpLinesByServiceCharitiesPage(secondaryHeading)(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Call the Charities helpline") shouldBe true
     }
 
     "return OSH page" in {
-      val result: Future[Result] = controller.helpLinesByServiceOshPage(secondaryHeading)(fakeRequest)
+      (mockEventDispatcher.dispatchEvent(_:MonitoringEvent)(_: Request[_], _: HeaderCarrier, _: ExecutionContext)).expects(
+        FindHmrcHelplinePage("osh"), *, *, *).returning(()).once()
+      val result: Future[Result] = helpdeskController.helpLinesByServiceOshPage(secondaryHeading)(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Call the online services helpline") shouldBe true
     }
 
     "return Pensions page" in {
-      val result: Future[Result] = controller.helpLinesByServicePensionsPage(secondaryHeading)(fakeRequest)
+      (mockEventDispatcher.dispatchEvent(_:MonitoringEvent)(_: Request[_], _: HeaderCarrier, _: ExecutionContext)).expects(
+        FindHmrcHelplinePage("pensions"), *, *, *).returning(()).once()
+      val result: Future[Result] = helpdeskController.helpLinesByServicePensionsPage(secondaryHeading)(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Call the pensions helpline") shouldBe true
     }
 
     "return VOA page" in {
-      val result: Future[Result] = controller.helpLinesByServiceVoaPage(secondaryHeading)(fakeRequest)
+      (mockEventDispatcher.dispatchEvent(_:MonitoringEvent)(_: Request[_], _: HeaderCarrier, _: ExecutionContext)).expects(
+        FindHmrcHelplinePage("voa"), *, *, *).returning(()).once()
+      val result: Future[Result] = helpdeskController.helpLinesByServiceVoaPage(secondaryHeading)(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Call the Valuation Office Agency helpline") shouldBe true
     }
 
     "return VAT page" in {
-      val result: Future[Result] = controller.helpLinesByServiceVatPage(secondaryHeading)(fakeRequest)
+      (mockEventDispatcher.dispatchEvent(_:MonitoringEvent)(_: Request[_], _: HeaderCarrier, _: ExecutionContext)).expects(
+        FindHmrcHelplinePage("vat"), *, *, *).returning(()).once()
+      val result: Future[Result] = helpdeskController.helpLinesByServiceVatPage(secondaryHeading)(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Call the VAT helpline") shouldBe true
     }

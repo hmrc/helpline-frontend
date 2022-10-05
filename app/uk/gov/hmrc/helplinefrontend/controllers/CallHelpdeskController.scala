@@ -198,7 +198,8 @@ class CallHelpdeskController @Inject()(implicit
   }
 
   def helpLinesByServicePage(): Action[AnyContent] = Action.async { implicit request =>
-      Future.successful(Ok(helplinesByService(HelplinesByServiceForm.helplinesByServiceForm(appConfig.helplinesByService))))
+    eventDispatcher.dispatchEvent(OtherHmrcHelpline)
+    Future.successful(Ok(helplinesByService(HelplinesByServiceForm.helplinesByServiceForm(appConfig.helplinesByService))))
   }
 
   def submitHelplinesByServicePage(): Action[AnyContent] = Action.async { implicit request =>
@@ -206,22 +207,27 @@ class CallHelpdeskController @Inject()(implicit
   }
 
   def helpLinesByServiceCharitiesPage(heading: String): Action[AnyContent] = Action { implicit request =>
+    eventDispatcher.dispatchEvent(FindHmrcHelplinePage("charities"))
     Ok(helpline(heading, "charities"))
   }
 
   def helpLinesByServiceOshPage(heading: String): Action[AnyContent] = Action { implicit request =>
+    eventDispatcher.dispatchEvent(FindHmrcHelplinePage("osh"))
     Ok(helpline(heading, "osh"))
   }
 
   def helpLinesByServicePensionsPage(heading: String): Action[AnyContent] = Action { implicit request =>
+    eventDispatcher.dispatchEvent(FindHmrcHelplinePage("pensions"))
     Ok(helpline(heading, "pensions"))
   }
 
   def helpLinesByServiceVatPage(heading: String): Action[AnyContent] = Action { implicit request =>
+    eventDispatcher.dispatchEvent(FindHmrcHelplinePage("vat"))
     Ok(helpline(heading, "vat"))
   }
 
   def helpLinesByServiceVoaPage(heading: String): Action[AnyContent] = Action { implicit request =>
+    eventDispatcher.dispatchEvent(FindHmrcHelplinePage("voa"))
     Ok(helpline(heading, "voa"))
   }
 
@@ -249,21 +255,20 @@ class CallHelpdeskController @Inject()(implicit
   }
 
   def findHMRCHelplinePage(): Action[AnyContent] = Action { implicit request =>
-    Ok(findHMRCHelpline(FindHMRCHelplineForm.findHMRCHelplineForm()))
+      eventDispatcher.dispatchEvent(FindHmrcHelpline)
+      Ok(findHMRCHelpline(FindHMRCHelplineForm.findHMRCHelplineForm()))
   }
 
   def processHMRCHelplinePage(): Action[AnyContent] = Action.async { implicit request =>
     val result = FindHMRCHelplineForm.findHMRCHelplineForm().bindFromRequest.fold(
       errors ⇒ BadRequest(findHMRCHelpline(errors)),
-      value => {
-        value match {
-          case "pta" => Redirect(routes.CallHelpdeskController.helpLinesByServiceOshPage("Personal Tax Account"))
-          case "sa" => Redirect(routes.CallHelpdeskController.helpLinesByServiceOshPage("Self Assessment"))
-          case "vat" => Redirect(routes.CallHelpdeskController.helpLinesByServiceVatPage("VAT"))
-          case "charities" => Redirect(routes.CallHelpdeskController.helpLinesByServiceCharitiesPage("Charities"))
-          case "other" => Redirect(routes.CallHelpdeskController.helpLinesByServicePage())
-          case _ => Redirect(routes.CallHelpdeskController.helpLinesByServicePage())
-        }
+      {
+        case "pta" => Redirect(routes.CallHelpdeskController.helpLinesByServiceOshPage("Personal Tax Account"))
+        case "sa" => Redirect(routes.CallHelpdeskController.helpLinesByServiceOshPage("Self Assessment"))
+        case "vat" => Redirect(routes.CallHelpdeskController.helpLinesByServiceVatPage("VAT"))
+        case "charities" => Redirect(routes.CallHelpdeskController.helpLinesByServiceCharitiesPage("Charities"))
+        case "other" => Redirect(routes.CallHelpdeskController.helpLinesByServicePage())
+        case _ => Redirect(routes.CallHelpdeskController.helpLinesByServicePage())
       }
     )
     Future.successful(result)
