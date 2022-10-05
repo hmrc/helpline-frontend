@@ -17,11 +17,12 @@
 package uk.gov.hmrc.helplinefrontend.controllers.monitoring.analytics
 
 import akka.Done
+import org.scalatest.Assertion
 import org.scalatest.concurrent.Eventually
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
-import play.api.mvc.Cookie
+import play.api.mvc.{AnyContentAsEmpty, Cookie}
 import play.api.test.FakeRequest
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.helplinefrontend.monitoring.analytics.{AnalyticsConnector, AnalyticsEventHandler, AnalyticsRequest, Event}
@@ -70,16 +71,46 @@ class AnalyticsEventHandlerSpec
           Event("sos_iv", "more_info", "test", Seq())))
       }
     }
+    "send findHmrcHelpline event" in new Setup {
+      dispatcher.dispatchEvent(FindHmrcHelpline)(request, hc, global)
+      eventually {
+        analyticsRequests.head shouldBe AnalyticsRequest(Some(gaClientId), Seq(
+          Event("lost_password", "lostpassword_find_helpline", "find_hmrc_helpline", Seq())))
+      }
+    }
+    "send findHmrcHelplinePage event" in new Setup {
+      def sendAndCheckFindHmrcHelplinePageEvent(serviceName: String): Assertion = {
+        dispatcher.dispatchEvent(FindHmrcHelplinePage(serviceName))(request, hc, global)
+        eventually {
+          analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
+            Event("lost_password", "lostpassword_end", s"lostpassword_helpline_$serviceName", Seq())))
+        }
+      }
+      sendAndCheckFindHmrcHelplinePageEvent("osh")
+      sendAndCheckFindHmrcHelplinePageEvent("vat")
+      sendAndCheckFindHmrcHelplinePageEvent("sa")
+      sendAndCheckFindHmrcHelplinePageEvent("charities")
+      sendAndCheckFindHmrcHelplinePageEvent("pta")
+      sendAndCheckFindHmrcHelplinePageEvent("pensions")
+      sendAndCheckFindHmrcHelplinePageEvent("voa")
+    }
+    "send otherHmrcHelpline event" in new Setup {
+      dispatcher.dispatchEvent(OtherHmrcHelpline)(request, hc, global)
+      eventually {
+        analyticsRequests.head shouldBe AnalyticsRequest(Some(gaClientId), Seq(
+          Event("lost_password", "lostpassword_find_helpline", "lostpassword_other_service_helpline", Seq())))
+      }
+    }
   }
 
   private trait Setup {
     val gaClientId = "GA1.1.283183975.1456746121"
-    val hc = HeaderCarrier()
+    val hc: HeaderCarrier = HeaderCarrier()
     var analyticsRequests = Seq.empty[AnalyticsRequest]
-    val request = FakeRequest().withCookies(Cookie("_ga", gaClientId))
+    val request: FakeRequest[AnyContentAsEmpty.type] = FakeRequest().withCookies(Cookie("_ga", gaClientId))
 
-    val appConfg = app.injector.instanceOf[AppConfig]
-    val httpClient = app.injector.instanceOf[HttpClient]
+    val appConfg: AppConfig = app.injector.instanceOf[AppConfig]
+    val httpClient: HttpClient = app.injector.instanceOf[HttpClient]
 
     object TestConnector extends AnalyticsConnector(appConfg, httpClient) {
       override def sendEvent(request: AnalyticsRequest)(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[Done] = {

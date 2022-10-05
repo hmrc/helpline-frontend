@@ -37,3 +37,9 @@ case class ContactHelpline(value: String) extends MonitoringEvent
 case object SignedOut extends MonitoringEvent
 
 case object SignedOutOrg extends MonitoringEvent
+
+case object FindHmrcHelpline extends MonitoringEvent
+
+case class FindHmrcHelplinePage(value: String) extends MonitoringEvent
+
+case object OtherHmrcHelpline extends MonitoringEvent
