@@ -1,0 +1,68 @@
+@*
+ * Copyright 2022 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import uk.gov.hmrc.helplinefrontend.config.AppConfig
+@import uk.gov.hmrc.helplinefrontend.views.html.Layout
+@import uk.gov.hmrc.helplinefrontend.controllers.routes
+@import java.net.URLDecoder
+@import uk.gov.hmrc.helplinefrontend.views.html.components.{Paragraph, H1, ul, InsetText, SummaryList}
+@import uk.gov.hmrc.helplinefrontend.models.ui.{SummaryRowData => Row}
+@import scala.collection.mutable.ListBuffer
+
+@this(
+  layout: Layout,
+  p: Paragraph,
+  h1: H1,
+  ul: ul,
+  insetText: InsetText,
+  summaryList: SummaryList
+)
+
+@(back: Option[String])(implicit request: Request[_], appConfig: AppConfig, messages: Messages)
+
+
+@rows = @{
+    val rws = ListBuffer[Row]()
+    rws.append(Row(key = "contact_us.died.contact_number.telephone.text", value = "contact_us.died.contact_number.telephone.number"))
+    rws.append(Row(key = "contact_us.died.contact_number.textphone.text", value = "contact_us.died.contact_number.textphone.number"))
+    rws.append(Row(key = "contact_us.died.contact_number.no_uk_telephone.text", value = "contact_us.died.contact_number.no_uk_telephone.number"))
+    rws.append(Row(key = "contact_us.died.contact_number.opening-times", value = "contact_us.died.contact_number.times"))
+    rws
+}
+
+
+@layout(pageTitle = s"${messages("contact_us.died.h1")} ${messages("title.suffix")}", backLinkLocation = back) {
+
+  @h1(messages("contact_us.died.h1"))
+
+  @p(messages("contact_us.died.call_hmrc"))
+
+  @p(messages("contact_us.died.call_advice"))
+
+          @ul(
+            items = Seq(
+                "contact_us.died.call_advice.bereavement",
+                "contact_us.died.call_advice.deceased"
+            )
+        )
+
+  @summaryList(rows = rows, classes = "govuk-summary-list--no-border")
+
+  @insetText(Html(messages("contact_us.died.getHelp", "https://www.gov.uk/dealing-hmrc-additional-needs/overview")))
+
+  @p(messages("contact_us.died.callCharges", "https://www.gov.uk/call-charges"))
+
+}

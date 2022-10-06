@@ -108,6 +108,22 @@ general-enquiries.query.p2=There are <a class="govuk-link" href="{0}">other ways
 general-enquiries-organisation.query.heading=Help with a service
 general-enquiries-organisation.query.p=You can <a class="govuk-link" href="{0}">find contact details for the service you are trying to access</a>.
 
+contact_us.died.h1=Has this person died?
+contact_us.died.call_hmrc=Call HMRC for help with tax after someone dies.
+contact_us.died.call_advice=This helpline uses speech recognition software, so you will be asked why you are calling HMRC. Try to answer with short phrases and words, for example:
+contact_us.died.call_advice.bereavement="bereavement"
+contact_us.died.call_advice.deceased="deceased"
+contact_us.died.contact_number.telephone.text=Telephone:
+contact_us.died.contact_number.telephone.number=0300 200 3300
+contact_us.died.contact_number.textphone.text=Textphone:
+contact_us.died.contact_number.textphone.number=0300 200 3319
+contact_us.died.contact_number.no_uk_telephone.text=Outside UK:
+contact_us.died.contact_number.no_uk_telephone.number=+44 135 535 9022
+contact_us.died.contact_number.opening-times=Opening times:
+contact_us.died.contact_number.times=Monday to Friday: 8am to 6pm<br><br>Closed weekends and bank holidays.
+contact_us.died.getHelp=Get help <a href="{0}" class="govuk-link">dealing with HMRC if you have additional needs</a>
+contact_us.died.callCharges=<a href="{0}" class="govuk-link">Find out about call charges</a>
+
 contact_us.deceased.h1=Has this person died?
 contact_us.deceased.call_hmrc=Call HMRC for help with tax after someone dies.
 contact_us.deceased.contact_number.telephone.number=0300 200 3300
@@ -115,7 +131,7 @@ contact_us.deceased.contact_number.call_advice.p1=When you call
 contact_us.deceased.contact_number.call_advice.p2=This helpline uses speech recognition software, so you will be asked why you are calling HMRC. Try to answer with short phrases and words, for example:
 contact_us.deceased.contact_number.call_advice.li1="bereavement"
 contact_us.deceased.contact_number.call_advice.li2="deceased"
-contact_us.deceased.contact_number.textphone.text=Textphone:
+contact_us.deceased.contact_number.telephone.text=Telephone:
 contact_us.deceased.contact_number.textphone.number=0300 200 3319
 contact_us.deceased.contact_number.no_uk_telephone.text=Outside UK:
 contact_us.deceased.contact_number.no_uk_telephone.number=+44 135 535 9022

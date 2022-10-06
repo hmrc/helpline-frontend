@@ -57,6 +57,7 @@ class CallHelpdeskController @Inject()(implicit
                                        callOptionsOrganisationNoAnswers: CallOptionsOrganisationNoAnswers,
                                        whichServiceAccess: WhichServiceAccess,
                                        whichServiceAccessOther: WhichServiceAccessOther,
+                                       hasThisPersonDied: HasThisPersonDied,
                                        helplinesByService: HelplinesByService,
                                        helpline: Helpline,
                                        findHMRCHelpline: FindHMRCHelpline,
@@ -96,6 +97,7 @@ class CallHelpdeskController @Inject()(implicit
           case SelfAssessment    => selfAssessmentPage(backCall)
           case StatePension      => statePensionPage(backCall)
           case TaxCredits        => taxCreditsPage(backCall)
+          case Died              => hasThisPersonDied(backCall)
           case _                 => generalEnquiriesPage(backCall)
         }
       ))
@@ -273,4 +275,11 @@ class CallHelpdeskController @Inject()(implicit
     )
     Future.successful(result)
   }
+
+  def hasThisPersonDiedPage: Action[AnyContent] = Action { implicit request =>
+    Ok(hasThisPersonDied(None))
+  }
+
+
+
 }

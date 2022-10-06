@@ -28,6 +28,7 @@ object CallOption extends Enum[CallOption]{
   val values: immutable.IndexedSeq[CallOption] = findValues
 
   case object Deceased          extends CallOption
+  case object Died              extends CallOption
   case object ChildBenefit      extends CallOption
   case object ChildcareService  extends CallOption
   case object IncomeTaxPaye     extends CallOption
