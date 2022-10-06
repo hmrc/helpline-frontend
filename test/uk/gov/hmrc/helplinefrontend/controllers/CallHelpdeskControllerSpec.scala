@@ -593,6 +593,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
         callOptionsOrganisationNoAnswers,
         whichServiceAccess,
         whichServiceAccessOther,
+        hasThisPersonDied,
         helplinesByService,
         helpline,
         findHMRCHelpline,
