@@ -37,7 +37,6 @@ class CallHelpdeskController @Inject()(implicit
                                        val authConnector: AuthConnector,
                                        appConfig: AppConfig,
                                        mcc: MessagesControllerComponents,
-                                       ivDeceased: IVDeceased,
                                        childBenefitPage: ChildBenefit,
                                        childcareServicePage: ChildcareService,
                                        incomeTaxPayePage: IncomeTaxPaye,
@@ -87,7 +86,6 @@ class CallHelpdeskController @Inject()(implicit
       val callOption: CallOption = CallOption.withNameInsensitiveOption(helpKey).getOrElse(GeneralEnquiries)
       Future.successful(Ok(
         callOption match {
-          case Deceased          => ivDeceased(backCall)
           case ChildBenefit      => childBenefitPage(backCall)
           case ChildcareService  =>
             eventDispatcher.dispatchEvent(ContactHmrcChildcare)
@@ -97,7 +95,9 @@ class CallHelpdeskController @Inject()(implicit
           case SelfAssessment    => selfAssessmentPage(backCall)
           case StatePension      => statePensionPage(backCall)
           case TaxCredits        => taxCreditsPage(backCall)
-          case Died              => hasThisPersonDied(backCall)
+          case Died              =>
+            eventDispatcher.dispatchEvent(HasThisPersonDied)
+            hasThisPersonDied(backCall)
           case _                 => generalEnquiriesPage(backCall)
         }
       ))
@@ -277,6 +277,7 @@ class CallHelpdeskController @Inject()(implicit
   }
 
   def hasThisPersonDiedPage: Action[AnyContent] = Action { implicit request =>
+    eventDispatcher.dispatchEvent(HasThisPersonDied)
     Ok(hasThisPersonDied(None))
   }
 

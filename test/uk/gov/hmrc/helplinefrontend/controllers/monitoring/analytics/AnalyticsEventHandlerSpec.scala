@@ -101,6 +101,13 @@ class AnalyticsEventHandlerSpec
           Event("lost_password", "lostpassword_find_helpline", "lostpassword_other_service_helpline", Seq())))
       }
     }
+    "send deceasedUser event" in new Setup {
+      dispatcher.dispatchEvent(HasThisPersonDied)(request, hc, global)
+      eventually {
+        analyticsRequests.head shouldBe AnalyticsRequest(Some(gaClientId), Seq(
+          Event("sos_iv", "personal_detail_validation_result", "deceased", Seq())))
+      }
+    }
   }
 
   private trait Setup {
