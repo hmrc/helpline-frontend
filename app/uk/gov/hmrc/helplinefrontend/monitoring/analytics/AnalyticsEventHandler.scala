@@ -45,6 +45,7 @@ class AnalyticsEventHandler @Inject()(connector: AnalyticsConnector) extends Eve
       case FindHmrcHelpline => sendEvent(factory.findHmrcHelpline())
       case e: FindHmrcHelplinePage => sendEvent(factory.findHmrcHelplinePage(e.value))
       case OtherHmrcHelpline => sendEvent(factory.otherHmrcHelpline())
+      case HasThisPersonDied => sendEvent(factory.hasThisPersonDied())
       case _ => ()
     }
   }
@@ -119,6 +120,11 @@ private class AnalyticsRequestFactory() {
 
   def signOutOrg()(clientId: Option[String])(implicit request: Request[_]): AnalyticsRequest = {
     val gaEvent = Event("sos_iv", "iv_end", "sign_out_orghelpline", getDimensions(request))
+    AnalyticsRequest(clientId, Seq(gaEvent))
+  }
+
+  def hasThisPersonDied()(clientId: Option[String])(implicit request: Request[_]): AnalyticsRequest = {
+    val gaEvent = Event("sos_iv", "personal_detail_validation_result", "deceased", getDimensions(request))
     AnalyticsRequest(clientId, Seq(gaEvent))
   }
 

@@ -124,23 +124,6 @@ contact_us.died.contact_number.times=Monday to Friday: 8am to 6pm<br><br>Closed 
 contact_us.died.getHelp=Get help <a href="{0}" class="govuk-link">dealing with HMRC if you have additional needs</a>
 contact_us.died.callCharges=<a href="{0}" class="govuk-link">Find out about call charges</a>
 
-contact_us.deceased.h1=Has this person died?
-contact_us.deceased.call_hmrc=Call HMRC for help with tax after someone dies.
-contact_us.deceased.contact_number.telephone.number=0300 200 3300
-contact_us.deceased.contact_number.call_advice.p1=When you call
-contact_us.deceased.contact_number.call_advice.p2=This helpline uses speech recognition software, so you will be asked why you are calling HMRC. Try to answer with short phrases and words, for example:
-contact_us.deceased.contact_number.call_advice.li1="bereavement"
-contact_us.deceased.contact_number.call_advice.li2="deceased"
-contact_us.deceased.contact_number.telephone.text=Telephone:
-contact_us.deceased.contact_number.textphone.number=0300 200 3319
-contact_us.deceased.contact_number.no_uk_telephone.text=Outside UK:
-contact_us.deceased.contact_number.no_uk_telephone.number=+44 135 535 9022
-contact_us.deceased.contact_hours.text1=Our phone line opening hours have temporarily changed to:
-contact_us.deceased.contact_hours.weekday=Monday to Friday: 8am to 4pm
-contact_us.deceased.contact_hours.text2=This is due to having fewer advisers available to answer calls because of the measures put in place to stop the spread of coronavirus.
-contact_us.deceased.getHelp=Get help <a href="{0}">dealing with HMRC if you have additional needs</a>
-contact_us.deceased.callCharges=<a href="{0}">Find out about call charges</a>
-
 helplines-search.h1=Which service are you trying to access?
 helplines-search.p=You cannot recover your sign in details until we have verified your email address. For security reasons you need to call an HMRC helpline.
 helplines-search.h2=Find an HMRC helpline

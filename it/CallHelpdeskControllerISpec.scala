@@ -23,14 +23,14 @@ import play.api.test.Helpers.LOCATION
 class CallHelpdeskControllerISpec extends helperSpec {
 
   val getPageBaseUrl = "/helpline"
-  val deceasedHelpKey = "deceased"
+  val diedHelpKey = "died"
   val callOptionsPage = "/call-options-no-answers"
 
   "GET /helpline/:helpKey" should {
-    "return deceased help page if the help key is 'deceased' but there is no go back url" in {
+    "return died help page if the help key is 'died' but there is no go back url" in {
       withClient {
         wsClient => {
-          wsClient.url(resource(s"$getPageBaseUrl/$deceasedHelpKey")).get().futureValue
+          wsClient.url(resource(s"$getPageBaseUrl/$diedHelpKey")).get().futureValue
         }
       }.status shouldBe OK
     }

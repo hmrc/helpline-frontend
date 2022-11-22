@@ -49,7 +49,6 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   val appConfig: AppConfig = app.injector.instanceOf[AppConfig]
   val authConnector: AuthConnector = app.injector.instanceOf[AuthConnector]
   val messagesCC: MessagesControllerComponents = app.injector.instanceOf[MessagesControllerComponents]
-  val contactUsDeceased: IVDeceased = app.injector.instanceOf[IVDeceased]
   val childBenefit: ChildBenefit = app.injector.instanceOf[ChildBenefit]
   val childcareService: ChildcareService = app.injector.instanceOf[ChildcareService]
   val incomeTaxPaye: IncomeTaxPaye = app.injector.instanceOf[IncomeTaxPaye]
@@ -100,7 +99,6 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       authConnector,
       appConfig,
       messagesCC,
-      contactUsDeceased,
       childBenefit,
       childcareService,
       incomeTaxPaye,
@@ -147,22 +145,6 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   val defaultHelpKey: String = "GENERAL-ENQUIRIES"
   val secondaryHeading: String = "Capital Gains Tax"
 
-  "CallHelpdeskController get deceased help page" should {
-    "return deceased help page if the help key is 'deceased' but there is no go back url" in {
-      val result: Future[Result] = controller.getHelpdeskPage(deceasedHelpKey, None)(fakeRequest)
-      status(result) shouldBe Status.OK
-      contentAsString(result).contains("Has this person died?") shouldBe true
-      contentAsString(result).contains("Back") shouldBe false
-    }
-
-    "return deceased help page if the help key is 'deceased' and there is a go back url" in {
-      val result: Future[Result] = controller.getHelpdeskPage(deceasedHelpKey, Some("backURL"))(fakeRequest)
-      status(result) shouldBe Status.OK
-      contentAsString(result).contains("Has this person died?") shouldBe true
-      contentAsString(result).contains("Back") shouldBe true
-    }
-  }
-
   "CallHelpdeskController get has this person died help page" should {
     "return hasThisPersonDied help page if the help key is 'DIED' but there is no go back url" in {
       val result: Future[Result] = controller.getHelpdeskPage(hasThisPersonDiedHelpKey, None)(fakeRequest)
@@ -176,6 +158,16 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Has this person died?") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
+    }
+    "return hasThisPersonDied help page" in {
+      val result: Future[Result] = controller.hasThisPersonDiedPage(request)
+      status(result) shouldBe Status.OK
+      contentAsString(result).contains("Has this person died?") shouldBe true
+      contentAsString(result).contains("Back") shouldBe false
+      eventually {
+        analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
+          Event("sos_iv", "personal_detail_validation_result", "deceased", expectedDimensions)))
+      }
     }
   }
 
@@ -264,7 +256,6 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
           authConnector,
           customiseAppConfig,
           messagesCC,
-          contactUsDeceased,
           childBenefit,
           childcareService,
           incomeTaxPaye,
@@ -573,7 +564,6 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       new CallHelpdeskController()(authConnector,
         appConfig,
         messagesCC,
-        contactUsDeceased,
         childBenefit,
         childcareService,
         incomeTaxPaye,

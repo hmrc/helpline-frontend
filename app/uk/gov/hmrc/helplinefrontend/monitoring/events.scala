@@ -43,3 +43,5 @@ case object FindHmrcHelpline extends MonitoringEvent
 case class FindHmrcHelplinePage(value: String) extends MonitoringEvent
 
 case object OtherHmrcHelpline extends MonitoringEvent
+
+case object HasThisPersonDied extends MonitoringEvent

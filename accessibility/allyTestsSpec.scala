@@ -49,7 +49,6 @@ class allyTestsSpec extends AnyWordSpec with Matchers with GuiceOneAppPerSuite w
   val appConfig: AppConfig = app.injector.instanceOf[AppConfig]
   val authConnector: AuthConnector = app.injector.instanceOf[AuthConnector]
   val messagesCC: MessagesControllerComponents = app.injector.instanceOf[MessagesControllerComponents]
-  val contactUsDeceased: IVDeceased = app.injector.instanceOf[IVDeceased]
   val childBenefit: ChildBenefit = app.injector.instanceOf[ChildBenefit]
   val childcareService: ChildcareService = app.injector.instanceOf[ChildcareService]
   val incomeTaxPaye: IncomeTaxPaye = app.injector.instanceOf[IncomeTaxPaye]
@@ -100,7 +99,6 @@ class allyTestsSpec extends AnyWordSpec with Matchers with GuiceOneAppPerSuite w
       authConnector,
       appConfig,
       messagesCC,
-      contactUsDeceased,
       childBenefit,
       childcareService,
       incomeTaxPaye,
