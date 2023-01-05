@@ -1,5 +1,5 @@
 @*
- * Copyright 2022 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,15 +25,17 @@
 @(back: Option[String])(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
 
 @layout(pageTitle = s"${messages("self-assessment-organisation.query.heading")} ${messages("title.suffix")}", backLinkLocation = back) {
-    @h1(messages("self-assessment-organisation.query.heading"))
+    @h1(messages("self-assessment.query.title"))
 
-    @h2(messages("default.title"), Some("govuk-body-l govuk-!-font-weight-bold"))
-    @p(messages("self-assessment-organisation.query.p1"))
-    @p(messages("self-assessment-organisation.query.p2", URLDecoder.decode(routes.RedirectController.contactHelpline("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/self-assessment", "self-assessment-org").url, "UTF-8")))
+    @h2(messages("self-assessment.query.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
+    @p(messages("self-assessment.query.p1"))
+    @p(messages("self-assessment.query.p2", URLDecoder.decode(routes.RedirectController.contactHelpline("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/self-assessment", "self-assessment").url, "UTF-8")))
 
     @h2(messages("default.need-help.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
-    @p(messages("online-services.need-help.p1"))
-    @p(messages("online-services.need-help.p2", URLDecoder.decode(routes.RedirectController.contactHelpdeskOrg("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/online-services-helpdesk").url, "UTF-8"), Some("govuk-!-margin-bottom-8")))
+    @p(messages("default.need-help.p1"))
 
+    @h2(messages("default.technical-help.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
+    @p(messages("default.technical-help.p1", "/contact/report-technical-problem?service=government-gateway-helpline-frontend&referrerUrl=https://www.tax.service.gov.uk/helpline/organisation/self-assessment"))
+    @p(messages("self-assessment.technical-help.p2"))
 }
 
