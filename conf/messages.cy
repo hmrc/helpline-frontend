@@ -75,7 +75,7 @@ paye-for-employers.query.p1=Mae angen i chi gysylltu â Gwasanaeth Cwsmeriaid Cy
 paye-for-employers.query.p2=Gallwch <a class="govuk-link" href="{0}">ddod o hyd i ffyrdd eraill o gysylltu â ni am TWE i gyflogwyr</a>.
 
 default.technical-help.heading=Os oes angen help technegol arnoch
-default.technical-help.p1=Os oes angen help arnoch gyda’n gwefan oherwydd eich bod yn cadarnhau pwy ydych ac nad yw’ch manylion yn cyd-fynd â’n cofnodion, neu os cewch unrhyw fater technegol arall, mae angen i chi gysylltu â’n tîm cymorth technegol.
+default.technical-help.p1=Os oes angen help arnoch gyda’n gwefan oherwydd eich bod yn cadarnhau pwy ydych ac nad yw’ch manylion yn cyd-fynd â’n cofnodion, neu os cewch unrhyw fater technegol arall, mae angen i chi <a class="govuk-link" href="{0}">gysylltu â’n tîm cymorth technegol</a>.
 
 self-assessment.query.title=Ymholiad Hunanasesiad
 self-assessment.query.p1=Os nad oes angen help arnoch i fewngofnodi, ond bod gennych ymholiad arall am Hunanasesiad, gallwch gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEF drwy ffonio <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>.
