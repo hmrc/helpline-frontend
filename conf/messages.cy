@@ -74,9 +74,13 @@ paye-for-employers.query.heading=Help gyda TWE
 paye-for-employers.query.p1=Mae angen i chi gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEF ar <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>.
 paye-for-employers.query.p2=Gallwch <a class="govuk-link" href="{0}">ddod o hyd i ffyrdd eraill o gysylltu â ni am TWE i gyflogwyr</a>.
 
-self-assessment.query.title=Ymholiad Hunanasesiad
+self-assessment.query.heading=Ymholiad Hunanasesiad
 self-assessment.query.p1=Os nad oes angen help arnoch i fewngofnodi, ond bod gennych ymholiad arall am Hunanasesiad, gallwch gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEF drwy ffonio <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>.
 self-assessment.query.p2=Mae ffyrdd eraill o <a class="govuk-link" href="{0}">gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEF</a>.
+
+self-assessment-organisation.query.heading=Help gyda Hunanasesiad
+self-assessment-organisation.query.p1=Mae angen i chi gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEF ar <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>.
+self-assessment-organisation.query.p2=Gallwch <a class="govuk-link" href="{0}">ddod o hyd i ffyrdd eraill o gysylltu â ni am Hunanasesiad</a>.
 
 seiss.query.heading=Os oes gennych ymholiad am y Cynllun Cymhorthdal Incwm Hunangyflogaeth
 seiss.query.p1=Os nad oes angen help arnoch i fewngofnodi, ond bod gennych ymholiad arall y Cynllun Cymhorthdal Incwm Hunangyflogaeth, gallwch gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEF drwy ffonio <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>.

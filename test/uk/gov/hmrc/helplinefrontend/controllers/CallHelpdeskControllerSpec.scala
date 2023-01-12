@@ -358,14 +358,14 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
     "return Self Assessment help page if the help key is 'self-assessment' but there is no go back url" in {
       val result: Future[Result] = controller.getHelpdeskOrganisationPage(selfAssessmentOrganisationHelpKey, None)(fakeRequest)
       status(result) shouldBe Status.OK
-      contentAsString(result).contains("Self Assessment query") shouldBe true
+      contentAsString(result).contains("Help with Self Assessment") shouldBe true
       contentAsString(result).contains("Back") shouldBe false
     }
 
     "return Self Assessment help page if the help key is 'self-assessment' and there is a go back url" in {
       val result: Future[Result] = controller.getHelpdeskOrganisationPage(selfAssessmentOrganisationHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
-      contentAsString(result).contains("Self Assessment query") shouldBe true
+      contentAsString(result).contains("Help with Self Assessment") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
     }
   }

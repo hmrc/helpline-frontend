@@ -30,8 +30,6 @@ default.title=Call an HMRC helpline
 default.need-help.heading=If you need help signing in
 default.need-help.p1=If you need help recovering your user ID, resetting your password or changing how you get your access codes, you need to contact the Online Services helpdesk on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3600</span>.
 default.need-help.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Online Services helpdesk</a>.
-default.technical-help.heading=If you need technical help
-default.technical-help.p1=If you need help with our website because you are confirming your identity and your details don’t match our records, or for any other technical issues, you need to <a class="govuk-link" href="{0}">contact our technical support team</a>.
 label.telephone=Telephone
 label.outside-uk=Outside UK
 label.monday-friday=Monday to Friday
@@ -76,11 +74,13 @@ paye-for-employers.query.heading=Help with PAYE for employers
 paye-for-employers.query.p1=You need to contact the employers helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3200</span>.
 paye-for-employers.query.p2=You can <a class="govuk-link" href="{0}">find other ways to contact us about PAYE for employers</a>.
 
-self-assessment.query.title=Self Assessment query
-self-assessment.query.heading=Call the Self Assessment helpline
+self-assessment.query.heading=Self Assessment query
 self-assessment.query.p1=If you do not need help signing in but have another query about Self Assessment, you need to contact the Self Assessment helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3310</span>.
 self-assessment.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Self Assessment helpline</a>.
-self-assessment.technical-help.p2=Technical support cannot help you submit your Self Assessment or obtain your login details.
+
+self-assessment-organisation.query.heading=Help with Self Assessment
+self-assessment-organisation.query.p1=You need to contact the Self Assessment helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3310</span>.
+self-assessment-organisation.query.p2=You can <a class="govuk-link" href="{0}">find other ways to contact us about Self Assessment</a>.
 
 seiss.query.heading=If you have a Self-Employment Income Support Scheme query
 seiss.query.p1=If you do not need help signing in but have another query about the Self-Employment Income Support Scheme, you need to contact the Self-Employment Income Support Scheme helpline on <span class="govuk-!-font-weight-bold no-wrap">0800 024 1222</span>.
