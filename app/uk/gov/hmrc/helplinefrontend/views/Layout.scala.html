@@ -15,10 +15,14 @@
  *@
 
 @import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcLayout
-@import uk.gov.hmrc.helplinefrontend.views.html.AdditionalHead
+@import uk.gov.hmrc.helplinefrontend.views.html.{AdditionalHead,FullWidth}
 @import views.html.helper.CSPNonce
 
-@this(hmrcLayout: HmrcLayout, head: AdditionalHead)
+@this(
+        hmrcLayout: HmrcLayout,
+        head: AdditionalHead,
+        fullWidthTemplate: FullWidth
+)
 
 @(pageTitle: String = "",
   headBlock: Option[Html] = None,
@@ -30,11 +34,7 @@
 
 
 @contentSection = {
-    <div class="govuk-grid-row">
-        <div class="@if(fullWidth){govuk-grid-column-full-width} else {govuk-grid-column-two-thirds}">
-            @contentBlock
-        </div>
-    </div>
+    @contentBlock
 }
 
 
@@ -55,7 +55,7 @@
     backLinkUrl = backLinkLocation,
     isWelshTranslationAvailable = appConfig.welshLanguageSupportEnabled,
     signOutUrl = signOutUrl,
-    mainContentLayout = None,
+    mainContentLayout = if(fullWidth)Some(fullWidthTemplate(_)) else None,
     additionalScriptsBlock = scriptsBlock,
     additionalHeadBlock = Some(head(headBlock)),
     nonce = CSPNonce.get
