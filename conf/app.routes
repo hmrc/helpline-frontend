@@ -32,6 +32,7 @@ GET        /helplines-by-service/osh                        uk.gov.hmrc.helpline
 GET        /helplines-by-service/pensions                   uk.gov.hmrc.helplinefrontend.controllers.CallHelpdeskController.helpLinesByServicePensionsPage(heading: String)
 GET        /helplines-by-service/vat                        uk.gov.hmrc.helplinefrontend.controllers.CallHelpdeskController.helpLinesByServiceVatPage(heading: String)
 GET        /helplines-by-service/voa                        uk.gov.hmrc.helplinefrontend.controllers.CallHelpdeskController.helpLinesByServiceVoaPage(heading: String)
+GET        /helplines-by-service/dst                        uk.gov.hmrc.helplinefrontend.controllers.CallHelpdeskController.helpLinesByServiceDstPage(heading: String)
 POST       /helplines-by-service/service                    uk.gov.hmrc.helplinefrontend.controllers.CallHelpdeskController.helpLinesByServiceServicePage()
 
 GET        /find-hmrc-helpline                              uk.gov.hmrc.helplinefrontend.controllers.CallHelpdeskController.findHMRCHelplinePage()
