@@ -34,11 +34,16 @@
 
 @rows = @{
     val rws = ListBuffer[Row]()
-    rws.append(Row(key = "helplines-search.telephone", value = s"helplines-search.${helpdesk}.tel"))
-    rws.append(Row(key = "helplines-search.outside-uk", value = s"helplines-search.${helpdesk}.int"))
-    rws.append(Row(key = "helplines-search.opening-times", value = s"helplines-search.${helpdesk}.times"))
+    if(helpdesk != "dst"){
+        rws.append(Row(key = "helplines-search.telephone", value = s"helplines-search.${helpdesk}.tel"))
+        rws.append(Row(key = "helplines-search.outside-uk", value = s"helplines-search.${helpdesk}.int"))
+        rws.append(Row(key = "helplines-search.opening-times", value = s"helplines-search.${helpdesk}.times"))
+    } else {
+        rws.append(Row(key = s"helplines-search.${helpdesk}-mailbox", value = s"helplines-search.${helpdesk}.mailbox"))
+    }
     rws
 }
+
 
 @layout(pageTitle = s"${messages(s"helplines-search.${helpdesk}.h1")} ${messages("title.suffix")}") {
     @preHeading(heading.replaceAll("_", " "))
@@ -50,6 +55,8 @@
         @p(messages("helplines-search.more-contact-details", "https://www.tax.service.gov.uk/ask-hmrc/chat/online-services-helpdesk"))
     }
     @insetText(html = Html(messages("helplines-search.additional-needs", "https://www.gov.uk/dealing-hmrc-additional-needs/overview")))
-    @p(messages("helplines-search.call-charges", "https://www.gov.uk/call-charges"))
+    @if(helpdesk != "dst"){
+        @p(messages("helplines-search.call-charges", "https://www.gov.uk/call-charges"))
+    }
 }
 

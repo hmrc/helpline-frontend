@@ -233,6 +233,11 @@ class CallHelpdeskController @Inject()(implicit
     Ok(helpline(heading, "voa"))
   }
 
+  def helpLinesByServiceDstPage(heading: String): Action[AnyContent] = Action { implicit request =>
+    eventDispatcher.dispatchEvent(FindHmrcHelplinePage("dst"))
+    Ok(helpline(heading, "dst"))
+  }
+
   def helpLinesByServiceServicePage(): Action[AnyContent] = Action.async { implicit request =>
     val result = HelplinesByServiceSearchForm.helplinesByServiceSearchForm(appConfig.helplinesByService).bindFromRequest.fold(
       errors ⇒ BadRequest(helplinesByService(errors)),
