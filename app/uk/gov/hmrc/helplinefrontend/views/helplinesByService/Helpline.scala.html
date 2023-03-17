@@ -48,7 +48,11 @@
 @layout(pageTitle = s"${messages(s"helplines-search.${helpdesk}.h1")} ${messages("title.suffix")}") {
     @preHeading(heading.replaceAll("_", " "))
     @h1(messages(s"helplines-search.${helpdesk}.h1"))
+    @if(helpdesk != "dst"){
     @summaryList(rows = rows, classes = "govuk-summary-list--no-border")
+    } else {
+        @p(messages(s"helplines-search.${helpdesk}-mailbox") + " " + messages(s"helplines-search.${helpdesk}.mailbox"))
+    }
     @if(helpdesk == "vat") {
         @p(messages("helplines-search.more-contact-details", "https://www.tax.service.gov.uk/ask-hmrc/chat/vat-online"))
     } else if(helpdesk == "osh") {

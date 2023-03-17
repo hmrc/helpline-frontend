@@ -243,7 +243,7 @@ helplines-search.voa.int=+44 300 050 1501
 helplines-search.voa.times=Monday to Friday: 8am to 6pm<br>Closed weekends and bank holidays.
 
 helplines-search.dst.h1=Contact the DST mailbox
-helplines-search.dst-mailbox=Mailbox:
+helplines-search.dst-mailbox=<span class="govuk-!-font-weight-bold">Mailbox:</span>
 helplines-search.dst.mailbox=<a href="mailto:ccgdstmailbox@hmrc.gov.uk" class="govuk-link">ccgdstmailbox@hmrc.gov.uk</a>
 
 find-HMRC-helplines.h1=Find an HMRC helpline
