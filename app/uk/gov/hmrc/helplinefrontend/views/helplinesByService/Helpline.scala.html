@@ -49,7 +49,7 @@
     @preHeading(heading.replaceAll("_", " "))
     @h1(messages(s"helplines-search.${helpdesk}.h1"))
     @if(helpdesk != "dst"){
-    @summaryList(rows = rows, classes = "govuk-summary-list--no-border")
+        @summaryList(rows = rows, classes = "govuk-summary-list--no-border")
     } else {
         @p(messages(s"helplines-search.${helpdesk}-mailbox") + " " + messages(s"helplines-search.${helpdesk}.mailbox"))
     }
