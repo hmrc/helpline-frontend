@@ -254,6 +254,7 @@ class CallHelpdeskController @Inject()(implicit
             case "charities" =>   Redirect(routes.CallHelpdeskController.helpLinesByServiceCharitiesPage(value))
             case "pensions" =>    Redirect(routes.CallHelpdeskController.helpLinesByServicePensionsPage(value))
             case "voa" =>         Redirect(routes.CallHelpdeskController.helpLinesByServiceVoaPage(value))
+            case "dst" =>         Redirect(routes.CallHelpdeskController.helpLinesByServiceDstPage(value))
             case _ =>             Redirect(routes.CallHelpdeskController.helpLinesByServiceOshPage(value))
           }
       }

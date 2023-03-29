@@ -644,5 +644,13 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Call the VAT helpline") shouldBe true
     }
+
+    "return the DSP page" in {
+      (mockEventDispatcher.dispatchEvent(_:MonitoringEvent)(_: Request[_], _: HeaderCarrier, _: ExecutionContext)).expects(
+        FindHmrcHelplinePage("dst"), *, *, *).returning(()).once()
+      val result: Future[Result] = helpdeskController.helpLinesByServiceDstPage(secondaryHeading)(fakeRequest)
+      status(result) shouldBe Status.OK
+      contentAsString(result).contains("Contact the DST mailbox") shouldBe true
+    }
   }
 }
