@@ -16,7 +16,6 @@
 
 @import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcLayout
 @import uk.gov.hmrc.helplinefrontend.views.html.{AdditionalHead,FullWidth}
-@import views.html.helper.CSPNonce
 
 @this(
         hmrcLayout: HmrcLayout,
@@ -57,6 +56,5 @@
     signOutUrl = signOutUrl,
     mainContentLayout = if(fullWidth)Some(fullWidthTemplate(_)) else None,
     additionalScriptsBlock = scriptsBlock,
-    additionalHeadBlock = Some(head(headBlock)),
-    nonce = CSPNonce.get
+    additionalHeadBlock = Some(head(headBlock))
 )(contentSection)
