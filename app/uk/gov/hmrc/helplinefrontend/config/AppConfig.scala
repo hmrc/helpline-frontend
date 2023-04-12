@@ -164,7 +164,12 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "VAT Mini One Stop Shop - for businesses based in the UK and EU" -> "vat",
     "VAT Mini One Stop Shop - for businesses based outside the UK and EU" -> "vat",
     "VAT Reverse Charge Sales List (RCSL)" -> "vat",
-    "VOA check and challenge your business rates valuation" -> "voa"
+    "VOA check and challenge your business rates valuation" -> "voa",
+    "Tax code change" -> "osh",
+    "Tax Credits" -> "osh",
+    "Help to Save" -> "osh",
+    "Child benefit" -> "osh",
+    "Tax - free childcare and Personal Pension Options" -> "osh"
   )
 
   val callOptionsList: List[String] =

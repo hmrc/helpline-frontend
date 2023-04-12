@@ -70,7 +70,7 @@
                     </tr>
                 </thead>
                 <tbody class="govuk-table__body">
-                @for(question <- appConfig.helplinesByService) {
+                @for(question <- appConfig.helplinesByService.toSeq.sortBy(_._1)) {
                     <tr class="govuk-table__row">
                         <td class="govuk-table__cell">
                             <ul class="govuk-list">
