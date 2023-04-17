@@ -88,6 +88,7 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "general-enquiries-org" -> "further-contact_other_org")
 
   val helplinesByService = Map(
+    "Advance Ruling Service" -> "osh",
     "Advance Tariff Ruling" -> "vat",
     "Aggregate Levy" -> "vat",
     "Air Passenger Duty" -> "vat",
