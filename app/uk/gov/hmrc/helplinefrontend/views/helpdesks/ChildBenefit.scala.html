@@ -16,24 +16,51 @@
 
 @import uk.gov.hmrc.helplinefrontend.config.AppConfig
 @import uk.gov.hmrc.helplinefrontend.views.html.Layout
-@import uk.gov.hmrc.helplinefrontend.views.html.components.{Paragraph, H1, H2}
+@import uk.gov.hmrc.helplinefrontend.views.html.components.{Paragraph, H1, H2, InsetText, SummaryList}
+@import uk.gov.hmrc.helplinefrontend.models.ui.{SummaryRowData => Row}
 @import uk.gov.hmrc.helplinefrontend.controllers.routes
 @import java.net.URLDecoder
+@import scala.collection.mutable.ListBuffer
 
-@this(layout: Layout, p: Paragraph, h1: H1, h2: H2)
+@this(layout: Layout,
+        p: Paragraph,
+        h1: H1,
+        h2: H2,
+        insetText: InsetText,
+        summaryList: SummaryList)
 
 @(back: Option[String])(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
 
-@layout(pageTitle = s"${messages("child-benefit.query.heading")} ${messages("title.suffix")}", backLinkLocation = back) {
-    @h1(messages("child-benefit.query.heading"))
-
-    @h2(messages("default.title"), Some("govuk-body-l govuk-!-font-weight-bold"))
-    @p(messages("child-benefit.query.p1"))
-    @p(messages("child-benefit.query.p2", URLDecoder.decode(routes.RedirectController.contactHelpline("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/child-benefit", "child-benefit").url, "UTF-8"), Some("govuk-!-margin-bottom-8")))
-
-    @h2(messages("default.need-help.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
-    @p(messages("default.need-help.p1"))
-    @p(messages("default.need-help.p2", URLDecoder.decode(routes.RedirectController.contactHelpdesk("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/online-services-helpdesk").url, "UTF-8"), Some("govuk-!-margin-bottom-8")))
+@rows = @{
+    val rws = ListBuffer[Row]()
+    rws.append(Row(key = "child-benefit.query.contact_number.telephone.text", value = "child-benefit.query.contact_number.telephone.number"))
+    rws.append(Row(key = "child-benefit.query.contact_number.no_uk_telephone.text", value = "child-benefit.query.contact_number.no_uk_telephone.number"))
+    rws.append(Row(key = "child-benefit.query.contact_number.opening-times", value = "child-benefit.query.contact_number.times"))
+    rws
 }
 
+@if(appConfig.serviceHelplinesRelatedQueriesOnly){
 
+    @layout(pageTitle = s"${messages("child-benefit.query.headingNew")} ${messages("title.suffix")}", backLinkLocation = back) {
+
+        @h1(messages("child-benefit.query.headingNew"))
+        @summaryList(rows = rows, classes = "govuk-summary-list--no-border")
+        @p(messages("child-benefit.query.contactDetails", "https://www.gov.uk/government/organisations/hm-revenue-customs/contact/child-benefit"))
+        @insetText(Html(messages("child-benefit.query.getHelp", "https://www.gov.uk/get-help-hmrc-extra-support")))
+        @p(messages("child-benefit.query.callCharges", "https://www.gov.uk/call-charges"))
+    }
+
+} else {
+
+    @layout(pageTitle = s"${messages("child-benefit.query.heading")} ${messages("title.suffix")}", backLinkLocation = back) {
+        @h1(messages("child-benefit.query.heading"))
+
+        @h2(messages("default.title"), Some("govuk-body-l govuk-!-font-weight-bold"))
+        @p(messages("child-benefit.query.p1"))
+        @p(messages("child-benefit.query.p2", URLDecoder.decode(routes.RedirectController.contactHelpline("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/child-benefit", "child-benefit").url, "UTF-8"), Some("govuk-!-margin-bottom-8")))
+
+        @h2(messages("default.need-help.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
+        @p(messages("default.need-help.p1"))
+        @p(messages("default.need-help.p2", URLDecoder.decode(routes.RedirectController.contactHelpdesk("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/online-services-helpdesk").url, "UTF-8"), Some("govuk-!-margin-bottom-8")))
+    }
+}

@@ -44,6 +44,17 @@ child-benefit.query.heading=Child Benefit query
 child-benefit.query.p1=If you do not need help signing in but have another query about Child Benefit, you need to contact the Child Benefit helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3100</span>.
 child-benefit.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Child Benefit helpline</a>.
 
+child-benefit.query.headingNew=Call the Child Benefit helpline
+child-benefit.query.contact_number.telephone.text=Telephone:
+child-benefit.query.contact_number.telephone.number=0300 200 3100
+child-benefit.query.contact_number.no_uk_telephone.text=Outside UK:
+child-benefit.query.contact_number.no_uk_telephone.number=+44 161 210 3086
+child-benefit.query.contact_number.opening-times=Opening times:
+child-benefit.query.contact_number.times=Monday to Friday: 8am to 6pm<br><br>Closed weekends and bank holidays.
+child-benefit.query.contactDetails=<a href="{0}" class="govuk-link">More contact details</a>
+child-benefit.query.getHelp=Get help <a href="{0}" class="govuk-link">dealing with HMRC if you have additional needs</a>
+child-benefit.query.callCharges=<a href="{0}" class="govuk-link">Find out about call charges</a>
+
 childcare-service.query.heading=Childcare Service query
 childcare-service.query.p1=If you need help with a Childcare Service application, contact the Childcare Service helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 123 4097</span>.
 childcare-service.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Childcare Service helpline</a>.

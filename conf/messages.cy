@@ -44,6 +44,17 @@ child-benefit.query.heading=Ymholiad Budd-dal Plant
 child-benefit.query.p1=Os nad oes angen help arnoch i fewngofnodi, ond bod gennych ymholiad arall am Fudd-dal Plant, gallwch gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEF drwy ffonio <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>.
 child-benefit.query.p2=Mae ffyrdd eraill o <a class="govuk-link" href="{0}">gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEF</a>.
 
+child-benefit.query.headingNew=Ffoniwch Wasanaeth Cwsmeriaid Cymraeg CThEF ar gyfer ymholiadau ynghylch Budd-dal Plant
+child-benefit.query.contact_number.telephone.text=Ffôn:
+child-benefit.query.contact_number.telephone.number=0300 200 1900
+child-benefit.query.contact_number.no_uk_telephone.text=Y tu allan i’r DU:
+child-benefit.query.contact_number.no_uk_telephone.number=+44 300 200 1900
+child-benefit.query.contact_number.opening-times=Oriau Agor:
+child-benefit.query.contact_number.times=Dydd Llun i ddydd Gwener: 08:30 tan 17:00<br><br>Ar gau ar benwythnosau a gwyliau banc.
+child-benefit.query.contactDetails=<a href="{0}" class="govuk-link">Rhagor o fanylion cyswllt</a>
+child-benefit.query.getHelp=Get help <a href="{0}" class="govuk-link">Help i ddelio â CThEF os oes gennych anghenion ychwanegol.</a>
+child-benefit.query.callCharges=<a href="{0}" class="govuk-link">Dysgwch am gostau galwadau</a>
+
 childcare-service.query.heading=Ymholiad Gwasanaeth Gofal Plant
 childcare-service.query.p1=Os oes angen help arnoch gyda chais gwasanaeth gofal plant, cysylltwch â llinell gymorth y Gwasanaeth Gofal Plant ar <span class="govuk-!-font-weight-bold no-wrap">0300 123 8124</span>.
 childcare-service.query.p2=Mae ffyrdd eraill o <a class="govuk-link" href="{0}">gysylltu â’r Gwasanaeth Gofal Plant</a>.
