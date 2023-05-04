@@ -171,7 +171,7 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "Help to Save" -> "osh",
     "Child benefit" -> "osh",
     "Tax - free childcare and Personal Pension Options" -> "osh",
-    "Legislative Delivery Helpline" -> "osh"
+    "Mandatory Disclosure Rules" -> "osh"
   )
 
   val callOptionsList: List[String] =
