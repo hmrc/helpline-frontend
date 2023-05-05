@@ -51,29 +51,84 @@ child-benefit.query.contact_number.no_uk_telephone.text=Outside UK:
 child-benefit.query.contact_number.no_uk_telephone.number=+44 161 210 3086
 child-benefit.query.contact_number.opening-times=Opening times:
 child-benefit.query.contact_number.times=Monday to Friday: 8am to 6pm<br><br>Closed weekends and bank holidays.
-child-benefit.query.contactDetails=<a href="{0}" class="govuk-link">More contact details</a>
-child-benefit.query.getHelp=Get help <a href="{0}" class="govuk-link">dealing with HMRC if you have additional needs</a>
-child-benefit.query.callCharges=<a href="{0}" class="govuk-link">Find out about call charges</a>
+child-benefit.query.contactDetails=<a href="{0}" class="govuk-link">More contact details</a>.
+child-benefit.query.getHelp=Get help <a href="{0}" class="govuk-link">dealing with HMRC if you have additional needs</a>.
+child-benefit.query.callCharges=<a href="{0}" class="govuk-link">Find out about call charges</a>.
 
 childcare-service.query.heading=Childcare Service query
 childcare-service.query.p1=If you need help with a Childcare Service application, contact the Childcare Service helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 123 4097</span>.
 childcare-service.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Childcare Service helpline</a>.
 
+childcare-service.query.headingNew=Call the Childcare Service helpline
+childcare-service.query.contact_number.telephone.text=Telephone:
+childcare-service.query.contact_number.telephone.number=0300 123 4097
+childcare-service.query.contact_number.textphone.text=Textphone:
+childcare-service.query.contact_number.textphone.number=0300 123 9232
+childcare-service.query.contact_number.opening-times=Opening times:
+childcare-service.query.contact_number.times=Monday to Friday: 8am to 6pm<br><br>Closed weekends and bank holidays.
+childcare-service.query.contactDetails=<a href="{0}" class="govuk-link">More contact details</a>.
+childcare-service.query.getHelp=Get help <a href="{0}" class="govuk-link">dealing with HMRC if you have additional needs</a>.
+childcare-service.query.callCharges=<a href="{0}" class="govuk-link">Find out about call charges</a>.
+
 corporation-tax.query.heading=Help with Corporation Tax
 corporation-tax.query.p1=You need to contact the Corporation Tax helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3410</span>.
 corporation-tax.query.p2=You can <a class="govuk-link" href="{0}">find other ways to contact us about Corporation Tax</a>.
+
+corporation-tax.query.headingNew=Call the Corporation Tax helpline
+corporation-tax.query.contact_number.telephone.text=Telephone:
+corporation-tax.query.contact_number.telephone.number=0300 200 3410
+corporation-tax.query.contact_number.no_uk_telephone.text=Outside UK:
+corporation-tax.query.contact_number.no_uk_telephone.number=+44 151 268 0571
+corporation-tax.query.contact_number.opening-times=Opening times:
+corporation-tax.query.contact_number.times=Monday to Friday: 8am to 6pm<br><br>Closed weekends and bank holidays.
+corporation-tax.query.contactDetails=<a href="{0}" class="govuk-link">More contact details</a>.
+corporation-tax.query.getHelp=Get help <a href="{0}" class="govuk-link">dealing with HMRC if you have additional needs</a>.
+corporation-tax.query.callCharges=<a href="{0}" class="govuk-link">Find out about call charges</a>.
 
 income-tax-paye.query.heading=Income Tax and PAYE query
 income-tax-paye.query.p1=If you do not need help signing in but have another query about Income Tax or PAYE, you need to contact the Income Tax helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3300</span>.
 income-tax-paye.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Income Tax helpline</a>.
 
+income-tax-paye.query.headingNew=Call the Income Tax and PAYE support helpline
+income-tax-paye.query.contact_number.telephone.text=Telephone:
+income-tax-paye.query.contact_number.telephone.number=0300 200 3300
+income-tax-paye.query.contact_number.no_uk_telephone.text=Outside UK:
+income-tax-paye.query.contact_number.no_uk_telephone.number=+44 135 535 9022
+income-tax-paye.query.contact_number.opening-times=Opening times:
+income-tax-paye.query.contact_number.times=Monday to Friday: 8am to 6pm<br><br>Closed weekends and bank holidays.
+income-tax-paye.query.contactDetails=<a href="{0}" class="govuk-link">More contact details</a>.
+income-tax-paye.query.getHelp=Get help <a href="{0}" class="govuk-link">dealing with HMRC if you have additional needs</a>.
+income-tax-paye.query.callCharges=<a href="{0}" class="govuk-link">Find out about call charges</a>.
+
 national-insurance.query.heading=National Insurance query
 national-insurance.query.p1=If you do not need help signing in but have another query about National Insurance, you need to contact the National Insurance helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3500</span>.
 national-insurance.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the National Insurance helpline</a>.
 
+national-insurance.query.headingNew=Call the National Insurance helpline
+national-insurance.query.contact_number.telephone.text=Telephone:
+national-insurance.query.contact_number.telephone.number=0300 200 3500
+national-insurance.query.contact_number.no_uk_telephone.text=Outside UK:
+national-insurance.query.contact_number.no_uk_telephone.number=+44 191 203 7010
+national-insurance.query.contact_number.opening-times=Opening times:
+national-insurance.query.contact_number.times=Monday to Friday: 8am to 6pm<br><br>Closed weekends and bank holidays.
+national-insurance.query.contactDetails=<a href="{0}" class="govuk-link">More contact details</a>.
+national-insurance.query.getHelp=Get help <a href="{0}" class="govuk-link">dealing with HMRC if you have additional needs</a>.
+national-insurance.query.callCharges=<a href="{0}" class="govuk-link">Find out about call charges</a>.
+
 machine-games-duty.query.heading=Help with Machine Games Duty
 machine-games-duty.query.p1=You need to contact the excise and gambling duties helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3701</span>.
 machine-games-duty.query.p2=You can <a class="govuk-link" href="{0}">find other ways to contact us about Machine Games Duty</a>.
+
+machine-games-duty.query.headingNew=Call the Machine Games Duty helpline
+machine-games-duty.query.contact_number.telephone.text=Telephone:
+machine-games-duty.query.contact_number.telephone.number=0300 200 3700
+machine-games-duty.query.contact_number.no_uk_telephone.text=Outside UK:
+machine-games-duty.query.contact_number.no_uk_telephone.number=+44 2920 501 261
+machine-games-duty.query.contact_number.opening-times=Opening times:
+machine-games-duty.query.contact_number.times=Monday to Friday: 8am to 6pm<br><br>Closed weekends and bank holidays.
+machine-games-duty.query.contactDetails=<a href="{0}" class="govuk-link">More contact details</a>.
+machine-games-duty.query.getHelp=Get help <a href="{0}" class="govuk-link">dealing with HMRC if you have additional needs</a>.
+machine-games-duty.query.callCharges=<a href="{0}" class="govuk-link">Find out about call charges</a>.
 
 machine-games-duty.need-help.p1=To get help recovering your sign in details or changing how you get your access codes, you need to contact the VAT Online Services helpdesk on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3701</span>.
 machine-games-duty.need-help.p2=You can <a class="govuk-link" href="{0}">find other ways to contact VAT Online Services</a>.
@@ -89,6 +144,17 @@ self-assessment.query.heading=Self Assessment query
 self-assessment.query.p1=If you do not need help signing in but have another query about Self Assessment, you need to contact the Self Assessment helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3310</span>.
 self-assessment.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Self Assessment helpline</a>.
 
+self-assessment.query.headingNew=Call the Self Assessment helpline
+self-assessment.query.contact_number.telephone.text=Telephone:
+self-assessment.query.contact_number.telephone.number=0300 200 3310
+self-assessment.query.contact_number.no_uk_telephone.text=Outside UK:
+self-assessment.query.contact_number.no_uk_telephone.number=+44 191 203 7010
+self-assessment.query.contact_number.opening-times=Opening times:
+self-assessment.query.contact_number.times=Monday to Friday: 8am to 6pm<br><br>Closed weekends and bank holidays.
+self-assessment.query.contactDetails=<a href="{0}" class="govuk-link">More contact details</a>.
+self-assessment.query.getHelp=Get help <a href="{0}" class="govuk-link">dealing with HMRC if you have additional needs</a>.
+self-assessment.query.callCharges=<a href="{0}" class="govuk-link">Find out about call charges</a>.
+
 self-assessment-organisation.query.heading=Help with Self Assessment
 self-assessment-organisation.query.p1=You need to contact the Self Assessment helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3310</span>.
 self-assessment-organisation.query.p2=You can <a class="govuk-link" href="{0}">find other ways to contact us about Self Assessment</a>.
@@ -101,13 +167,44 @@ state-pension.query.heading=State Pension query
 state-pension.query.p1=If you do not need help signing in but have another query about a State Pension, you need to contact the Pension Service helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3500</span>.
 state-pension.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Pension Service helpline</a>.
 
+state-pension.query.headingNew=Call the State Pension helpline
+state-pension.query.contact_number.telephone.text=Telephone:
+state-pension.query.contact_number.telephone.number=0800 731 0469
+state-pension.query.contact_number.opening-times=Opening times:
+state-pension.query.contact_number.times=Monday to Friday: 8am to 6pm<br><br>Closed weekends and bank holidays.
+state-pension.query.contactDetails=<a href="{0}" class="govuk-link">More contact details</a>.
+state-pension.query.getHelp=Get help <a href="{0}" class="govuk-link">dealing with HMRC if you have additional needs</a>.
+state-pension.query.callCharges=<a href="{0}" class="govuk-link">Find out about call charges</a>.
+
 tax-credits.query.heading=Tax Credits query
 tax-credits.query.p1=If you do not need help signing in but have another query about tax credits, you need to contact the tax credits helpline on <span class="govuk-!-font-weight-bold no-wrap">0345 300 3900</span>.
 tax-credits.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the tax credits helpline</a>.
 
+tax-credits.query.headingNew=Call the Tax Credits helpline
+tax-credits.query.contact_number.telephone.text=Telephone:
+tax-credits.query.contact_number.telephone.number=0345 300 3900
+tax-credits.query.contact_number.no_uk_telephone.text=Outside UK:
+tax-credits.query.contact_number.no_uk_telephone.number=+44 2890 538 192
+tax-credits.query.contact_number.opening-times=Opening times:
+tax-credits.query.contact_number.times=Monday to Friday: 8am to 6pm<br><br>Closed weekends and bank holidays.
+tax-credits.query.contactDetails=<a href="{0}" class="govuk-link">More contact details</a>.
+tax-credits.query.getHelp=Get help <a href="{0}" class="govuk-link">dealing with HMRC if you have additional needs</a>.
+tax-credits.query.callCharges=<a href="{0}" class="govuk-link">Find out about call charges</a>.
+
 vat.query.heading=Help with VAT
 vat.query.p1=You need to contact the VAT helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3701</span>.
 vat.query.p2=You can <a class="govuk-link" href="{0}">find other ways to contact us about VAT</a>.
+
+vat.query.headingNew=Call the VAT helpline
+vat.query.contact_number.telephone.text=Telephone:
+vat.query.contact_number.telephone.number=0300 200 3700
+vat.query.contact_number.no_uk_telephone.text=Outside UK:
+vat.query.contact_number.no_uk_telephone.number=+44 2920 501 261
+vat.query.contact_number.opening-times=Opening times:
+vat.query.contact_number.times=Monday to Friday: 8am to 6pm<br><br>Closed weekends and bank holidays.
+vat.query.contactDetails=<a href="{0}" class="govuk-link">More contact details</a>.
+vat.query.getHelp=Get help <a href="{0}" class="govuk-link">dealing with HMRC if you have additional needs</a>.
+vat.query.callCharges=<a href="{0}" class="govuk-link">Find out about call charges</a>.
 
 vat.need-help.p1=To get help recovering your sign in details or changing how you get your access codes, you need to contact the VAT Online Services helpdesk on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3701</span>.
 vat.need-help.p2=You can <a class="govuk-link" href="{0}">find other ways to contact VAT Online Services</a>.

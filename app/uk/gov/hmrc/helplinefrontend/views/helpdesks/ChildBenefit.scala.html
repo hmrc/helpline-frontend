@@ -19,8 +19,8 @@
 @import uk.gov.hmrc.helplinefrontend.views.html.components.{Paragraph, H1, H2, InsetText, SummaryList}
 @import uk.gov.hmrc.helplinefrontend.models.ui.{SummaryRowData => Row}
 @import uk.gov.hmrc.helplinefrontend.controllers.routes
-@import java.net.URLDecoder
 @import scala.collection.mutable.ListBuffer
+@import java.net.URLDecoder
 
 @this(layout: Layout,
         p: Paragraph,
@@ -42,7 +42,6 @@
 @if(appConfig.serviceHelplinesRelatedQueriesOnly){
 
     @layout(pageTitle = s"${messages("child-benefit.query.headingNew")} ${messages("title.suffix")}", backLinkLocation = back) {
-
         @h1(messages("child-benefit.query.headingNew"))
         @summaryList(rows = rows, classes = "govuk-summary-list--no-border")
         @p(messages("child-benefit.query.contactDetails", "https://www.gov.uk/government/organisations/hm-revenue-customs/contact/child-benefit"))

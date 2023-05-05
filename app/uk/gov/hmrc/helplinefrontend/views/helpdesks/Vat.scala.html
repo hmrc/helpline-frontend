@@ -16,24 +16,50 @@
 
 @import uk.gov.hmrc.helplinefrontend.config.AppConfig
 @import uk.gov.hmrc.helplinefrontend.views.html.Layout
-@import uk.gov.hmrc.helplinefrontend.views.html.components.{Paragraph, H1, H2}
+@import uk.gov.hmrc.helplinefrontend.views.html.components.{Paragraph, H1, H2, InsetText, SummaryList}
+@import uk.gov.hmrc.helplinefrontend.models.ui.{SummaryRowData => Row}
 @import uk.gov.hmrc.helplinefrontend.controllers.routes
+@import scala.collection.mutable.ListBuffer
 @import java.net.URLDecoder
 
-@this(layout: Layout, p: Paragraph, h1: H1, h2: H2)
+@this(layout: Layout,
+        p: Paragraph,
+        h1: H1,
+        h2: H2,
+        insetText: InsetText,
+        summaryList: SummaryList)
 
 @(back: Option[String])(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
 
-@layout(pageTitle = s"${messages("vat.query.heading")} ${messages("title.suffix")}", backLinkLocation = back) {
-    @h1(messages("vat.query.heading"))
-
-    @h2(messages("default.title"), Some("govuk-body-l govuk-!-font-weight-bold"))
-    @p(messages("vat.query.p1"))
-    @p(messages("vat.query.p2", URLDecoder.decode(routes.RedirectController.contactHelpline("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/vat-enquiries", "vat").url, "UTF-8")))
-
-    @h2(messages("default.need-help.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
-    @p(messages("vat.need-help.p1"))
-    @p(messages("vat.need-help.p2", URLDecoder.decode(routes.RedirectController.contactHelpdeskOrg("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/vat-online-services-helpdesk").url, "UTF-8"), Some("govuk-!-margin-bottom-8")))
-
+@rows = @{
+    val rws = ListBuffer[Row]()
+    rws.append(Row(key = "vat.query.contact_number.telephone.text", value = "vat.query.contact_number.telephone.number"))
+    rws.append(Row(key = "vat.query.contact_number.no_uk_telephone.text", value = "vat.query.contact_number.no_uk_telephone.number"))
+    rws.append(Row(key = "vat.query.contact_number.opening-times", value = "vat.query.contact_number.times"))
+    rws
 }
 
+@if(appConfig.serviceHelplinesRelatedQueriesOnly){
+
+    @layout(pageTitle = s"${messages("vat.query.headingNew")} ${messages("title.suffix")}", backLinkLocation = back) {
+        @h1(messages("vat.query.headingNew"))
+        @summaryList(rows = rows, classes = "govuk-summary-list--no-border")
+        @p(messages("vat.query.contactDetails", "https://www.gov.uk/government/organisations/hm-revenue-customs/contact/vat-enquiries"))
+        @insetText(Html(messages("vat.query.getHelp", "https://www.gov.uk/get-help-hmrc-extra-support")))
+        @p(messages("vat.query.callCharges", "https://www.gov.uk/call-charges"))
+    }
+
+} else {
+
+    @layout(pageTitle = s"${messages("vat.query.heading")} ${messages("title.suffix")}", backLinkLocation = back) {
+        @h1(messages("vat.query.heading"))
+
+        @h2(messages("default.title"), Some("govuk-body-l govuk-!-font-weight-bold"))
+        @p(messages("vat.query.p1"))
+        @p(messages("vat.query.p2", URLDecoder.decode(routes.RedirectController.contactHelpline("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/vat-enquiries", "vat").url, "UTF-8")))
+
+        @h2(messages("default.need-help.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
+        @p(messages("vat.need-help.p1"))
+        @p(messages("vat.need-help.p2", URLDecoder.decode(routes.RedirectController.contactHelpdeskOrg("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/vat-online-services-helpdesk").url, "UTF-8"), Some("govuk-!-margin-bottom-8")))
+    }
+}
