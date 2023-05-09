@@ -38,7 +38,6 @@ get-help=Help i <a href="{0}">ddelio â CThEF os oes gennych anghenion ychwanego
 contact_hours.temp.text1=Mae oriau agor ein llinellau ffôn wedi newid dros dro i:
 contact_hours.temp.text2=Mae hyn oherwydd bod llai o ymgynghorwyr ar gael i ateb galwadau, oherwydd y gweithdrefnau sydd wedi’u rhoi ar waith er mwyn atal coronafeirws rhag ymledu.
 contact_hours.temp.weekday=Dydd Llun i Ddydd Gwener: 08:30 i 17:00
-contact_hours.temp.text2=Mae hyn oherwydd bod llai o ymgynghorwyr ar gael i ateb galwadau, oherwydd y gweithdrefnau sydd wedi’u rhoi ar waith er mwyn atal coronafeirws rhag ymledu.
 more-details=<a class="govuk-link" href="{0}">Mwy o fanylion cyswllt (gan gynnwys gwasanaeth sgwrs dros y we)</a>
 
 child-benefit.query.heading=Ymholiad Budd-dal Plant
