@@ -35,9 +35,9 @@ label.outside-uk=Y tu allan i’r DU
 label.monday-friday=Dydd Llun – Dydd Gwener
 call-charges=<a class="govuk-link" href="{0}">Gwybodaeth am gostau galwadau</a>.
 get-help=Help i <a href="{0}">ddelio â CThEF os oes gennych anghenion ychwanegol</a>
-contact_hours.temp.text1=
+contact_hours.temp.text1=Mae oriau agor ein llinellau ffôn wedi newid dros dro i:
+contact_hours.temp.text2=Mae hyn oherwydd bod llai o ymgynghorwyr ar gael i ateb galwadau, oherwydd y gweithdrefnau sydd wedi’u rhoi ar waith er mwyn atal coronafeirws rhag ymledu.
 contact_hours.temp.weekday=Dydd Llun i Ddydd Gwener: 08:30 i 17:00
-contact_hours.temp.text2=
 more-details=<a class="govuk-link" href="{0}">Mwy o fanylion cyswllt (gan gynnwys gwasanaeth sgwrs dros y we)</a>
 
 child-benefit.query.heading=Ymholiad Budd-dal Plant
@@ -244,3 +244,119 @@ find-HMRC-helplines.option4=Elusennau
 find-HMRC-helplines.option4.hint=Yn cynnwys Clybiau Chwaraeon Amatur Cymunedol
 find-HMRC-helplines.option5=Gwasanaethau eraill
 find-HMRC-helplines.error=Dewiswch y gwasanaeth rydych yn ei ddefnyddio gyda'r cyfrif hwn
+
+helplines-search.h1=Pa wasanaeth yr ydych yn ceisio cael ato?
+helplines-search.p=Ni allwch adfer eich manylion mewngofnodi hyd nes ein bod wedi dilysu’ch cyfeiriad e-bost. Am resymau diogelwch, bydd angen i chi ffonio un o linellau cymorth CThEF.
+helplines-search.h2=Dod o hyd i un o linellau cymorth CThEF
+helplines-search.contacts=cysylltiadau
+helplines-search.advance-tariff-ruling=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer Dyfarniadau Tariffau Uwch.
+helplines-search.aggregate-levy=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer yr Ardoll Agregau.
+helplines-search.air-passenger-duty=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer y Cynllun Cofrestru Cyfanwerthwyr Alcohol.
+helplines-search.alcohol-and-tobacco-warehousing-declarations=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer Datganiadau Warysu Alcohol a Thybaco.
+helplines-search.alcoholic-ingredients-relief=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer y Rhyddhad Cynhwysion Alcoholaidd.
+helplines-search.alcohol-wholesaler-registration-scheme=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer y Cynllun Cofrestru Cyfanwerthwyr Alcohol.
+helplines-search.annual-tax-on-enveloped-dwellings=Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF i adfer eich manylion mewngofnodi ar gyfer y Dreth Flynyddol ar Anheddau sydd wedi’u Hamgáu.
+helplines-search.anti-money-laundering-registration=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer cofrestriad gwrth-wyngalchu arian.
+helplines-search.automatic-exchange-of-information=Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF i adfer eich manylion mewngofnodi ar gyfer Cyfnewid Gwybodaeth yn Awtomatig.
+helplines-search.bingo-duty=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer y Doll Bingo.
+helplines-search.biodiesel-and-fuels-production-duty=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer y Doll Cynhyrchu Biodiesel a Thanwyddau.
+helplines-search.capital-gains-tax=Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF i adfer eich manylion mewngofnodi ar gyfer y Dreth Enillion Cyfalaf.
+helplines-search.change-vat-registration-details=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer Newid manylion cofrestru TAW.
+helplines-search.charities-and-community-amateur-sports-clubs=Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF i adfer eich manylion mewngofnodi ar gyfer Elusennau a Chlybiau Chwaraeon Amatur Cymunedol.
+helplines-search.child-trust-fund=Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF i adfer eich manylion mewngofnodi ar gyfer y Gronfa Ymddiriedolaeth Plant.
+helplines-search.claims-for-refund-of-vat-by-certain-bodies=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer Hawliadau am Ad-daliad TAW gan Gyrff Penodol.
+helplines-search.construction-industry-scheme-cis=Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF i adfer eich manylion mewngofnodi ar gyfer Cynllun y Diwydiant Adeiladu (CIS).
+helplines-search.corporation-tax=Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF i adfer eich manylion mewngofnodi ar gyfer y Dreth Gorfforaeth.
+helplines-search.country-by-country-reporting=Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF i adfer eich manylion mewngofnodi ar gyfer Cyflwyno adroddiadau Gwlad wrth wlad.
+helplines-search.cross-border-arrangement=Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF i adfer eich manylion mewngofnodi ar gyfer trefniant ar draws y ffin.
+helplines-search.customs-declaration-service=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer y Gwasanaeth Datganiadau Tollau.
+helplines-search.customs-trader-services-cts=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer Gwasanaethau Masnachwyr Tollau (CTS).
+helplines-search.duty-deferment-electronic-statements=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer Datganiadau Electronig i Ohirio Tollau.
+helplines-search.electronic-binding-tariff-information=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer Gwybodaeth Electronig am Dariff sy’n Rhwymo.
+helplines-search.excise-movement-and-control-system=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer y System Symudiadau a Rheolaeth Ecséis.
+helplines-search.fuels-duty=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer y Doll Tanwyddau.
+helplines-search.fulfilment-house-due-diligence-scheme=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer y Cynllun Diwydrwydd Dyladwy ar gyfer Busnesau Cyflawni.
+helplines-search.gaming-duty=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer y Doll Hapchwarae.
+helplines-search.gas-for-use-as-road-fuel-duty=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer y Doll ar Nwy i’w ddefnyddio fel Tanwydd Ffordd.
+helplines-search.general-betting-duty=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer y Doll Fetio Gyffredinol.
+helplines-search.goods-vehicle-movement-service=Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF i adfer eich manylion mewngofnodi ar gyfer y Gwasanaeth Symud Cerbydau Nwyddau.
+helplines-search.import-control-system-ics=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer y System Rheoli Mewnforion (ICS).
+helplines-search.insurance-premium-tax=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer Treth Premiwm Yswiriant.
+helplines-search.landfill-tax=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer y Dreth Dirlenwi.
+helplines-search.lifetime-isa=Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF i adfer eich manylion mewngofnodi ar gyfer ISA Gydol Oes.
+helplines-search.lottery-duty=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer Toll y Loteri.
+helplines-search.machine-games-duty=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer y Doll Peiriannau Hapchwarae.
+helplines-search.making-tax-digital-for-income-tax=Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF i adfer eich manylion mewngofnodi ar gyfer Troi Treth yn Ddigidol ar gyfer Treth Incwm.
+helplines-search.making-tax-digital-for-vat=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer Troi Treth yn Ddigidol ar gyfer TAW.
+helplines-search.new-computerised-transit-system=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer y System Gludo Gyfrifiadurol Newydd.
+helplines-search.new-export-system-nes=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer y System Allforio Genedlaethol (NES).
+helplines-search.non-taxable-trust-registration=Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF i adfer eich manylion mewngofnodi ar gyfer Cofrestriadau ar gyfer ymddiriedolaethau nad ydynt yn drethadwy.
+helplines-search.notification-of-vehicle-arrivals-nova=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer Hysbysiad o Gerbydau’n Cyrraedd (NOVA).
+helplines-search.other-business-taxes-duties-and-schemes=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer trethi, tollau a chynlluniau busnes eraill.
+helplines-search.paye-for-employers=Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF i adfer eich manylion mewngofnodi ar gyfer TWE i gyflogwyr.
+helplines-search.pension-schemes-online-service=Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF i adfer eich manylion mewngofnodi ar gyfer Gwasanaethau Cynlluniau Pensiwn Ar-lein.
+helplines-search.pension-schemes-for-administrators=Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF i adfer eich manylion mewngofnodi ar gyfer Cynlluniau Pensiwn ar gyfer Gweinyddwyr.
+helplines-search.pension-schemes-for-practitioners=Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF i adfer eich manylion mewngofnodi ar gyfer Cynlluniau Pensiwn ar gyfer Ymarferwyr.
+helplines-search.plastic-packaging-tax=Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF i adfer eich manylion mewngofnodi ar gyfer Y Dreth Deunydd Pacio Plastig.
+helplines-search.pool-betting-duty=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer y Doll Cronfa Fetio.
+helplines-search.qualifying-recognised-overseas-pension-scheme-qrops=Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF i adfer eich manylion mewngofnodi ar gyfer Cynlluniau Pensiwn Tramor Cydnabyddedig Cymwys (QROPS).
+helplines-search.rebated-oils-enquiry-service=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer Gwasanaeth Ymholiadau Olew Ad-daledig.
+helplines-search.remote-gambling-duty=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer y Doll Hapchwarae o Bell.
+helplines-search.report-and-pay-import-vat-ni=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer Rhoi gwybod am a thalu TAW mewnforio (Gogledd Iwerddon).
+helplines-search.report-and-pay-import-vat-tsp=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer Rhoi gwybod am a thalu TAW mewnforio (TSP).
+helplines-search.safety-and-security=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer Diogelwch.
+helplines-search.self-assessment=Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF i adfer eich manylion mewngofnodi ar gyfer Hunanasesiad.
+helplines-search.self-assessment-online-for-partnerships=Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF i adfer eich manylion mewngofnodi ar gyfer Hunanasesiad Ar-lein ar gyfer Partneriaethau.
+helplines-search.self-assessment-online-for-trusts=Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF i adfer eich manylion mewngofnodi ar gyfer Hunanasesiad Ar-lein ar gyfer Ymddiriedolaethau.
+helplines-search.secure-electronic-transfer-set=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer SET.
+helplines-search.shared-workspace=Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF i adfer eich manylion mewngofnodi ar gyfer Gweithle sy’n cael ei Rannu.
+helplines-search.soft-drinks-industry-levy=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer Ardoll y Diwydiant Diodydd Ysgafn.
+helplines-search.stamp-duty-land-tax-for-organisations=Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF i adfer eich manylion mewngofnodi ar gyfer Treth Dir y Tollau Stamp ar gyfer Sefydliadau.
+helplines-search.employment-intermediary-report=Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF i adfer eich manylion mewngofnodi ar gyfer Adroddiad cyfryngwr cyflogaeth.
+helplines-search.vat-returns=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer Ffurflenni TAW.
+helplines-search.tailored-support-programme=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer y Rhaglen rhoi cymorth wedi’i deilwra.
+helplines-search.imports-from-ireland=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer Mewnforion o Iwerddon.
+helplines-search.tied-oils-enquiry-service=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer y Gwasanaeth Ymholiadau Olew ‘Tied’.
+helplines-search.trust-registration-service=Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF i adfer eich manylion mewngofnodi ar gyfer y Gwasanaeth Cofrestru Ymddiriedolaethau.
+helplines-search.vat-ec-sales-list-ecsl=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer y Rhestr Gwerthiannau yn y GE (ECSL).
+helplines-search.vat-eu-refunds=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer Ad-daliadau TAW yr UE.
+helplines-search.vat-for-government-and-nhs=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer TAW ar gyfer y Llywodraeth a’r GIG.
+helplines-search.vat-mini-one-stop-shop---for-businesses-based-in-the-uk-and-eu=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer y Gwasanaeth Un Cam ar gyfer TAW.
+helplines-search.vat-mini-one-stop-shop---for-businesses-based-outside-the-uk-and-eu=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer y Gwasanaeth Un Cam ar gyfer TAW.
+helplines-search.vat-reverse-charge-sales-list-rcsl=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer y Rhestr Gwerthiannau Tâl Gwrthdro (RCSL).
+helplines-search.voa-check-and-challenge-your-business-rates-valuation=Cysylltwch â llinell gymorth Asiantaeth y Swyddfa Brisio (VOA) i adfer eich manylion ar gyfer Gwirio a herio’ch prisiad ardrethi busnes gan y VOA.
+
+helplines-search.default.select=Dewis gwasanaeth
+helplines-search.telephone=Ffôn:
+helplines-search.opening-times=Oriau agor:
+helplines-search.textphone=Ffôn testun:
+helplines-search.outside-uk=O’r tu allan i’r DU:
+helplines-search.closed=Ar gau ar benwythnosau a gwyliau banc.
+helplines-search.more-contact-details=<a href={0} class="govuk-link">Rhagor o fanylion cyswllt (gan gynnwys sgwrs dros y we)</a>
+helplines-search.additional-needs=Help i <a href={0} class="govuk-link">ddelio â CThEF os oes gennych anghenion ychwanegol</a>.
+helplines-search.call-charges=Dysgwch am gostau galwadau
+
+helplines-search.vat.h1=Ffoniwch y llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis
+helplines-search.vat.tel=0300 200 3705
+helplines-search.vat.int=44 300 200 3705
+helplines-search.vat.times=Dydd Llun i ddydd Gwener: 8.30am i 5pm
+
+helplines-search.osh.h1=Ffoniwch Wasanaeth Cwsmeriaid Cymraeg CThEF ar gyfer ymholiadau ynghylch gwasanaethau ar-lein
+helplines-search.osh.tel=0300 200 1900
+helplines-search.osh.int=44 300 200 1900
+helplines-search.osh.times=Dydd Llun i ddydd Gwener: 8.30am i 5pm<br>Ar gau ar benwythnosau a gwyliau banc.
+
+helplines-search.charities.h1=Ffoniwch Wasanaeth Cwsmeriaid Cymraeg CThEF i drafod elusennau
+helplines-search.charities.tel=0300 200 1900
+helplines-search.charities.int=44 300 200 1900
+helplines-search.charities.times=Dydd Llun i ddydd Gwener: 8.30am i 5pm<br>Ar gau ar benwythnosau a gwyliau banc.
+
+helplines-search.pensions.h1=Ffoniwch Wasanaeth Cwsmeriaid Cymraeg CThEF i drafod pensiynau
+helplines-search.pensions.tel=0300 200 1900
+helplines-search.pensions.int=44 300 200 1900
+helplines-search.pensions.times=Dydd Llun i ddydd Gwener: 8.30am i 5pm<br>Ar gau ar benwythnosau a gwyliau banc.
+
+helplines-search.voa.h1=Ffoniwch linell gymorth Asiantaeth y Swyddfa Brisio
+helplines-search.voa.tel=03000 505505
+helplines-search.voa.int=44 3000 505505
+helplines-search.voa.times=Dydd Llun i ddydd Gwener: 09:00 tan 16:30<br>Ar gau ar benwythnosau a gwyliau banc.
