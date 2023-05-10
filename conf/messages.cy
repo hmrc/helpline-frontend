@@ -74,7 +74,7 @@ corporation-tax.query.heading=Help gyda Threth Gorfforaeth
 corporation-tax.query.p1=Mae angen i chi gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEF ar <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>.
 corporation-tax.query.p2=Gallwch <a class="govuk-link" href="{0}">ddod o hyd i ffyrdd eraill o gysylltu â ni ynglyn â Threth Gorfforaeth</a>.
 
-corporation-tax.query.headingNew=Ffoniwch Wasanaeth Cwsmeriaid Cymraeg CThEF ar gyfer ymholiadau ynghylch credydau treth
+corporation-tax.query.headingNew=Ffoniwch Wasanaeth Cwsmeriaid Cymraeg CThEF ar gyfer ymholiadau ynghylch Treth Gorfforaeth
 corporation-tax.query.contact_number.telephone.text=Ffôn:
 corporation-tax.query.contact_number.telephone.number=0300 200 1900
 corporation-tax.query.contact_number.no_uk_telephone.text=Y tu allan i’r DU:
