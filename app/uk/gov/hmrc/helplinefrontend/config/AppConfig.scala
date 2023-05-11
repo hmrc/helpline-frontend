@@ -119,7 +119,7 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "Fuels Duty" -> "vat",
     "Fulfilment House Due Diligence Scheme" -> "vat",
     "Gaming Duty" -> "vat",
-    "Gas for use as Road Fuel Duty" -> "gas",
+    "Gas for use as Road Fuel Duty" -> "vat",
     "General Betting Duty" -> "vat",
     "Goods Vehicle Movement Service" -> "osh",
     "Import Control System (ICS)" -> "vat",

@@ -44,8 +44,8 @@
     @layout(pageTitle = s"${messages("income-tax-paye.query.headingNew")} ${messages("title.suffix")}", backLinkLocation = back) {
         @h1(messages("income-tax-paye.query.headingNew"))
         @summaryList(rows = rows, classes = "govuk-summary-list--no-border")
-        @p(messages("income-tax-paye.query.contactDetails", "https://www.gov.uk/government/organisations/hm-revenue-customs/contact/income-tax-enquiries-for-individuals-pensioners-and-employees"))
-        @insetText(Html(messages("income-tax-paye.query.getHelp", "https://www.gov.uk/get-help-hmrc-extra-support")))
+        @p(messages("income-tax-paye.query.contactDetails"))
+        @insetText(Html(messages("income-tax-paye.query.getHelp")))
         @p(messages("income-tax-paye.query.callCharges", "https://www.gov.uk/call-charges"))
     }
 

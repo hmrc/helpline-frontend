@@ -44,8 +44,8 @@
     @layout(pageTitle = s"${messages("corporation-tax.query.headingNew")} ${messages("title.suffix")}", backLinkLocation = back) {
         @h1(messages("corporation-tax.query.headingNew"))
         @summaryList(rows = rows, classes = "govuk-summary-list--no-border")
-        @p(messages("corporation-tax.query.contactDetails", "https://www.gov.uk/government/organisations/hm-revenue-customs/contact/corporation-tax-enquiries"))
-        @insetText(Html(messages("corporation-tax.query.getHelp", "https://www.gov.uk/get-help-hmrc-extra-support")))
+        @p(messages("corporation-tax.query.contactDetails"))
+        @insetText(Html(messages("corporation-tax.query.getHelp")))
         @p(messages("corporation-tax.query.callCharges", "https://www.gov.uk/call-charges"))
     }
 
