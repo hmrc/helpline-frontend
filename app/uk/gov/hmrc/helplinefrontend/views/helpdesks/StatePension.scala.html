@@ -43,9 +43,9 @@
     @layout(pageTitle = s"${messages("state-pension.query.headingNew")} ${messages("title.suffix")}", backLinkLocation = back) {
         @h1(messages("state-pension.query.headingNew"))
         @summaryList(rows = rows, classes = "govuk-summary-list--no-border")
-        @p(messages("state-pension.query.contactDetails", "https://www.gov.uk/contact-pension-service"))
-        @insetText(Html(messages("state-pension.query.getHelp", "https://www.gov.uk/get-help-hmrc-extra-support")))
-        @p(messages("state-pension.query.callCharges", "https://www.gov.uk/call-charges"))
+        @p(messages("state-pension.query.contactDetails"))
+        @insetText(Html(messages("state-pension.query.getHelp")))
+        @p(messages("state-pension.query.callCharges"))
     }
 
 } else {

@@ -44,9 +44,9 @@
     @layout(pageTitle = s"${messages("vat.query.headingNew")} ${messages("title.suffix")}", backLinkLocation = back) {
         @h1(messages("vat.query.headingNew"))
         @summaryList(rows = rows, classes = "govuk-summary-list--no-border")
-        @p(messages("vat.query.contactDetails", "https://www.gov.uk/government/organisations/hm-revenue-customs/contact/vat-enquiries"))
-        @insetText(Html(messages("vat.query.getHelp", "https://www.gov.uk/get-help-hmrc-extra-support")))
-        @p(messages("vat.query.callCharges", "https://www.gov.uk/call-charges"))
+        @p(messages("vat.query.contactDetails"))
+        @insetText(Html(messages("vat.query.getHelp")))
+        @p(messages("vat.query.callCharges"))
     }
 
 } else {

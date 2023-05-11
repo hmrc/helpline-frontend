@@ -51,9 +51,9 @@ child-benefit.query.contact_number.no_uk_telephone.text=Y tu allan i’r DU:
 child-benefit.query.contact_number.no_uk_telephone.number=+44 300 200 1900
 child-benefit.query.contact_number.opening-times=Oriau Agor:
 child-benefit.query.contact_number.times=Dydd Llun i ddydd Gwener: 08:30 tan 17:00<br><br>Ar gau ar benwythnosau a gwyliau banc.
-child-benefit.query.contactDetails=<a href="{0}" class="govuk-link">Rhagor o fanylion cyswllt</a>.
-child-benefit.query.getHelp=Get help <a href="{0}" class="govuk-link">Help i ddelio â CThEF os oes gennych anghenion ychwanegol</a>.
-child-benefit.query.callCharges=<a href="{0}" class="govuk-link">Dysgwch am gostau galwadau</a>.
+child-benefit.query.contactDetails=<a href="https://www.gov.uk/government/organisations/hm-revenue-customs/contact/budd-dal-plant-ymholiadau-cyffredinol" class="govuk-link">Rhagor o fanylion cyswllt</a>.
+child-benefit.query.getHelp=<a href="https://www.gov.uk/cael-help-cthem-cymorth-ychwanegol" class="govuk-link">Help i ddelio â CThEF os oes gennych anghenion ychwanegol</a>.
+child-benefit.query.callCharges=<a href="https://www.gov.uk/costau-galwadau" class="govuk-link">Dysgwch am gostau galwadau</a>.
 
 childcare-service.query.heading=Ymholiad Gwasanaeth Gofal Plant
 childcare-service.query.p1=Os oes angen help arnoch gyda chais gwasanaeth gofal plant, cysylltwch â llinell gymorth y Gwasanaeth Gofal Plant ar <span class="govuk-!-font-weight-bold no-wrap">0300 123 8124</span>.
@@ -66,9 +66,9 @@ childcare-service.query.contact_number.textphone.text=Ffôn testun:
 childcare-service.query.contact_number.textphone.number=0300 200 1900
 childcare-service.query.contact_number.opening-times=Oriau Agor:
 childcare-service.query.contact_number.times=Dydd Llun i ddydd Gwener: 08:30 tan 17:00<br><br>Ar gau ar benwythnosau a gwyliau banc.
-childcare-service.query.contactDetails=<a href="{0}" class="govuk-link">Rhagor o fanylion cyswllt</a>.
-childcare-service.query.getHelp=Get help <a href="{0}" class="govuk-link">Help i ddelio â CThEF os oes gennych anghenion ychwanegol</a>.
-childcare-service.query.callCharges=<a href="{0}" class="govuk-link">Dysgwch am gostau galwadau</a>.
+childcare-service.query.contactDetails=<a href="https://www.gov.uk/government/organisations/hm-revenue-customs/contact/llinell-gymorth-y-gwasanaeth-gofal-plant" class="govuk-link">Rhagor o fanylion cyswllt</a>.
+childcare-service.query.getHelp=<a href="https://www.gov.uk/cael-help-cthem-cymorth-ychwanegol" class="govuk-link">Help i ddelio â CThEF os oes gennych anghenion ychwanegol</a>.
+childcare-service.query.callCharges=<a href="https://www.gov.uk/costau-galwadau" class="govuk-link">Dysgwch am gostau galwadau</a>.
 
 corporation-tax.query.heading=Help gyda Threth Gorfforaeth
 corporation-tax.query.p1=Mae angen i chi gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEF ar <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>.
@@ -81,9 +81,9 @@ corporation-tax.query.contact_number.no_uk_telephone.text=Y tu allan i’r DU:
 corporation-tax.query.contact_number.no_uk_telephone.number=+44 300 200 1900
 corporation-tax.query.contact_number.opening-times=Oriau Agor:
 corporation-tax.query.contact_number.times=Dydd Llun i ddydd Gwener: 08:30 tan 17:00<br><br>Ar gau ar benwythnosau a gwyliau banc.
-corporation-tax.query.contactDetails=<a href="{0}" class="govuk-link">Rhagor o fanylion cyswllt</a>.
-corporation-tax.query.getHelp=Get help <a href="{0}" class="govuk-link">Help i ddelio â CThEF os oes gennych anghenion ychwanegol</a>.
-corporation-tax.query.callCharges=<a href="{0}" class="govuk-link">Dysgwch am gostau galwadau</a>.
+corporation-tax.query.contactDetails=<a href="https://www.gov.uk/government/organisations/hm-revenue-customs/contact/welsh-language-helplines" class="govuk-link">Rhagor o fanylion cyswllt</a>.
+corporation-tax.query.getHelp=<a href="https://www.gov.uk/cael-help-cthem-cymorth-ychwanegol" class="govuk-link">Help i ddelio â CThEF os oes gennych anghenion ychwanegol</a>.
+corporation-tax.query.callCharges=<a href="https://www.gov.uk/costau-galwadau" class="govuk-link">Dysgwch am gostau galwadau</a>.
 
 income-tax-paye.query.heading=Ymholiad Treth Incwm a TWE
 income-tax-paye.query.p1=Os nad oes angen help arnoch i fewngofnodi, ond bod gennych ymholiad arall am Dreth Incwm neu TWE, gallwch gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEF drwy ffonio <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>.
@@ -96,9 +96,9 @@ income-tax-paye.query.contact_number.no_uk_telephone.text=Y tu allan i’r DU:
 income-tax-paye.query.contact_number.no_uk_telephone.number=+44 300 200 1900
 income-tax-paye.query.contact_number.opening-times=Oriau Agor:
 income-tax-paye.query.contact_number.times=Dydd Llun i ddydd Gwener: 08:30 tan 17:00<br><br>Ar gau ar benwythnosau a gwyliau banc.
-income-tax-paye.query.contactDetails=<a href="{0}" class="govuk-link">Rhagor o fanylion cyswllt</a>.
-income-tax-paye.query.getHelp=Get help <a href="{0}" class="govuk-link">Help i ddelio â CThEF os oes gennych anghenion ychwanegol</a>.
-income-tax-paye.query.callCharges=<a href="{0}" class="govuk-link">Dysgwch am gostau galwadau</a>.
+income-tax-paye.query.contactDetails=<a href="https://www.gov.uk/government/organisations/hm-revenue-customs/contact/welsh-language-helplines" class="govuk-link">Rhagor o fanylion cyswllt</a>.
+income-tax-paye.query.getHelp=<a href="https://www.gov.uk/cael-help-cthem-cymorth-ychwanegol" class="govuk-link">Help i ddelio â CThEF os oes gennych anghenion ychwanegol</a>.
+income-tax-paye.query.callCharges=<a href="https://www.gov.uk/costau-galwadau" class="govuk-link">Dysgwch am gostau galwadau</a>.
 
 national-insurance.query.heading=Ymholiad Yswiriant Gwladol
 national-insurance.query.p1=Os nad oes angen help arnoch i fewngofnodi, ond bod gennych ymholiad arall am Yswiriant Gwladol, gallwch gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEF drwy ffonio <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>.
@@ -111,9 +111,9 @@ national-insurance.query.contact_number.no_uk_telephone.text=Y tu allan i’r DU
 national-insurance.query.contact_number.no_uk_telephone.number=+44 300 200 1900
 national-insurance.query.contact_number.opening-times=Oriau Agor:
 national-insurance.query.contact_number.times=Dydd Llun i ddydd Gwener: 08:30 tan 17:00<br><br>Ar gau ar benwythnosau a gwyliau banc.
-national-insurance.query.contactDetails=<a href="{0}" class="govuk-link">Rhagor o fanylion cyswllt</a>.
-national-insurance.query.getHelp=Get help <a href="{0}" class="govuk-link">Help i ddelio â CThEF os oes gennych anghenion ychwanegol</a>.
-national-insurance.query.callCharges=<a href="{0}" class="govuk-link">Dysgwch am gostau galwadau</a>.
+national-insurance.query.contactDetails=<a href="https://www.gov.uk/government/organisations/hm-revenue-customs/contact/welsh-language-helplines" class="govuk-link">Rhagor o fanylion cyswllt</a>.
+national-insurance.query.getHelp=<a href="https://www.gov.uk/cael-help-cthem-cymorth-ychwanegol" class="govuk-link">Help i ddelio â CThEF os oes gennych anghenion ychwanegol</a>.
+national-insurance.query.callCharges=<a href="https://www.gov.uk/costau-galwadau" class="govuk-link">Dysgwch am gostau galwadau</a>.
 
 machine-games-duty.query.heading=Help gyda Tholl Peiriannau Hapchwarae
 machine-games-duty.query.p1=Mae angen i chi gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEF ar <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>.
@@ -126,9 +126,9 @@ machine-games-duty.query.contact_number.no_uk_telephone.text=Y tu allan i’r DU
 machine-games-duty.query.contact_number.no_uk_telephone.number=+44 300 200 3705
 machine-games-duty.query.contact_number.opening-times=Oriau Agor:
 machine-games-duty.query.contact_number.times=Dydd Llun i ddydd Gwener: 08:30 tan 17:00<br><br>Ar gau ar benwythnosau a gwyliau banc.
-machine-games-duty.query.contactDetails=<a href="{0}" class="govuk-link">Rhagor o fanylion cyswllt</a>.
-machine-games-duty.query.getHelp=Get help <a href="{0}" class="govuk-link">Help i ddelio â CThEF os oes gennych anghenion ychwanegol</a>.
-machine-games-duty.query.callCharges=<a href="{0}" class="govuk-link">Dysgwch am gostau galwadau</a>.
+machine-games-duty.query.contactDetails=<a href="https://www.gov.uk/government/organisations/hm-revenue-customs/contact/vat-customs-and-excise-and-duties-enquiries-for-welsh-speaking-customers" class="govuk-link">Rhagor o fanylion cyswllt</a>.
+machine-games-duty.query.getHelp=<a href="https://www.gov.uk/cael-help-cthem-cymorth-ychwanegol" class="govuk-link">Help i ddelio â CThEF os oes gennych anghenion ychwanegol</a>.
+machine-games-duty.query.callCharges=<a href="https://www.gov.uk/costau-galwadau" class="govuk-link">Dysgwch am gostau galwadau</a>.
 
 machine-games-duty.need-help.p1=I gael help i adfer eich manylion mewngofnodi neu newid sut rydych yn cael eich codau cyrchu, mae angen i chi gysylltu â’r Gwasanaeth TAW trwy ffonio <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>.
 machine-games-duty.need-help.p2=Gallwch <a class="govuk-link" href="{0}">ddod o hyd i ffyrdd eraill o gysylltu â Gwasanaethau Ar-lein TAW</a>.
@@ -151,9 +151,9 @@ self-assessment.query.contact_number.no_uk_telephone.text=Y tu allan i’r DU:
 self-assessment.query.contact_number.no_uk_telephone.number=+44 300 200 1900
 self-assessment.query.contact_number.opening-times=Oriau Agor:
 self-assessment.query.contact_number.times=Dydd Llun i ddydd Gwener: 08:30 tan 17:00<br><br>Ar gau ar benwythnosau a gwyliau banc.
-self-assessment.query.contactDetails=<a href="{0}" class="govuk-link">Rhagor o fanylion cyswllt</a>.
-self-assessment.query.getHelp=Get help <a href="{0}" class="govuk-link">Help i ddelio â CThEF os oes gennych anghenion ychwanegol</a>.
-self-assessment.query.callCharges=<a href="{0}" class="govuk-link">Dysgwch am gostau galwadau</a>.
+self-assessment.query.contactDetails=<a href="https://www.gov.uk/government/organisations/hm-revenue-customs/contact/welsh-language-helplines" class="govuk-link">Rhagor o fanylion cyswllt</a>.
+self-assessment.query.getHelp=<a href="https://www.gov.uk/cael-help-cthem-cymorth-ychwanegol" class="govuk-link">Help i ddelio â CThEF os oes gennych anghenion ychwanegol</a>.
+self-assessment.query.callCharges=<a href="https://www.gov.uk/costau-galwadau" class="govuk-link">Dysgwch am gostau galwadau</a>.
 
 self-assessment-organisation.query.heading=Help gyda Hunanasesiad
 self-assessment-organisation.query.p1=Mae angen i chi gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEF ar <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>.
@@ -172,9 +172,9 @@ state-pension.query.contact_number.telephone.text=Ffôn:
 state-pension.query.contact_number.telephone.number=0300 200 1900
 state-pension.query.contact_number.opening-times=Oriau Agor:
 state-pension.query.contact_number.times=Dydd Llun i ddydd Gwener: 08:30 tan 17:00<br><br>Ar gau ar benwythnosau a gwyliau banc.
-state-pension.query.contactDetails=<a href="{0}" class="govuk-link">Rhagor o fanylion cyswllt</a>.
-state-pension.query.getHelp=Get help <a href="{0}" class="govuk-link">Help i ddelio â CThEF os oes gennych anghenion ychwanegol</a>.
-state-pension.query.callCharges=<a href="{0}" class="govuk-link">Dysgwch am gostau galwadau</a>.
+state-pension.query.contactDetails=<a href="https://www.gov.uk/cysylltwch-gwasanaeth-pensiwn" class="govuk-link">Rhagor o fanylion cyswllt</a>.
+state-pension.query.getHelp=<a href="https://www.gov.uk/cael-help-cthem-cymorth-ychwanegol" class="govuk-link">Help i ddelio â CThEF os oes gennych anghenion ychwanegol</a>.
+state-pension.query.callCharges=<a href="https://www.gov.uk/costau-galwadau" class="govuk-link">Dysgwch am gostau galwadau</a>.
 
 tax-credits.query.heading=Ymholiad Credyd Treth
 tax-credits.query.p1=Os nad oes angen help arnoch i fewngofnodi, ond bod gennych ymholiad arall am gredydau treth, gallwch gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEF drwy ffonio <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>.
@@ -187,9 +187,9 @@ tax-credits.query.contact_number.no_uk_telephone.text=Y tu allan i’r DU:
 tax-credits.query.contact_number.no_uk_telephone.number=+44 300 200 1900
 tax-credits.query.contact_number.opening-times=Oriau Agor:
 tax-credits.query.contact_number.times=Dydd Llun i ddydd Gwener: 08:30 tan 17:00<br><br>Ar gau ar benwythnosau a gwyliau banc.
-tax-credits.query.contactDetails=<a href="{0}" class="govuk-link">Rhagor o fanylion cyswllt</a>.
-tax-credits.query.getHelp=Get help <a href="{0}" class="govuk-link">Help i ddelio â CThEF os oes gennych anghenion ychwanegol</a>.
-tax-credits.query.callCharges=<a href="{0}" class="govuk-link">Dysgwch am gostau galwadau</a>.
+tax-credits.query.contactDetails=<a href="https://www.gov.uk/government/organisations/hm-revenue-customs/contact/welsh-language-helplines" class="govuk-link">Rhagor o fanylion cyswllt</a>.
+tax-credits.query.getHelp=<a href="https://www.gov.uk/cael-help-cthem-cymorth-ychwanegol" class="govuk-link">Help i ddelio â CThEF os oes gennych anghenion ychwanegol</a>.
+tax-credits.query.callCharges=<a href="https://www.gov.uk/costau-galwadau" class="govuk-link">Dysgwch am gostau galwadau</a>.
 
 vat.query.heading=Help gyda TAW
 vat.query.p1=Mae angen i chi gysylltu â’r Llinell Gymorth TAW ar <span class="govuk-!-font-weight-bold no-wrap">0300 200 3705</span>.
@@ -202,9 +202,9 @@ vat.query.contact_number.no_uk_telephone.text=Y tu allan i’r DU:
 vat.query.contact_number.no_uk_telephone.number=+44 300 200 3705
 vat.query.contact_number.opening-times=Oriau Agor:
 vat.query.contact_number.times=Dydd Llun i ddydd Gwener: 08:30 tan 17:00<br><br>Ar gau ar benwythnosau a gwyliau banc.
-vat.query.contactDetails=<a href="{0}" class="govuk-link">Rhagor o fanylion cyswllt</a>.
-vat.query.getHelp=Get help <a href="{0}" class="govuk-link">Help i ddelio â CThEF os oes gennych anghenion ychwanegol</a>.
-vat.query.callCharges=<a href="{0}" class="govuk-link">Dysgwch am gostau galwadau</a>.
+vat.query.contactDetails=<a href="https://www.gov.uk/government/organisations/hm-revenue-customs/contact/vat-customs-and-excise-and-duties-enquiries-for-welsh-speaking-customers" class="govuk-link">Rhagor o fanylion cyswllt</a>.
+vat.query.getHelp=<a href="https://www.gov.uk/cael-help-cthem-cymorth-ychwanegol" class="govuk-link">Help i ddelio â CThEF os oes gennych anghenion ychwanegol</a>.
+vat.query.callCharges=<a href="https://www.gov.uk/costau-galwadau" class="govuk-link">Dysgwch am gostau galwadau</a>.
 
 vat.need-help.p1=I gael help i adfer eich manylion mewngofnodi neu newid sut rydych yn cael eich codau cyrchu, mae angen i chi gysylltu â’r Gwasanaeth TAW trwy ffonio <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>.
 vat.need-help.p2=Gallwch <a class="govuk-link" href="{0}">ddod o hyd i ffyrdd eraill o gysylltu â Gwasanaethau Ar-lein TAW</a>.
@@ -334,7 +334,7 @@ helplines-search.outside-uk=O’r tu allan i’r DU:
 helplines-search.closed=Ar gau ar benwythnosau a gwyliau banc.
 helplines-search.more-contact-details=<a href={0} class="govuk-link">Rhagor o fanylion cyswllt (gan gynnwys sgwrs dros y we)</a>
 helplines-search.additional-needs=Help i <a href={0} class="govuk-link">ddelio â CThEF os oes gennych anghenion ychwanegol</a>.
-helplines-search.call-charges=Dysgwch am gostau galwadau
+helplines-search.call-charges=<a href="https://www.gov.uk/costau-galwadau" class="govuk-link">Dysgwch am gostau galwadau</a>
 
 helplines-search.vat.h1=Ffoniwch y llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis
 helplines-search.vat.tel=0300 200 3705

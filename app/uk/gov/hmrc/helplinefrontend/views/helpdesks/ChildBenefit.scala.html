@@ -44,9 +44,10 @@
     @layout(pageTitle = s"${messages("child-benefit.query.headingNew")} ${messages("title.suffix")}", backLinkLocation = back) {
         @h1(messages("child-benefit.query.headingNew"))
         @summaryList(rows = rows, classes = "govuk-summary-list--no-border")
-        @p(messages("child-benefit.query.contactDetails", "https://www.gov.uk/government/organisations/hm-revenue-customs/contact/child-benefit"))
-        @insetText(Html(messages("child-benefit.query.getHelp", "https://www.gov.uk/get-help-hmrc-extra-support")))
-        @p(messages("child-benefit.query.callCharges", "https://www.gov.uk/call-charges"))
+
+        @p(messages("child-benefit.query.contactDetails"))
+        @insetText(Html(messages("child-benefit.query.getHelp")))
+        @p(messages("child-benefit.query.callCharges"))
     }
 
 } else {
