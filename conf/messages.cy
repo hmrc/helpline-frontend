@@ -334,7 +334,7 @@ helplines-search.outside-uk=O’r tu allan i’r DU:
 helplines-search.closed=Ar gau ar benwythnosau a gwyliau banc.
 helplines-search.more-contact-details=<a href={0} class="govuk-link">Rhagor o fanylion cyswllt (gan gynnwys sgwrs dros y we)</a>
 helplines-search.additional-needs=Help i <a href={0} class="govuk-link">ddelio â CThEF os oes gennych anghenion ychwanegol</a>.
-helplines-search.call-charges=<a href={0} class="govuk-link">Dysgwch am gostau galwadau</a>
+helplines-search.call-charges=<a href="https://www.gov.uk/costau-galwadau" class="govuk-link">Dysgwch am gostau galwadau</a>
 
 helplines-search.vat.h1=Ffoniwch y llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis
 helplines-search.vat.tel=0300 200 3705
