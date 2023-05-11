@@ -162,7 +162,7 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "Trust registration service" -> "osh",
     "VAT EC Sales List (ECSL)" -> "vat",
     "VAT EU Refunds" -> "vat",
-    "VAT for Government and NHS" -> "",
+    "VAT for Government and NHS" -> "vat",
     "VAT Mini One Stop Shop - for businesses based in the UK and EU" -> "vat",
     "VAT Mini One Stop Shop - for businesses based outside the UK and EU" -> "vat",
     "VAT Reverse Charge Sales List (RCSL)" -> "vat",
