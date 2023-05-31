@@ -18,7 +18,6 @@ package uk.gov.hmrc.helplinefrontend.models.form
 
 import play.api.data.Form
 import play.api.data.Forms.{nonEmptyText, single}
-import uk.gov.hmrc.helplinefrontend.models.form.Mappings.oneOfConstraint
 
 object HelplinesByServiceForm {
 

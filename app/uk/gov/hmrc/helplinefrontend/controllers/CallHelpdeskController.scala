@@ -143,7 +143,7 @@ class CallHelpdeskController @Inject()(implicit
 
   def selectCallOption(): Action[AnyContent] = Action.async { implicit request =>
     val result = CallOptionForm.callOptionForm(appConfig.callOptionsList).bindFromRequest.fold(
-      errors ⇒ BadRequest(callOptionsNoAnswers(errors)),
+      errors => BadRequest(callOptionsNoAnswers(errors)),
       value => {
         eventDispatcher.dispatchEvent(ContactType(appConfig.defaultCallOptionsAndGAEventMapper(value)))
         Redirect(routes.CallHelpdeskController.getHelpdeskPage(value, Some(routes.CallHelpdeskController.callOptionsNoAnswersPage().url)))
@@ -154,7 +154,7 @@ class CallHelpdeskController @Inject()(implicit
 
   def selectOrganisationCallOption(): Action[AnyContent] = Action.async { implicit request =>
     val result = CallOptionOrganisationForm.callOptionOrganisationForm(appConfig.callOptionsOrganisationList).bindFromRequest.fold(
-      errors ⇒ BadRequest(callOptionsOrganisationNoAnswers(errors)),
+      errors => BadRequest(callOptionsOrganisationNoAnswers(errors)),
       value => {
         eventDispatcher.dispatchEvent(ContactType(appConfig.defaultCallOptionsOrganisationAndGAEventMapper(value)))
         Redirect(routes.CallHelpdeskController.getHelpdeskOrganisationPage(value, Some(routes.CallHelpdeskController.callOptionsNoAnswersOrganisationPage().url)))
@@ -172,7 +172,7 @@ class CallHelpdeskController @Inject()(implicit
 
   def selectServiceAccessOption(): Action[AnyContent] = Action.async { implicit request =>
     val result = CallOptionForm.callOptionForm(appConfig.standaloneIndividualList).bindFromRequest.fold(
-      errors ⇒ BadRequest(whichServiceAccess(errors)),
+      errors => BadRequest(whichServiceAccess(errors)),
       value => {
         eventDispatcher.dispatchEvent(ContactType(appConfig.standaloneIndividualAndGAEventMapper(value)))
         Redirect(routes.CallHelpdeskController.getHelpdeskPage(value, Some(routes.CallHelpdeskController.whichServiceAccessPage().url)))
@@ -190,7 +190,7 @@ class CallHelpdeskController @Inject()(implicit
 
   def selectServiceAccessOtherOption(): Action[AnyContent] = Action.async { implicit request =>
     val result = CallOptionForm.callOptionForm(appConfig.standaloneOrganisationList).bindFromRequest.fold(
-      errors ⇒ BadRequest(whichServiceAccessOther(errors)),
+      errors => BadRequest(whichServiceAccessOther(errors)),
       value => {
         eventDispatcher.dispatchEvent(ContactType(appConfig.standaloneOrganisationAndGAEventMapper(value)))
         Redirect(routes.CallHelpdeskController.getHelpdeskOrganisationPage(value, Some(routes.CallHelpdeskController.whichServiceAccessOtherPage().url)))
@@ -240,7 +240,7 @@ class CallHelpdeskController @Inject()(implicit
 
   def helpLinesByServiceServicePage(): Action[AnyContent] = Action.async { implicit request =>
     val result = HelplinesByServiceSearchForm.helplinesByServiceSearchForm(appConfig.helplinesByService).bindFromRequest.fold(
-      errors ⇒ BadRequest(helplinesByService(errors)),
+      errors => BadRequest(helplinesByService(errors)),
       value => {
           var helpdesk : String = ""
           for(question <- appConfig.helplinesByService) {
@@ -269,7 +269,7 @@ class CallHelpdeskController @Inject()(implicit
 
   def processHMRCHelplinePage(): Action[AnyContent] = Action.async { implicit request =>
     val result = FindHMRCHelplineForm.findHMRCHelplineForm().bindFromRequest.fold(
-      errors ⇒ BadRequest(findHMRCHelpline(errors)),
+      errors => BadRequest(findHMRCHelpline(errors)),
       {
         case "pta" => Redirect(routes.CallHelpdeskController.helpLinesByServiceOshPage("Personal Tax Account"))
         case "sa" => Redirect(routes.CallHelpdeskController.helpLinesByServiceOshPage("Self Assessment"))

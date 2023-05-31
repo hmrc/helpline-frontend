@@ -22,14 +22,12 @@
 @import uk.gov.hmrc.helplinefrontend.models.ui.{SummaryRowData => Row}
 @import scala.collection.mutable.ListBuffer
 
-@this(
-  layout: Layout,
-  p: Paragraph,
-  h1: H1,
-  ul: ul,
-  insetText: InsetText,
-  summaryList: SummaryList
-)
+@this(layout: Layout,
+      p: Paragraph,
+      h1: H1,
+      ul: ul,
+      insetText: InsetText,
+      summaryList: SummaryList)
 
 @(back: Option[String])(implicit request: Request[_], appConfig: AppConfig, messages: Messages)
 
@@ -40,7 +38,7 @@
     rws.append(Row(key = "contact_us.died.contact_number.textphone.text", value = "contact_us.died.contact_number.textphone.number"))
     rws.append(Row(key = "contact_us.died.contact_number.no_uk_telephone.text", value = "contact_us.died.contact_number.no_uk_telephone.number"))
     rws.append(Row(key = "contact_us.died.contact_number.opening-times", value = "contact_us.died.contact_number.times"))
-    rws
+    rws.toSeq
 }
 
 

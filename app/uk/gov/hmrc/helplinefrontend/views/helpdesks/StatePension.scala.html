@@ -23,11 +23,11 @@
 @import java.net.URLDecoder
 
 @this(layout: Layout,
-        p: Paragraph,
-        h1: H1,
-        h2: H2,
-        insetText: InsetText,
-        summaryList: SummaryList)
+      p: Paragraph,
+      h1: H1,
+      h2: H2,
+      insetText: InsetText,
+      summaryList: SummaryList)
 
 @(back: Option[String])(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
 
@@ -35,7 +35,7 @@
     val rws = ListBuffer[Row]()
     rws.append(Row(key = "state-pension.query.contact_number.telephone.text", value = "state-pension.query.contact_number.telephone.number"))
     rws.append(Row(key = "state-pension.query.contact_number.opening-times", value = "state-pension.query.contact_number.times"))
-    rws
+    rws.toSeq
 }
 
 @if(appConfig.serviceHelplinesRelatedQueriesOnly){

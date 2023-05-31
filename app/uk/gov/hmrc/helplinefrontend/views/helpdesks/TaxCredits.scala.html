@@ -23,11 +23,11 @@
 @import java.net.URLDecoder
 
 @this(layout: Layout,
-        p: Paragraph,
-        h1: H1,
-        h2: H2,
-        insetText: InsetText,
-        summaryList: SummaryList)
+      p: Paragraph,
+      h1: H1,
+      h2: H2,
+      insetText: InsetText,
+      summaryList: SummaryList)
 
 @(back: Option[String])(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
 
@@ -36,7 +36,7 @@
     rws.append(Row(key = "tax-credits.query.contact_number.telephone.text", value = "tax-credits.query.contact_number.telephone.number"))
     rws.append(Row(key = "tax-credits.query.contact_number.no_uk_telephone.text", value = "tax-credits.query.contact_number.no_uk_telephone.number"))
     rws.append(Row(key = "tax-credits.query.contact_number.opening-times", value = "tax-credits.query.contact_number.times"))
-    rws
+    rws.toSeq
 }
 
 @if(appConfig.serviceHelplinesRelatedQueriesOnly){
