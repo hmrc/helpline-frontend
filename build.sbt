@@ -1,6 +1,5 @@
 import scoverage.ScoverageKeys
 import uk.gov.hmrc.DefaultBuildSettings.integrationTestSettings
-import uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin.publishingSettings
 
 val appName = "helpline-frontend"
 
@@ -10,7 +9,7 @@ lazy val microservice = Project(appName, file("."))
   .settings(PlayKeys.playDefaultPort := 10102)
   .settings(
     majorVersion                     := 1,
-    scalaVersion                     := "2.12.15",
+    scalaVersion                     := "2.13.8",
     libraryDependencies              ++= AppDependencies.compile ++ AppDependencies.test,
     TwirlKeys.templateImports ++= Seq(
       "uk.gov.hmrc.helplinefrontend.config.AppConfig",
@@ -19,7 +18,6 @@ lazy val microservice = Project(appName, file("."))
       "uk.gov.hmrc.helplinefrontend.models.ui._"
     ),
   )
-  .settings(publishingSettings: _*)
   .configs(IntegrationTest)
   .settings(integrationTestSettings(): _*)
   .settings(resolvers += Resolver.jcenterRepo)

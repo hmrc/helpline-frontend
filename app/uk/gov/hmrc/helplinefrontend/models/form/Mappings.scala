@@ -20,7 +20,7 @@ import play.api.data.validation.{Constraint, Invalid, Valid}
 
 object Mappings {
 
-  def oneOfConstraint[T](options: Seq[T], error: String = "error.invalid"): Constraint[T] = Constraint { v ⇒
+  def oneOfConstraint[T](options: Seq[T], error: String = "error.invalid"): Constraint[T] = Constraint { v =>
     if (options contains v)
       Valid
     else

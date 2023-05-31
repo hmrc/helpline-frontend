@@ -36,7 +36,7 @@
     rws.append(Row(key = "self-assessment.query.contact_number.telephone.text", value = "self-assessment.query.contact_number.telephone.number"))
     rws.append(Row(key = "self-assessment.query.contact_number.no_uk_telephone.text", value = "self-assessment.query.contact_number.no_uk_telephone.number"))
     rws.append(Row(key = "self-assessment.query.contact_number.opening-times", value = "self-assessment.query.contact_number.times"))
-    rws
+    rws.toSeq
 }
 
 @if(appConfig.serviceHelplinesRelatedQueriesOnly){
