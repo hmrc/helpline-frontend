@@ -16,7 +16,7 @@
 
 @import uk.gov.hmrc.helplinefrontend.config.AppConfig
 @import uk.gov.hmrc.helplinefrontend.views.html.Layout
-@import uk.gov.hmrc.helplinefrontend.views.html.components.{Paragraph, H1, H2, InsetText, SummaryList}
+@import uk.gov.hmrc.helplinefrontend.views.html.components.{Paragraph, H1, H2, InsetText, SummaryList, Link}
 @import uk.gov.hmrc.helplinefrontend.models.ui.{SummaryRowData => Row}
 @import uk.gov.hmrc.helplinefrontend.controllers.routes
 @import scala.collection.mutable.ListBuffer
@@ -26,6 +26,7 @@
         p: Paragraph,
         h1: H1,
         h2: H2,
+        a: Link,
         insetText: InsetText,
         summaryList: SummaryList)
 
@@ -41,12 +42,23 @@
 
 @if(appConfig.serviceHelplinesRelatedQueriesOnly){
 
-    @layout(pageTitle = s"${messages("self-assessment.query.headingNew")} ${messages("title.suffix")}", backLinkLocation = back) {
-        @h1(messages("self-assessment.query.headingNew"))
-        @summaryList(rows = rows, classes = "govuk-summary-list--no-border")
-        @p(messages("self-assessment.query.contactDetails"))
-        @insetText(Html(messages("self-assessment.query.getHelp")))
-        @p(messages("self-assessment.query.callCharges"))
+    @if(messages.lang.code == "en") {
+        @layout(pageTitle = s"${messages("self-assessment.query.h1")} ${messages("title.suffix")}", backLinkLocation = back) {
+            @h1(messages("self-assessment.query.h1"))
+            @h2(messages("self-assessment.helpline-closed.h2"), Some("govuk-body-l govuk-!-font-weight-bold"))
+            @p(messages("self-assessment.helpline.closed.p1"))
+            @p(messages("self-assessment.helpline.closed.chat"))
+            @insetText(Html(messages("self-assessment.query.getHelp")))
+            @p(messages("self-assessment.helpline.closed.p2"))
+        }
+    } else {
+        @layout(pageTitle = s"${messages("self-assessment.query.headingNew")} ${messages("title.suffix")}", backLinkLocation = back) {
+            @h1(messages("self-assessment.query.headingNew"))
+            @summaryList(rows = rows, classes = "govuk-summary-list--no-border")
+            @p(messages("self-assessment.query.contactDetails"))
+            @insetText(Html(messages("self-assessment.query.getHelp")))
+            @p(messages("self-assessment.query.callCharges"))
+        }
     }
 
 } else {
