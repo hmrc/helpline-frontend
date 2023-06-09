@@ -40,8 +40,15 @@
 }
 
 @if(appConfig.serviceHelplinesRelatedQueriesOnly){
-
-    @if(messages.lang.code == "en") {
+    @if(messages.lang.code == "cy") {
+        @layout(pageTitle = s"${messages("self-assessment.query.headingNew")} ${messages("title.suffix")}", backLinkLocation = back) {
+            @h1(messages("self-assessment.query.headingNew"))
+            @summaryList(rows = rows, classes = "govuk-summary-list--no-border")
+            @p(messages("self-assessment.query.contactDetails"))
+            @insetText(Html(messages("self-assessment.query.getHelp")))
+            @p(messages("self-assessment.query.callCharges"))
+        }
+    } else {
         @layout(pageTitle = s"${messages("self-assessment.query.h1")} ${messages("title.suffix")}", backLinkLocation = back) {
             @h1(messages("self-assessment.query.h1"))
             @h2(messages("self-assessment.helpline-closed.h2"), Some("govuk-body-l govuk-!-font-weight-bold"))
@@ -49,14 +56,6 @@
             @p(messages("self-assessment.helpline.closed.chat"))
             @insetText(Html(messages("self-assessment.query.getHelp")))
             @p(messages("self-assessment.helpline.closed.p2"))
-        }
-    } else {
-        @layout(pageTitle = s"${messages("self-assessment.query.headingNew")} ${messages("title.suffix")}", backLinkLocation = back) {
-            @h1(messages("self-assessment.query.headingNew"))
-            @summaryList(rows = rows, classes = "govuk-summary-list--no-border")
-            @p(messages("self-assessment.query.contactDetails"))
-            @insetText(Html(messages("self-assessment.query.getHelp")))
-            @p(messages("self-assessment.query.callCharges"))
         }
     }
 
