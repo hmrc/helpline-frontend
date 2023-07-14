@@ -415,7 +415,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       val result: Future[Result] = controller.getHelpdeskPage(selfAssessmentHelpKey, None)(fakeRequest)
       status(result) shouldBe Status.OK
       if (appConfig.serviceHelplinesRelatedQueriesOnly) {
-        contentAsString(result).contains("Call the Self Assessment helpline") shouldBe true
+        contentAsString(result).contains("Self Assessment enquiries") shouldBe true
         contentAsString(result).contains("Back") shouldBe false
       } else {
         contentAsString(result).contains("Self Assessment query") shouldBe true
@@ -427,7 +427,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       val result: Future[Result] = controller.getHelpdeskPage(selfAssessmentHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
       if(appConfig.serviceHelplinesRelatedQueriesOnly) {
-        contentAsString(result).contains("Call the Self Assessment helpline") shouldBe true
+        contentAsString(result).contains("Self Assessment enquiries") shouldBe true
         contentAsString(result).contains("Back") shouldBe true
       } else {
         contentAsString(result).contains("Self Assessment query") shouldBe true
