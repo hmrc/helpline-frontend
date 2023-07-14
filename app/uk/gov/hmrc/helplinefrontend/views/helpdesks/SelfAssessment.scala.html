@@ -39,37 +39,21 @@
     rws.toSeq
 }
 
-@if(appConfig.serviceHelplinesRelatedQueriesOnly){
-    @if(messages.lang.code == "cy") {
-        @layout(pageTitle = s"${messages("self-assessment.query.headingNew")} ${messages("title.suffix")}", backLinkLocation = back) {
-            @h1(messages("self-assessment.query.headingNew"))
-            @summaryList(rows = rows, classes = "govuk-summary-list--no-border")
-            @p(messages("self-assessment.query.contactDetails"))
-            @insetText(Html(messages("self-assessment.query.getHelp")))
-            @p(messages("self-assessment.query.callCharges"))
-        }
-    } else {
-        @layout(pageTitle = s"${messages("self-assessment.query.h1")} ${messages("title.suffix")}", backLinkLocation = back) {
-            @h1(messages("self-assessment.query.h1"))
-            @h2(messages("self-assessment.helpline-closed.h2"), Some("govuk-body-l govuk-!-font-weight-bold"))
-            @p(messages("self-assessment.helpline.closed.p1"))
-            @p(messages("self-assessment.helpline.closed.chat"))
-            @insetText(Html(messages("self-assessment.query.getHelp")))
-            @p(messages("self-assessment.helpline.closed.p2"))
-        }
+@if(messages.lang.code == "cy") {
+    @layout(pageTitle = s"${messages("self-assessment.query.headingNew")} ${messages("title.suffix")}", backLinkLocation = back) {
+        @h1(messages("self-assessment.query.headingNew"))
+        @summaryList(rows = rows, classes = "govuk-summary-list--no-border")
+        @p(messages("self-assessment.query.contactDetails"))
+        @insetText(Html(messages("self-assessment.query.getHelp")))
+        @p(messages("self-assessment.query.callCharges"))
     }
-
 } else {
-
-    @layout(pageTitle = s"${messages("self-assessment.query.heading")} ${messages("title.suffix")}", backLinkLocation = back) {
-        @h1(messages("self-assessment.query.heading"))
-
-        @h2(messages("default.title"), Some("govuk-body-l govuk-!-font-weight-bold"))
-        @p(messages("self-assessment.query.p1"))
-        @p(messages("self-assessment.query.p2", URLDecoder.decode(routes.RedirectController.contactHelpline("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/self-assessment", "self-assessment").url, "UTF-8")))
-
-        @h2(messages("default.need-help.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
-        @p(messages("default.need-help.p1"))
-        @p(messages("default.need-help.p2", URLDecoder.decode(routes.RedirectController.contactHelpdesk("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/online-services-helpdesk").url, "UTF-8"), Some("govuk-!-margin-bottom-8")))
+    @layout(pageTitle = s"${messages("self-assessment.query.h1")} ${messages("title.suffix")}", backLinkLocation = back) {
+        @h1(messages("self-assessment.query.h1"))
+        @h2(messages("self-assessment.helpline-closed.h2"), Some("govuk-body-l govuk-!-font-weight-bold"))
+        @p(messages("self-assessment.helpline.closed.p1"))
+        @p(messages("self-assessment.helpline.closed.chat"))
+        @insetText(Html(messages("self-assessment.query.getHelp")))
+        @p(messages("self-assessment.helpline.closed.p2"))
     }
 }

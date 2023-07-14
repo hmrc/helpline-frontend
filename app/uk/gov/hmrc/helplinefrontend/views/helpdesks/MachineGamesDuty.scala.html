@@ -25,7 +25,6 @@
 @this(layout: Layout,
         p: Paragraph,
         h1: H1,
-        h2: H2,
         insetText: InsetText,
         summaryList: SummaryList)
 
@@ -39,27 +38,11 @@
     rws.toSeq
 }
 
-@if(appConfig.serviceHelplinesRelatedQueriesOnly){
-
-    @layout(pageTitle = s"${messages("machine-games-duty.query.headingNew")} ${messages("title.suffix")}", backLinkLocation = back) {
-        @h1(messages("machine-games-duty.query.headingNew"))
-        @summaryList(rows = rows, classes = "govuk-summary-list--no-border")
-        @p(messages("machine-games-duty.query.contactDetails"))
-        @insetText(Html(messages("machine-games-duty.query.getHelp")))
-        @p(messages("machine-games-duty.query.callCharges"))
-    }
-
-} else {
-
-    @layout(pageTitle = s"${messages("machine-games-duty.query.heading")} ${messages("title.suffix")}", backLinkLocation = back) {
-        @h1(messages("machine-games-duty.query.heading"))
-
-        @h2(messages("default.title"), Some("govuk-body-l govuk-!-font-weight-bold"))
-        @p(messages("machine-games-duty.query.p1"))
-        @p(messages("machine-games-duty.query.p2", URLDecoder.decode(routes.RedirectController.contactHelpline("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/excise-enquiries", "machine-games-duty").url, "UTF-8")))
-
-        @h2(messages("default.need-help.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
-        @p(messages("machine-games-duty.need-help.p1"))
-        @p(messages("machine-games-duty.need-help.p2", URLDecoder.decode(routes.RedirectController.contactHelpdeskOrg("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/vat-online-services-helpdesk").url, "UTF-8"), Some("govuk-!-margin-bottom-8")))
-    }
+@layout(pageTitle = s"${messages("machine-games-duty.query.headingNew")} ${messages("title.suffix")}", backLinkLocation = back) {
+    @h1(messages("machine-games-duty.query.headingNew"))
+    @summaryList(rows = rows, classes = "govuk-summary-list--no-border")
+    @p(messages("machine-games-duty.query.contactDetails"))
+    @insetText(Html(messages("machine-games-duty.query.getHelp")))
+    @p(messages("machine-games-duty.query.callCharges"))
 }
+

@@ -27,7 +27,6 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
 
   val welshLanguageSupportEnabled: Boolean = config.getOptional[Boolean]("features.welsh-language-support").getOrElse(true)
   val backCallEnabled: Boolean = config.getOptional[Boolean]("features.back-call-support").getOrElse(false)
-  val serviceHelplinesRelatedQueriesOnly: Boolean = config.getOptional[Boolean]("feature.serviceHelplinesRelatedQueriesOnly").getOrElse(false)
 
    val defaultCallOptionsAndGAEventMapper = mutable.LinkedHashMap(
     "child-benefit" -> "contact_childbenefit",
@@ -68,7 +67,7 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "machine-games-duty" -> "contact_machinegamingduty",
     "vat" -> "contact_vat",
     "divider" -> "divider",
-    "help-with-a-service" -> "contact_other_org"
+    "contact-hmrc" -> "contact_hmrc"
   )
 
   val contactHelplineGAEventMapper = Map(

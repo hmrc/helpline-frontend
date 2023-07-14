@@ -193,7 +193,11 @@ class CallHelpdeskController @Inject()(implicit
       errors => BadRequest(whichServiceAccessOther(errors)),
       value => {
         eventDispatcher.dispatchEvent(ContactType(appConfig.standaloneOrganisationAndGAEventMapper(value)))
-        Redirect(routes.CallHelpdeskController.getHelpdeskOrganisationPage(value, Some(routes.CallHelpdeskController.whichServiceAccessOtherPage().url)))
+        if(value == "contact-hmrc"){
+          Redirect("https://www.gov.uk/contact-hmrc")
+        } else {
+          Redirect(routes.CallHelpdeskController.getHelpdeskOrganisationPage(value, Some(routes.CallHelpdeskController.whichServiceAccessOtherPage().url)))
+        }
       }
     )
     Future.successful(result)

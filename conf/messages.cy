@@ -25,6 +25,7 @@ call-option.label.general-enquiries=Rhywbeth arall
 call-option.label.paye-for-employers=TWE i gyflogwyr
 call-option.label.vat=TAW
 call-option.label.which-service-are-you-trying-to-access-other=Rhywbeth arall
+call-option.label.contact-hmnrc=Rhywbeth arall
 
 default.title=Ffoniwch linell gymorth CThEF
 default.need-help.heading=Os oes angen help arnoch i fewngofnodi
