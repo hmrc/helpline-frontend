@@ -145,16 +145,20 @@ self-assessment.query.heading=Self Assessment query
 self-assessment.query.p1=If you do not need help signing in but have another query about Self Assessment, you need to contact the Self Assessment helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3310</span>.
 self-assessment.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Self Assessment helpline</a>.
 
-self-assessment.query.headingNew=Call the Self Assessment helpline
+self-assessment.query.h1=Self Assessment enquiries
 self-assessment.query.contact_number.telephone.text=Telephone:
 self-assessment.query.contact_number.telephone.number=0300 200 3310
 self-assessment.query.contact_number.no_uk_telephone.text=Outside UK:
 self-assessment.query.contact_number.no_uk_telephone.number=+44 191 203 7010
 self-assessment.query.contact_number.opening-times=Opening times:
 self-assessment.query.contact_number.times=Monday to Friday: 8am to 6pm<br><br>Closed weekends and bank holidays.
-self-assessment.query.contactDetails=<a href="https://www.gov.uk/government/organisations/hm-revenue-customs/contact/self-assessment" class="govuk-link">More contact details</a>.
+self-assessment.query.contactDetails=<a href="https://www.gov.uk/government/organisations/hm-revenue-customs/contact/self-assessment" class="govuk-link">More contact details</a>
 self-assessment.query.getHelp=Get help <a href="https://www.gov.uk/get-help-hmrc-extra-support" class="govuk-link">dealing with HMRC if you have additional needs</a>.
 self-assessment.query.callCharges=<a href="https://www.gov.uk/call-charges" class="govuk-link">Find out about call charges</a>.
+self-assessment.helpline-closed.h2=Ask HMRC online
+self-assessment.helpline.closed.p1=Ask HMRC’s digital assistant to find information about Self Assessment.
+self-assessment.helpline.closed.p2=For general enquiries about Self Assessment, <a href="https://www.gov.uk/government/organisations/hm-revenue-customs/contact/self-assessment" class="govuk-link">find more contact details</a>.
+self-assessment.helpline.closed.chat=<a href="/ask-hmrc/chat/self-assessment" class="govuk-link">Ask HMRC online</a>
 
 self-assessment-organisation.query.heading=Help with Self Assessment
 self-assessment-organisation.query.p1=You need to contact the Self Assessment helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3310</span>.
