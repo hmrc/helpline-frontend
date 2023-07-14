@@ -286,7 +286,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
       val result: Future[Result] = controller.getHelpdeskPage(nationalInsuranceHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
-      contentAsString(result).contains("National Insurance query") shouldBe true
+      contentAsString(result).contains("Call the National Insurance helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe false
     }
   }
