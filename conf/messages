@@ -25,6 +25,7 @@ call-option.label.vat=VAT
 call-option.label.general-enquiries=Something else
 call-option.label.help-with-a-service=Something else
 call-option.label.which-service-are-you-trying-to-access-other=Something else
+call-option.label.contact-hmrc=Something else
 
 default.title=Call an HMRC helpline
 default.need-help.heading=If you need help signing in

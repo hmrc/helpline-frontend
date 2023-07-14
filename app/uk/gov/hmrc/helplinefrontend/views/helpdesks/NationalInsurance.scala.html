@@ -25,7 +25,6 @@
 @this(layout: Layout,
         p: Paragraph,
         h1: H1,
-        h2: H2,
         insetText: InsetText,
         summaryList: SummaryList)
 
@@ -39,27 +38,11 @@
     rws.toSeq
 }
 
-@if(appConfig.serviceHelplinesRelatedQueriesOnly){
-
-    @layout(pageTitle = s"${messages("national-insurance.query.headingNew")} ${messages("title.suffix")}", backLinkLocation = back) {
-        @h1(messages("national-insurance.query.headingNew"))
-        @summaryList(rows = rows, classes = "govuk-summary-list--no-border")
-        @p(messages("national-insurance.query.contactDetails"))
-        @insetText(Html(messages("national-insurance.query.getHelp")))
-        @p(messages("national-insurance.query.callCharges"))
-    }
-
-} else {
-
-    @layout(pageTitle = s"${messages("national-insurance.query.heading")} ${messages("title.suffix")}", backLinkLocation = back) {
-        @h1(messages("national-insurance.query.heading"))
-
-        @h2(messages("default.title"), Some("govuk-body-l govuk-!-font-weight-bold"))
-        @p(messages("national-insurance.query.p1"))
-        @p(messages("national-insurance.query.p2", URLDecoder.decode(routes.RedirectController.contactHelpline("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/national-insurance-enquiries-for-employees-and-individuals", "national-insurance").url, "UTF-8")))
-
-        @h2(messages("default.need-help.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
-        @p(messages("default.need-help.p1"))
-        @p(messages("default.need-help.p2", URLDecoder.decode(routes.RedirectController.contactHelpdesk("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/online-services-helpdesk").url, "UTF-8"), Some("govuk-!-margin-bottom-8")))
-    }
+@layout(pageTitle = s"${messages("national-insurance.query.headingNew")} ${messages("title.suffix")}", backLinkLocation = back) {
+    @h1(messages("national-insurance.query.headingNew"))
+    @summaryList(rows = rows, classes = "govuk-summary-list--no-border")
+    @p(messages("national-insurance.query.contactDetails"))
+    @insetText(Html(messages("national-insurance.query.getHelp")))
+    @p(messages("national-insurance.query.callCharges"))
 }
+

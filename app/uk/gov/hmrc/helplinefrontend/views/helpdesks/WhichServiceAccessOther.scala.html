@@ -53,7 +53,12 @@
                     RadioItem(
                         divider = Some(messages("call-option.label.or"))
                     )
-                } else {
+                } else if (selectedCallOption == "help-with-a-service"){
+                    RadioItem(
+                        content = Text(messages("call-option.label." + selectedCallOption)),
+                        value = Some("https://www.gov.uk")
+                    )
+                }else {
                     RadioItem(
                         content = Text(messages("call-option.label." + selectedCallOption)),
                         value = Some(selectedCallOption)
