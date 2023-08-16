@@ -29,10 +29,10 @@
 
     @h2(messages("default.title"), Some("govuk-body-l govuk-!-font-weight-bold"))
     @p(messages("general-enquiries.query.p1"))
-    @p(messages("general-enquiries.query.p2", URLDecoder.decode(routes.RedirectController.contactHelpline("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/income-tax-enquiries-for-individuals-pensioners-and-employees", "general-enquiries").url, "UTF-8")))
+    @p(id = Some("query"), key = messages("general-enquiries.query.p2","https://www.gov.uk/government/organisations/hm-revenue-customs/contact/income-tax-enquiries-for-individuals-pensioners-and-employees"))
 
     @h2(messages("default.need-help.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
     @p(messages("default.need-help.p1"))
-    @p(messages("default.need-help.p2", URLDecoder.decode(routes.RedirectController.contactHelpdesk("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/online-services-helpdesk").url, "UTF-8"), Some("govuk-!-margin-bottom-8")))
+    @p(id = Some("online-services"), key = messages("default.need-help.p2", "https://www.gov.uk/government/organisations/hm-revenue-customs/contact/online-services-helpdesk"))
 }
 

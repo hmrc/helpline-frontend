@@ -18,10 +18,6 @@ POST       /which-service-are-you-trying-to-access-other    uk.gov.hmrc.helpline
 GET        /call-options-no-answers                         uk.gov.hmrc.helplinefrontend.controllers.CallHelpdeskController.callOptionsNoAnswersPage()
 POST       /call-options-no-answers                         uk.gov.hmrc.helplinefrontend.controllers.CallHelpdeskController.selectCallOption()
 
-GET        /contact-helpdesk                                uk.gov.hmrc.helplinefrontend.controllers.RedirectController.contactHelpdesk(redirectUrl: String)
-GET        /contact-helpdesk-org                            uk.gov.hmrc.helplinefrontend.controllers.RedirectController.contactHelpdeskOrg(redirectUrl: String)
-GET        /contact-helpline                                uk.gov.hmrc.helplinefrontend.controllers.RedirectController.contactHelpline(redirectUrl: String, origin: String)
-
 GET        /has-this-person-died                            uk.gov.hmrc.helplinefrontend.controllers.CallHelpdeskController.hasThisPersonDiedPage()
 
 GET        /helplines-by-service                            uk.gov.hmrc.helplinefrontend.controllers.CallHelpdeskController.helpLinesByServicePage()
