@@ -19,7 +19,6 @@ call-option.label.corporation-tax=Treth Gorfforaeth
 call-option.label.machine-games-duty=Toll Peiriannau Hapchwarae (MGD)
 call-option.label.state-pension=Pensiwn y Wladwriaeth
 call-option.label.tax-credits=Credydau Treth
-call-option.label.SEISS=Cynllun Cymhorthdal Incwm Hunangyflogaeth (SEISS)
 call-option.label.help-with-a-service=Rhywbeth arall
 call-option.label.general-enquiries=Rhywbeth arall
 call-option.label.paye-for-employers=TWE i gyflogwyr
@@ -159,10 +158,6 @@ self-assessment.query.callCharges=<a href="https://www.gov.uk/costau-galwadau" c
 self-assessment-organisation.query.heading=Help gyda Hunanasesiad
 self-assessment-organisation.query.p1=Mae angen i chi gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEF ar <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>.
 self-assessment-organisation.query.p2=Gallwch <a class="govuk-link" href="{0}">ddod o hyd i ffyrdd eraill o gysylltu â ni am Hunanasesiad</a>.
-
-seiss.query.heading=Os oes gennych ymholiad am y Cynllun Cymhorthdal Incwm Hunangyflogaeth
-seiss.query.p1=Os nad oes angen help arnoch i fewngofnodi, ond bod gennych ymholiad arall y Cynllun Cymhorthdal Incwm Hunangyflogaeth, gallwch gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEF drwy ffonio <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>.
-seiss.query.p2=Mae ffyrdd eraill o <a class="govuk-link" href="{0}">gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEF</a>.
 
 state-pension.query.heading=Ymholiad Pensiwn y Wladwriaeth
 state-pension.query.p1=Os nad oes angen help arnoch i fewngofnodi, ond bod gennych ymholiad arall am Bensiwn y Wladwriaeth, gallwch gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEF drwy ffonio <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>.

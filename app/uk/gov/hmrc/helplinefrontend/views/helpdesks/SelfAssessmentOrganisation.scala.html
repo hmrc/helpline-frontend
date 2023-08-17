@@ -29,11 +29,11 @@
 
     @h2(messages("default.title"), Some("govuk-body-l govuk-!-font-weight-bold"))
     @p(messages("self-assessment-organisation.query.p1"))
-    @p(messages("self-assessment-organisation.query.p2", URLDecoder.decode(routes.RedirectController.contactHelpline("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/self-assessment", "self-assessment-org").url, "UTF-8")))
+    @p(id = Some("query"), key = messages("self-assessment-organisation.query.p2", "https://www.gov.uk/government/organisations/hm-revenue-customs/contact/self-assessment"))
 
     @h2(messages("default.need-help.heading"), Some("govuk-body-l govuk-!-font-weight-bold"))
     @p(messages("online-services.need-help.p1"))
-    @p(messages("online-services.need-help.p2", URLDecoder.decode(routes.RedirectController.contactHelpdeskOrg("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/online-services-helpdesk").url, "UTF-8"), Some("govuk-!-margin-bottom-8")))
+    @p(id = Some("online-services"), key = messages("online-services.need-help.p2", "https://www.gov.uk/government/organisations/hm-revenue-customs/contact/online-services-helpdesk"), classes = Some("govuk-!-margin-bottom-8"))
 
 }
 

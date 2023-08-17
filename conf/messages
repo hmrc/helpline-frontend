@@ -17,7 +17,6 @@ call-option.label.national-insurance=National Insurance
 call-option.label.self-assessment=Self Assessment
 call-option.label.state-pension=State Pension
 call-option.label.tax-credits=Tax Credits
-call-option.label.SEISS=Self-Employment Income Support Scheme (SEISS)
 call-option.label.corporation-tax=Corporation Tax
 call-option.label.machine-games-duty=Machine Games Duty
 call-option.label.paye-for-employers=PAYE
@@ -163,10 +162,6 @@ self-assessment.helpline.closed.chat=<a href="/ask-hmrc/chat/self-assessment" cl
 self-assessment-organisation.query.heading=Help with Self Assessment
 self-assessment-organisation.query.p1=You need to contact the Self Assessment helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3310</span>.
 self-assessment-organisation.query.p2=You can <a class="govuk-link" href="{0}">find other ways to contact us about Self Assessment</a>.
-
-seiss.query.heading=If you have a Self-Employment Income Support Scheme query
-seiss.query.p1=If you do not need help signing in but have another query about the Self-Employment Income Support Scheme, you need to contact the Self-Employment Income Support Scheme helpline on <span class="govuk-!-font-weight-bold no-wrap">0800 024 1222</span>.
-seiss.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Self-Employment Income Support Scheme helpline</a>.
 
 state-pension.query.heading=State Pension query
 state-pension.query.p1=If you do not need help signing in but have another query about a State Pension, you need to contact the Pension Service helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3500</span>.

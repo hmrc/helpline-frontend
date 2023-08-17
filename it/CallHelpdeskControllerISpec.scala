@@ -15,16 +15,21 @@
  */
 
 import java.net.URLEncoder
-
 import play.api.http.Status.OK
 import play.api.libs.ws.WSResponse
 import play.api.test.Helpers.LOCATION
+import org.jsoup.Jsoup
+import org.jsoup.nodes.{Document, Element}
+import org.jsoup.select.Elements
 
 class CallHelpdeskControllerISpec extends helperSpec {
 
   val getPageBaseUrl = "/helpline"
   val diedHelpKey = "died"
   val callOptionsPage = "/call-options-no-answers"
+  val payeForEmployersPage = "/organisation/paye-for-employers"
+  val selfAssessmentPage = "/organisation/self-assessment"
+  val generalEnquiriesPage = "/organisation/help-with-a-service"
 
   "GET /helpline/:helpKey" should {
     "return died help page if the help key is 'died' but there is no go back url" in {
@@ -58,6 +63,66 @@ class CallHelpdeskControllerISpec extends helperSpec {
 
               submitCallOption.header(LOCATION).get should endWith(s"$getPageBaseUrl/$callOption?back=$backLinkToCallOptionsPage")
           }
+        }
+      }
+    }
+  }
+
+  "GET /helpline/organisation/paye-for-employers" should {
+    "return a page which includes the correct help links" in {
+
+      withClient {
+        wsClient => {
+          val pageResponse: WSResponse = wsClient.url(resource(s"$getPageBaseUrl$payeForEmployersPage")).get().futureValue
+
+          pageResponse.status shouldBe OK
+          val doc: Document = Jsoup.parse(pageResponse.body)
+
+          lazy val queryLink: Element = doc.getElementById("query")
+          queryLink.getElementsByClass("govuk-link").first.attr("href") should be("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/employer-enquiries")
+
+          lazy val onlineServicesLink: Element = doc.getElementById("online-services")
+          onlineServicesLink.getElementsByClass("govuk-link").first.attr("href") should be("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/online-services-helpdesk")
+        }
+      }
+    }
+  }
+
+  "GET /helpline/organisation/self-assessment" should {
+    "return a page which includes the correct help links" in {
+
+      withClient {
+        wsClient => {
+          val pageResponse: WSResponse = wsClient.url(resource(s"$getPageBaseUrl$selfAssessmentPage")).get().futureValue
+
+          pageResponse.status shouldBe OK
+          val doc: Document = Jsoup.parse(pageResponse.body)
+
+          lazy val queryLink: Element = doc.getElementById("query")
+          queryLink.getElementsByClass("govuk-link").first.attr("href") should be("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/self-assessment")
+
+          lazy val onlineServicesLink: Element = doc.getElementById("online-services")
+          onlineServicesLink.getElementsByClass("govuk-link").first.attr("href") should be("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/online-services-helpdesk")
+        }
+      }
+    }
+  }
+
+  "GET /helpline/organisation/help-with-a-service" should {
+    "return a page which includes the correct help links" in {
+
+      withClient {
+        wsClient => {
+          val pageResponse: WSResponse = wsClient.url(resource(s"$getPageBaseUrl$generalEnquiriesPage")).get().futureValue
+
+          pageResponse.status shouldBe OK
+          val doc: Document = Jsoup.parse(pageResponse.body)
+
+          lazy val queryLink: Element = doc.getElementById("query")
+          queryLink.getElementsByClass("govuk-link").first.attr("href") should be("https://www.gov.uk/contact-hmrc")
+
+          lazy val onlineServicesLink: Element = doc.getElementById("online-services")
+          onlineServicesLink.getElementsByClass("govuk-link").first.attr("href") should be("https://www.gov.uk/government/organisations/hm-revenue-customs/contact/online-services-helpdesk")
         }
       }
     }

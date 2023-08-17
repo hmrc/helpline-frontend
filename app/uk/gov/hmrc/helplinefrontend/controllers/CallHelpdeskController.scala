@@ -44,7 +44,6 @@ class CallHelpdeskController @Inject()(implicit
                                        selfAssessmentPage: SelfAssessment,
                                        statePensionPage: StatePension,
                                        taxCreditsPage: TaxCredits,
-                                       seissPage: Seiss,
                                        generalEnquiriesPage: GeneralEnquiries,
                                        generalEnquiriesOrganisationPage: GeneralEnquiriesOrganisation,
                                        corporationTaxPage: CorporationTax,

@@ -56,7 +56,6 @@ class allyTestsSpec extends AnyWordSpec with Matchers with GuiceOneAppPerSuite w
   val selfAssessment: SelfAssessment = app.injector.instanceOf[SelfAssessment]
   val statePension: StatePension = app.injector.instanceOf[StatePension]
   val taxCredits: TaxCredits = app.injector.instanceOf[TaxCredits]
-  val seiss: Seiss = app.injector.instanceOf[Seiss]
   val generalEnquiries: GeneralEnquiries = app.injector.instanceOf[GeneralEnquiries]
   val generalEnquiriesOrganisation: GeneralEnquiriesOrganisation = app.injector.instanceOf[GeneralEnquiriesOrganisation]
   val corporationTax: CorporationTax = app.injector.instanceOf[CorporationTax]
@@ -106,7 +105,6 @@ class allyTestsSpec extends AnyWordSpec with Matchers with GuiceOneAppPerSuite w
       selfAssessment,
       statePension,
       taxCredits,
-      seiss,
       generalEnquiries,
       generalEnquiriesOrganisation,
       corporationTax,
@@ -140,7 +138,6 @@ class allyTestsSpec extends AnyWordSpec with Matchers with GuiceOneAppPerSuite w
   val taxCreditsHelpKey: String = "TAX-CREDITS"
   val generalEnquiriesHelpKey: String = "GENERAL-ENQUIRIES"
   val generalEnquiriesOrganisationHelpKey: String = "SOMETHING-ELSE"
-  val seissHelpKey: String = "SEISS"
   val vatHelpKey: String = "VAT"
   val defaultHelpKey: String = "GENERAL-ENQUIRIES"
 

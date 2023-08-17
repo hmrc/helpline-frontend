@@ -56,7 +56,6 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   val selfAssessment: SelfAssessment = app.injector.instanceOf[SelfAssessment]
   val statePension: StatePension = app.injector.instanceOf[StatePension]
   val taxCredits: TaxCredits = app.injector.instanceOf[TaxCredits]
-  val seiss: Seiss = app.injector.instanceOf[Seiss]
   val generalEnquiries: GeneralEnquiries = app.injector.instanceOf[GeneralEnquiries]
   val generalEnquiriesOrganisation: GeneralEnquiriesOrganisation = app.injector.instanceOf[GeneralEnquiriesOrganisation]
   val corporationTax: CorporationTax = app.injector.instanceOf[CorporationTax]
@@ -106,7 +105,6 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       selfAssessment,
       statePension,
       taxCredits,
-      seiss,
       generalEnquiries,
       generalEnquiriesOrganisation,
       corporationTax,
@@ -140,7 +138,6 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   val taxCreditsHelpKey: String = "TAX-CREDITS"
   val generalEnquiriesHelpKey: String = "GENERAL-ENQUIRIES"
   val generalEnquiriesOrganisationHelpKey: String = "SOMETHING-ELSE"
-  val seissHelpKey: String = "SEISS"
   val vatHelpKey: String = "VAT"
   val defaultHelpKey: String = "GENERAL-ENQUIRIES"
   val secondaryHeading: String = "Capital Gains Tax"
@@ -264,7 +261,6 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
           selfAssessment,
           statePension,
           taxCredits,
-          seiss,
           generalEnquiries,
           generalEnquiriesOrganisation,
           corporationTax,
@@ -404,24 +400,6 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
     }
   }
 
-  //VER-1648 The business have asked us to remove SEISS references, but may add back later
-  "CallHelpdeskController get Seiss help page" should {
-    pending
-    "return Seiss help page if the help key is 'SEISS' but there is no go back url" in {
-      val result: Future[Result] = controller.getHelpdeskPage(seissHelpKey, None)(fakeRequest)
-      status(result) shouldBe Status.OK
-      contentAsString(result).contains("If you have a Self-Employment Income Support Scheme query") shouldBe true
-      contentAsString(result).contains("Back") shouldBe false
-    }
-
-    "return Seiss help page if the help key is 'SEISS' and there is a go back url" in {
-      val result: Future[Result] = controller.getHelpdeskPage(seissHelpKey, Some("backURL"))(fakeRequest)
-      status(result) shouldBe Status.OK
-      contentAsString(result).contains("If you have a Self-Employment Income Support Scheme query") shouldBe true
-      contentAsString(result).contains("Back") shouldBe true
-    }
-  }
-
   "CallHelpdeskController get call-options-no-answers page" should {
     "return a page with a list all the available help pages as radio buttons, and no go back url" in {
       val result: Future[Result] = controller.callOptionsNoAnswersPage()(fakeRequest)
@@ -525,15 +503,6 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
           Event("sos_iv", "more_info", "contact_sa", expectedDimensions)))
       }
     }
-    "fire contact_seiss ga event when user clicks on SEISS" in {
-      pending //VER-1648 The business have asked us to remove SEISS references, but may add back later
-      val result: Future[Result] = controller.selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "SEISS"))
-      status(result) shouldBe Status.SEE_OTHER
-      eventually {
-        analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
-          Event("sos_iv", "more_info", "contact_seiss", expectedDimensions)))
-      }
-    }
     "fire contact_pension ga event when user clicks on state pension" in {
       val result: Future[Result] = controller.selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "state-pension"))
       status(result) shouldBe Status.SEE_OTHER
@@ -573,7 +542,6 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
         selfAssessment,
         statePension,
         taxCredits,
-        seiss,
         generalEnquiries,
         generalEnquiriesOrganisation,
         corporationTax,

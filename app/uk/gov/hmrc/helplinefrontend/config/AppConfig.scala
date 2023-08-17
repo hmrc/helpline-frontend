@@ -76,7 +76,6 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "income-tax-paye" -> "further-contact_incometaxpaye",
     "national-insurance" -> "further-contact_natinsurance",
     "self-assessment" -> "further-contact_sa",
-    "SEISS" -> "further-contact_seiss",
     "state-pension" -> "further-contact_pension",
     "tax-credits" -> "further-contact_taxcred",
     "general-enquiries" -> "further-contact_other",
