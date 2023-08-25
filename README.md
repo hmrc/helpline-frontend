@@ -4,7 +4,15 @@
 helpline-frontend is a service that will display contact pages on demand.
 
 ### Running
-To run the application, use `sbt run`. 
+To run the application, use `sbt run`.
+
+When running the integration tests you can start the DATASTREAM service
+with the command
+
+`sm2 --start DATASTREAM`
+
+to suppress errors caused by calls to auditing. However, the tests will run successfully
+without the support of the data stream service.
 
 ## API
 

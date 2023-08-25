@@ -20,9 +20,8 @@ import play.api.libs.ws.WSResponse
 import play.api.test.Helpers.LOCATION
 import org.jsoup.Jsoup
 import org.jsoup.nodes.{Document, Element}
-import org.jsoup.select.Elements
 
-class CallHelpdeskControllerISpec extends helperSpec {
+class CallHelpdeskControllerISpec extends HelperSpec {
 
   val getPageBaseUrl = "/helpline"
   val diedHelpKey = "died"

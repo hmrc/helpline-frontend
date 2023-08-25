@@ -14,17 +14,14 @@
  * limitations under the License.
  */
 
+import org.scalatest.concurrent.{IntegrationPatience, ScalaFutures}
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
+import org.scalatestplus.play.guice.GuiceOneServerPerSuite
 import play.api.test.WsTestClient
-import uk.gov.hmrc.integration.ServiceSpec
 
-class helperSpec extends AnyWordSpec with Matchers with WsTestClient with ServiceSpec {
+class HelperSpec extends AnyWordSpec with Matchers with WsTestClient with GuiceOneServerPerSuite with ScalaFutures with IntegrationPatience {
 
-  override def afterAll(): Unit = {
-    // Not calling this as we don't use ServiceManagerClient
-  }
-
-  override def externalServices: Seq[String] = Seq.empty
+  def resource(path: String) = s"http://localhost:$port$path"
 
 }
