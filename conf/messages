@@ -144,7 +144,7 @@ self-assessment.query.heading=Self Assessment query
 self-assessment.query.p1=If you do not need help signing in but have another query about Self Assessment, you need to contact the Self Assessment helpline on <span class="govuk-!-font-weight-bold no-wrap">0300 200 3310</span>.
 self-assessment.query.p2=There are <a class="govuk-link" href="{0}">other ways to contact the Self Assessment helpline</a>.
 
-self-assessment.query.h1=Self Assessment enquiries
+self-assessment.query.h1=Call the Self Assessment helpline
 self-assessment.query.contact_number.telephone.text=Telephone:
 self-assessment.query.contact_number.telephone.number=0300 200 3310
 self-assessment.query.contact_number.no_uk_telephone.text=Outside UK:

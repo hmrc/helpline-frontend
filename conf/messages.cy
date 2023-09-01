@@ -144,7 +144,7 @@ self-assessment.query.heading=Ymholiad Hunanasesiad
 self-assessment.query.p1=Os nad oes angen help arnoch i fewngofnodi, ond bod gennych ymholiad arall am Hunanasesiad, gallwch gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEF drwy ffonio <span class="govuk-!-font-weight-bold no-wrap">0300 200 1900</span>.
 self-assessment.query.p2=Mae ffyrdd eraill o <a class="govuk-link" href="{0}">gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEF</a>.
 
-self-assessment.query.headingNew=Ffoniwch Wasanaeth Cwsmeriaid Cymraeg CThEF ar gyfer ymholiadau ynghylch Hunanasesiad
+self-assessment.query.h1=Ffoniwch Wasanaeth Cwsmeriaid Cymraeg CThEF ar gyfer ymholiadau ynghylch Hunanasesiad
 self-assessment.query.contact_number.telephone.text=Ffôn:
 self-assessment.query.contact_number.telephone.number=0300 200 1900
 self-assessment.query.contact_number.no_uk_telephone.text=Y tu allan i’r DU:
