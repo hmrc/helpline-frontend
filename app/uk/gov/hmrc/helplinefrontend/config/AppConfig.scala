@@ -110,7 +110,7 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "Cross-border arrangement" -> "osh",
     "Customs Declaration Service" -> "vat",
     "Customs Trader Services (CTS)" -> "vat",
-    "Digital Services Tax" -> "dst",
+    "Digital Services Tax (DST)" -> "dst",
     "Duty Deferment Electronic Statements" -> "vat",
     "Electronic Binding Tariff Information" -> "vat",
     "Excise Movement and Control System" -> "vat",
