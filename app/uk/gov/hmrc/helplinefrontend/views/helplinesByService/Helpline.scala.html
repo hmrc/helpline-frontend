@@ -26,8 +26,7 @@
       h1: H1,
       h2: H2,
       summaryList: SummaryList,
-      insetText: InsetText)
-
+      insetText: InsetText, govukWarningText : GovukWarningText)
 
 @(heading: String, helpdesk: String)(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
 
@@ -50,6 +49,13 @@
     @if(helpdesk != "dst"){
         @summaryList(rows = rows, classes = "govuk-summary-list--no-border")
     } else {
+@*        work here*@
+        @p(messages("helplines-search.dst.p.1"))
+        @p(messages("helplines-search.dst.p.2"))
+        @govukWarningText(WarningText(
+            iconFallbackText = Some("Warning"),
+            content = Text(messages("helplines-search.dst.warning"))
+        ))
         @p(messages(s"helplines-search.${helpdesk}-mailbox") + " " + messages(s"helplines-search.${helpdesk}.mailbox"))
     }
     @if(helpdesk == "vat") {
