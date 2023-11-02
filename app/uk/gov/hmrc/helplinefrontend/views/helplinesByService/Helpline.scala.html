@@ -26,10 +26,8 @@
       h1: H1,
       h2: H2,
       summaryList: SummaryList,
-      insetText: InsetText )
-      govukWarningText : GovukWarningText
-
-
+      insetText: InsetText,
+      govukWarningText : GovukWarningText)
 
 @(heading: String, helpdesk: String)(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
 
@@ -44,7 +42,6 @@
     }
     rws.toSeq
 }
-
 
 @layout(pageTitle = s"${messages(s"helplines-search.${helpdesk}.h1")} ${messages("title.suffix")}") {
     @preHeading(heading.replaceAll("_", " "))
