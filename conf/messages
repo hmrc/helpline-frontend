@@ -358,6 +358,9 @@ helplines-search.voa.int=+44 300 050 1501
 helplines-search.voa.times=Monday to Friday: 8am to 6pm<br>Closed weekends and bank holidays.
 
 helplines-search.dst.h1=Contact the DST mailbox
+helplines-search.dst.p.1=Contact the DST mailbox to recover your sign in details for Digital Services Tax.
+helplines-search.dst.p.2=Digital Services Tax is a tax on large businesses (UK turnover over £25 million) operating in online marketplaces, search engines and social media.
+helplines-search.dst.warning=This mailbox is not for Making Tax Digital or your personal tax account.
 helplines-search.dst-mailbox=<span class="govuk-!-font-weight-bold">Mailbox:</span>
 helplines-search.dst.mailbox=<a href="mailto:ccgdstmailbox@hmrc.gov.uk" class="govuk-link">ccgdstmailbox@hmrc.gov.uk</a>
 
