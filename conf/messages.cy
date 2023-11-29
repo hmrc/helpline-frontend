@@ -3,6 +3,7 @@ title.suffix=- Llinellau Cymorth CThEF - GOV.UK
 error.prefix=Gwall
 back=Yn ôl
 continue=Yn eich blaen
+error-summary-header=Mae problem wedi codi
 
 call-options-no-answers.h1=Pa wasanaeth yr ydych yn ceisio cael ato?
 call-options-no-answers.other.h1=Pa wasanaeth eraill yr ydych yn ceisio cael ato?
@@ -356,3 +357,8 @@ helplines-search.voa.h1=Ffoniwch linell gymorth Asiantaeth y Swyddfa Brisio
 helplines-search.voa.tel=03000 505505
 helplines-search.voa.int=44 3000 505505
 helplines-search.voa.times=Dydd Llun i ddydd Gwener: 09:00 tan 16:30<br>Ar gau ar benwythnosau a gwyliau banc.
+
+select-national-insurance-service.h1=Dewiswch y gwasanaeth Yswiriant Gwladol sydd ei angen arnoch
+select-national-insurance-service.option1=Dod o hyd i’ch rhif Yswiriant Gwladol
+select-national-insurance-service.option2=Ymholiad arall am Yswiriant Gwladol
+select-national-insurance-service.error=Dewiswch pa wasanaeth yr oeddech yn ceisio cael mynediad ato gan ddefnyddio’r cyfrif hwn

@@ -22,10 +22,11 @@ import uk.gov.hmrc.auth.core.{AuthConnector, AuthorisedFunctions}
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.helplinefrontend.models.CallOption._
 import uk.gov.hmrc.helplinefrontend.models._
-import uk.gov.hmrc.helplinefrontend.models.form.{CallOptionForm, CallOptionOrganisationForm, FindHMRCHelplineForm, HelplinesByServiceForm, HelplinesByServiceSearchForm}
+import uk.gov.hmrc.helplinefrontend.models.form.{CallOptionForm, CallOptionOrganisationForm, FindHMRCHelplineForm, FindNiNumber,  OtherQueries, HelplinesByServiceForm, HelplinesByServiceSearchForm,SelectNationalInsuranceServiceForm}
 import uk.gov.hmrc.helplinefrontend.monitoring._
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
 import uk.gov.hmrc.helplinefrontend.views.html.helplinesByService._
+import uk.gov.hmrc.helplinefrontend.views.html.SelectNationalInsuranceService
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
@@ -59,6 +60,7 @@ class CallHelpdeskController @Inject()(implicit
                                        helplinesByService: HelplinesByService,
                                        helpline: Helpline,
                                        findHMRCHelpline: FindHMRCHelpline,
+                                       selectNationalInsuranceService: SelectNationalInsuranceService,
                                        val eventDispatcher: EventDispatcher,
                                        ec: ExecutionContext)
   extends FrontendController(mcc) with Logging with AuthorisedFunctions {
@@ -290,6 +292,18 @@ class CallHelpdeskController @Inject()(implicit
     Ok(hasThisPersonDied(None))
   }
 
+  def showSelectNationalInsuranceServicePage(): Action[AnyContent] = Action { implicit request =>
+    Ok(selectNationalInsuranceService(SelectNationalInsuranceServiceForm.apply()))
+  }
 
-
+  def processSelectNationalInsuranceServicePage(): Action[AnyContent] = Action.async { implicit request =>
+    val result = SelectNationalInsuranceServiceForm.apply().bindFromRequest.fold(
+      errors => BadRequest(selectNationalInsuranceService(errors)),
+      {
+        case FindNiNumber => NotImplemented
+        case OtherQueries => NotImplemented
+      }
+    )
+    Future.successful(result)
+  }
 }
