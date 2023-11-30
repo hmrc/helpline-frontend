@@ -32,7 +32,7 @@
 
 @layout(pageTitle = s"${messages("select-national-insurance-service.h1")} ${messages("title.suffix")}", formErrors = selectNationalInsuranceServiceForm.errors) {
 
-    @formWithCsrf(routes.CallHelpdeskController.processSelectNationalInsuranceServicePage()) {
+    @formWithCsrf(routes.SelectNationalInsuranceServiceController.processSelectNationalInsuranceServicePage()) {
 
         @if(selectNationalInsuranceServiceForm.hasErrors) {
             @govukErrorSummary(ErrorSummary(
