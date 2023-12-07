@@ -30,7 +30,7 @@
 
 @(selectNationalInsuranceServiceForm: Form[_])(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
 
-@layout(pageTitle = s"${messages("select-national-insurance-service.h1")} ${messages("title.suffix")}", formErrors = selectNationalInsuranceServiceForm.errors) {
+@layout(pageTitle = s"${messages("select-national-insurance-service.h1")} ${messages("title.suffix")}", formErrors = selectNationalInsuranceServiceForm.errors, backLinkLocation = Some(routes.CallHelpdeskController.callOptionsNoAnswersPage().url)) {
 
     @formWithCsrf(routes.SelectNationalInsuranceServiceController.processSelectNationalInsuranceServicePage()) {
 

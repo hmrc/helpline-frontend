@@ -41,6 +41,7 @@ class SelectNationalInsuranceServiceControllerSpec extends AnyWordSpec with Matc
 
       val document: Document = Jsoup.parse(contentAsString(result))
 
+      document.select("a[class='govuk-back-link']").attr("href") should include("/helpline/call-options-no-answers")
       document.select("h1").text shouldBe("Select the National Insurance service you need")
       document.select("main label").get(0).text shouldBe ("Find your National Insurance number")
       document.select("main label").get(1).text shouldBe ("Other National Insurance queries")
