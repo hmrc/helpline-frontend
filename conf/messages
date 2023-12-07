@@ -3,6 +3,7 @@ title.suffix=- HMRC Helplines - GOV.UK
 error.prefix=Error
 back=Back
 continue=Continue
+error-summary-header=There is a problem
 
 call-options-no-answers.h1=Which service are you trying to access?
 call-options-no-answers.other.h1=Which other service are you trying to access?
@@ -381,3 +382,8 @@ find-HMRC-helplines.option4.hint=Includes Communities Amateur Sports Clubs
 find-HMRC-helplines.option5=Other services
 find-HMRC-helplines.option5.value=other
 find-HMRC-helplines.error=Select the service you access using this account
+
+select-national-insurance-service.h1=Select the National Insurance service you need
+select-national-insurance-service.option1=Find your National Insurance number
+select-national-insurance-service.option2=Other National Insurance queries
+select-national-insurance-service.error=Select which service you were trying to access using this account

@@ -29,8 +29,8 @@ lazy val microservice = Project(appName, file("."))
           |.*BuildInfo.*;
           |.*Routes.*;
           |.*RoutesPrefix.*;""".stripMargin,
-      ScoverageKeys.coverageMinimumStmtTotal := 80,
-      ScoverageKeys.coverageFailOnMinimum := false,
+      ScoverageKeys.coverageMinimumStmtTotal := 78,
+      ScoverageKeys.coverageFailOnMinimum := true,
       ScoverageKeys.coverageHighlighting := true
     )
   )
