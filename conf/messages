@@ -261,7 +261,7 @@ helplines-search.country-by-country-reporting=Contact the Online Services helpde
 helplines-search.cross-border-arrangement=Contact the Online Services helpdesk to recover your sign in details for cross-border arrangement.
 helplines-search.customs-declaration-service=Contact the VAT helpline to recover your sign in details for Customs Declaration Service.
 helplines-search.customs-trader-services-cts=Contact the VAT helpline to recover your sign in details for CTS.
-helplines-search.digital-services-tax=Contact the DST mailbox to recover your sign in details for Digital Services Tax.
+helplines-search.digital-services-tax-dst=Contact the DST mailbox to recover your sign in details for Digital Services Tax.
 helplines-search.duty-deferment-electronic-statements=Contact the VAT helpline to recover your sign in details for Duty Deferment Electronic Statements.
 helplines-search.electronic-binding-tariff-information=Contact the VAT helpline to recover your sign in details for Electronic Binding Tariff Information.
 helplines-search.excise-movement-and-control-system=Contact the VAT helpline to recover your sign in details for Excise Movement and Control System.
@@ -361,7 +361,7 @@ helplines-search.voa.times=Monday to Friday: 8am to 6pm<br>Closed weekends and b
 helplines-search.dst.h1=Contact the DST mailbox
 helplines-search.dst.p.1=Contact the DST mailbox to recover your sign in details for Digital Services Tax.
 helplines-search.dst.p.2=Digital Services Tax is a tax on large businesses (UK turnover over £25 million) operating in online marketplaces, search engines and social media.
-helplines-search.dst.warning=This mailbox is not for Making Tax Digital or your personal tax account.
+helplines-search.dst.warning=This mailbox is for Digital Services Tax queries only and not for queries relating to Making Tax Digital or your personal tax account.
 helplines-search.dst-mailbox=<span class="govuk-!-font-weight-bold">Mailbox:</span>
 helplines-search.dst.mailbox=<a href="mailto:ccgdstmailbox@hmrc.gov.uk" class="govuk-link">ccgdstmailbox@hmrc.gov.uk</a>
 
