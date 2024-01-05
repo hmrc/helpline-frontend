@@ -40,13 +40,23 @@ import scala.concurrent.{ExecutionContext, Future}
 
 class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOneAppPerSuite with Eventually with MockFactory{
 
-  private val fakeRequest = FakeRequest("GET", "/")
-  val config: Configuration = Configuration.from(Map(
-    "features.back-call-support" -> false
-  ))
-  val customiseAppConfig = new AppConfig(config, new ServicesConfig(config))
+  class TestAppConfig(config: Configuration, servicesConfig: ServicesConfig, testFindMyNinoEnabled: Boolean)
+  extends AppConfig(config, servicesConfig){
+    override val findMyNinoEnabled: Boolean = testFindMyNinoEnabled
+  }
 
-  val appConfig: AppConfig = app.injector.instanceOf[AppConfig]
+  private val fakeRequest = FakeRequest("GET", "/")
+  val customConfig: Configuration = Configuration.from(Map(
+    "features.back-call-support" -> false,
+    "features.find-my-nino.enabled" -> false
+  ))
+  val customiseAppConfig = new AppConfig(customConfig, new ServicesConfig(customConfig))
+
+  val config: Configuration = app.injector.instanceOf[Configuration]
+  val servicesConfig: ServicesConfig = new ServicesConfig(config)
+
+  val appConfig: AppConfig = new AppConfig(config, servicesConfig)
+
   val authConnector: AuthConnector = app.injector.instanceOf[AuthConnector]
   val messagesCC: MessagesControllerComponents = app.injector.instanceOf[MessagesControllerComponents]
   val childBenefit: ChildBenefit = app.injector.instanceOf[ChildBenefit]
@@ -93,10 +103,13 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
   val eventDispatcher = new EventDispatcher(TestHandler)
 
-  val controller: CallHelpdeskController =
+  def getController(findMyNinoEnabled: Boolean = false): CallHelpdeskController = {
+
+    val testAppConfig: TestAppConfig = new TestAppConfig(config, servicesConfig, findMyNinoEnabled)
+
     new CallHelpdeskController()(
       authConnector,
-      appConfig,
+      testAppConfig,
       messagesCC,
       childBenefit,
       childcareService,
@@ -123,6 +136,8 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       eventDispatcher,
       ec)
 
+  }
+
   val childBenefitHelpKey: String = "CHILD-BENEFIT"
   val childcareServiceHelpKey: String = "CHILDCARE-SERVICE"
   val corporationTaxHelpKey: String = "CORPORATION-TAX"
@@ -144,20 +159,20 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
   "CallHelpdeskController get has this person died help page" should {
     "return hasThisPersonDied help page if the help key is 'DIED' but there is no go back url" in {
-      val result: Future[Result] = controller.getHelpdeskPage(hasThisPersonDiedHelpKey, None)(fakeRequest)
+      val result: Future[Result] = getController().getHelpdeskPage(hasThisPersonDiedHelpKey, None)(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Has this person died?") shouldBe true
       contentAsString(result).contains("Back") shouldBe false
     }
 
     "return hasThisPersonDied help page if the help key is 'DIED' and there is a go back url" in {
-      val result: Future[Result] = controller.getHelpdeskPage(hasThisPersonDiedHelpKey, Some("backURL"))(fakeRequest)
+      val result: Future[Result] = getController().getHelpdeskPage(hasThisPersonDiedHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Has this person died?") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
     }
     "return hasThisPersonDied help page" in {
-      val result: Future[Result] = controller.hasThisPersonDiedPage(request)
+      val result: Future[Result] = getController().hasThisPersonDiedPage(request)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Has this person died?") shouldBe true
       contentAsString(result).contains("Back") shouldBe false
@@ -170,14 +185,14 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
   "CallHelpdeskController get child benefit help page" should {
     "return child benefit help page if the help key is 'CHILD-BENEFIT' but there is no go back url" in {
-      val result: Future[Result] = controller.getHelpdeskPage(childBenefitHelpKey, None)(fakeRequest)
+      val result: Future[Result] = getController().getHelpdeskPage(childBenefitHelpKey, None)(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Call the Child Benefit helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe false
     }
 
     "return child benefit help page if the help key is 'CHILD-BENEFIT' and there is a go back url" in {
-      val result: Future[Result] = controller.getHelpdeskPage(childBenefitHelpKey, Some("backURL"))(fakeRequest)
+      val result: Future[Result] = getController().getHelpdeskPage(childBenefitHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Call the Child Benefit helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
@@ -186,7 +201,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
   "CallHelpdeskController get childcare service help page" should {
     "return childcare service help page if the help key is 'CHILDCARE-SERVICE' but there is no go back url" in {
-      val result: Future[Result] = controller.getHelpdeskPage(childcareServiceHelpKey, None)(fakeRequest)
+      val result: Future[Result] = getController().getHelpdeskPage(childcareServiceHelpKey, None)(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Call the Childcare Service helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe false
@@ -194,7 +209,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
 
     "return childcare service help page if the help key is 'CHILDCARE-SERVICE' and there is a go back url" in {
-      val result: Future[Result] = controller.getHelpdeskPage(childcareServiceHelpKey, Some("backURL"))(fakeRequest)
+      val result: Future[Result] = getController().getHelpdeskPage(childcareServiceHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Call the Childcare Service helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
@@ -203,14 +218,14 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
   "CallHelpdeskController get corporation tax help page" should {
     "return corporation tax help page if the help key is 'CORPORATION-TAX' but there is no go back url" in {
-      val result: Future[Result] = controller.getHelpdeskOrganisationPage(corporationTaxHelpKey, None)(fakeRequest)
+      val result: Future[Result] = getController().getHelpdeskOrganisationPage(corporationTaxHelpKey, None)(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Call the Corporation Tax helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe false
     }
 
     "return corporation tax help page if the help key is 'CORPORATION-TAX' and there is a go back url" in {
-      val result: Future[Result] = controller.getHelpdeskOrganisationPage(corporationTaxHelpKey, Some("backURL"))(fakeRequest)
+      val result: Future[Result] = getController().getHelpdeskOrganisationPage(corporationTaxHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Call the Corporation Tax helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
@@ -219,14 +234,14 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
   "CallHelpdeskController get Income Tax and PAYE help page" should {
     "return Income Tax and PAYE help page if the help key is 'INCOME-TAX-PAYE' but there is no go back url" in {
-      val result: Future[Result] = controller.getHelpdeskPage(incomeTaxPayeHelpKey, None)(fakeRequest)
+      val result: Future[Result] = getController().getHelpdeskPage(incomeTaxPayeHelpKey, None)(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Call the Income Tax and PAYE support helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe false
     }
 
     "return Income Tax and PAYE help page if the help key is 'INCOME-TAX-PAYE' and there is a go back url" in {
-      val result: Future[Result] = controller.getHelpdeskPage(incomeTaxPayeHelpKey, Some("backURL"))(fakeRequest)
+      val result: Future[Result] = getController().getHelpdeskPage(incomeTaxPayeHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Call the Income Tax and PAYE support helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
@@ -235,14 +250,14 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
   "CallHelpdeskController get National Insurance help page" should {
     "return National Insurance help page if the help key is 'NATIONAL-INSURANCE' but there is no go back url" in {
-      val result: Future[Result] = controller.getHelpdeskPage(nationalInsuranceHelpKey, None)(fakeRequest)
+      val result: Future[Result] = getController().getHelpdeskPage(nationalInsuranceHelpKey, None)(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Call the National Insurance helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe false
     }
 
     "return National Insurance help page if the help key is 'NATIONAL-INSURANCE' and there is a go back url" in {
-      val result: Future[Result] = controller.getHelpdeskPage(nationalInsuranceHelpKey, Some("backURL"))(fakeRequest)
+      val result: Future[Result] = getController().getHelpdeskPage(nationalInsuranceHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Call the National Insurance helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
@@ -289,7 +304,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
   "CallHelpdeskController get Machine Games Duty help page" should {
     "return Machine Games Duty help page if the help key is 'MACHINE-GAMING-DUTY' but there is no go back url" in {
-      val result: Future[Result] = controller.getHelpdeskOrganisationPage(machineGamingDutyHelpKey, None)(fakeRequest)
+      val result: Future[Result] = getController().getHelpdeskOrganisationPage(machineGamingDutyHelpKey, None)(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Call the Machine Games Duty helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe false
@@ -297,7 +312,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
 
     "return Machine Games Duty help page if the help key is 'MACHINE-GAMING-DUTY' and there is a go back url" in {
-      val result: Future[Result] = controller.getHelpdeskOrganisationPage(machineGamingDutyHelpKey, Some("backURL"))(fakeRequest)
+      val result: Future[Result] = getController().getHelpdeskOrganisationPage(machineGamingDutyHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Call the Machine Games Duty helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
@@ -306,14 +321,14 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
   "CallHelpdeskController get paye for employers help page" should {
     "return paye for employers help page if the help key is 'PAYE-FOR-EMPLOYERS' but there is no go back url" in {
-      val result: Future[Result] = controller.getHelpdeskOrganisationPage(payeForEmployersHelpKey, None)(fakeRequest)
+      val result: Future[Result] = getController().getHelpdeskOrganisationPage(payeForEmployersHelpKey, None)(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Help with PAYE for employers") shouldBe true
       contentAsString(result).contains("Back") shouldBe false
     }
 
     "return paye for employers help page if the help key is 'PAYE-FOR-EMPLOYERS' and there is a go back url" in {
-      val result: Future[Result] = controller.getHelpdeskOrganisationPage(payeForEmployersHelpKey, Some("backURL"))(fakeRequest)
+      val result: Future[Result] = getController().getHelpdeskOrganisationPage(payeForEmployersHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Help with PAYE for employers") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
@@ -322,14 +337,14 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
   "CallHelpdeskController get vat help page" should {
     "return vat help page if the help key is 'VAT' but there is no go back url" in {
-      val result: Future[Result] = controller.getHelpdeskOrganisationPage(vatHelpKey, None)(fakeRequest)
+      val result: Future[Result] = getController().getHelpdeskOrganisationPage(vatHelpKey, None)(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Call the VAT helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe false
     }
 
     "return vat help page if the help key is 'VAT' and there is a go back url" in {
-      val result: Future[Result] = controller.getHelpdeskOrganisationPage(vatHelpKey, Some("backURL"))(fakeRequest)
+      val result: Future[Result] = getController().getHelpdeskOrganisationPage(vatHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Call the VAT helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
@@ -338,14 +353,14 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
   "CallHelpdeskController get Self Assessment help page" should {
     "return Self Assessment help page if the help key is 'SELF-ASSESSMENT' but there is no go back url" in {
-      val result: Future[Result] = controller.getHelpdeskPage(selfAssessmentHelpKey, None)(fakeRequest)
+      val result: Future[Result] = getController().getHelpdeskPage(selfAssessmentHelpKey, None)(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Call the Self Assessment helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe false
     }
 
     "return Self Assessment help page if the help key is 'SELF ASSESSMENT' and there is a go back url" in {
-      val result: Future[Result] = controller.getHelpdeskPage(selfAssessmentHelpKey, Some("backURL"))(fakeRequest)
+      val result: Future[Result] = getController().getHelpdeskPage(selfAssessmentHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Call the Self Assessment helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
@@ -354,14 +369,14 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
   "CallHelpdeskController get Self Assessment help page" should {
     "return Self Assessment help page if the help key is 'self-assessment' but there is no go back url" in {
-      val result: Future[Result] = controller.getHelpdeskOrganisationPage(selfAssessmentOrganisationHelpKey, None)(fakeRequest)
+      val result: Future[Result] = getController().getHelpdeskOrganisationPage(selfAssessmentOrganisationHelpKey, None)(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Help with Self Assessment") shouldBe true
       contentAsString(result).contains("Back") shouldBe false
     }
 
     "return Self Assessment help page if the help key is 'self-assessment' and there is a go back url" in {
-      val result: Future[Result] = controller.getHelpdeskOrganisationPage(selfAssessmentOrganisationHelpKey, Some("backURL"))(fakeRequest)
+      val result: Future[Result] = getController().getHelpdeskOrganisationPage(selfAssessmentOrganisationHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Help with Self Assessment") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
@@ -370,14 +385,14 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
   "CallHelpdeskController get State Pension help page" should {
     "return State Pension help page if the help key is 'STATE-PENSION' but there is no go back url" in {
-      val result: Future[Result] = controller.getHelpdeskPage(statePensionHelpKey, None)(fakeRequest)
+      val result: Future[Result] = getController().getHelpdeskPage(statePensionHelpKey, None)(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Call the State Pension helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe false
     }
 
     "return State Pension help page if the help key is 'STATE-PENSION' and there is a go back url" in {
-      val result: Future[Result] = controller.getHelpdeskPage(statePensionHelpKey, Some("backURL"))(fakeRequest)
+      val result: Future[Result] = getController().getHelpdeskPage(statePensionHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Call the State Pension helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
@@ -386,14 +401,14 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
   "CallHelpdeskController get Tax Credits help page" should {
     "return Tax Credits help page if the help key is 'TAX-CREDITS' but there is no go back url" in {
-      val result: Future[Result] = controller.getHelpdeskPage(taxCreditsHelpKey, None)(fakeRequest)
+      val result: Future[Result] = getController().getHelpdeskPage(taxCreditsHelpKey, None)(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Call the Tax Credits helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe false
     }
 
     "return Tax Credits help page if the help key is 'TAX-CREDITS' and there is a go back url" in {
-      val result: Future[Result] = controller.getHelpdeskPage(taxCreditsHelpKey, Some("backURL"))(fakeRequest)
+      val result: Future[Result] = getController().getHelpdeskPage(taxCreditsHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Call the Tax Credits helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
@@ -402,7 +417,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
   "CallHelpdeskController get call-options-no-answers page" should {
     "return a page with a list all the available help pages as radio buttons, and no go back url" in {
-      val result: Future[Result] = controller.callOptionsNoAnswersPage()(fakeRequest)
+      val result: Future[Result] = getController().callOptionsNoAnswersPage()(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Back") shouldBe false
     }
@@ -410,7 +425,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
   "CallHelpdeskController get which-service-are-you-trying-to-access page" should {
     "return a page with a list all the available help pages as radio buttons, and no back url" in {
-      val result: Future[Result] = controller.whichServiceAccessPage()(request)
+      val result: Future[Result] = getController().whichServiceAccessPage()(request)
       status(result) shouldBe Status.OK
       eventually {
         analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
@@ -422,7 +437,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
   "CallHelpdeskController get which-service-are-you-trying-to-access-other page" should {
     "return a page with a list all the available help pages as radio buttons, and a back url" in {
-      val result: Future[Result] = controller.whichServiceAccessOtherPage()(fakeRequest)
+      val result: Future[Result] = getController().whichServiceAccessOtherPage()(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Back") shouldBe true
     }
@@ -430,14 +445,14 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
   "CallHelpdeskController get  General Enquiries help page" should {
     "return General Enquiries help page if the help key is 'DEFAULT' but there is no go back url" in {
-      val result: Future[Result] = controller.getHelpdeskPage(defaultHelpKey, None)(fakeRequest)
+      val result: Future[Result] = getController().getHelpdeskPage(defaultHelpKey, None)(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Query about something else") shouldBe true
       contentAsString(result).contains("Back") shouldBe false
     }
 
     "return General Enquiries help page if the help key is 'DEFAULT' and there is a go back url" in {
-      val result: Future[Result] = controller.getHelpdeskPage(defaultHelpKey, Some("backURL"))(fakeRequest)
+      val result: Future[Result] = getController().getHelpdeskPage(defaultHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Query about something else") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
@@ -446,14 +461,14 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
   "CallHelpdeskController get General Enquiries help page" should {
     "return General Enquiries help page if the help key is 'SOMETHING-ELSE' but there is no go back url" in {
-      val result: Future[Result] = controller.getHelpdeskOrganisationPage(generalEnquiriesOrganisationHelpKey, None)(fakeRequest)
+      val result: Future[Result] = getController().getHelpdeskOrganisationPage(generalEnquiriesOrganisationHelpKey, None)(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Help with a service") shouldBe true
       contentAsString(result).contains("Back") shouldBe false
     }
 
     "return General Enquiries help page if the help key is 'SOMETHING-ELSE' and there is a go back url" in {
-      val result: Future[Result] = controller.getHelpdeskOrganisationPage(generalEnquiriesOrganisationHelpKey, Some("backURL"))(fakeRequest)
+      val result: Future[Result] = getController().getHelpdeskOrganisationPage(generalEnquiriesOrganisationHelpKey, Some("backURL"))(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Help with a service") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
@@ -462,7 +477,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
   "CallHelpdeskController get findHMRCHelpline page" should {
     "return find HMRC Helpline page" in {
-      val result: Future[Result] = controller.findHMRCHelplinePage()(fakeRequest)
+      val result: Future[Result] = getController().findHMRCHelplinePage()(fakeRequest)
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Find an HMRC helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe false
@@ -472,56 +487,81 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   "CallHelpdeskController " should {
 
     "fire contact_childbenefits ga event when user clicks on Child benefit" in {
-      val result: Future[Result] = controller.selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "child-benefit"))
+      val result: Future[Result] = getController().selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "child-benefit"))
       status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should startWith("/helpline/child-benefit")
       eventually {
         analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
           Event("sos_iv", "more_info", "contact_childbenefit", expectedDimensions)))
       }
     }
     "fire contact_incometaxpaye ga event when user clicks on income tax" in {
-      val result: Future[Result] = controller.selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "income-tax-paye"))
+      val result: Future[Result] = getController().selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "income-tax-paye"))
       status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should startWith("/helpline/income-tax-paye")
       eventually {
         analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
           Event("sos_iv", "more_info", "contact_incometaxpaye", expectedDimensions)))
       }
     }
-    "fire contact_natinsurance ga event when user clicks on national insurance" in {
-      val result: Future[Result] = controller.selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "national-insurance"))
+    "fire contact_natinsurance ga event when user clicks on national insurance with the find my nino enabled flag set to false" in {
+      val result: Future[Result] = getController().selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "national-insurance"))
       status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should startWith("/helpline/national-insurance")
+      eventually {
+        analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
+          Event("sos_iv", "more_info", "contact_natinsurance", expectedDimensions)))
+      }
+    }
+    "fire contact_natinsurance ga event when user clicks on national insurance with the find my nino enabled flag set to true" in {
+      val result: Future[Result] = getController(findMyNinoEnabled = true).selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "national-insurance"))
+      status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get shouldBe "/helpline/select-national-insurance-service"
       eventually {
         analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
           Event("sos_iv", "more_info", "contact_natinsurance", expectedDimensions)))
       }
     }
     "fire contact_sa ga event when user clicks on self assessment" in {
-      val result: Future[Result] = controller.selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "self-assessment"))
+      val result: Future[Result] = getController().selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "self-assessment"))
       status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should startWith("/helpline/self-assessment")
       eventually {
         analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
           Event("sos_iv", "more_info", "contact_sa", expectedDimensions)))
       }
     }
     "fire contact_pension ga event when user clicks on state pension" in {
-      val result: Future[Result] = controller.selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "state-pension"))
+      val result: Future[Result] = getController().selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "state-pension"))
       status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should startWith("/helpline/state-pension")
       eventually {
         analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
           Event("sos_iv", "more_info", "contact_pension", expectedDimensions)))
       }
     }
     "fire contact_taxcred ga event when user clicks on tax credits" in {
-      val result: Future[Result] = controller.selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "tax-credits"))
+      val result: Future[Result] = getController().selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "tax-credits"))
       status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should startWith("/helpline/tax-credits")
       eventually {
         analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
           Event("sos_iv", "more_info", "contact_taxcred", expectedDimensions)))
       }
     }
     "fire contact_other ga event when user clicks on other" in {
-      val result: Future[Result] = controller.selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "general-enquiries"))
+      val result: Future[Result] = getController().selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "general-enquiries"))
       status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should startWith("/helpline/general-enquiries")
+      eventually {
+        analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
+          Event("sos_iv", "more_info", "contact_other", expectedDimensions)))
+      }
+    }
+    "fire contact_other ga event when user clicks on other and find my nino enabled flag is set to true" in {
+      val result: Future[Result] = getController(findMyNinoEnabled = true).selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "general-enquiries"))
+      status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should startWith("/helpline/general-enquiries")
       eventually {
         analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
           Event("sos_iv", "more_info", "contact_other", expectedDimensions)))
@@ -623,4 +663,5 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       contentAsString(result).contains("Contact the DST mailbox") shouldBe true
     }
   }
+  
 }

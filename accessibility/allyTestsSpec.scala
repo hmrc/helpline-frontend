@@ -42,7 +42,8 @@ class allyTestsSpec extends AnyWordSpec with Matchers with GuiceOneAppPerSuite w
 
   private val fakeRequest = FakeRequest("GET", "/")
   val config: Configuration = Configuration.from(Map(
-    "features.back-call-support" -> false
+    "features.back-call-support" -> false,
+    "features.find-my-nino.enabled" -> false
   ))
   val customiseAppConfig = new AppConfig(config, new ServicesConfig(config))
 

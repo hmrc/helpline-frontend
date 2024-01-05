@@ -15,6 +15,8 @@
  */
 
 import java.net.URLEncoder
+import play.api.Application
+import play.api.inject.guice.GuiceApplicationBuilder
 import play.api.http.Status.OK
 import play.api.libs.ws.WSResponse
 import play.api.test.Helpers.LOCATION
@@ -29,6 +31,13 @@ class CallHelpdeskControllerISpec extends HelperSpec {
   val payeForEmployersPage = "/organisation/paye-for-employers"
   val selfAssessmentPage = "/organisation/self-assessment"
   val generalEnquiriesPage = "/organisation/help-with-a-service"
+
+  // Create alternative application instance with feature flag "features.find-my-nino.enabled" set to true
+  lazy val findMyNinoEnabledApp: Application = new GuiceApplicationBuilder()
+    .configure(
+      "features.find-my-nino.enabled" -> true,
+      "metrics.enabled" -> false)
+    .build()
 
   "GET /helpline/:helpKey" should {
     "return died help page if the help key is 'died' but there is no go back url" in {
@@ -64,6 +73,27 @@ class CallHelpdeskControllerISpec extends HelperSpec {
           }
         }
       }
+    }
+
+    "direct the service to the select-national-insurance-service page" when {
+
+      "the national insurance option is selected and the findMyNinoEnabled flag is set to true" in new FindMyNinoEnabled {
+
+        withClient {
+          wsClient => {
+
+            val nationalInsuranceCallOption = s"selected-call-option=${URLEncoder.encode("national-insurance", "UTF-8")}"
+            val submitCallOptionResponse = wsClient.url(resource(s"$getPageBaseUrl$callOptionsPage"))
+              .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded")
+              .withFollowRedirects(false).post(nationalInsuranceCallOption).futureValue
+
+            submitCallOptionResponse.header(LOCATION).get shouldBe "/helpline/select-national-insurance-service"
+          }
+        }
+
+
+      }
+
     }
   }
 
@@ -125,6 +155,12 @@ class CallHelpdeskControllerISpec extends HelperSpec {
         }
       }
     }
+  }
+
+  trait FindMyNinoEnabled extends HelperSpec {
+
+    override lazy val app: Application = findMyNinoEnabledApp
+
   }
 
 }
