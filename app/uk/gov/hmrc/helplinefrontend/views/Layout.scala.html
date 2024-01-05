@@ -17,11 +17,10 @@
 @import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcLayout
 @import uk.gov.hmrc.helplinefrontend.views.html.{AdditionalHead,FullWidth}
 
-@this(
-        hmrcLayout: HmrcLayout,
+@this(hmrcLayout: HmrcLayout,
         head: AdditionalHead,
-        fullWidthTemplate: FullWidth
-)
+        fullWidthMainContent: FullWidth,
+        twoThirdsMainContent: TwoThirdsMainContent)
 
 @(pageTitle: String = "",
   headBlock: Option[Html] = None,
@@ -54,7 +53,7 @@
     backLinkUrl = backLinkLocation,
     isWelshTranslationAvailable = appConfig.welshLanguageSupportEnabled,
     signOutUrl = signOutUrl,
-    mainContentLayout = if(fullWidth)Some(fullWidthTemplate(_)) else None,
+    mainContentLayout = Some(if (fullWidth) fullWidthMainContent(_) else twoThirdsMainContent(_)),
     additionalScriptsBlock = scriptsBlock,
     additionalHeadBlock = Some(head(headBlock))
 )(contentSection)
