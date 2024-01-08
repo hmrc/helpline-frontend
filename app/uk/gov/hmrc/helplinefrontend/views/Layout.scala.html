@@ -17,10 +17,12 @@
 @import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcLayout
 @import uk.gov.hmrc.helplinefrontend.views.html.{AdditionalHead,FullWidth}
 
-@this(hmrcLayout: HmrcLayout,
+@this(
+        hmrcLayout: HmrcLayout,
         head: AdditionalHead,
         fullWidthMainContent: FullWidth,
-        twoThirdsMainContent: TwoThirdsMainContent)
+        twoThirdsMainContent: TwoThirdsMainContent
+)
 
 @(pageTitle: String = "",
   headBlock: Option[Html] = None,
