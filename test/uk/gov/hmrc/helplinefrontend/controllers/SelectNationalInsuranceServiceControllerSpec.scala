@@ -58,6 +58,24 @@ class SelectNationalInsuranceServiceControllerSpec extends AnyWordSpec with Matc
       document.select("#select-national-insurance-service-error").text() shouldBe("Error: Select which service you were trying to access using this account")
     }
 
+    "sadasdsa" in new Setup {
+      val result: Future[Result] = controller.processSelectNationalInsuranceServicePage()(validRequest("find_your_national_insurance_number"))
+      status(result) shouldBe Status.OK
+
+      val document: Document = Jsoup.parse(contentAsString(result))
+      document.select("h1").text() shouldBe("sadasdsad")
+
+    }
+
+    "okijkjhjkj" in new Setup {
+      val result: Future[Result] = controller.processSelectNationalInsuranceServicePage()(validRequest("other_national_insurance_queries"))
+      status(result) shouldBe Status.OK
+
+      val document: Document = Jsoup.parse(contentAsString(result))
+      document.select("h1").text() shouldBe("sadasdsad")
+
+    }
+
 }
 
   class Setup() {
