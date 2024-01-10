@@ -358,6 +358,13 @@ helplines-search.voa.tel=03000 505505
 helplines-search.voa.int=44 3000 505505
 helplines-search.voa.times=Dydd Llun i ddydd Gwener: 09:00 tan 16:30<br>Ar gau ar benwythnosau a gwyliau banc.
 
+helplines-search.dst.h1=Cysylltwch â mewnflwch y DST
+helplines-search.dst.p.1=Cysylltwch â mewnflwch y DST i adfer eich manylion mewngofnodi ar gyfer Treth Gwasanaethau Digidol.
+helplines-search.dst.p.2=Mae Treth Gwasanaethau Digidol yn dreth ar fusnesau mawr (trosiant y DU dros £25 miliwn) sy’n gweithredu mewn marchnadoedd ar-lein, peiriannau chwilio a chyfryngau cymdeithasol.
+helplines-search.dst.warning=Mae’r blwch post hwn ar gyfer ymholiadau Treth Gwasanaethau Digidol yn unig ac nid ar gyfer ymholiadau sy’n ymwneud â’r cynllun Troi Treth yn Ddigidol neu’ch cyfrif treth personol.
+helplines-search.dst-mailbox=<span class="govuk-!-font-weight-bold">Mewnflwch:</span>
+helplines-search.dst.mailbox=<a href="mailto:ccgdstmailbox@hmrc.gov.uk" class="govuk-link">ccgdstmailbox@hmrc.gov.uk</a>
+
 select-national-insurance-service.h1=Dewiswch y gwasanaeth Yswiriant Gwladol sydd ei angen arnoch
 select-national-insurance-service.option1=Dod o hyd i’ch rhif Yswiriant Gwladol
 select-national-insurance-service.option2=Ymholiad arall am Yswiriant Gwladol
