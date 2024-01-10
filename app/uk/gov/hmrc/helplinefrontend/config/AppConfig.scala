@@ -174,6 +174,11 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "Mandatory Disclosure Rules" -> "osh"
   )
 
+  val configuredOriginServices = Map(
+    "/identity-verification" -> "IV",
+    "/personal-details-validation" -> "PDV"
+  )
+
   val callOptionsList: List[String] =
     config.getOptional[String]("features.call-options")
       .fold(defaultCallOptionsAndGAEventMapper.keySet.toList)(_.split(",").toList)

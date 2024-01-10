@@ -35,6 +35,14 @@ class SelectNationalInsuranceServiceController @Inject()(implicit
   extends FrontendController(mcc) with Logging with AuthorisedFunctions {
 
   def showSelectNationalInsuranceServicePage(): Action[AnyContent] = Action { implicit request =>
+    val newHeaderKey: String = "ORIGIN_SERVICE"
+    val configOfReferers: Map[String,String] = appConfig.configuredOriginServices
+    val referer:Option[String] = request.headers.get("Referer")
+        for (service <- configOfReferers){
+          if(service._1.contains(referer))
+            request.session + (newHeaderKey -> service._2)
+          }
+
     Ok(selectNationalInsuranceService(SelectNationalInsuranceServiceForm.apply()))
   }
 
