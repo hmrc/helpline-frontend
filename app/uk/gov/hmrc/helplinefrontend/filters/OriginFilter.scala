@@ -18,11 +18,12 @@ package uk.gov.hmrc.helplinefrontend.filters
 
 import com.google.inject.Inject
 import akka.stream.Materializer
+import play.api.Logging
 import play.api.mvc._
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import scala.concurrent.Future
 
-class OriginFilter @Inject()(override val mat: Materializer, appConfig: AppConfig) extends Filter {
+class OriginFilter @Inject()(override val mat: Materializer, appConfig: AppConfig) extends Filter with Logging {
 
   import OriginFilter.originHeaderKey
 
@@ -34,11 +35,15 @@ class OriginFilter @Inject()(override val mat: Materializer, appConfig: AppConfi
 
     val newRequestHeader: RequestHeader = if(referrer.nonEmpty) {
 
+      logger.info(s"Referrer defined in origin filter : ${referrer.get}")
+
       val originServices : Seq[String] = configReferrers.keys.toSeq.filter(referrer.get.contains(_))
 
       if(originServices.nonEmpty) {
 
         val originServiceKey: Option[String] = configReferrers.get(originServices.head)
+
+        logger.info(s"Origin service key set to ${originServiceKey.get}")
 
         val newHeaders: Headers = rh.headers.add(originHeaderKey -> originServiceKey.get)
 
