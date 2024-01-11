@@ -44,11 +44,11 @@ class SelectNationalInsuranceServiceController @Inject()(implicit
       errors => BadRequest(selectNationalInsuranceService(errors)),
       {
         case FindNiNumber => request.headers.get("ORIGIN_SERVICE") match {
-          case Some("IV") => Redirect("/find-your-national-insurance-number/checkDetails?origin=IV")
-          case Some("PDV") => Redirect("/find-your-national-insurance-number/checkDetails?origin=PDV")
-          case None => Redirect("/find-your-national-insurance-number/checkDetails")
+          case Some("IV") => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails?origin=IV")
+          case Some("PDV") => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails?origin=PDV")
+          case None => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails")
         }
-        case OtherQueries => Redirect("/NationalInsurance")
+        case OtherQueries => Redirect("/helpline/NATIONAL-INSURANCE")
       }
     )
     Future.successful(result)

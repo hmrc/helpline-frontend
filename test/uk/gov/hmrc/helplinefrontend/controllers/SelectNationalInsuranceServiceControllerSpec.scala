@@ -58,22 +58,16 @@ class SelectNationalInsuranceServiceControllerSpec extends AnyWordSpec with Matc
       document.select("#select-national-insurance-service-error").text() shouldBe("Error: Select which service you were trying to access using this account")
     }
 
-    "sadasdsa" in new Setup {
+    "redirect to find your nino page when Find your National Insurance number is selected and submitted" in new Setup {
       val result: Future[Result] = controller.processSelectNationalInsuranceServicePage()(validRequest("find_your_national_insurance_number"))
-      status(result) shouldBe Status.OK
-
-      val document: Document = Jsoup.parse(contentAsString(result))
-      document.select("h1").text() shouldBe("sadasdsad")
-
+      status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should startWith("/find-your-national-insurance-number/")
     }
 
-    "okijkjhjkj" in new Setup {
+    "redirect to find your nino page when Other National Insurance queries is selected and submitted" in new Setup {
       val result: Future[Result] = controller.processSelectNationalInsuranceServicePage()(validRequest("other_national_insurance_queries"))
-      status(result) shouldBe Status.OK
-
-      val document: Document = Jsoup.parse(contentAsString(result))
-      document.select("h1").text() shouldBe("sadasdsad")
-
+      status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should startWith("/NationalInsurance")
     }
 
 }
