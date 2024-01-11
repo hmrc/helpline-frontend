@@ -269,6 +269,7 @@ helplines-search.cross-border-arrangement=Cysylltwch â Gwasanaeth Cwsmeriaid Cy
 helplines-search.customs-declaration-service=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer y Gwasanaeth Datganiadau Tollau.
 helplines-search.customs-trader-services-cts=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer Gwasanaethau Masnachwyr Tollau (CTS).
 helplines-search.duty-deferment-electronic-statements=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer Datganiadau Electronig i Ohirio Tollau.
+helplines-search.digital-services-tax-dst=Cysylltwch â mewnflwch y DST i adfer eich manylion mewngofnodi ar gyfer Treth Gwasanaethau Digidol.
 helplines-search.electronic-binding-tariff-information=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer Gwybodaeth Electronig am Dariff sy’n Rhwymo.
 helplines-search.excise-movement-and-control-system=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer y System Symudiadau a Rheolaeth Ecséis.
 helplines-search.fuels-duty=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer y Doll Tanwyddau.
