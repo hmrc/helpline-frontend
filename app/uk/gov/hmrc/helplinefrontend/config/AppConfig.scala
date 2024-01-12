@@ -203,4 +203,9 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
   lazy val ggLogoutUrl = s"$basGatewayUrl$logoutPath"
   lazy val logoutCallback: String = servicesConfig.getConfString("auth.logoutCallbackUrl", "/helpline/signed-out")
 
+  val configuredOriginServices = Map(
+    "/identity-verification" -> "IV",
+    "/personal-details-validation" -> "PDV"
+  )
+
 }
