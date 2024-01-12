@@ -18,7 +18,6 @@ package uk.gov.hmrc.helplinefrontend.controllers
 
 import play.api.Logging
 import play.api.mvc._
-import uk.gov.hmrc.http.HeaderNames
 import uk.gov.hmrc.auth.core.{AuthConnector, AuthorisedFunctions}
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.helplinefrontend.models.form._
@@ -43,10 +42,10 @@ class SelectNationalInsuranceServiceController @Inject()(implicit
     val result = SelectNationalInsuranceServiceForm.apply().bindFromRequest.fold(
       errors => BadRequest(selectNationalInsuranceService(errors)),
       {
-        case FindNiNumber => request.headers.get("HELPLINE_ORIGIN_SERVICE") match {
+        case FindNiNumber => request.session.get("HELPLINE_ORIGIN_SERVICE") match {
           case Some("IV") => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails?origin=IV")
           case Some("PDV") => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails?origin=PDV")
-          case None => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails")
+          case None | Some(_) => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails")
         }
         case OtherQueries => Redirect("/helpline/NATIONAL-INSURANCE")
       }
