@@ -42,8 +42,12 @@ class SelectNationalInsuranceServiceController @Inject()(implicit
     val result = SelectNationalInsuranceServiceForm.apply().bindFromRequest.fold(
       errors => BadRequest(selectNationalInsuranceService(errors)),
       {
-        case FindNiNumber => NotImplemented
-        case OtherQueries => NotImplemented
+        case FindNiNumber => request.session.get("HELPLINE_ORIGIN_SERVICE") match {
+          case Some("IV") => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails?origin=IV")
+          case Some("PDV") => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails?origin=PDV")
+          case None | Some(_) => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails")
+        }
+        case OtherQueries => Redirect("/helpline/NATIONAL-INSURANCE")
       }
     )
     Future.successful(result)

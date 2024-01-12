@@ -192,6 +192,8 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
 
   lazy val platformAnalyticsUrl = servicesConfig.baseUrl("platform-analytics")
 
+  lazy val findYourNationalInsuranceNumberFrontendUrl = servicesConfig.baseUrl("find-your-national-insurance-number-frontend")
+
   //TODO:Is this really the way to store state in a play app?
   var isLoggedInUser: Boolean = false
 
