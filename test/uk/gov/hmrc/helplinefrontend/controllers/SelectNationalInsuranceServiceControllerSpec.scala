@@ -61,13 +61,26 @@ class SelectNationalInsuranceServiceControllerSpec extends AnyWordSpec with Matc
     "redirect to find your nino page when Find your National Insurance number is selected and submitted" in new Setup {
       val result: Future[Result] = controller.processSelectNationalInsuranceServicePage()(validRequest("find_your_national_insurance_number"))
       status(result) shouldBe Status.SEE_OTHER
-      redirectLocation(result).get should startWith("/find-your-national-insurance-number/")
+      redirectLocation(result).get should include("/find-your-national-insurance-number/")
     }
+
+    "redirect to find your nino page when Find your National Insurance number is selected and submitted and the user came from IV" in new Setup {
+      val result: Future[Result] = controller.processSelectNationalInsuranceServicePage()(validRequest("find_your_national_insurance_number"))
+      status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should include("/find-your-national-insurance-number/checkDetails?origin=IV")
+    }
+
+    "redirect to find your nino page when Find your National Insurance number is selected and submitted and the user came from PDV" in new Setup {
+      val result: Future[Result] = controller.processSelectNationalInsuranceServicePage()(validRequest("find_your_national_insurance_number"))
+      status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should include("/find-your-national-insurance-number/checkDetails?origin=PDV")
+    }
+
 
     "redirect to find your nino page when Other National Insurance queries is selected and submitted" in new Setup {
       val result: Future[Result] = controller.processSelectNationalInsuranceServicePage()(validRequest("other_national_insurance_queries"))
       status(result) shouldBe Status.SEE_OTHER
-      redirectLocation(result).get should startWith("/NationalInsurance")
+      redirectLocation(result).get should include("/NATIONAL-INSURANCE")
     }
 
 }
