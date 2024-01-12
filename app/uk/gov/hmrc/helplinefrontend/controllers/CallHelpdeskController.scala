@@ -65,6 +65,7 @@ class CallHelpdeskController @Inject()(implicit
 
   def checkIsAuthorisedUser()(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[Boolean] = {
     authorised(){
+      println("/////")
       appConfig.isLoggedInUser = true
       Future.successful(appConfig.isLoggedInUser)
     }.recover {
