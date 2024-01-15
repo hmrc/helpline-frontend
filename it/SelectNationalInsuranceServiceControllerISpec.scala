@@ -15,30 +15,108 @@
  */
 
 import play.api.Application
-import play.api.http.Status.OK
+import play.api.http.Status.{OK, SEE_OTHER}
 import play.api.inject.guice.GuiceApplicationBuilder
+import play.api.libs.ws.DefaultWSCookie
+import play.api.test.Helpers.LOCATION
 
 class SelectNationalInsuranceServiceControllerISpec extends HelperSpec {
 
   val getPageBaseUrl = "/helpline"
   val selectNationalInsuranceServiceKey = "/select-national-insurance-service"
+  val nationalInsuranceHelpline = "/NATIONAL-INSURANCE"
 
-
-  lazy val findMyNinoEnabledApp: Application = new GuiceApplicationBuilder()
+  override lazy val app: Application = new GuiceApplicationBuilder()
     .configure(
-      "features.find-my-nino.enabled" -> true,
-      "metrics.enabled" -> false)
+      "play.filters.csrf.header.bypassHeaders.X-Requested-With" -> "*",
+      "play.filters.csrf.header.bypassHeaders.Csrf-Token" -> "nocheck"
+    )
     .build()
+
+
+  "GET /select-national-insurance-service" should {
+    "redirect to the select national insurance service page" in {
+      withClient {
+        wsClient => {
+        val submitNationalInsuranceServiceResponse = wsClient.url(resource(s"$getPageBaseUrl$selectNationalInsuranceServiceKey")).get().futureValue
+          submitNationalInsuranceServiceResponse.status shouldBe OK
+        }
+      }
+    }
+  }
 
 
 
   "POST /select-national-insurance-service" should {
-    "redirect to checkDetails page" in {
+    "redirect to national insurance helpline page when Other Queries is selected" in {
       withClient {
         wsClient => {
-          wsClient.url(resource(s"$getPageBaseUrl/$selectNationalInsuranceServiceKey")).get().futureValue
+          val submitNationalInsuranceServiceResponse = wsClient.url(resource(s"$getPageBaseUrl$selectNationalInsuranceServiceKey"))
+            .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded")
+            .withFollowRedirects(false).post(Map("select-national-insurance-service" -> Seq("other_national_insurance_queries"))).futureValue
+
+          submitNationalInsuranceServiceResponse.header(LOCATION).get shouldBe "/helpline/NATIONAL-INSURANCE"
         }
-      }.status shouldBe OK
+      }
+    }
+
+    "redirect to check details page when Find my nino is select and origin is IV" in {
+      withClient{
+        wsClient =>{
+
+          val submitNationalInsuranceServiceResponse = wsClient.url(resource(s"$getPageBaseUrl$selectNationalInsuranceServiceKey"))
+            .addCookies(DefaultWSCookie("mdtp", authAndSessionCookie("IV")))
+            .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded")
+            .withFollowRedirects(false).post(Map("select-national-insurance-service" -> Seq("find_your_national_insurance_number"))).futureValue
+
+          submitNationalInsuranceServiceResponse.status shouldBe SEE_OTHER
+          submitNationalInsuranceServiceResponse.header(LOCATION).get shouldBe "http://localhost:9000/find-your-national-insurance-number/checkDetails?origin=IV"
+        }
+      }
+    }
+
+    "redirect to check details page when Find my nino is select and origin is PDV" in {
+      withClient{
+        wsClient =>{
+
+          val submitNationalInsuranceServiceResponse = wsClient.url(resource(s"$getPageBaseUrl$selectNationalInsuranceServiceKey"))
+            .addCookies(DefaultWSCookie("mdtp", authAndSessionCookie("PDV")))
+            .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded")
+            .withFollowRedirects(false).post(Map("select-national-insurance-service" -> Seq("find_your_national_insurance_number"))).futureValue
+
+          submitNationalInsuranceServiceResponse.status shouldBe SEE_OTHER
+          submitNationalInsuranceServiceResponse.header(LOCATION).get shouldBe "http://localhost:9000/find-your-national-insurance-number/checkDetails?origin=PDV"
+        }
+      }
+    }
+
+    "redirect to check details page when Find my nino is select and origin is not recognised" in {
+      withClient{
+        wsClient =>{
+
+          val submitNationalInsuranceServiceResponse = wsClient.url(resource(s"$getPageBaseUrl$selectNationalInsuranceServiceKey"))
+            .addCookies(DefaultWSCookie("mdtp", authAndSessionCookie("Not an Origin")))
+            .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded")
+            .withFollowRedirects(false).post(Map("select-national-insurance-service" -> Seq("find_your_national_insurance_number"))).futureValue
+
+          submitNationalInsuranceServiceResponse.status shouldBe SEE_OTHER
+          submitNationalInsuranceServiceResponse.header(LOCATION).get shouldBe "http://localhost:9000/find-your-national-insurance-number/checkDetails"
+        }
+      }
+    }
+
+    "redirect to check details page when Find my nino is select and origin is not there" in {
+      withClient{
+        wsClient =>{
+
+          val submitNationalInsuranceServiceResponse = wsClient.url(resource(s"$getPageBaseUrl$selectNationalInsuranceServiceKey"))
+            .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded")
+            .withFollowRedirects(false).post(Map("select-national-insurance-service" -> Seq("find_your_national_insurance_number"))).futureValue
+
+          submitNationalInsuranceServiceResponse.status shouldBe SEE_OTHER
+          submitNationalInsuranceServiceResponse.header(LOCATION).get shouldBe "http://localhost:9000/find-your-national-insurance-number/checkDetails"
+        }
+      }
     }
   }
 }

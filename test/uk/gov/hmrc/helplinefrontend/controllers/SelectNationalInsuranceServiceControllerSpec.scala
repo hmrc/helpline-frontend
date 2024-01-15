@@ -84,7 +84,7 @@ class SelectNationalInsuranceServiceControllerSpec extends AnyWordSpec with Matc
       redirectLocation(result).get should include("/find-your-national-insurance-number/checkDetails?origin=PDV")
     }
 
-    "redirect to find your nino page when Find your National Insurance number is selected and submitted but the orgin isn't recognisable" in new Setup{
+    "redirect to find your nino page when Find your National Insurance number is selected and submitted but the origin isn't recognisable" in new Setup{
       def validRequestPdv(selectNationalInsuranceService: String): FakeRequest[AnyContentAsFormUrlEncoded] = FakeRequest()
         .withFormUrlEncodedBody("select-national-insurance-service" -> selectNationalInsuranceService)
         .withMethod(POST).withSession("HELPLINE_ORIGIN_SERVICE" -> "Not an Origin")
