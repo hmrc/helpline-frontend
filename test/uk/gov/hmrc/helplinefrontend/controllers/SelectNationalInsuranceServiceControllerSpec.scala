@@ -97,7 +97,7 @@ class SelectNationalInsuranceServiceControllerSpec extends AnyWordSpec with Matc
     "redirect to find your nino page when Other National Insurance queries is selected and submitted" in new Setup {
       val result: Future[Result] = controller.processSelectNationalInsuranceServicePage()(validRequest("other_national_insurance_queries"))
       status(result) shouldBe Status.SEE_OTHER
-      redirectLocation(result).get should include("/NATIONAL-INSURANCE")
+      redirectLocation(result).get should include("/NationalInsurance")
     }
 }
 

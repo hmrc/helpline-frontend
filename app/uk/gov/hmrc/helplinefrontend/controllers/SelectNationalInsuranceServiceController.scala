@@ -20,6 +20,8 @@ import play.api.Logging
 import play.api.mvc._
 import uk.gov.hmrc.auth.core.{AuthConnector, AuthorisedFunctions}
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
+import uk.gov.hmrc.helplinefrontend.filters.OriginFilter
+import uk.gov.hmrc.helplinefrontend.models.CallOption
 import uk.gov.hmrc.helplinefrontend.models.form._
 import uk.gov.hmrc.helplinefrontend.views.html.SelectNationalInsuranceService
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
@@ -42,12 +44,12 @@ class SelectNationalInsuranceServiceController @Inject()(implicit
     val result = SelectNationalInsuranceServiceForm.apply().bindFromRequest.fold(
       errors => BadRequest(selectNationalInsuranceService(errors)),
       {
-        case FindNiNumber => request.session.get("HELPLINE_ORIGIN_SERVICE") match {
-          case Some("IV") => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails?origin=IV")
-          case Some("PDV") => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails?origin=PDV")
-          case None | Some(_) => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails")
+        case FindNiNumber => request.session.get(OriginFilter.originHeaderKey) match {
+          case Some(appConfig.IVOrigin) => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails?origin=IV")
+          case Some(appConfig.PDVOrigin) => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails?origin=PDV")
+          case _ => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails")
         }
-        case OtherQueries => Redirect("/helpline/NATIONAL-INSURANCE")
+        case OtherQueries => Redirect(routes.CallHelpdeskController.getHelpdeskPage(CallOption.NationalInsurance.toString,None))
       }
     )
     Future.successful(result)

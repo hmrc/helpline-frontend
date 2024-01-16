@@ -192,7 +192,7 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
 
   lazy val platformAnalyticsUrl = servicesConfig.baseUrl("platform-analytics")
 
-  lazy val findYourNationalInsuranceNumberFrontendUrl = servicesConfig.baseUrl("find-your-national-insurance-number-frontend")
+  lazy val findYourNationalInsuranceNumberFrontendUrl = servicesConfig.getConfString("find-your-national-insurance-number-host","")
 
   //TODO:Is this really the way to store state in a play app?
   var isLoggedInUser: Boolean = false
@@ -203,6 +203,8 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
   lazy val ggLogoutUrl = s"$basGatewayUrl$logoutPath"
   lazy val logoutCallback: String = servicesConfig.getConfString("auth.logoutCallbackUrl", "/helpline/signed-out")
 
+  val IVOrigin: String = "IV"
+  val PDVOrigin: String = "PDV"
   val configuredOriginServices = Map(
     "/identity-verification" -> "IV",
     "/personal-details-validation" -> "PDV"

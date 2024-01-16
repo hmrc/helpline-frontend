@@ -38,7 +38,10 @@ class SelectNationalInsuranceServiceControllerISpec extends HelperSpec {
     "redirect to the select national insurance service page" in {
       withClient {
         wsClient => {
-        val submitNationalInsuranceServiceResponse = wsClient.url(resource(s"$getPageBaseUrl$selectNationalInsuranceServiceKey")).get().futureValue
+        val submitNationalInsuranceServiceResponse = wsClient.url(resource(s"$getPageBaseUrl$selectNationalInsuranceServiceKey"))
+          .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded", "Referer" -> "/identity-verification")
+          .withFollowRedirects(false)
+          .get().futureValue
           submitNationalInsuranceServiceResponse.status shouldBe OK
         }
       }
@@ -52,10 +55,10 @@ class SelectNationalInsuranceServiceControllerISpec extends HelperSpec {
       withClient {
         wsClient => {
           val submitNationalInsuranceServiceResponse = wsClient.url(resource(s"$getPageBaseUrl$selectNationalInsuranceServiceKey"))
-            .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded")
+            .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded","Referer" -> "/identity-verification")
             .withFollowRedirects(false).post(Map("select-national-insurance-service" -> Seq("other_national_insurance_queries"))).futureValue
 
-          submitNationalInsuranceServiceResponse.header(LOCATION).get shouldBe "/helpline/NATIONAL-INSURANCE"
+          submitNationalInsuranceServiceResponse.header(LOCATION).get shouldBe "/helpline/NationalInsurance"
         }
       }
     }
@@ -66,7 +69,7 @@ class SelectNationalInsuranceServiceControllerISpec extends HelperSpec {
 
           val submitNationalInsuranceServiceResponse = wsClient.url(resource(s"$getPageBaseUrl$selectNationalInsuranceServiceKey"))
             .addCookies(DefaultWSCookie("mdtp", authAndSessionCookie("IV")))
-            .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded")
+            .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded", "Referer" -> "/identity-verification")
             .withFollowRedirects(false).post(Map("select-national-insurance-service" -> Seq("find_your_national_insurance_number"))).futureValue
 
           submitNationalInsuranceServiceResponse.status shouldBe SEE_OTHER
@@ -81,7 +84,7 @@ class SelectNationalInsuranceServiceControllerISpec extends HelperSpec {
 
           val submitNationalInsuranceServiceResponse = wsClient.url(resource(s"$getPageBaseUrl$selectNationalInsuranceServiceKey"))
             .addCookies(DefaultWSCookie("mdtp", authAndSessionCookie("PDV")))
-            .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded")
+            .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded", "Referer" -> "/personal-details-validation")
             .withFollowRedirects(false).post(Map("select-national-insurance-service" -> Seq("find_your_national_insurance_number"))).futureValue
 
           submitNationalInsuranceServiceResponse.status shouldBe SEE_OTHER
@@ -96,7 +99,7 @@ class SelectNationalInsuranceServiceControllerISpec extends HelperSpec {
 
           val submitNationalInsuranceServiceResponse = wsClient.url(resource(s"$getPageBaseUrl$selectNationalInsuranceServiceKey"))
             .addCookies(DefaultWSCookie("mdtp", authAndSessionCookie("Not an Origin")))
-            .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded")
+            .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded", "Referer" -> "/not and Origin")
             .withFollowRedirects(false).post(Map("select-national-insurance-service" -> Seq("find_your_national_insurance_number"))).futureValue
 
           submitNationalInsuranceServiceResponse.status shouldBe SEE_OTHER
