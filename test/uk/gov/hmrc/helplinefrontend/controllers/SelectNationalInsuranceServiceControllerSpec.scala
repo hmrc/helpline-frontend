@@ -66,30 +66,27 @@ class SelectNationalInsuranceServiceControllerSpec extends AnyWordSpec with Matc
 
     "redirect to find your nino page when Find your National Insurance number is selected and submitted and the user came from IV" in new Setup {
 
-      def validRequestIv(selectNationalInsuranceService: String): FakeRequest[AnyContentAsFormUrlEncoded] = FakeRequest()
-        .withFormUrlEncodedBody("select-national-insurance-service" -> selectNationalInsuranceService)
-        .withMethod(POST).withSession("HELPLINE_ORIGIN_SERVICE" -> "IV")
-      val result: Future[Result] = controller.processSelectNationalInsuranceServicePage()(validRequestIv("find_your_national_insurance_number"))
+      val result: Future[Result] = controller.processSelectNationalInsuranceServicePage()(validRequest("find_your_national_insurance_number")
+        .withSession("HELPLINE_ORIGIN_SERVICE" -> "IV")
+      )
       status(result) shouldBe Status.SEE_OTHER
       redirectLocation(result).get should include("/find-your-national-insurance-number/checkDetails?origin=IV")
     }
 
     "redirect to find your nino page when Find your National Insurance number is selected and submitted and the user came from PDV" in new Setup{
-      def validRequestPdv(selectNationalInsuranceService: String): FakeRequest[AnyContentAsFormUrlEncoded] = FakeRequest()
-        .withFormUrlEncodedBody("select-national-insurance-service" -> selectNationalInsuranceService)
-        .withMethod(POST).withSession("HELPLINE_ORIGIN_SERVICE" -> "PDV")
 
-      val result: Future[Result] = controller.processSelectNationalInsuranceServicePage()(validRequestPdv("find_your_national_insurance_number"))
+      val result: Future[Result] = controller.processSelectNationalInsuranceServicePage()(validRequest("find_your_national_insurance_number")
+        .withSession("HELPLINE_ORIGIN_SERVICE" -> "PDV")
+      )
       status(result) shouldBe Status.SEE_OTHER
       redirectLocation(result).get should include("/find-your-national-insurance-number/checkDetails?origin=PDV")
     }
 
     "redirect to find your nino page when Find your National Insurance number is selected and submitted but the origin isn't recognisable" in new Setup{
-      def validRequestPdv(selectNationalInsuranceService: String): FakeRequest[AnyContentAsFormUrlEncoded] = FakeRequest()
-        .withFormUrlEncodedBody("select-national-insurance-service" -> selectNationalInsuranceService)
-        .withMethod(POST).withSession("HELPLINE_ORIGIN_SERVICE" -> "Not an Origin")
 
-      val result: Future[Result] = controller.processSelectNationalInsuranceServicePage()(validRequestPdv("find_your_national_insurance_number"))
+      val result: Future[Result] = controller.processSelectNationalInsuranceServicePage()(validRequest("find_your_national_insurance_number")
+        .withSession("HELPLINE_ORIGIN_SERVICE" -> "Not an Origin")
+      )
       status(result) shouldBe Status.SEE_OTHER
       redirectLocation(result).get should include("/find-your-national-insurance-number/checkDetails")
     }
@@ -97,7 +94,7 @@ class SelectNationalInsuranceServiceControllerSpec extends AnyWordSpec with Matc
     "redirect to find your nino page when Other National Insurance queries is selected and submitted" in new Setup {
       val result: Future[Result] = controller.processSelectNationalInsuranceServicePage()(validRequest("other_national_insurance_queries"))
       status(result) shouldBe Status.SEE_OTHER
-      redirectLocation(result).get should include("/NationalInsurance")
+      redirectLocation(result).get should include("/national-insurance")
     }
 }
 

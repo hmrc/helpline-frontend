@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
 import play.api.Application
 import play.api.http.Status.{OK, SEE_OTHER}
 import play.api.inject.guice.GuiceApplicationBuilder
@@ -24,7 +26,6 @@ class SelectNationalInsuranceServiceControllerISpec extends HelperSpec {
 
   val getPageBaseUrl = "/helpline"
   val selectNationalInsuranceServiceKey = "/select-national-insurance-service"
-  val nationalInsuranceHelpline = "/NATIONAL-INSURANCE"
 
   override lazy val app: Application = new GuiceApplicationBuilder()
     .configure(
@@ -58,7 +59,11 @@ class SelectNationalInsuranceServiceControllerISpec extends HelperSpec {
             .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded","Referer" -> "/identity-verification")
             .withFollowRedirects(false).post(Map("select-national-insurance-service" -> Seq("other_national_insurance_queries"))).futureValue
 
-          submitNationalInsuranceServiceResponse.header(LOCATION).get shouldBe "/helpline/NationalInsurance"
+          submitNationalInsuranceServiceResponse.header(LOCATION).get shouldBe s"/helpline/national-insurance"
+
+          val redirectResult = wsClient.url(resource(submitNationalInsuranceServiceResponse.header(LOCATION).get)).get().futureValue
+          val doc: Document = Jsoup.parse(redirectResult.body)
+          doc.select("h1").text().contains("Call the National Insurance helpline") shouldBe true
         }
       }
     }

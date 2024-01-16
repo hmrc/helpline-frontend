@@ -21,7 +21,7 @@ import play.api.mvc._
 import uk.gov.hmrc.auth.core.{AuthConnector, AuthorisedFunctions}
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.helplinefrontend.filters.OriginFilter
-import uk.gov.hmrc.helplinefrontend.models.CallOption
+import uk.gov.hmrc.helplinefrontend.models.CallOption.NationalInsurance
 import uk.gov.hmrc.helplinefrontend.models.form._
 import uk.gov.hmrc.helplinefrontend.views.html.SelectNationalInsuranceService
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
@@ -49,7 +49,7 @@ class SelectNationalInsuranceServiceController @Inject()(implicit
           case Some(appConfig.PDVOrigin) => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails?origin=PDV")
           case _ => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails")
         }
-        case OtherQueries => Redirect(routes.CallHelpdeskController.getHelpdeskPage(CallOption.NationalInsurance.toString,None))
+        case OtherQueries => Redirect(routes.CallHelpdeskController.getHelpdeskPage(NationalInsurance.entryName.toLowerCase,None))
       }
     )
     Future.successful(result)
