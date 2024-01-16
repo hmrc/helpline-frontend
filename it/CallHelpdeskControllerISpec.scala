@@ -108,6 +108,37 @@ class CallHelpdeskControllerISpec extends HelperSpec {
         }
       }
 
+      "the national insurance option is selected on the call-options-no-answers page and the findMyNinoEnabled flag is set to false" in {
+
+        withClient {
+          wsClient => {
+
+            val nationalInsuranceCallOption = s"selected-call-option=${URLEncoder.encode("national-insurance", "UTF-8")}"
+            val submitCallOptionResponse = wsClient.url(resource(s"$getPageBaseUrl$callOptionsPage"))
+              .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded")
+              .withFollowRedirects(false).post(nationalInsuranceCallOption).futureValue
+
+            submitCallOptionResponse.header(LOCATION).get shouldBe "/helpline/national-insurance?back=%2Fhelpline%2Fcall-options-no-answers"
+          }
+        }
+      }
+
+      "the national insurance option is selected on the which-service-are-you-trying-to-access page and the findMyNinoEnabled flag is set to false" in {
+
+        withClient {
+          wsClient => {
+
+            val nationalInsuranceCallOption = s"selected-call-option=${URLEncoder.encode("national-insurance", "UTF-8")}"
+            val submitCallOptionResponse = wsClient.url(resource(s"$getPageBaseUrl$whichServiceAreYouTryingToAccessPage"))
+              .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded")
+              .withFollowRedirects(false).post(nationalInsuranceCallOption).futureValue
+
+            submitCallOptionResponse.header(LOCATION).get shouldBe "/helpline/national-insurance?back=%2Fhelpline%2Fwhich-service-are-you-trying-to-access"
+          }
+        }
+      }
+
+
     }
   }
 
