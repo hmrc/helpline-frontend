@@ -59,7 +59,7 @@ class SelectNationalInsuranceServiceControllerISpec extends HelperSpec {
             .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded","Referer" -> "/identity-verification")
             .withFollowRedirects(false).post(Map("select-national-insurance-service" -> Seq("other_national_insurance_queries"))).futureValue
 
-          submitNationalInsuranceServiceResponse.header(LOCATION).get shouldBe s"/helpline/national-insurance"
+          submitNationalInsuranceServiceResponse.header(LOCATION).get shouldBe s"/helpline/national-insurance?back=%2Fhelpline%2Fselect-national-insurance-service"
 
           val redirectResult = wsClient.url(resource(submitNationalInsuranceServiceResponse.header(LOCATION).get)).get().futureValue
           val doc: Document = Jsoup.parse(redirectResult.body)
