@@ -30,6 +30,16 @@ class OriginFilter @Inject()(override val mat: Materializer, appConfig: AppConfi
 
   override def apply(f: RequestHeader => Future[Result])(rh: RequestHeader): Future[Result] = {
 
+    if(appConfig.findMyNinoEnabled) {
+      setOriginFlag(f)(rh)
+    } else {
+      f(rh)
+    }
+
+  }
+
+  private def setOriginFlag(f: RequestHeader => Future[Result])(rh: RequestHeader): Future[Result] = {
+
     val configReferrers: Map[String, String] = appConfig.configuredOriginServices
 
     rh.headers.get(referrerKey).fold(f(rh)) { referrer =>
@@ -53,6 +63,7 @@ class OriginFilter @Inject()(override val mat: Materializer, appConfig: AppConfi
     }
 
   }
+
 
 }
 
