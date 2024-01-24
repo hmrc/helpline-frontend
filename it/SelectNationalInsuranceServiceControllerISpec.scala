@@ -78,7 +78,7 @@ class SelectNationalInsuranceServiceControllerISpec extends HelperSpec {
             .withFollowRedirects(false).post(Map("select-national-insurance-service" -> Seq("find_your_national_insurance_number"))).futureValue
 
           submitNationalInsuranceServiceResponse.status shouldBe SEE_OTHER
-          submitNationalInsuranceServiceResponse.header(LOCATION).get shouldBe "http://localhost:9000/find-your-national-insurance-number/checkDetails?origin=IV"
+          submitNationalInsuranceServiceResponse.header(LOCATION).get shouldBe "http://localhost:14033/find-your-national-insurance-number/checkDetails?origin=IV"
         }
       }
     }
@@ -93,7 +93,7 @@ class SelectNationalInsuranceServiceControllerISpec extends HelperSpec {
             .withFollowRedirects(false).post(Map("select-national-insurance-service" -> Seq("find_your_national_insurance_number"))).futureValue
 
           submitNationalInsuranceServiceResponse.status shouldBe SEE_OTHER
-          submitNationalInsuranceServiceResponse.header(LOCATION).get shouldBe "http://localhost:9000/find-your-national-insurance-number/checkDetails?origin=PDV"
+          submitNationalInsuranceServiceResponse.header(LOCATION).get shouldBe "http://localhost:14033/find-your-national-insurance-number/checkDetails?origin=PDV"
         }
       }
     }
@@ -108,7 +108,7 @@ class SelectNationalInsuranceServiceControllerISpec extends HelperSpec {
             .withFollowRedirects(false).post(Map("select-national-insurance-service" -> Seq("find_your_national_insurance_number"))).futureValue
 
           submitNationalInsuranceServiceResponse.status shouldBe SEE_OTHER
-          submitNationalInsuranceServiceResponse.header(LOCATION).get shouldBe "http://localhost:9000/find-your-national-insurance-number/checkDetails"
+          submitNationalInsuranceServiceResponse.header(LOCATION).get shouldBe "http://localhost:14033/find-your-national-insurance-number/checkDetails"
         }
       }
     }
@@ -122,7 +122,7 @@ class SelectNationalInsuranceServiceControllerISpec extends HelperSpec {
             .withFollowRedirects(false).post(Map("select-national-insurance-service" -> Seq("find_your_national_insurance_number"))).futureValue
 
           submitNationalInsuranceServiceResponse.status shouldBe SEE_OTHER
-          submitNationalInsuranceServiceResponse.header(LOCATION).get shouldBe "http://localhost:9000/find-your-national-insurance-number/checkDetails"
+          submitNationalInsuranceServiceResponse.header(LOCATION).get shouldBe "http://localhost:14033/find-your-national-insurance-number/checkDetails"
         }
       }
     }
