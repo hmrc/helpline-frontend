@@ -179,7 +179,11 @@ class CallHelpdeskController @Inject()(implicit
       errors => BadRequest(whichServiceAccess(errors)),
       value => {
         eventDispatcher.dispatchEvent(ContactType(appConfig.standaloneIndividualAndGAEventMapper(value)))
-        Redirect(routes.CallHelpdeskController.getHelpdeskPage(value, Some(routes.CallHelpdeskController.whichServiceAccessPage().url)))
+
+        value match {
+          case "national-insurance" if appConfig.findMyNinoEnabled => Redirect(routes.SelectNationalInsuranceServiceController.showSelectNationalInsuranceServicePage().url)
+          case _ => Redirect(routes.CallHelpdeskController.getHelpdeskPage(value, Some(routes.CallHelpdeskController.whichServiceAccessPage().url)))
+        }
       }
     )
     Future.successful(result)
