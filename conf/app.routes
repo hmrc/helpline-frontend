@@ -34,7 +34,7 @@ POST       /helplines-by-service/service                    uk.gov.hmrc.helpline
 GET        /find-hmrc-helpline                              uk.gov.hmrc.helplinefrontend.controllers.CallHelpdeskController.findHMRCHelplinePage()
 POST       /find-hmrc-helpline                              uk.gov.hmrc.helplinefrontend.controllers.CallHelpdeskController.processHMRCHelplinePage()
 
-GET        /select-national-insurance-service               uk.gov.hmrc.helplinefrontend.controllers.SelectNationalInsuranceServiceController.showSelectNationalInsuranceServicePage()
+GET        /select-national-insurance-service               uk.gov.hmrc.helplinefrontend.controllers.SelectNationalInsuranceServiceController.showSelectNationalInsuranceServicePage(back: Option[String])
 POST       /select-national-insurance-service               uk.gov.hmrc.helplinefrontend.controllers.SelectNationalInsuranceServiceController.processSelectNationalInsuranceServicePage()
 
 GET        /:helpKey                                        uk.gov.hmrc.helplinefrontend.controllers.CallHelpdeskController.getHelpdeskPage(helpKey: String, back: Option[String])
