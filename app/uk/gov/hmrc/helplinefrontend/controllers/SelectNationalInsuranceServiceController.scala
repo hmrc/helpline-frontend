@@ -36,7 +36,7 @@ class SelectNationalInsuranceServiceController @Inject()(implicit
                                                          selectNationalInsuranceService: SelectNationalInsuranceService)
   extends FrontendController(mcc) with Logging with AuthorisedFunctions {
 
-  def showSelectNationalInsuranceServicePage(back: Option[String] = None): Action[AnyContent] = Action { implicit request =>
+  def showSelectNationalInsuranceServicePage(back: Option[String]): Action[AnyContent] = Action { implicit request =>
     Ok(selectNationalInsuranceService(SelectNationalInsuranceServiceForm.apply(), back))
   }
 
@@ -49,7 +49,7 @@ class SelectNationalInsuranceServiceController @Inject()(implicit
           case Some(appConfig.PDVOrigin) => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails?origin=PDV")
           case _ => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails")
         }
-        case OtherQueries => Redirect(routes.CallHelpdeskController.getHelpdeskPage(NationalInsurance.entryName.toLowerCase,Some(routes.SelectNationalInsuranceServiceController.showSelectNationalInsuranceServicePage(None).url)))
+        case OtherQueries => Redirect(routes.CallHelpdeskController.getHelpdeskPage(NationalInsurance.entryName.toLowerCase,Some(routes.SelectNationalInsuranceServiceController.showSelectNationalInsuranceServicePage().url)))
       }
     )
     Future.successful(result)
