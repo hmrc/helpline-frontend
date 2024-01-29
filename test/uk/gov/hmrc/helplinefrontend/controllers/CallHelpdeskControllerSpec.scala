@@ -516,7 +516,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
     "fire contact_natinsurance ga event when user clicks on national insurance with the find my nino enabled flag set to true" in {
       val result: Future[Result] = getController(findMyNinoEnabled = true).selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "national-insurance"))
       status(result) shouldBe Status.SEE_OTHER
-      redirectLocation(result).get shouldBe "/helpline/select-national-insurance-service"
+      redirectLocation(result).get shouldBe "/helpline/select-national-insurance-service?back=%2Fhelpline%2Fcall-options-no-answers"
       eventually {
         analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
           Event("sos_iv", "more_info", "contact_natinsurance", expectedDimensions)))
