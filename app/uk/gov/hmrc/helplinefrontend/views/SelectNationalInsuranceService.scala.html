@@ -32,7 +32,7 @@
 
 @layout(pageTitle = s"${messages("select-national-insurance-service.h1")} ${messages("title.suffix")}", formErrors = selectNationalInsuranceServiceForm.errors, backLinkLocation = back) {
 
-    @formWithCsrf(routes.SelectNationalInsuranceServiceController.processSelectNationalInsuranceServicePage()) {
+    @formWithCsrf(routes.SelectNationalInsuranceServiceController.processSelectNationalInsuranceServicePage(back)) {
 
         @if(selectNationalInsuranceServiceForm.hasErrors) {
             @govukErrorSummary(ErrorSummary(

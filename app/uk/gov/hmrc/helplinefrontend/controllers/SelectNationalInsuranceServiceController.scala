@@ -40,7 +40,7 @@ class SelectNationalInsuranceServiceController @Inject()(implicit
     Ok(selectNationalInsuranceService(SelectNationalInsuranceServiceForm.apply(), back))
   }
 
-  def processSelectNationalInsuranceServicePage(): Action[AnyContent] = Action.async { implicit request =>
+  def processSelectNationalInsuranceServicePage(back: Option[String]): Action[AnyContent] = Action.async { implicit request =>
     val result = SelectNationalInsuranceServiceForm.apply().bindFromRequest.fold(
       errors => BadRequest(selectNationalInsuranceService(errors)),
       {
@@ -49,7 +49,7 @@ class SelectNationalInsuranceServiceController @Inject()(implicit
           case Some(appConfig.PDVOrigin) => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails?origin=PDV")
           case _ => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails")
         }
-        case OtherQueries => Redirect(routes.CallHelpdeskController.getHelpdeskPage(NationalInsurance.entryName.toLowerCase,Some(routes.SelectNationalInsuranceServiceController.showSelectNationalInsuranceServicePage().url)))
+        case OtherQueries => Redirect(routes.CallHelpdeskController.getHelpdeskPage(NationalInsurance.entryName.toLowerCase,Some(routes.SelectNationalInsuranceServiceController.showSelectNationalInsuranceServicePage(back).url)))
       }
     )
     Future.successful(result)
