@@ -88,7 +88,7 @@ class CallHelpdeskControllerISpec extends HelperSpec {
               .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded")
               .withFollowRedirects(false).post(nationalInsuranceCallOption).futureValue
 
-            submitCallOptionResponse.header(LOCATION).get shouldBe "/helpline/select-national-insurance-service"
+            submitCallOptionResponse.header(LOCATION).get shouldBe "/helpline/select-national-insurance-service?back=%2Fhelpline%2Fcall-options-no-answers"
           }
         }
       }
@@ -103,7 +103,7 @@ class CallHelpdeskControllerISpec extends HelperSpec {
               .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded")
               .withFollowRedirects(false).post(nationalInsuranceCallOption).futureValue
 
-            submitCallOptionResponse.header(LOCATION).get shouldBe "/helpline/select-national-insurance-service"
+            submitCallOptionResponse.header(LOCATION).get shouldBe "/helpline/select-national-insurance-service?back=%2Fhelpline%2Fwhich-service-are-you-trying-to-access"
           }
         }
       }

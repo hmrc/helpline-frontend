@@ -34,14 +34,15 @@ import scala.concurrent.Future
 
 class SelectNationalInsuranceServiceControllerSpec extends AnyWordSpec with Matchers with GuiceOneAppPerSuite with Eventually with MockFactory{
 
+
   "Select Which National Insurance page" should {
     "return a page with the heading, radios and button" in new Setup {
-      val result: Future[Result] = controller.showSelectNationalInsuranceServicePage()(fakeRequest)
+      val result: Future[Result] = controller.showSelectNationalInsuranceServicePage(Some(callOptionsRoute))(fakeRequest)
       status(result) shouldBe Status.OK
 
       val document: Document = Jsoup.parse(contentAsString(result))
 
-      document.select("a[class='govuk-back-link']").attr("href") should include("/helpline/call-options-no-answers")
+      document.select("a[class='govuk-back-link']").attr("href") should include(callOptionsRoute)
       document.select("h1").text shouldBe("Select the National Insurance service you need")
       document.select("main label").get(0).text shouldBe ("Find your National Insurance number")
       document.select("main label").get(1).text shouldBe ("Other National Insurance queries")
@@ -49,7 +50,7 @@ class SelectNationalInsuranceServiceControllerSpec extends AnyWordSpec with Matc
     }
 
     "return a page with an error message when submitted without any selection" in new Setup {
-      val result: Future[Result] = controller.processSelectNationalInsuranceServicePage()(fakeRequest)
+      val result: Future[Result] = controller.processSelectNationalInsuranceServicePage(Some(callOptionsRoute))(fakeRequest)
       status(result) shouldBe Status.BAD_REQUEST
 
       val document: Document = Jsoup.parse(contentAsString(result))
@@ -59,14 +60,14 @@ class SelectNationalInsuranceServiceControllerSpec extends AnyWordSpec with Matc
     }
 
     "redirect to find your nino page when Find your National Insurance number is selected and submitted" in new Setup {
-      val result: Future[Result] = controller.processSelectNationalInsuranceServicePage()(validRequest("find_your_national_insurance_number"))
+      val result: Future[Result] = controller.processSelectNationalInsuranceServicePage(Some(callOptionsRoute))(validRequest("find_your_national_insurance_number"))
       status(result) shouldBe Status.SEE_OTHER
       redirectLocation(result).get should include("/find-your-national-insurance-number/checkDetails")
     }
 
     "redirect to find your nino page when Find your National Insurance number is selected and submitted and the user came from IV" in new Setup {
 
-      val result: Future[Result] = controller.processSelectNationalInsuranceServicePage()(validRequest("find_your_national_insurance_number")
+      val result: Future[Result] = controller.processSelectNationalInsuranceServicePage(Some(callOptionsRoute))(validRequest("find_your_national_insurance_number")
         .withSession("HELPLINE_ORIGIN_SERVICE" -> "IV")
       )
       status(result) shouldBe Status.SEE_OTHER
@@ -75,7 +76,7 @@ class SelectNationalInsuranceServiceControllerSpec extends AnyWordSpec with Matc
 
     "redirect to find your nino page when Find your National Insurance number is selected and submitted and the user came from PDV" in new Setup{
 
-      val result: Future[Result] = controller.processSelectNationalInsuranceServicePage()(validRequest("find_your_national_insurance_number")
+      val result: Future[Result] = controller.processSelectNationalInsuranceServicePage(Some(callOptionsRoute))(validRequest("find_your_national_insurance_number")
         .withSession("HELPLINE_ORIGIN_SERVICE" -> "PDV")
       )
       status(result) shouldBe Status.SEE_OTHER
@@ -84,7 +85,7 @@ class SelectNationalInsuranceServiceControllerSpec extends AnyWordSpec with Matc
 
     "redirect to find your nino page when Find your National Insurance number is selected and submitted but the origin isn't recognisable" in new Setup{
 
-      val result: Future[Result] = controller.processSelectNationalInsuranceServicePage()(validRequest("find_your_national_insurance_number")
+      val result: Future[Result] = controller.processSelectNationalInsuranceServicePage(Some(callOptionsRoute))(validRequest("find_your_national_insurance_number")
         .withSession("HELPLINE_ORIGIN_SERVICE" -> "Not an Origin")
       )
       status(result) shouldBe Status.SEE_OTHER
@@ -92,15 +93,25 @@ class SelectNationalInsuranceServiceControllerSpec extends AnyWordSpec with Matc
     }
 
     "redirect to find your nino page when Other National Insurance queries is selected and submitted" in new Setup {
-      val result: Future[Result] = controller.processSelectNationalInsuranceServicePage()(validRequest("other_national_insurance_queries"))
+      val result: Future[Result] = controller.processSelectNationalInsuranceServicePage(Some(callOptionsRoute))(validRequest("other_national_insurance_queries"))
       status(result) shouldBe Status.SEE_OTHER
       redirectLocation(result).get should include("/national-insurance")
+    }
+
+    "have a back link url that returns to which service are you trying to access page if accessed via that route" in new Setup {
+      val result: Future[Result] = controller.showSelectNationalInsuranceServicePage(Some(whichServiceRoute))(fakeRequest)
+      status(result) shouldBe Status.OK
+
+      val document: Document = Jsoup.parse(contentAsString(result))
+
+      document.select("a[class='govuk-back-link']").attr("href") should include(whichServiceRoute)
+
     }
 }
 
   class Setup() {
 
-    val fakeRequest = FakeRequest("GET", "/")
+    val fakeRequest: FakeRequest[AnyContentAsEmpty.type] = FakeRequest("GET", "/")
     val appConfig: AppConfig = app.injector.instanceOf[AppConfig]
     val authConnector: AuthConnector = app.injector.instanceOf[AuthConnector]
     val messagesCC: MessagesControllerComponents = app.injector.instanceOf[MessagesControllerComponents]
@@ -112,6 +123,9 @@ class SelectNationalInsuranceServiceControllerSpec extends AnyWordSpec with Matc
         appConfig,
         messagesCC,
         selectNationalInsuranceService)
+
+    val callOptionsRoute = "/call-options-no-answers"
+    val whichServiceRoute = "/which-service-are-you-trying-to-access"
 
     def validRequest(selectNationalInsuranceService: String): FakeRequest[AnyContentAsFormUrlEncoded] = FakeRequest()
       .withFormUrlEncodedBody("select-national-insurance-service" -> selectNationalInsuranceService)

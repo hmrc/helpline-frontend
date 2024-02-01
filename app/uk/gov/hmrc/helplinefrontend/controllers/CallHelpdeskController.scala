@@ -147,7 +147,7 @@ class CallHelpdeskController @Inject()(implicit
         eventDispatcher.dispatchEvent(ContactType(appConfig.defaultCallOptionsAndGAEventMapper(value)))
 
         value match {
-          case "national-insurance" if appConfig.findMyNinoEnabled => Redirect(routes.SelectNationalInsuranceServiceController.showSelectNationalInsuranceServicePage().url)
+          case "national-insurance" if appConfig.findMyNinoEnabled => Redirect(routes.SelectNationalInsuranceServiceController.showSelectNationalInsuranceServicePage(Some(routes.CallHelpdeskController.callOptionsNoAnswersPage().url)).url)
           case _ => Redirect(routes.CallHelpdeskController.getHelpdeskPage(value, Some(routes.CallHelpdeskController.callOptionsNoAnswersPage().url)))
         }
 
@@ -181,7 +181,7 @@ class CallHelpdeskController @Inject()(implicit
         eventDispatcher.dispatchEvent(ContactType(appConfig.standaloneIndividualAndGAEventMapper(value)))
 
         value match {
-          case "national-insurance" if appConfig.findMyNinoEnabled => Redirect(routes.SelectNationalInsuranceServiceController.showSelectNationalInsuranceServicePage().url)
+          case "national-insurance" if appConfig.findMyNinoEnabled => Redirect(routes.SelectNationalInsuranceServiceController.showSelectNationalInsuranceServicePage(Some(routes.CallHelpdeskController.whichServiceAccessPage().url)).url)
           case _ => Redirect(routes.CallHelpdeskController.getHelpdeskPage(value, Some(routes.CallHelpdeskController.whichServiceAccessPage().url)))
         }
       }
