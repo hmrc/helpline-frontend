@@ -28,6 +28,8 @@ import play.api.mvc.{AnyContentAsEmpty, Cookie, MessagesControllerComponents, Re
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import uk.gov.hmrc.auth.core.AuthConnector
+import uk.gov.hmrc.auth.core.authorise.Predicate
+import uk.gov.hmrc.auth.core.retrieve.{EmptyRetrieval, Retrieval}
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.helplinefrontend.monitoring.{EventDispatcher, FindHmrcHelpline, FindHmrcHelplinePage, MonitoringEvent, OtherHmrcHelpline}
 import uk.gov.hmrc.helplinefrontend.monitoring.analytics._
@@ -57,7 +59,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
   val appConfig: AppConfig = new AppConfig(config, servicesConfig)
 
-  val authConnector: AuthConnector = app.injector.instanceOf[AuthConnector]
+  val authConnector: AuthConnector = mock[AuthConnector]
   val messagesCC: MessagesControllerComponents = app.injector.instanceOf[MessagesControllerComponents]
   val childBenefit: ChildBenefit = app.injector.instanceOf[ChildBenefit]
   val childcareService: ChildcareService = app.injector.instanceOf[ChildcareService]
@@ -103,9 +105,14 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
   val eventDispatcher = new EventDispatcher(TestHandler)
 
-  def getController(findMyNinoEnabled: Boolean = false): CallHelpdeskController = {
+  def getController(findMyNinoEnabled: Boolean = false, isLoggedIn: Boolean = true): CallHelpdeskController = {
 
     val testAppConfig: TestAppConfig = new TestAppConfig(config, servicesConfig, findMyNinoEnabled)
+
+    (authConnector.authorise(_: Predicate, _: Retrieval[_])(_: HeaderCarrier, _: ExecutionContext))
+      .expects(*, EmptyRetrieval, *,*)
+      .returning(if(isLoggedIn) Future.successful((): Unit) else Future.failed(new Exception("")))
+      .anyNumberOfTimes()
 
     new CallHelpdeskController()(
       authConnector,
@@ -264,6 +271,11 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
     }
 
     "return National Insurance help page if the help key is 'NATIONAL-INSURANCE' and there is a go back url, but back call is not supported" in {
+      (authConnector.authorise(_: Predicate, _: Retrieval[_])(_: HeaderCarrier, _: ExecutionContext))
+        .expects(*, EmptyRetrieval, *,*)
+        .returning(Future.successful((): Unit))
+        .anyNumberOfTimes()
+
       val controller: CallHelpdeskController =
         new CallHelpdeskController()(
           authConnector,
@@ -484,7 +496,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
     }
   }
 
-  "CallHelpdeskController " should {
+  "CallHelpdeskController" should {
 
     "fire contact_childbenefits ga event when user clicks on Child benefit" in {
       val result: Future[Result] = getController().selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "child-benefit"))
@@ -504,8 +516,8 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
           Event("sos_iv", "more_info", "contact_incometaxpaye", expectedDimensions)))
       }
     }
-    "fire contact_natinsurance ga event when user clicks on national insurance with the find my nino enabled flag set to false" in {
-      val result: Future[Result] = getController().selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "national-insurance"))
+    "redirect to call us page whenclicks on national insurance with the find my nino enabled flag set to false and user is not logged in" in {
+      val result: Future[Result] = getController(findMyNinoEnabled = false, isLoggedIn = false).selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "national-insurance"))
       status(result) shouldBe Status.SEE_OTHER
       redirectLocation(result).get should startWith("/helpline/national-insurance")
       eventually {
@@ -513,8 +525,27 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
           Event("sos_iv", "more_info", "contact_natinsurance", expectedDimensions)))
       }
     }
-    "fire contact_natinsurance ga event when user clicks on national insurance with the find my nino enabled flag set to true" in {
-      val result: Future[Result] = getController(findMyNinoEnabled = true).selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "national-insurance"))
+    "redirect to call us page whenclicks on national insurance with the find my nino enabled flag set to false and user is logged in" in {
+      val result: Future[Result] = getController(findMyNinoEnabled = false, isLoggedIn = true).selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "national-insurance"))
+      status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should startWith("/helpline/national-insurance")
+      eventually {
+        analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
+          Event("sos_iv", "more_info", "contact_natinsurance", expectedDimensions)))
+      }
+    }
+    "redirect to call us page when user clicks on national insurance with the find my nino enabled flag set to true, and user is not logged in" in {
+      val result: Future[Result] = getController(findMyNinoEnabled = true, isLoggedIn = false).selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "national-insurance"))
+      status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should startWith("/helpline/national-insurance")
+      eventually {
+        analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
+          Event("sos_iv", "more_info", "contact_natinsurance", expectedDimensions)))
+      }
+    }
+    "redirect to select national insurance page when user clicks on national insurance with the find my nino enabled flag set to true and user is not logged in" in {
+
+      val result: Future[Result] = getController(findMyNinoEnabled = true, isLoggedIn = true).selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "national-insurance"))
       status(result) shouldBe Status.SEE_OTHER
       redirectLocation(result).get shouldBe "/helpline/select-national-insurance-service?back=%2Fhelpline%2Fcall-options-no-answers"
       eventually {
@@ -566,6 +597,26 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
         analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
           Event("sos_iv", "more_info", "contact_other", expectedDimensions)))
       }
+    }
+    "redirect to call us page when user selects national insurance and find my nino flag is set to false and user is not logged in for (service access)" in {
+      val result: Future[Result] = getController(findMyNinoEnabled = false, isLoggedIn = false).selectServiceAccessOption()(request.withFormUrlEncodedBody("selected-call-option" -> "national-insurance"))
+      status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should startWith("/helpline/national-insurance")
+    }
+    "redirect to call us page when user selects national insurance and find my nino flag is set to true and user is not logged in for (service access)" in {
+      val result: Future[Result] = getController(findMyNinoEnabled = true, isLoggedIn = false).selectServiceAccessOption()(request.withFormUrlEncodedBody("selected-call-option" -> "national-insurance"))
+      status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should startWith("/helpline/national-insurance")
+    }
+    "redirect to call us page when user selects national insurance and find my nino flag is set to false and user is logged in for (service access)" in {
+      val result: Future[Result] = getController(findMyNinoEnabled = false, isLoggedIn = true).selectServiceAccessOption()(request.withFormUrlEncodedBody("selected-call-option" -> "national-insurance"))
+      status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should startWith("/helpline/national-insurance")
+    }
+    "redirect to select national insurance page when user selects national insurance and find my nino flag is set to true and user is logged in for (service access)" in {
+      val result: Future[Result] = getController(findMyNinoEnabled = true, isLoggedIn = true).selectServiceAccessOption()(request.withFormUrlEncodedBody("selected-call-option" -> "national-insurance"))
+      status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get shouldBe "/helpline/select-national-insurance-service?back=%2Fhelpline%2Fwhich-service-are-you-trying-to-access"
     }
   }
 

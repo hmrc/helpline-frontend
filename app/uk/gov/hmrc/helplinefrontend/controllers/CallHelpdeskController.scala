@@ -141,19 +141,21 @@ class CallHelpdeskController @Inject()(implicit
   }
 
   def selectCallOption(): Action[AnyContent] = Action.async { implicit request =>
-    val result = CallOptionForm.callOptionForm(appConfig.callOptionsList).bindFromRequest.fold(
-      errors => BadRequest(callOptionsNoAnswers(errors)),
-      value => {
-        eventDispatcher.dispatchEvent(ContactType(appConfig.defaultCallOptionsAndGAEventMapper(value)))
+    checkIsAuthorisedUser().map { isLoggedIn =>
+      val result = CallOptionForm.callOptionForm(appConfig.callOptionsList).bindFromRequest.fold(
+        errors => BadRequest(callOptionsNoAnswers(errors)),
+        value => {
+          eventDispatcher.dispatchEvent(ContactType(appConfig.defaultCallOptionsAndGAEventMapper(value)))
 
-        value match {
-          case "national-insurance" if appConfig.findMyNinoEnabled => Redirect(routes.SelectNationalInsuranceServiceController.showSelectNationalInsuranceServicePage(Some(routes.CallHelpdeskController.callOptionsNoAnswersPage().url)).url)
-          case _ => Redirect(routes.CallHelpdeskController.getHelpdeskPage(value, Some(routes.CallHelpdeskController.callOptionsNoAnswersPage().url)))
+          value match {
+            case "national-insurance" if appConfig.findMyNinoEnabled && isLoggedIn => Redirect(routes.SelectNationalInsuranceServiceController.showSelectNationalInsuranceServicePage(Some(routes.CallHelpdeskController.callOptionsNoAnswersPage().url)).url)
+            case _ => Redirect(routes.CallHelpdeskController.getHelpdeskPage(value, Some(routes.CallHelpdeskController.callOptionsNoAnswersPage().url)))
+          }
+
         }
-
-      }
-    )
-    Future.successful(result)
+      )
+      result
+    }
   }
 
   def selectOrganisationCallOption(): Action[AnyContent] = Action.async { implicit request =>
@@ -175,18 +177,20 @@ class CallHelpdeskController @Inject()(implicit
   }
 
   def selectServiceAccessOption(): Action[AnyContent] = Action.async { implicit request =>
-    val result = CallOptionForm.callOptionForm(appConfig.standaloneIndividualList).bindFromRequest.fold(
-      errors => BadRequest(whichServiceAccess(errors)),
-      value => {
-        eventDispatcher.dispatchEvent(ContactType(appConfig.standaloneIndividualAndGAEventMapper(value)))
+    checkIsAuthorisedUser().map { isLoggedIn =>
+      val result = CallOptionForm.callOptionForm(appConfig.standaloneIndividualList).bindFromRequest.fold(
+        errors => BadRequest(whichServiceAccess(errors)),
+        value => {
+          eventDispatcher.dispatchEvent(ContactType(appConfig.standaloneIndividualAndGAEventMapper(value)))
 
-        value match {
-          case "national-insurance" if appConfig.findMyNinoEnabled => Redirect(routes.SelectNationalInsuranceServiceController.showSelectNationalInsuranceServicePage(Some(routes.CallHelpdeskController.whichServiceAccessPage().url)).url)
-          case _ => Redirect(routes.CallHelpdeskController.getHelpdeskPage(value, Some(routes.CallHelpdeskController.whichServiceAccessPage().url)))
+          value match {
+            case "national-insurance" if appConfig.findMyNinoEnabled && isLoggedIn => Redirect(routes.SelectNationalInsuranceServiceController.showSelectNationalInsuranceServicePage(Some(routes.CallHelpdeskController.whichServiceAccessPage().url)).url)
+            case _ => Redirect(routes.CallHelpdeskController.getHelpdeskPage(value, Some(routes.CallHelpdeskController.whichServiceAccessPage().url)))
+          }
         }
-      }
-    )
-    Future.successful(result)
+      )
+      result
+    }
   }
 
   def whichServiceAccessOtherPage(): Action[AnyContent] = Action.async { implicit request =>
