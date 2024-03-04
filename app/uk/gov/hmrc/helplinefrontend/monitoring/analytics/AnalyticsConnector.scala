@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.helplinefrontend.monitoring.analytics
 
-import akka.Done
+import org.apache.pekko.Done
 import javax.inject.{Inject, Singleton}
 import play.api.Logging
 import play.api.libs.json.Json

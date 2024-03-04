@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.helplinefrontend.controllers.monitoring.analytics
 
-import akka.Done
+import org.apache.pekko.Done
 import org.scalatest.Assertion
 import org.scalatest.concurrent.Eventually
 import org.scalatest.matchers.should.Matchers

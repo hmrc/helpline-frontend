@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.helplinefrontend.controllers
 
-import akka.Done
+import org.apache.pekko.Done
 import org.scalamock.scalatest.MockFactory
 import org.scalatest.concurrent.Eventually
 import org.scalatest.matchers.should.Matchers

@@ -17,7 +17,7 @@
 package uk.gov.hmrc.helplinefrontend.filters
 
 import com.google.inject.Inject
-import akka.stream.Materializer
+import org.apache.pekko.stream.Materializer
 import play.api.Logging
 import play.api.mvc._
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
