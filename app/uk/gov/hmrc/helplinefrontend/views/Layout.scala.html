@@ -14,11 +14,14 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcLayout
 @import uk.gov.hmrc.helplinefrontend.views.html.{AdditionalHead,FullWidth}
+@import uk.gov.hmrc.hmrcfrontend.views.viewmodels.hmrcstandardpage.ServiceURLs
+@import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcStandardPage
+@import uk.gov.hmrc.hmrcfrontend.views.viewmodels.hmrcstandardpage.TemplateOverrides
+@import uk.gov.hmrc.hmrcfrontend.views.viewmodels.hmrcstandardpage.HmrcStandardPageParams
 
 @this(
-        hmrcLayout: HmrcLayout,
+        hmrcStandardPage: HmrcStandardPage,
         head: AdditionalHead,
         fullWidthMainContent: FullWidth,
         twoThirdsMainContent: TwoThirdsMainContent
@@ -50,12 +53,18 @@
     else Some(pageTitle)
 }
 
-@hmrcLayout(
-    pageTitle = actualPageTitle,
-    backLinkUrl = backLinkLocation,
-    isWelshTranslationAvailable = appConfig.welshLanguageSupportEnabled,
-    signOutUrl = signOutUrl,
-    mainContentLayout = Some(if (fullWidth) fullWidthMainContent(_) else twoThirdsMainContent(_)),
-    additionalScriptsBlock = scriptsBlock,
-    additionalHeadBlock = Some(head(headBlock))
+@hmrcStandardPage(
+    HmrcStandardPageParams(
+        serviceURLs = ServiceURLs(
+            signOutUrl = signOutUrl
+        ),
+        backLink = backLinkLocation.map(href => BackLink(href)),
+        pageTitle = actualPageTitle,
+        isWelshTranslationAvailable = appConfig.welshLanguageSupportEnabled,
+        templateOverrides = TemplateOverrides(
+            additionalHeadBlock = Some(head(headBlock)),
+            additionalScriptsBlock = scriptsBlock,
+            mainContentLayout = Some(if (fullWidth) fullWidthMainContent(_) else twoThirdsMainContent(_))
+        )
+    )
 )(contentSection)

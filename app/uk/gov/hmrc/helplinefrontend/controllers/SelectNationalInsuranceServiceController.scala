@@ -41,7 +41,7 @@ class SelectNationalInsuranceServiceController @Inject()(implicit
   }
 
   def processSelectNationalInsuranceServicePage(back: Option[String]): Action[AnyContent] = Action.async { implicit request =>
-    val result = SelectNationalInsuranceServiceForm.apply().bindFromRequest.fold(
+    val result = SelectNationalInsuranceServiceForm.apply().bindFromRequest().fold(
       errors => BadRequest(selectNationalInsuranceService(errors)),
       {
         case FindNiNumber => request.session.get(OriginFilter.originHeaderKey) match {

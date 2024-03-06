@@ -17,9 +17,10 @@
 package uk.gov.hmrc.helplinefrontend.monitoring.analytics
 
 import org.apache.pekko.Done
+
 import javax.inject.{Inject, Singleton}
 import play.api.Logging
-import play.api.libs.json.Json
+import play.api.libs.json.{Json, OWrites}
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.http.{HeaderCarrier, HttpClient}
 import uk.gov.hmrc.http.HttpReads.Implicits.readRaw
@@ -28,11 +29,11 @@ import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
 class AnalyticsConnector @Inject() (appConfig: AppConfig, http: HttpClient) extends Logging {
-  def serviceUrl: String = appConfig.platformAnalyticsUrl
+  private def serviceUrl: String = appConfig.platformAnalyticsUrl
 
-  private implicit val dimensionValueWrites = Json.writes[DimensionValue]
-  private implicit val eventWrites = Json.writes[Event]
-  private implicit val analyticsWrites = Json.writes[AnalyticsRequest]
+  private implicit val dimensionValueWrites: OWrites[DimensionValue] = Json.writes[DimensionValue]
+  private implicit val eventWrites: OWrites[Event] = Json.writes[Event]
+  private implicit val analyticsWrites: OWrites[AnalyticsRequest] = Json.writes[AnalyticsRequest]
 
   def sendEvent(request: AnalyticsRequest)(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[Done] = {
     val url = s"$serviceUrl/platform-analytics/event"
