@@ -16,8 +16,8 @@
 
 package uk.gov.hmrc.helplinefrontend.controllers
 
-import akka.Done
-import akka.util.Timeout
+import org.apache.pekko.Done
+import org.apache.pekko.util.Timeout
 import org.scalatest.concurrent.Eventually
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec

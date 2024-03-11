@@ -141,7 +141,7 @@ class CallHelpdeskController @Inject()(implicit
   }
 
   def selectCallOption(): Action[AnyContent] = Action.async { implicit request =>
-    val result = CallOptionForm.callOptionForm(appConfig.callOptionsList).bindFromRequest.fold(
+    val result = CallOptionForm.callOptionForm(appConfig.callOptionsList).bindFromRequest().fold(
       errors => BadRequest(callOptionsNoAnswers(errors)),
       value => {
         eventDispatcher.dispatchEvent(ContactType(appConfig.defaultCallOptionsAndGAEventMapper(value)))
@@ -157,7 +157,7 @@ class CallHelpdeskController @Inject()(implicit
   }
 
   def selectOrganisationCallOption(): Action[AnyContent] = Action.async { implicit request =>
-    val result = CallOptionOrganisationForm.callOptionOrganisationForm(appConfig.callOptionsOrganisationList).bindFromRequest.fold(
+    val result = CallOptionOrganisationForm.callOptionOrganisationForm(appConfig.callOptionsOrganisationList).bindFromRequest().fold(
       errors => BadRequest(callOptionsOrganisationNoAnswers(errors)),
       value => {
         eventDispatcher.dispatchEvent(ContactType(appConfig.defaultCallOptionsOrganisationAndGAEventMapper(value)))
@@ -175,7 +175,7 @@ class CallHelpdeskController @Inject()(implicit
   }
 
   def selectServiceAccessOption(): Action[AnyContent] = Action.async { implicit request =>
-    val result = CallOptionForm.callOptionForm(appConfig.standaloneIndividualList).bindFromRequest.fold(
+    val result = CallOptionForm.callOptionForm(appConfig.standaloneIndividualList).bindFromRequest().fold(
       errors => BadRequest(whichServiceAccess(errors)),
       value => {
         eventDispatcher.dispatchEvent(ContactType(appConfig.standaloneIndividualAndGAEventMapper(value)))
@@ -197,7 +197,7 @@ class CallHelpdeskController @Inject()(implicit
   }
 
   def selectServiceAccessOtherOption(): Action[AnyContent] = Action.async { implicit request =>
-    val result = CallOptionForm.callOptionForm(appConfig.standaloneOrganisationList).bindFromRequest.fold(
+    val result = CallOptionForm.callOptionForm(appConfig.standaloneOrganisationList).bindFromRequest().fold(
       errors => BadRequest(whichServiceAccessOther(errors)),
       value => {
         eventDispatcher.dispatchEvent(ContactType(appConfig.standaloneOrganisationAndGAEventMapper(value)))
@@ -251,7 +251,7 @@ class CallHelpdeskController @Inject()(implicit
   }
 
   def helpLinesByServiceServicePage(): Action[AnyContent] = Action.async { implicit request =>
-    val result = HelplinesByServiceSearchForm.helplinesByServiceSearchForm(appConfig.helplinesByService).bindFromRequest.fold(
+    val result = HelplinesByServiceSearchForm.helplinesByServiceSearchForm(appConfig.helplinesByService).bindFromRequest().fold(
       errors => BadRequest(helplinesByService(errors)),
       value => {
           var helpdesk : String = ""
@@ -280,7 +280,7 @@ class CallHelpdeskController @Inject()(implicit
   }
 
   def processHMRCHelplinePage(): Action[AnyContent] = Action.async { implicit request =>
-    val result = FindHMRCHelplineForm.findHMRCHelplineForm().bindFromRequest.fold(
+    val result = FindHMRCHelplineForm.findHMRCHelplineForm().bindFromRequest().fold(
       errors => BadRequest(findHMRCHelpline(errors)),
       {
         case "pta" => Redirect(routes.CallHelpdeskController.helpLinesByServiceOshPage("Personal Tax Account"))
