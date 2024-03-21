@@ -30,10 +30,10 @@ import play.api.test.Helpers._
 import uk.gov.hmrc.auth.core.AuthConnector
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.helplinefrontend.views.html.SelectNationalInsuranceService
-import scala.concurrent.Future
 
+import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext.Implicits.global
 class SelectNationalInsuranceServiceControllerSpec extends AnyWordSpec with Matchers with GuiceOneAppPerSuite with Eventually with MockFactory{
-
 
   "Select Which National Insurance page" should {
     "return a page with the heading, radios and button" in new Setup {
@@ -120,6 +120,7 @@ class SelectNationalInsuranceServiceControllerSpec extends AnyWordSpec with Matc
     val controller: SelectNationalInsuranceServiceController =
       new SelectNationalInsuranceServiceController()(
         authConnector,
+        implicitly[ExecutionContext],
         appConfig,
         messagesCC,
         selectNationalInsuranceService)

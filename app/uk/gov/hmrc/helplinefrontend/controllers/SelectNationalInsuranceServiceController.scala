@@ -18,40 +18,60 @@ package uk.gov.hmrc.helplinefrontend.controllers
 
 import play.api.Logging
 import play.api.mvc._
+import uk.gov.hmrc.auth.core.authorise.EmptyPredicate
+import uk.gov.hmrc.auth.core.retrieve.v2.Retrievals
+import uk.gov.hmrc.auth.core.retrieve.{Credentials, ~}
 import uk.gov.hmrc.auth.core.{AuthConnector, AuthorisedFunctions}
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.helplinefrontend.filters.OriginFilter
 import uk.gov.hmrc.helplinefrontend.models.CallOption.NationalInsurance
+import uk.gov.hmrc.helplinefrontend.models.auth.AuthDetails
 import uk.gov.hmrc.helplinefrontend.models.form._
 import uk.gov.hmrc.helplinefrontend.views.html.SelectNationalInsuranceService
+import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
+
 import javax.inject.{Inject, Singleton}
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
 class SelectNationalInsuranceServiceController @Inject()(implicit
                                                          val authConnector: AuthConnector,
+                                                         implicit val ec: ExecutionContext,
                                                          appConfig: AppConfig,
                                                          mcc: MessagesControllerComponents,
                                                          selectNationalInsuranceService: SelectNationalInsuranceService)
   extends FrontendController(mcc) with Logging with AuthorisedFunctions {
 
+  def retrieveDetailsFromAuth(implicit hc: HeaderCarrier): Future[Option[AuthDetails]] = {
+    authConnector.authorise[Option[String] ~ Option[Credentials]](EmptyPredicate, Retrievals.nino and Retrievals.credentials).map {
+      case nino ~ credentials => Some(AuthDetails(nino, credentials.map(_.providerId)))
+      case _ =>
+        logger.warn(s"Something went wrong with the call to auth in Select National Insurance Service Controller ${hc.sessionId.map(_.value)}")
+        None
+    }.recover {
+      case userNotLoggedIn => None
+    }
+  }
   def showSelectNationalInsuranceServicePage(back: Option[String]): Action[AnyContent] = Action { implicit request =>
     Ok(selectNationalInsuranceService(SelectNationalInsuranceServiceForm.apply(), back))
   }
 
   def processSelectNationalInsuranceServicePage(back: Option[String]): Action[AnyContent] = Action.async { implicit request =>
-    val result = SelectNationalInsuranceServiceForm.apply().bindFromRequest().fold(
-      errors => BadRequest(selectNationalInsuranceService(errors)),
+    SelectNationalInsuranceServiceForm.apply().bindFromRequest().fold(
+      errors => Future.successful(BadRequest(selectNationalInsuranceService(errors))),
       {
-        case FindNiNumber => request.session.get(OriginFilter.originHeaderKey) match {
-          case Some(appConfig.IVOrigin) => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails?origin=IV")
-          case Some(appConfig.PDVOrigin) => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails?origin=PDV")
-          case _ => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails")
-        }
-        case OtherQueries => Redirect(routes.CallHelpdeskController.getHelpdeskPage(NationalInsurance.entryName.toLowerCase,Some(routes.SelectNationalInsuranceServiceController.showSelectNationalInsuranceServicePage(back).url)))
+        case FindNiNumber =>
+          retrieveDetailsFromAuth.map { _ =>
+            request.session.get(OriginFilter.originHeaderKey) match {
+              case Some(appConfig.IVOrigin) => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails?origin=IV")
+              case Some(appConfig.PDVOrigin) => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails?origin=PDV")
+              case _ => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails")
+            }
+          }
+        case OtherQueries => Future.successful(Redirect(routes.CallHelpdeskController.getHelpdeskPage(NationalInsurance.entryName.toLowerCase,Some(routes.SelectNationalInsuranceServiceController.showSelectNationalInsuranceServicePage(back).url))))
       }
     )
-    Future.successful(result)
+
   }
 }
