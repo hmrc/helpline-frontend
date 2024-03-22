@@ -14,23 +14,49 @@
  * limitations under the License.
  */
 
+package controllers
+
+/*
+ * Copyright 2024 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import play.api.Application
 import play.api.http.Status.{OK, SEE_OTHER}
 import play.api.inject.guice.GuiceApplicationBuilder
+import play.api.libs.json.Json
 import play.api.libs.ws.DefaultWSCookie
 import play.api.test.Helpers.LOCATION
+import uk.gov.hmrc.helplinefrontend.controllers.SelectNationalInsuranceServiceController
+import uk.gov.hmrc.helplinefrontend.models.auth.AuthDetails
+import uk.gov.hmrc.http.{Authorization, HeaderCarrier}
+import utils.HelperSpec
 
 class SelectNationalInsuranceServiceControllerISpec extends HelperSpec {
 
   val getPageBaseUrl = "/helpline"
   val selectNationalInsuranceServiceKey = "/select-national-insurance-service"
 
+
   override lazy val app: Application = new GuiceApplicationBuilder()
     .configure(
       "play.filters.csrf.header.bypassHeaders.X-Requested-With" -> "*",
-      "play.filters.csrf.header.bypassHeaders.Csrf-Token" -> "nocheck"
+      "play.filters.csrf.header.bypassHeaders.Csrf-Token" -> "nocheck",
+      "microservice.services.auth.host" -> wiremockHost,
+      "microservice.services.auth.port" -> wiremockPort
     )
     .build()
 
@@ -49,7 +75,30 @@ class SelectNationalInsuranceServiceControllerISpec extends HelperSpec {
     }
   }
 
+  "retrieveDetailsFromAuth" should {
 
+    "return None" when {
+      "user is not logged in" in {
+        implicit val hc: HeaderCarrier = HeaderCarrier(authorization = Some(Authorization("Bearer foobar")))
+        stubForAuth(401, Json.obj())
+
+        app.injector.instanceOf[SelectNationalInsuranceServiceController].retrieveDetailsFromAuth.futureValue shouldBe None
+      }
+    }
+    "return Nino and authProviderID when user is logged in" in {
+      val authBodySuccess = Json.obj("nino" -> "AA000000A", "optionalCredentials" -> Json.obj("providerId" -> "foo", "providerType" -> "bar"))
+      implicit val hc: HeaderCarrier = HeaderCarrier(authorization = Some(Authorization("Bearer foobar")))
+      stubForAuth(200, authBodySuccess)
+      val res =app.injector.instanceOf[SelectNationalInsuranceServiceController].retrieveDetailsFromAuth.futureValue
+      res shouldBe Some(AuthDetails(Some("AA000000A"), Some("foo")))
+    }
+    "return no attributes when user is logged in, but auth returns no attributes" in {
+      implicit val hc: HeaderCarrier = HeaderCarrier(authorization = Some(Authorization("Bearer foobar")))
+      stubForAuth(200, Json.obj())
+      val res =app.injector.instanceOf[SelectNationalInsuranceServiceController].retrieveDetailsFromAuth.futureValue
+      res shouldBe Some(AuthDetails(None, None))
+    }
+  }
 
   "POST /select-national-insurance-service" should {
     "redirect to national insurance helpline page when Other Queries is selected" in {
@@ -68,10 +117,24 @@ class SelectNationalInsuranceServiceControllerISpec extends HelperSpec {
       }
     }
 
-    "redirect to check details page when Find my nino is select and origin is IV" in {
+    "redirect to check details page when Find my nino is select and origin is IV and user is logged in" in {
       withClient{
-        wsClient =>{
+        wsClient => {
+          stubForAuth(200, Json.obj())
+          val submitNationalInsuranceServiceResponse = wsClient.url(resource(s"$getPageBaseUrl$selectNationalInsuranceServiceKey"))
+            .addCookies(DefaultWSCookie("mdtp", authAndSessionCookie("IV")))
+            .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded", "Referer" -> "/identity-verification")
+            .withFollowRedirects(false).post(Map("select-national-insurance-service" -> Seq("find_your_national_insurance_number"))).futureValue
 
+          submitNationalInsuranceServiceResponse.status shouldBe SEE_OTHER
+          submitNationalInsuranceServiceResponse.header(LOCATION).get shouldBe "http://localhost:14033/find-your-national-insurance-number/checkDetails?origin=IV"
+        }
+      }
+    }
+    "redirect to check details page when Find my nino is select and origin is IV and user is NOT logged in" in {
+      withClient{
+        wsClient => {
+          stubForAuth(401, Json.obj())
           val submitNationalInsuranceServiceResponse = wsClient.url(resource(s"$getPageBaseUrl$selectNationalInsuranceServiceKey"))
             .addCookies(DefaultWSCookie("mdtp", authAndSessionCookie("IV")))
             .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded", "Referer" -> "/identity-verification")

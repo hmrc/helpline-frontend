@@ -40,6 +40,11 @@ Several alternatives will be available and can be selected by indicating the hel
 | anything else      | DEFAULT page                                  |
 
 
+## Find my nino
+Please see [How find my nino integrates with Helpline Frontend]("https://github.com/hmrc/verification-diagrams/tree/main/diagrams/find-my-nino-integration")
+
+Please see OriginFilter class for more information on referers
+
 ### License
 
 This code is open source software licensed under the [Apache 2.0 License]("http://www.apache.org/licenses/LICENSE-2.0.html").
