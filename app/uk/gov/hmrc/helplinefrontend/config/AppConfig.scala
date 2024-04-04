@@ -28,8 +28,10 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
   val welshLanguageSupportEnabled: Boolean = config.getOptional[Boolean]("features.welsh-language-support").getOrElse(true)
   val backCallEnabled: Boolean = config.getOptional[Boolean]("features.back-call-support").getOrElse(false)
   val findMyNinoEnabled: Boolean = config.get[Boolean]("features.find-my-nino.enabled")
+  lazy val deviceIdSecret: Option[String] = config.getOptional[String]("cookie.deviceId.secret")
+  lazy val deviceIdPreviousSecret: Option[Seq[String]] = config.getOptional[Seq[String]]("cookie.deviceId.previous.secret")
 
-   val defaultCallOptionsAndGAEventMapper = mutable.LinkedHashMap(
+  val defaultCallOptionsAndGAEventMapper: mutable.Map[String, String] = mutable.LinkedHashMap(
     "child-benefit" -> "contact_childbenefit",
     "childcare-service" -> "contact_childcare-services",
     "income-tax-paye" -> "contact_incometaxpaye",
@@ -41,7 +43,7 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "general-enquiries" -> "contact_other"
   )
 
-  val defaultCallOptionsOrganisationAndGAEventMapper = mutable.LinkedHashMap(
+  val defaultCallOptionsOrganisationAndGAEventMapper: mutable.Map[String, String] = mutable.LinkedHashMap(
     "corporation-tax" -> "contact_corporationtax",
     "machine-games-duty" -> "contact_machinegamingduty",
     "paye-for-employers" -> "contact_paye",
@@ -51,7 +53,7 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "help-with-a-service" -> "contact_other_org"
   )
 
-  val standaloneIndividualAndGAEventMapper = mutable.LinkedHashMap(
+  val standaloneIndividualAndGAEventMapper: mutable.Map[String, String] = mutable.LinkedHashMap(
     "child-benefit" -> "contact_childbenefit",
     "childcare-service" -> "contact_childcare_services",
     "income-tax-paye" -> "contact_incometaxpaye",
@@ -63,7 +65,7 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "which-service-are-you-trying-to-access-other" -> "which-service-are-you-trying-to-access-other"
   )
 
-  val standaloneOrganisationAndGAEventMapper = mutable.LinkedHashMap(
+  val standaloneOrganisationAndGAEventMapper: mutable.Map[String, String] = mutable.LinkedHashMap(
     "corporation-tax" -> "contact_corporationtax",
     "machine-games-duty" -> "contact_machinegamingduty",
     "vat" -> "contact_vat",
@@ -71,7 +73,7 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "contact-hmrc" -> "contact_hmrc"
   )
 
-  val contactHelplineGAEventMapper = Map(
+  val contactHelplineGAEventMapper: Map[String, String] = Map(
     "child-benefit" -> "further-contact_childbenefit",
     "childcare-service" -> "further-contact_childcare-services",
     "income-tax-paye" -> "further-contact_incometaxpaye",
@@ -87,7 +89,7 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "vat" -> "further-contact_vat",
     "general-enquiries-org" -> "further-contact_other_org")
 
-  val helplinesByService = Map(
+  val helplinesByService: Map[String, String] = Map(
     "Advance Ruling Service" -> "osh",
     "Advance Tariff Ruling" -> "vat",
     "Aggregate Levy" -> "vat",
@@ -190,9 +192,9 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     config.getOptional[String]("features.standalone.organisation.call-options")
       .fold(standaloneOrganisationAndGAEventMapper.keySet.toList)(_.split(",").toList)
 
-  lazy val platformAnalyticsUrl = servicesConfig.baseUrl("platform-analytics")
+  lazy val platformAnalyticsUrl: String = servicesConfig.baseUrl("platform-analytics")
 
-  lazy val findYourNationalInsuranceNumberFrontendUrl = servicesConfig.getConfString("find-your-national-insurance-number-host","")
+  lazy val findYourNationalInsuranceNumberFrontendUrl: String = servicesConfig.getConfString("find-your-national-insurance-number-host","")
 
   //TODO:Is this really the way to store state in a play app?
   var isLoggedInUser: Boolean = false
@@ -205,7 +207,7 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
 
   val IVOrigin: String = "IV"
   val PDVOrigin: String = "PDV"
-  val configuredOriginServices = Map(
+  val configuredOriginServices: Map[String, String] = Map(
     "/identity-verification" -> "IV",
     "/personal-details-validation" -> "PDV"
   )

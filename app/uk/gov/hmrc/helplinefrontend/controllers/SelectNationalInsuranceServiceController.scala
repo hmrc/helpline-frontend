@@ -27,9 +27,11 @@ import uk.gov.hmrc.helplinefrontend.filters.OriginFilter
 import uk.gov.hmrc.helplinefrontend.models.CallOption.NationalInsurance
 import uk.gov.hmrc.helplinefrontend.models.auth.AuthDetails
 import uk.gov.hmrc.helplinefrontend.models.form._
+import uk.gov.hmrc.helplinefrontend.monitoring.auditing.AuditEventHandler
 import uk.gov.hmrc.helplinefrontend.views.html.SelectNationalInsuranceService
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
+import uk.gov.hmrc.helplinefrontend.monitoring._
 
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.{ExecutionContext, Future}
@@ -40,7 +42,8 @@ class SelectNationalInsuranceServiceController @Inject()(implicit
                                                          implicit val ec: ExecutionContext,
                                                          appConfig: AppConfig,
                                                          mcc: MessagesControllerComponents,
-                                                         selectNationalInsuranceService: SelectNationalInsuranceService)
+                                                         selectNationalInsuranceService: SelectNationalInsuranceService,
+                                                         auditEventHandler: AuditEventHandler)
   extends FrontendController(mcc) with Logging with AuthorisedFunctions {
 
   def retrieveDetailsFromAuth(implicit hc: HeaderCarrier): Future[Option[AuthDetails]] = {
@@ -62,7 +65,9 @@ class SelectNationalInsuranceServiceController @Inject()(implicit
       errors => Future.successful(BadRequest(selectNationalInsuranceService(errors))),
       {
         case FindNiNumber =>
-          retrieveDetailsFromAuth.map { _ =>
+          retrieveDetailsFromAuth.map { detailsFromAuth =>
+            val userDetails = detailsFromAuth.getOrElse(AuthDetails(None, None))
+            auditEventHandler.handleEvent(FindYourNINOSelected( userDetails.nino.toString, userDetails.authProviderId.toString))
             request.session.get(OriginFilter.originHeaderKey) match {
               case Some(appConfig.IVOrigin) => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails?origin=IV")
               case Some(appConfig.PDVOrigin) => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails?origin=PDV")
