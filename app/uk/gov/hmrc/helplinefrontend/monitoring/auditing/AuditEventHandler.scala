@@ -37,7 +37,7 @@ class AuditEventHandler @Inject()(
                                    deviceIdService: DeviceIdService)(implicit messagesApi: MessagesApi)
   extends EventHandler {
 
-  private lazy val factory = new AuditEventFactory()
+  lazy val factory = new AuditEventFactory()
 
   private def sendEvent[E <: MonitoringEvent](event: E, create: E => DataEvent)(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[AuditResult] = {
     val dataEvent = create(event)

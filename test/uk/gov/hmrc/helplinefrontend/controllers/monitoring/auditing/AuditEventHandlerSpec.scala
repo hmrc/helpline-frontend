@@ -32,6 +32,7 @@ import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.audit.AuditExtensions
 import uk.gov.hmrc.play.audit.AuditExtensions.AuditHeaderCarrier
 import uk.gov.hmrc.play.audit.http.connector.AuditConnector
+import uk.gov.hmrc.play.audit.model.DataEvent
 import uk.gov.hmrc.play.bootstrap.frontend.filters.deviceid.{DeviceId, DeviceIdCookie}
 
 import java.util.UUID
@@ -42,6 +43,7 @@ class AuditEventHandlerSpec extends AnyWordSpec with Matchers {
   "AuditEventHandler" should {
     "create a FindYourNINOSelected when called" in new Setup{
       val event: FindYourNINOSelected = FindYourNINOSelected(nino, authProviderId)
+      val auditEvent: DataEvent = auditEventHandler.factory.findYourNINOSelected(event)
       auditEventHandler.handleEvent(event)
 
       val expectedTags: Map[String, String] = carrier.toAuditTags("FindYourNINOSelected", request.path)
@@ -52,9 +54,9 @@ class AuditEventHandlerSpec extends AnyWordSpec with Matchers {
         "credId" -> authProviderId
       )
 
-      event.nino shouldBe expectedDetails("nino")
-      event.authProviderId shouldBe expectedDetails("credId")
-      //verify(mockAuditConnector).sendEvent(argThat(new DataEventMatcher(expectedTags, expectedDetails)))(any(), any())
+      auditEvent.tags shouldBe expectedTags
+      auditEvent.detail shouldBe expectedDetails
+      auditEvent.auditType shouldBe "FindYourNINOSelected"
     }
   }
 }
