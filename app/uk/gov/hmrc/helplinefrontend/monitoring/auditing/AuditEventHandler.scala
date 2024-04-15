@@ -18,7 +18,6 @@ package uk.gov.hmrc.helplinefrontend.monitoring.auditing
 
 import play.api.i18n.{LangImplicits, MessagesApi}
 import play.api.mvc.Request
-import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.helplinefrontend.monitoring._
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.audit.AuditExtensions
@@ -32,9 +31,7 @@ import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
 class AuditEventHandler @Inject()(
-                                   connector: AuditConnector,
-                                   appConfig: AppConfig,
-                                   deviceIdService: DeviceIdService)(implicit messagesApi: MessagesApi)
+                                   connector: AuditConnector)(implicit messagesApi: MessagesApi)
   extends EventHandler {
 
   lazy val factory = new AuditEventFactory()
@@ -69,7 +66,7 @@ private[auditing] class AuditEventFactory()(implicit override val messagesApi: M
     )
   }
 
-  def findYourNINOSelected(event: FindYourNINOSelected)(implicit request: Request[_], hc: HeaderCarrier, executionContext: ExecutionContext): DataEvent = {
+  def findYourNINOSelected(event: FindYourNINOSelected)(implicit request: Request[_], hc: HeaderCarrier): DataEvent = {
     generateDataEvent(
       auditType = "FindYourNINOSelected",
       details = Map(

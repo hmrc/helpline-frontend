@@ -16,18 +16,15 @@
 
 package uk.gov.hmrc.helplinefrontend.controllers.monitoring.auditing
 
-import org.mockito.ArgumentMatchers.{any, argThat}
-import org.mockito.Mockito.{verify, when}
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatestplus.mockito.MockitoSugar.mock
 import play.api.i18n.MessagesApi
 import play.api.mvc.{AnyContent, Cookie, Request}
 import play.api.test.FakeRequest
-import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.helplinefrontend.filters.OriginFilter
 import uk.gov.hmrc.helplinefrontend.monitoring._
-import uk.gov.hmrc.helplinefrontend.monitoring.auditing.{AuditEventHandler, DeviceIdService}
+import uk.gov.hmrc.helplinefrontend.monitoring.auditing.AuditEventHandler
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.audit.AuditExtensions
 import uk.gov.hmrc.play.audit.AuditExtensions.AuditHeaderCarrier
@@ -76,13 +73,10 @@ trait Setup{
   val carrier: AuditHeaderCarrier = AuditExtensions.auditHeaderCarrier(headerCarrier)
 
   val mockAuditConnector: AuditConnector = mock[AuditConnector]
-  val mockAppConfig: AppConfig = mock[AppConfig]
-  val mockDeviceIdService: DeviceIdService = mock[DeviceIdService]
 
   val deviceId = new DeviceId(UUID.randomUUID().toString, 1234, "hash")
 
-  when(mockDeviceIdService.getDeviceId()).thenReturn(deviceId)
   val mockMessagesApi: MessagesApi = mock[MessagesApi]
-  val auditEventHandler: AuditEventHandler = new AuditEventHandler(mockAuditConnector, mockAppConfig, mockDeviceIdService)(mockMessagesApi)
+  val auditEventHandler: AuditEventHandler = new AuditEventHandler(mockAuditConnector)(mockMessagesApi)
 
 }
