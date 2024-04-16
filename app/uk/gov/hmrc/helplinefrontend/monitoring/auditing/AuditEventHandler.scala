@@ -16,22 +16,16 @@
 
 package uk.gov.hmrc.helplinefrontend.monitoring.auditing
 
-import play.api.i18n.{LangImplicits, MessagesApi}
 import play.api.libs.json.Json
 import play.api.mvc.Request
-import uk.gov.hmrc.helplinefrontend.monitoring._
 import uk.gov.hmrc.http.HeaderCarrier
-import uk.gov.hmrc.play.audit.AuditExtensions
-import uk.gov.hmrc.play.audit.AuditExtensions.AuditHeaderCarrier
-import uk.gov.hmrc.play.audit.http.connector.{AuditConnector, AuditResult}
-import uk.gov.hmrc.play.audit.model.DataEvent
+import uk.gov.hmrc.play.audit.http.connector.AuditConnector
 import uk.gov.hmrc.helplinefrontend.filters.OriginFilter
-
 import javax.inject.{Inject, Singleton}
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext
 
 @Singleton
-class AuditEventHandler @Inject()(connector: AuditConnector)(implicit messagesApi: MessagesApi){
+class AuditEventHandler @Inject()(connector: AuditConnector){
 
   def auditSearchResults(nino: String, authProviderId: String) (implicit request: Request[_], hc: HeaderCarrier, ec: ExecutionContext): Unit =
     connector.sendExplicitAudit(
@@ -42,5 +36,4 @@ class AuditEventHandler @Inject()(connector: AuditConnector)(implicit messagesAp
         "credId" -> authProviderId
     )
   )
-
 }
