@@ -31,7 +31,6 @@ import uk.gov.hmrc.helplinefrontend.monitoring.auditing.AuditEventHandler
 import uk.gov.hmrc.helplinefrontend.views.html.SelectNationalInsuranceService
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-import uk.gov.hmrc.helplinefrontend.monitoring._
 
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.{ExecutionContext, Future}
@@ -67,7 +66,7 @@ class SelectNationalInsuranceServiceController @Inject()(implicit
         case FindNiNumber =>
           retrieveDetailsFromAuth.map { detailsFromAuth =>
             val userDetails = detailsFromAuth.getOrElse(AuthDetails(None, None))
-            auditEventHandler.handleEvent(FindYourNINOSelected( userDetails.nino.toString, userDetails.authProviderId.toString))
+            auditEventHandler.auditSearchResults(userDetails.nino.toString, userDetails.authProviderId.toString)
             request.session.get(OriginFilter.originHeaderKey) match {
               case Some(appConfig.IVOrigin) => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails?origin=IV")
               case Some(appConfig.PDVOrigin) => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails?origin=PDV")

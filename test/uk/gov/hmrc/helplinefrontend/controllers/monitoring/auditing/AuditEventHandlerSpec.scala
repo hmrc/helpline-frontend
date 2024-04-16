@@ -16,10 +16,16 @@
 
 package uk.gov.hmrc.helplinefrontend.controllers.monitoring.auditing
 
+import com.github.tomakehurst.wiremock.WireMockServer
+import com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig
+import org.scalatest.concurrent.Eventually.eventually
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatestplus.mockito.MockitoSugar.mock
+import play.api.Application
 import play.api.i18n.MessagesApi
+import play.api.inject.guice.GuiceApplicationBuilder
+import play.api.libs.json.{JsObject, Json}
 import play.api.mvc.{AnyContent, Cookie, Request}
 import play.api.test.FakeRequest
 import uk.gov.hmrc.helplinefrontend.filters.OriginFilter
@@ -34,26 +40,26 @@ import uk.gov.hmrc.play.bootstrap.frontend.filters.deviceid.{DeviceId, DeviceIdC
 
 import java.util.UUID
 import scala.concurrent.ExecutionContext.Implicits.global
+import scala.jdk.CollectionConverters.CollectionHasAsScala
 
 
 class AuditEventHandlerSpec extends AnyWordSpec with Matchers {
   "AuditEventHandler" should {
     "create a FindYourNINOSelected when called" in new Setup{
-      val event: FindYourNINOSelected = FindYourNINOSelected(nino, authProviderId)
-      val auditEvent: DataEvent = auditEventHandler.factory.findYourNINOSelected(event)
-      auditEventHandler.handleEvent(event)
-
+      auditEventHandler.auditSearchResults(nino, authProviderId)
       val expectedTags: Map[String, String] = carrier.toAuditTags("FindYourNINOSelected", request.path)
-
       val expectedDetails: Map[String, String] = Map(
         "nino" -> nino,
         "originServiceName" -> request.session.get(OriginFilter.originHeaderKey).toString,
         "credId" -> authProviderId
       )
 
-      auditEvent.tags shouldBe expectedTags
-      auditEvent.detail shouldBe expectedDetails
-      auditEvent.auditType shouldBe "FindYourNINOSelected"
+      assertAuditEvent("FindYourNINOSelected") { bodyOfAudit =>
+        (bodyOfAudit \ "auditType").as[String] shouldBe "FindYourNINOSelected"
+        (bodyOfAudit \ "tags").as[String] shouldBe expectedTags
+        (bodyOfAudit \ "auditSource").as[String] shouldBe "helpline-frontend"
+        (bodyOfAudit \ "detail").as[JsObject] shouldBe expectedDetails
+      }
     }
   }
 }
@@ -77,6 +83,32 @@ trait Setup{
   val deviceId = new DeviceId(UUID.randomUUID().toString, 1234, "hash")
 
   val mockMessagesApi: MessagesApi = mock[MessagesApi]
-  val auditEventHandler: AuditEventHandler = new AuditEventHandler(mockAuditConnector)(mockMessagesApi)
+  val wiremockHost: String = "localhost"
+  val wiremockPort: Int = 12346
+  val wireMockServer = new WireMockServer(wireMockConfig().port(wiremockPort))
+  lazy val config: Map[String, String] = Map(
+    "auditing.consumer.baseUri.host" -> s"$wiremockHost",
+    "auditing.consumer.baseUri.port" -> s"$wiremockPort",
+  )
+  implicit lazy val app: Application = new GuiceApplicationBuilder().configure(config).build()
+  val auditEventHandler: AuditEventHandler = app.injector.instanceOf[AuditEventHandler]
+
+  def assertAuditEvent(elementToIdentifyAuditEvent: String)(assertion: JsObject => Any): Unit = {
+    eventually {
+      val bodyOfAudit =
+        Json.parse(
+          wireMockServer.getAllServeEvents.asScala.collectFirst {
+            case event if {
+              event.getRequest.getBodyAsString.contains(elementToIdentifyAuditEvent) &&
+                event.getRequest.getUrl.contains("/write/audit") &&
+                !event.getRequest.getBodyAsString.contains("RequestReceived") &&
+                !event.getRequest.getBodyAsString.contains("OutboundCall")
+            } => event.getRequest.getBodyAsString
+          }.get
+        ).as[JsObject]
+
+      assertion(bodyOfAudit)
+    }
+  }
 
 }
