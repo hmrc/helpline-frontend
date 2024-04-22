@@ -29,6 +29,7 @@ import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import uk.gov.hmrc.auth.core.AuthConnector
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
+import uk.gov.hmrc.helplinefrontend.monitoring.auditing.AuditEventHandler
 import uk.gov.hmrc.helplinefrontend.views.html.SelectNationalInsuranceService
 
 import scala.concurrent.{ExecutionContext, Future}
@@ -116,6 +117,8 @@ class SelectNationalInsuranceServiceControllerSpec extends AnyWordSpec with Matc
     val authConnector: AuthConnector = app.injector.instanceOf[AuthConnector]
     val messagesCC: MessagesControllerComponents = app.injector.instanceOf[MessagesControllerComponents]
     val selectNationalInsuranceService: SelectNationalInsuranceService = app.injector.instanceOf[SelectNationalInsuranceService]
+    val auditEventHandler: AuditEventHandler = app.injector.instanceOf[AuditEventHandler]
+
 
     val controller: SelectNationalInsuranceServiceController =
       new SelectNationalInsuranceServiceController()(
@@ -123,7 +126,8 @@ class SelectNationalInsuranceServiceControllerSpec extends AnyWordSpec with Matc
         implicitly[ExecutionContext],
         appConfig,
         messagesCC,
-        selectNationalInsuranceService)
+        selectNationalInsuranceService,
+        auditEventHandler)
 
     val callOptionsRoute = "/call-options-no-answers"
     val whichServiceRoute = "/which-service-are-you-trying-to-access"
