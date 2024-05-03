@@ -20,20 +20,20 @@ import play.api.libs.json.Json
 import play.api.mvc.Request
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.audit.http.connector.AuditConnector
-import uk.gov.hmrc.helplinefrontend.filters.OriginFilter
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.ExecutionContext
 
 @Singleton
 class AuditEventHandler @Inject()(connector: AuditConnector){
 
-  def auditSearchResults(nino: String, authProviderId: String) (implicit request: Request[_], hc: HeaderCarrier, ec: ExecutionContext): Unit =
+  def auditSearchResults(nino: String, originServiceName: String, authProviderId: String) (implicit request: Request[_], hc: HeaderCarrier, ec: ExecutionContext): Unit = {
     connector.sendExplicitAudit(
       auditType = "FindYourNINOSelected",
       detail = Json.obj(
         "nino" -> nino,
-        "originServiceName" -> request.session.get(OriginFilter.originHeaderKey).toString,
+        "originServiceName" -> originServiceName,
         "credId" -> authProviderId
     )
   )
+  }
 }

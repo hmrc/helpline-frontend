@@ -45,12 +45,13 @@ class AuditEventHandlerSpec extends AnyWordSpec with Matchers {
       }.buildNewDeviceIdCookie()
 
       val nino: String = "AA000003D"
+      val originServiceName: String = "None"
       val authProviderId: String = "1234"
 
       implicit val request: Request[AnyContent] = FakeRequest().withCookies(deviceIdCookie)
       implicit val headerCarrier: HeaderCarrier = HeaderCarrier()
 
-      auditEventHandler.auditSearchResults(nino, authProviderId)
+      auditEventHandler.auditSearchResults(nino, originServiceName, authProviderId)
 
       val expectedAuditType = "FindYourNINOSelected"
       val expectedDetails: JsObject = Json.obj(

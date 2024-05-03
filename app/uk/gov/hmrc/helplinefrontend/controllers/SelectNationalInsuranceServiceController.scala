@@ -66,7 +66,10 @@ class SelectNationalInsuranceServiceController @Inject()(implicit
         case FindNiNumber =>
           retrieveDetailsFromAuth.map { detailsFromAuth =>
             val userDetails = detailsFromAuth.getOrElse(AuthDetails(None, None))
-            auditEventHandler.auditSearchResults(userDetails.nino.toString, userDetails.authProviderId.toString)
+            auditEventHandler.auditSearchResults(
+              userDetails.nino.getOrElse("None"),
+              request.session.get(OriginFilter.originHeaderKey).getOrElse("None"),
+              userDetails.authProviderId.getOrElse("None"))
             request.session.get(OriginFilter.originHeaderKey) match {
               case Some(appConfig.IVOrigin) => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails?origin=IV")
               case Some(appConfig.PDVOrigin) => Redirect(s"${appConfig.findYourNationalInsuranceNumberFrontendUrl}/find-your-national-insurance-number/checkDetails?origin=PDV")
