@@ -29,13 +29,7 @@ class OriginFilter @Inject()(override val mat: Materializer, appConfig: AppConfi
   import OriginFilter._
 
   override def apply(f: RequestHeader => Future[Result])(rh: RequestHeader): Future[Result] = {
-
-    if(appConfig.findMyNinoEnabled) {
       setOriginFlag(f)(rh)
-    } else {
-      f(rh)
-    }
-
   }
 
   private def setOriginFlag(f: RequestHeader => Future[Result])(rh: RequestHeader): Future[Result] = {

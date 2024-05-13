@@ -29,6 +29,7 @@ import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import uk.gov.hmrc.auth.core.AuthConnector
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
+import uk.gov.hmrc.helplinefrontend.controllers.filters.TestAppConfig
 import uk.gov.hmrc.helplinefrontend.monitoring.{EventDispatcher, FindHmrcHelpline, FindHmrcHelplinePage, MonitoringEvent, OtherHmrcHelpline}
 import uk.gov.hmrc.helplinefrontend.monitoring.analytics._
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
@@ -40,15 +41,9 @@ import scala.concurrent.{ExecutionContext, Future}
 
 class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOneAppPerSuite with Eventually with MockFactory{
 
-  class TestAppConfig(config: Configuration, servicesConfig: ServicesConfig, testFindMyNinoEnabled: Boolean)
-  extends AppConfig(config, servicesConfig){
-    override val findMyNinoEnabled: Boolean = testFindMyNinoEnabled
-  }
-
   private val fakeRequest = FakeRequest("GET", "/")
   val customConfig: Configuration = Configuration.from(Map(
-    "features.back-call-support" -> false,
-    "features.find-my-nino.enabled" -> false
+    "features.back-call-support" -> false
   ))
   val customiseAppConfig = new AppConfig(customConfig, new ServicesConfig(customConfig))
 
@@ -103,9 +98,9 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
   val eventDispatcher = new EventDispatcher(TestHandler)
 
-  def getController(findMyNinoEnabled: Boolean = false): CallHelpdeskController = {
+  def getController(): CallHelpdeskController = {
 
-    val testAppConfig: TestAppConfig = new TestAppConfig(config, servicesConfig, findMyNinoEnabled)
+    val testAppConfig: TestAppConfig = new TestAppConfig(config, servicesConfig)
 
     new CallHelpdeskController()(
       authConnector,
@@ -504,17 +499,8 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
           Event("sos_iv", "more_info", "contact_incometaxpaye", expectedDimensions)))
       }
     }
-    "fire contact_natinsurance ga event when user clicks on national insurance with the find my nino enabled flag set to false" in {
+    "fire contact_natinsurance ga event when user clicks on national insurance" in {
       val result: Future[Result] = getController().selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "national-insurance"))
-      status(result) shouldBe Status.SEE_OTHER
-      redirectLocation(result).get should startWith("/helpline/national-insurance")
-      eventually {
-        analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
-          Event("sos_iv", "more_info", "contact_natinsurance", expectedDimensions)))
-      }
-    }
-    "fire contact_natinsurance ga event when user clicks on national insurance with the find my nino enabled flag set to true" in {
-      val result: Future[Result] = getController(findMyNinoEnabled = true).selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "national-insurance"))
       status(result) shouldBe Status.SEE_OTHER
       redirectLocation(result).get shouldBe "/helpline/select-national-insurance-service?back=%2Fhelpline%2Fcall-options-no-answers"
       eventually {
@@ -559,7 +545,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       }
     }
     "fire contact_other ga event when user clicks on other and find my nino enabled flag is set to true" in {
-      val result: Future[Result] = getController(findMyNinoEnabled = true).selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "general-enquiries"))
+      val result: Future[Result] = getController().selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "general-enquiries"))
       status(result) shouldBe Status.SEE_OTHER
       redirectLocation(result).get should startWith("/helpline/general-enquiries")
       eventually {
