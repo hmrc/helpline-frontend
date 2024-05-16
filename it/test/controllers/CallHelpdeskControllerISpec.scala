@@ -53,13 +53,6 @@ class CallHelpdeskControllerISpec extends HelperSpec {
   val selfAssessmentPage = "/organisation/self-assessment"
   val generalEnquiriesPage = "/organisation/help-with-a-service"
 
-  // Create alternative application instance with feature flag "features.find-my-nino.enabled" set to true
-  lazy val findMyNinoEnabledApp: Application = new GuiceApplicationBuilder()
-    .configure(
-      "features.find-my-nino.enabled" -> true,
-      "metrics.enabled" -> false)
-    .build()
-
   "GET /helpline/:helpKey" should {
     "return died help page if the help key is 'died' but there is no go back url" in {
       withClient {
@@ -89,8 +82,9 @@ class CallHelpdeskControllerISpec extends HelperSpec {
               val submitCallOption = wsClient.url(resource(s"$getPageBaseUrl$callOptionsPage"))
                 .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded")
                 .withFollowRedirects(false).post(callOptionSelected).futureValue
-
-              submitCallOption.header(LOCATION).get should endWith(s"$getPageBaseUrl/$callOption?back=$backLinkToCallOptionsPage")
+              if(callOption != "national-insurance") {
+                submitCallOption.header(LOCATION).get should endWith(s"$getPageBaseUrl/$callOption?back=$backLinkToCallOptionsPage")
+              }
           }
         }
       }
@@ -98,7 +92,7 @@ class CallHelpdeskControllerISpec extends HelperSpec {
 
     "direct the service to the select-national-insurance-service page" when {
 
-      "the national insurance option is selected on the call-options-no-answers page and the findMyNinoEnabled flag is set to true" in new FindMyNinoEnabled {
+      "the national insurance option is selected on the call-options-no-answers page" in {
 
         withClient {
           wsClient => {
@@ -113,7 +107,7 @@ class CallHelpdeskControllerISpec extends HelperSpec {
         }
       }
 
-      "the national insurance option is selected on the which-service-are-you-trying-to-access page and the findMyNinoEnabled flag is set to true" in new FindMyNinoEnabled {
+      "the national insurance option is selected on the which-service-are-you-trying-to-access page" in {
 
         withClient {
           wsClient => {
@@ -127,38 +121,6 @@ class CallHelpdeskControllerISpec extends HelperSpec {
           }
         }
       }
-
-      "the national insurance option is selected on the call-options-no-answers page and the findMyNinoEnabled flag is set to false" in {
-
-        withClient {
-          wsClient => {
-
-            val nationalInsuranceCallOption = s"selected-call-option=${URLEncoder.encode("national-insurance", "UTF-8")}"
-            val submitCallOptionResponse = wsClient.url(resource(s"$getPageBaseUrl$callOptionsPage"))
-              .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded")
-              .withFollowRedirects(false).post(nationalInsuranceCallOption).futureValue
-
-            submitCallOptionResponse.header(LOCATION).get shouldBe "/helpline/national-insurance?back=%2Fhelpline%2Fcall-options-no-answers"
-          }
-        }
-      }
-
-      "the national insurance option is selected on the which-service-are-you-trying-to-access page and the findMyNinoEnabled flag is set to false" in {
-
-        withClient {
-          wsClient => {
-
-            val nationalInsuranceCallOption = s"selected-call-option=${URLEncoder.encode("national-insurance", "UTF-8")}"
-            val submitCallOptionResponse = wsClient.url(resource(s"$getPageBaseUrl$whichServiceAreYouTryingToAccessPage"))
-              .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded")
-              .withFollowRedirects(false).post(nationalInsuranceCallOption).futureValue
-
-            submitCallOptionResponse.header(LOCATION).get shouldBe "/helpline/national-insurance?back=%2Fhelpline%2Fwhich-service-are-you-trying-to-access"
-          }
-        }
-      }
-
-
     }
   }
 
@@ -221,11 +183,4 @@ class CallHelpdeskControllerISpec extends HelperSpec {
       }
     }
   }
-
-  trait FindMyNinoEnabled extends HelperSpec {
-
-    override lazy val app: Application = findMyNinoEnabledApp
-
-  }
-
 }

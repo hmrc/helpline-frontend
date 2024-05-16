@@ -27,7 +27,6 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
 
   val welshLanguageSupportEnabled: Boolean = config.getOptional[Boolean]("features.welsh-language-support").getOrElse(true)
   val backCallEnabled: Boolean = config.getOptional[Boolean]("features.back-call-support").getOrElse(false)
-  val findMyNinoEnabled: Boolean = config.get[Boolean]("features.find-my-nino.enabled")
   lazy val deviceIdSecret: Option[String] = config.getOptional[String]("cookie.deviceId.secret")
   lazy val deviceIdPreviousSecret: Option[Seq[String]] = config.getOptional[Seq[String]]("cookie.deviceId.previous.secret")
 
