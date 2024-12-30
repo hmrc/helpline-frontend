@@ -25,9 +25,10 @@ import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.mvc.{AnyContentAsEmpty, Cookie}
 import play.api.test.FakeRequest
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
-import uk.gov.hmrc.helplinefrontend.monitoring.analytics.{AnalyticsConnector, AnalyticsEventHandler, AnalyticsRequest, Event}
 import uk.gov.hmrc.helplinefrontend.monitoring._
-import uk.gov.hmrc.http.{HeaderCarrier, HttpClient}
+import uk.gov.hmrc.helplinefrontend.monitoring.analytics.{AnalyticsConnector, AnalyticsEventHandler, AnalyticsRequest, Event}
+import uk.gov.hmrc.http.HeaderCarrier
+import uk.gov.hmrc.http.client.HttpClientV2
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.{ExecutionContext, Future}
@@ -117,9 +118,9 @@ class AnalyticsEventHandlerSpec
     val request: FakeRequest[AnyContentAsEmpty.type] = FakeRequest().withCookies(Cookie("_ga", gaClientId))
 
     val appConfg: AppConfig = app.injector.instanceOf[AppConfig]
-    val httpClient: HttpClient = app.injector.instanceOf[HttpClient]
+    val httpClientV2: HttpClientV2 = app.injector.instanceOf[HttpClientV2]
 
-    object TestConnector extends AnalyticsConnector(appConfg, httpClient) {
+    object TestConnector extends AnalyticsConnector(appConfg, httpClientV2) {
       override def sendEvent(request: AnalyticsRequest)(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[Done] = {
         analyticsRequests = analyticsRequests :+ request
         Future.successful(Done)

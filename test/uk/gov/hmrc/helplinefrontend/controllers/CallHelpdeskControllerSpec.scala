@@ -24,17 +24,18 @@ import org.scalatest.wordspec.AnyWordSpec
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.Configuration
 import play.api.http.Status
-import play.api.mvc.{AnyContentAsEmpty, Cookie, MessagesControllerComponents, Request, Result}
+import play.api.mvc._
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import uk.gov.hmrc.auth.core.AuthConnector
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.helplinefrontend.controllers.filters.TestAppConfig
-import uk.gov.hmrc.helplinefrontend.monitoring.{EventDispatcher, FindHmrcHelpline, FindHmrcHelplinePage, MonitoringEvent, OtherHmrcHelpline}
 import uk.gov.hmrc.helplinefrontend.monitoring.analytics._
+import uk.gov.hmrc.helplinefrontend.monitoring.{HasThisPersonDied, _}
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
 import uk.gov.hmrc.helplinefrontend.views.html.helplinesByService.{FindHMRCHelpline, Helpline, HelplinesByService}
-import uk.gov.hmrc.http.{HeaderCarrier, HttpClient}
+import uk.gov.hmrc.http.HeaderCarrier
+import uk.gov.hmrc.http.client.HttpClientV2
 import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
 
 import scala.concurrent.{ExecutionContext, Future}
@@ -85,9 +86,9 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
     .withSession("dimensions" -> """[{"index":2,"value":"ma"},{"index":3,"value":"UpliftNino"},{"index":4,"value":"200-MEO"},{"index":5,"value":"No Enrolments"}]""").withMethod("POST")
 
   val expectedDimensions: Seq[DimensionValue] = Seq(DimensionValue(2,"ma"), DimensionValue(3,"UpliftNino"), DimensionValue(4,"200-MEO"), DimensionValue(5,"No Enrolments"))
-  val httpClient: HttpClient = app.injector.instanceOf[HttpClient]
+  val httpClientV2: HttpClientV2 = app.injector.instanceOf[HttpClientV2]
 
-  object TestConnector extends AnalyticsConnector(appConfig, httpClient) {
+  object TestConnector extends AnalyticsConnector(appConfig, httpClientV2) {
     override def sendEvent(request: AnalyticsRequest)(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[Done] = {
       analyticsRequests = analyticsRequests :+ request
       Future.successful(Done)

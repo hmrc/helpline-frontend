@@ -31,8 +31,9 @@ import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.helplinefrontend.monitoring.EventDispatcher
 import uk.gov.hmrc.helplinefrontend.monitoring.analytics._
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
-import uk.gov.hmrc.helplinefrontend.views.html.helplinesByService.{Helpline, HelplinesByService, FindHMRCHelpline}
-import uk.gov.hmrc.http.{HeaderCarrier, HttpClient}
+import uk.gov.hmrc.helplinefrontend.views.html.helplinesByService.{FindHMRCHelpline, Helpline, HelplinesByService}
+import uk.gov.hmrc.http.HeaderCarrier
+import uk.gov.hmrc.http.client.HttpClientV2
 import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
 import uk.gov.hmrc.scalatestaccessibilitylinter.AccessibilityMatchers
 
@@ -80,9 +81,9 @@ class allyTestsSpec extends AnyWordSpec with Matchers with GuiceOneAppPerSuite w
     .withSession("dimensions" -> """[{"index":2,"value":"ma"},{"index":3,"value":"UpliftNino"},{"index":4,"value":"200-MEO"},{"index":5,"value":"No Enrolments"}]""")
 
   val expectedDimensions: Seq[DimensionValue] = Seq(DimensionValue(2,"ma"), DimensionValue(3,"UpliftNino"), DimensionValue(4,"200-MEO"), DimensionValue(5,"No Enrolments"))
-  val httpClient: HttpClient = app.injector.instanceOf[HttpClient]
+  val httpClientV2: HttpClientV2 = app.injector.instanceOf[HttpClientV2]
 
-  object TestConnector extends AnalyticsConnector(appConfig, httpClient) {
+  object TestConnector extends AnalyticsConnector(appConfig, httpClientV2) {
     override def sendEvent(request: AnalyticsRequest)(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[Done] = {
       analyticsRequests = analyticsRequests :+ request
       Future.successful(Done)

@@ -17,18 +17,18 @@
 package uk.gov.hmrc.helplinefrontend.monitoring.analytics
 
 import org.apache.pekko.Done
-
-import javax.inject.{Inject, Singleton}
 import play.api.Logging
 import play.api.libs.json.{Json, OWrites}
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
-import uk.gov.hmrc.http.{HeaderCarrier, HttpClient}
 import uk.gov.hmrc.http.HttpReads.Implicits.readRaw
+import uk.gov.hmrc.http.client.HttpClientV2
+import uk.gov.hmrc.http.{HeaderCarrier, StringContextOps}
 
+import javax.inject.{Inject, Singleton}
 import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
-class AnalyticsConnector @Inject() (appConfig: AppConfig, http: HttpClient) extends Logging {
+class AnalyticsConnector @Inject() (appConfig: AppConfig, httpClientV2: HttpClientV2) extends Logging {
   private def serviceUrl: String = appConfig.platformAnalyticsUrl
 
   private implicit val dimensionValueWrites: OWrites[DimensionValue] = Json.writes[DimensionValue]
@@ -36,11 +36,15 @@ class AnalyticsConnector @Inject() (appConfig: AppConfig, http: HttpClient) exte
   private implicit val analyticsWrites: OWrites[AnalyticsRequest] = Json.writes[AnalyticsRequest]
 
   def sendEvent(request: AnalyticsRequest)(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[Done] = {
-    val url = s"$serviceUrl/platform-analytics/event"
-    http.POST(url, request).map(_ => Done).recover {
-      case _ : Throwable =>
-        logger.error(s"Couldn't send analytics event $request")
-        Done
-    }
+    httpClientV2
+      .post(url"$serviceUrl/platform-analytics/event")
+      .withBody(Json.toJson(request))
+      .execute
+      .map(_ => Done)
+      .recover {
+        case _: Throwable =>
+          logger.error(s"Couldn't send analytics event $request")
+          Done
+      }
   }
 }
