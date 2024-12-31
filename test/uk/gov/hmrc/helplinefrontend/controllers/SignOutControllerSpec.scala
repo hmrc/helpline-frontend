@@ -28,7 +28,8 @@ import play.api.test.Helpers.{redirectLocation, status}
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.helplinefrontend.monitoring.EventDispatcher
 import uk.gov.hmrc.helplinefrontend.monitoring.analytics.{AnalyticsConnector, AnalyticsEventHandler, AnalyticsRequest}
-import uk.gov.hmrc.http.{HeaderCarrier, HttpClient}
+import uk.gov.hmrc.http.HeaderCarrier
+import uk.gov.hmrc.http.client.HttpClientV2
 
 import scala.concurrent.duration.DurationInt
 import scala.concurrent.{ExecutionContext, Future}
@@ -38,9 +39,9 @@ class SignOutControllerSpec extends AnyWordSpec with Matchers with GuiceOneAppPe
   val mcc: MessagesControllerComponents = app.injector.instanceOf[MessagesControllerComponents]
   val appConfig: AppConfig = app.injector.instanceOf[AppConfig]
   var analyticsRequests = Seq.empty[AnalyticsRequest]
-  val httpClient: HttpClient = app.injector.instanceOf[HttpClient]
+  val httpClientV2: HttpClientV2 = app.injector.instanceOf[HttpClientV2]
 
-  object TestConnector extends AnalyticsConnector(appConfig, httpClient) {
+  object TestConnector extends AnalyticsConnector(appConfig, httpClientV2) {
     override def sendEvent(request: AnalyticsRequest)(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[Done] = {
       analyticsRequests = analyticsRequests :+ request
       Future.successful(Done)

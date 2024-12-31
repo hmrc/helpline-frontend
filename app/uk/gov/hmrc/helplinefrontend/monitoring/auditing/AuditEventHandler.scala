@@ -17,16 +17,18 @@
 package uk.gov.hmrc.helplinefrontend.monitoring.auditing
 
 import play.api.libs.json.Json
-import play.api.mvc.Request
+import play.api.mvc.RequestHeader
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.audit.http.connector.AuditConnector
+
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.ExecutionContext
 
 @Singleton
 class AuditEventHandler @Inject()(connector: AuditConnector){
 
-  def auditSearchResults(nino: String, originServiceName: String, authProviderId: String) (implicit request: Request[_], hc: HeaderCarrier, ec: ExecutionContext): Unit = {
+  def auditSearchResults(nino: String, originServiceName: String, authProviderId: String)
+                        (implicit requestHeader: RequestHeader, hc: HeaderCarrier, ec: ExecutionContext): Unit = {
     connector.sendExplicitAudit(
       auditType = "FindYourNINOSelected",
       detail = Json.obj(
