@@ -34,7 +34,6 @@ object CallOption extends Enum[CallOption]{
   case object NationalInsurance extends CallOption
   case object SelfAssessment    extends CallOption
   case object StatePension      extends CallOption
-  case object TaxCredits        extends CallOption
   case object CorporationTax    extends CallOption
   case object MachineGamesDuty  extends CallOption
   case object MachineGamingDuty extends CallOption

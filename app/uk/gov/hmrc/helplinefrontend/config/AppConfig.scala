@@ -37,7 +37,6 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "national-insurance" -> "contact_natinsurance",
     "self-assessment" -> "contact_sa",
     "state-pension" -> "contact_pension",
-    "tax-credits" -> "contact_taxcred",
     "divider" -> "divider",
     "general-enquiries" -> "contact_other"
   )
@@ -59,7 +58,6 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "national-insurance" -> "contact_natinsurance",
     "self-assessment" -> "contact_sa",
     "state-pension" -> "contact_pension",
-    "tax-credits" -> "contact_taxcred",
     "divider" -> "divider",
     "which-service-are-you-trying-to-access-other" -> "which-service-are-you-trying-to-access-other"
   )
@@ -79,7 +77,6 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "national-insurance" -> "further-contact_natinsurance",
     "self-assessment" -> "further-contact_sa",
     "state-pension" -> "further-contact_pension",
-    "tax-credits" -> "further-contact_taxcred",
     "general-enquiries" -> "further-contact_other",
     "corporation-tax" -> "further-contact_corporationtax",
     "machine-games-duty" -> "further-contact_machinegamingduty",
@@ -168,7 +165,6 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "VAT Reverse Charge Sales List (RCSL)" -> "vat",
     "VOA check and challenge your business rates valuation" -> "voa",
     "Tax code change" -> "osh",
-    "Tax Credits" -> "osh",
     "Help to Save" -> "osh",
     "Child benefit" -> "osh",
     "Tax - free childcare and Personal Pension Options" -> "osh",
