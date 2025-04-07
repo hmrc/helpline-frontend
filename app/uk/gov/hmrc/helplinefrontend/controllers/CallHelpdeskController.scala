@@ -43,7 +43,6 @@ class CallHelpdeskController @Inject()(implicit
                                        nationalInsurancePage: NationalInsurance,
                                        selfAssessmentPage: SelfAssessment,
                                        statePensionPage: StatePension,
-                                       taxCreditsPage: TaxCredits,
                                        generalEnquiriesPage: GeneralEnquiries,
                                        generalEnquiriesOrganisationPage: GeneralEnquiriesOrganisation,
                                        corporationTaxPage: CorporationTax,
@@ -93,7 +92,6 @@ class CallHelpdeskController @Inject()(implicit
           case NationalInsurance => nationalInsurancePage(backCall)
           case SelfAssessment    => selfAssessmentPage(backCall)
           case StatePension      => statePensionPage(backCall)
-          case TaxCredits        => taxCreditsPage(backCall)
           case Died              =>
             eventDispatcher.dispatchEvent(HasThisPersonDied)
             hasThisPersonDied(backCall)

@@ -61,7 +61,6 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   val nationalInsurance: NationalInsurance = app.injector.instanceOf[NationalInsurance]
   val selfAssessment: SelfAssessment = app.injector.instanceOf[SelfAssessment]
   val statePension: StatePension = app.injector.instanceOf[StatePension]
-  val taxCredits: TaxCredits = app.injector.instanceOf[TaxCredits]
   val generalEnquiries: GeneralEnquiries = app.injector.instanceOf[GeneralEnquiries]
   val generalEnquiriesOrganisation: GeneralEnquiriesOrganisation = app.injector.instanceOf[GeneralEnquiriesOrganisation]
   val corporationTax: CorporationTax = app.injector.instanceOf[CorporationTax]
@@ -113,7 +112,6 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       nationalInsurance,
       selfAssessment,
       statePension,
-      taxCredits,
       generalEnquiries,
       generalEnquiriesOrganisation,
       corporationTax,
@@ -146,7 +144,6 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   val selfAssessmentHelpKey: String = "SELF-ASSESSMENT"
   val selfAssessmentOrganisationHelpKey: String = "self-assessment"
   val statePensionHelpKey: String = "STATE-PENSION"
-  val taxCreditsHelpKey: String = "TAX-CREDITS"
   val generalEnquiriesHelpKey: String = "GENERAL-ENQUIRIES"
   val generalEnquiriesOrganisationHelpKey: String = "SOMETHING-ELSE"
   val vatHelpKey: String = "VAT"
@@ -271,7 +268,6 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
           nationalInsurance,
           selfAssessment,
           statePension,
-          taxCredits,
           generalEnquiries,
           generalEnquiriesOrganisation,
           corporationTax,
@@ -395,22 +391,6 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
     }
   }
 
-  "CallHelpdeskController get Tax Credits help page" should {
-    "return Tax Credits help page if the help key is 'TAX-CREDITS' but there is no go back url" in {
-      val result: Future[Result] = getController().getHelpdeskPage(taxCreditsHelpKey, None)(fakeRequest)
-      status(result) shouldBe Status.OK
-      contentAsString(result).contains("Call the Tax Credits helpline") shouldBe true
-      contentAsString(result).contains("Back") shouldBe false
-    }
-
-    "return Tax Credits help page if the help key is 'TAX-CREDITS' and there is a go back url" in {
-      val result: Future[Result] = getController().getHelpdeskPage(taxCreditsHelpKey, Some("backURL"))(fakeRequest)
-      status(result) shouldBe Status.OK
-      contentAsString(result).contains("Call the Tax Credits helpline") shouldBe true
-      contentAsString(result).contains("Back") shouldBe true
-    }
-  }
-
   "CallHelpdeskController get call-options-no-answers page" should {
     "return a page with a list all the available help pages as radio buttons, and no go back url" in {
       val result: Future[Result] = getController().callOptionsNoAnswersPage()(fakeRequest)
@@ -527,15 +507,6 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
           Event("sos_iv", "more_info", "contact_pension", expectedDimensions)))
       }
     }
-    "fire contact_taxcred ga event when user clicks on tax credits" in {
-      val result: Future[Result] = getController().selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "tax-credits"))
-      status(result) shouldBe Status.SEE_OTHER
-      redirectLocation(result).get should startWith("/helpline/tax-credits")
-      eventually {
-        analyticsRequests.last shouldBe AnalyticsRequest(Some(gaClientId), Seq(
-          Event("sos_iv", "more_info", "contact_taxcred", expectedDimensions)))
-      }
-    }
     "fire contact_other ga event when user clicks on other" in {
       val result: Future[Result] = getController().selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "general-enquiries"))
       status(result) shouldBe Status.SEE_OTHER
@@ -568,7 +539,6 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
         nationalInsurance,
         selfAssessment,
         statePension,
-        taxCredits,
         generalEnquiries,
         generalEnquiriesOrganisation,
         corporationTax,

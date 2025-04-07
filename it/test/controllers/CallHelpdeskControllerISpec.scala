@@ -65,7 +65,7 @@ class CallHelpdeskControllerISpec extends HelperSpec {
 
   "GET /helpline/call-options-no-answers" should {
     "return a page which list the call options and takes you to the corresponding help pages" in {
-      val callOptions = List("child-benefit", "income-tax-paye", "national-insurance", "self-assessment", "state-pension", "tax-credits", "general-enquiries")
+      val callOptions = List("child-benefit", "income-tax-paye", "national-insurance", "self-assessment", "state-pension", "general-enquiries")
       val backLinkToCallOptionsPage = URLEncoder.encode(getPageBaseUrl + callOptionsPage, "UTF-8")
 
       withClient {
