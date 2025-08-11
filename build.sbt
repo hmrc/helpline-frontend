@@ -21,7 +21,6 @@ lazy val microservice = Project(appName, file("."))
     scalacOptions += "-Wconf:src=routes/.*:s",
     scalacOptions += "-Wconf:cat=unused-imports&src=twirl/.*:s",
   )
-  .settings(resolvers += Resolver.jcenterRepo)
   .settings(
     Seq(
       ScoverageKeys.coverageExcludedPackages := "<empty>;Reverse.*;.*BuildInfo.*;.*Routes.*;.*RoutesPrefix.*;",

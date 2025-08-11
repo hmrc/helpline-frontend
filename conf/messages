@@ -223,11 +223,11 @@ contact_us.died.call_advice=This helpline uses speech recognition software, so y
 contact_us.died.call_advice.bereavement="bereavement"
 contact_us.died.call_advice.deceased="deceased"
 contact_us.died.contact_number.telephone.text=Telephone:
-contact_us.died.contact_number.telephone.number=0300 200 3300
+contact_us.died.contact_number.telephone.number=0300 322 9620
 contact_us.died.contact_number.textphone.text=Textphone:
 contact_us.died.contact_number.textphone.number=0300 200 3319
 contact_us.died.contact_number.no_uk_telephone.text=Outside UK:
-contact_us.died.contact_number.no_uk_telephone.number=+44 135 535 9022
+contact_us.died.contact_number.no_uk_telephone.number=+44 300 322 9620
 contact_us.died.contact_number.opening-times=Opening times:
 contact_us.died.contact_number.times=Monday to Friday: 8am to 6pm<br><br>Closed weekends and bank holidays.
 contact_us.died.getHelp=Get help <a href="{0}" class="govuk-link">dealing with HMRC if you have additional needs</a>
