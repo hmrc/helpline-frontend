@@ -14,9 +14,13 @@
  * limitations under the License.
  *@
 
+@import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcAccessibleAutocompleteCss
+@import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcAccessibleAutocompleteJavascript
+@import uk.gov.hmrc.hmrcfrontend.views.viewmodels.accessibleautocomplete.AccessibleAutocomplete
 @import uk.gov.hmrc.helplinefrontend.config.AppConfig
 @import uk.gov.hmrc.helplinefrontend.views.html.Layout
 @import uk.gov.hmrc.helplinefrontend.controllers.routes
+@import uk.gov.hmrc.govukfrontend.views.Implicits.RichSelect
 @import uk.gov.hmrc.govukfrontend.views.Aliases.Text
 @import uk.gov.hmrc.helplinefrontend.views.html.components._
 @import views.html.helper.CSPNonce
@@ -25,15 +29,22 @@
 @this(
         layout: Layout,
         formWithCsrf: FormWithCSRF,
+        autocompleteCss: HmrcAccessibleAutocompleteCss,
+        autocompleteJavascript: HmrcAccessibleAutocompleteJavascript,
+        govukSelect: GovukSelect,
         h1: H1,
         h2: H2,
         p: Paragraph
 )
 
+
 @(HelplinesByServiceForm: Form[String])(implicit request: Request[_], msgs: Messages, appConfig: AppConfig)
 
-@layout(pageTitle = s"${msgs("helplines-search.h1")} ${msgs("title.suffix")}", fullWidth = true) {
-    <link href="/helpline/assets/stylesheets/accessible-autocomplete.min.css" media="all" rel="stylesheet" type="text/css" />
+@layout(pageTitle = s"${msgs("helplines-search.h1")} ${msgs("title.suffix")}",
+    fullWidth = true,
+    headBlock = Some(autocompleteCss()),
+    scriptsBlock = Some(autocompleteJavascript())
+    ) {
     <div class="row">
         <div class="govuk-grid-column-two-thirds">
             @h1(msgs("helplines-search.h1"), Some("govuk-heading-l"))
@@ -45,19 +56,23 @@
         <div class="govuk-grid-column-one-third">
             <!-- Autocomplete -->
             @formWithCsrf(routes.CallHelpdeskController.helpLinesByServiceServicePage()) {
-                <div class="govuk-form-group">
-                    <label class="govuk-label" for="helpline-service">
-                        Search
-                    </label>
-                    <div class="govuk-input__wrapper govuk-!-width-full autocomplete-container">
-                        <select id="helpline-service" class="govuk-!-width-full govuk-select" name="service">
-                            <option value="">@msgs(s"helplines-search.default.select")</option>
-                            @for(question <- appConfig.helplinesByService) {
-                                <option value="@question._1">@question._1</option>
-                            }
-                        </select>
-                        <button class="button-search-inline" type="submit">Search</button>
-                    </div>
+                <div class="autocomplete-container">
+                    @govukSelect(Select(
+                        id = "helpline-service",
+                        name = "service",
+                        items = Seq(SelectItem(text = "")) ++ appConfig.helplinesByService.map {
+                            question => SelectItem(
+                                value = Some(question._1),
+                                text = question._1
+                            )
+                        },
+                        label = Label(
+                            content = Text("Search")
+                        )
+                    ).asAccessibleAutocomplete(Some(
+                        AccessibleAutocomplete()
+                    )))
+                    <button class="button-search-inline" type="submit">Search</button>
                 </div>
             }
         </div>
@@ -85,14 +100,4 @@
         }
         </div>
     </div>
-    <script @{CSPNonce.attr} src="/helpline/assets/javascript/accessible-autocomplete.min.js"></script>
-    <script @{CSPNonce.attr}>
-            accessibleAutocomplete.enhanceSelectElement({
-                autoselect: true,
-                confirmOnBlur: true,
-                defaultValue: "",
-                minLength: 2,
-                selectElement: document.querySelector("#helpline-service")
-            })
-    </script>
 }

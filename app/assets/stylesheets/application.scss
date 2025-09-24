@@ -34,8 +34,8 @@
   border-radius: 0;
   position: relative;
   padding: 0;
-  width: 39px;
-  height: 39px;
+  width: 40px;
+  height: 40px;
   background-image: url("../images/search-button.png");
   background-repeat: no-repeat;
   text-indent: -5000px;
@@ -44,6 +44,7 @@
   color: #fff;
   background-size: 52.5px auto;
   background-position: 115% 50%;
+  top: 30px;
 }
 
 @media (max-width: 640px){
@@ -55,20 +56,13 @@
   }
 }
 
-.autocomplete-container > div {
-  width: 100%;
-}
+.autocomplete-container {
+  display: flex;
 
-.autocomplete__option {
-  font-family: GDS Transport,arial,sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-weight: 400;
-  font-size: 16px;
-  font-size: 1rem;
-  line-height: 1.25;
-  color: #0b0c0c;
-  display: block;
+  .govuk-form-group {
+    width: 90%;
+    margin-bottom: 0;
+  }
 }
 
 .row:after {
