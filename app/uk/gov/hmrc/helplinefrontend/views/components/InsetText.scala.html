@@ -1,5 +1,5 @@
 @*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,15 @@
  * limitations under the License.
  *@
 
-@this(govukInsetText: GovukInsetText)
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.insettext._
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.content._
+
+@this(govukInsetText: uk.gov.hmrc.govukfrontend.views.html.components.GovukInsetText)
 
 @(html: Html, classes: String = "", id: Option[String] = None)(implicit msgs: Messages)
 
 @govukInsetText(
-    InsetText(
+    new uk.gov.hmrc.govukfrontend.views.viewmodels.insettext.InsetText(
         content = HtmlContent(html),
         classes = classes,
         id = id
