@@ -14,19 +14,17 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.helplinefrontend.controllers.monitoring.analytics
+package uk.gov.hmrc.helplinefrontend.monitoring.analytics
 
 import org.apache.pekko.Done
 import org.scalatest.Assertion
 import org.scalatest.concurrent.Eventually
-import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
-import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.mvc.{AnyContentAsEmpty, Cookie}
 import play.api.test.FakeRequest
+import uk.gov.hmrc.helplinefrontend.UnitSpec
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
-import uk.gov.hmrc.helplinefrontend.monitoring._
-import uk.gov.hmrc.helplinefrontend.monitoring.analytics.{AnalyticsConnector, AnalyticsEventHandler, AnalyticsRequest, Event}
+import uk.gov.hmrc.helplinefrontend.monitoring.*
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.http.client.HttpClientV2
 
@@ -36,8 +34,7 @@ import scala.concurrent.{ExecutionContext, Future}
 class AnalyticsEventHandlerSpec
   extends AnyWordSpec
     with Eventually
-    with GuiceOneAppPerSuite
-    with Matchers {
+    with UnitSpec {
 
   "dispatcher" should {
 

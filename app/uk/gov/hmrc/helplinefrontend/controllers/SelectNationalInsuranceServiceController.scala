@@ -48,7 +48,7 @@ class SelectNationalInsuranceServiceController @Inject()(implicit
   def retrieveDetailsFromAuth(implicit hc: HeaderCarrier): Future[Option[AuthDetails]] = {
     authConnector.authorise[Option[String] ~ Option[Credentials]](EmptyPredicate, Retrievals.nino and Retrievals.credentials).map {
       case nino ~ credentials => Some(AuthDetails(nino, credentials.map(_.providerId)))
-      case _ =>
+      case null =>
         logger.warn(s"Something went wrong with the call to auth in Select National Insurance Service Controller ${hc.sessionId.map(_.value)}")
         None
     }.recover {

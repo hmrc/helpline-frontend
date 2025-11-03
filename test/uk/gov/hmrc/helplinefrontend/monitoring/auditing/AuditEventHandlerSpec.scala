@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,17 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.helplinefrontend.controllers.monitoring.auditing
+package uk.gov.hmrc.helplinefrontend.monitoring.auditing
 
 import org.mockito.ArgumentMatchers.{any, eq => equalTo}
 import org.mockito.Mockito.verify
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatestplus.mockito.MockitoSugar.mock
-import play.api.libs.json.{JsObject, JsValue, Json}
+import play.api.libs.json.{JsObject, Json}
 import play.api.mvc.{AnyContent, Cookie, Request}
 import play.api.test.FakeRequest
 import uk.gov.hmrc.helplinefrontend.filters.OriginFilter
-import uk.gov.hmrc.helplinefrontend.monitoring.auditing.AuditEventHandler
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.audit.http.connector.AuditConnector
 import uk.gov.hmrc.play.bootstrap.frontend.filters.deviceid.DeviceIdCookie

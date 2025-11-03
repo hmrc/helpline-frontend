@@ -14,14 +14,16 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.helplinefrontend.controllers
+package uk.gov.hmrc.helplinefrontend
 
-import play.api.Environment
-import controllers.{AssetsBuilder, AssetsMetadata}
-import javax.inject.{Inject, Singleton}
-import play.api.http.HttpErrorHandler
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatestplus.play.guice.GuiceOneAppPerSuite
+import play.api.Application
+import play.api.inject.guice.GuiceApplicationBuilder
 
-@Singleton
-class AssetsController @Inject()(errorHandler: HttpErrorHandler,
-                                 meta: AssetsMetadata,
-                                 env: Environment) extends AssetsBuilder(errorHandler, meta, env)
+trait UnitSpec extends AnyWordSpec with Matchers with GuiceOneAppPerSuite {
+
+  override lazy val app: Application = new GuiceApplicationBuilder().configure("metrics.jvm" -> "false").build()
+  
+}

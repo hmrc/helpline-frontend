@@ -29,9 +29,9 @@ import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import uk.gov.hmrc.auth.core.AuthConnector
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
-import uk.gov.hmrc.helplinefrontend.controllers.filters.TestAppConfig
+import uk.gov.hmrc.helplinefrontend.filters.TestAppConfig
 import uk.gov.hmrc.helplinefrontend.monitoring.analytics._
-import uk.gov.hmrc.helplinefrontend.monitoring.{HasThisPersonDied, _}
+import uk.gov.hmrc.helplinefrontend.monitoring._
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks._
 import uk.gov.hmrc.helplinefrontend.views.html.helplinesByService.{FindHMRCHelpline, Helpline, HelplinesByService}
 import uk.gov.hmrc.http.HeaderCarrier
@@ -53,30 +53,30 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
   val appConfig: AppConfig = new AppConfig(config, servicesConfig)
 
-  val authConnector: AuthConnector = app.injector.instanceOf[AuthConnector]
-  val messagesCC: MessagesControllerComponents = app.injector.instanceOf[MessagesControllerComponents]
-  val childBenefit: ChildBenefit = app.injector.instanceOf[ChildBenefit]
-  val childcareService: ChildcareService = app.injector.instanceOf[ChildcareService]
-  val incomeTaxPaye: IncomeTaxPaye = app.injector.instanceOf[IncomeTaxPaye]
-  val nationalInsurance: NationalInsurance = app.injector.instanceOf[NationalInsurance]
-  val selfAssessment: SelfAssessment = app.injector.instanceOf[SelfAssessment]
-  val statePension: StatePension = app.injector.instanceOf[StatePension]
-  val generalEnquiries: GeneralEnquiries = app.injector.instanceOf[GeneralEnquiries]
-  val generalEnquiriesOrganisation: GeneralEnquiriesOrganisation = app.injector.instanceOf[GeneralEnquiriesOrganisation]
-  val corporationTax: CorporationTax = app.injector.instanceOf[CorporationTax]
-  val machineGamingDuty: MachineGamesDuty = app.injector.instanceOf[MachineGamesDuty]
-  val payeForEmployers: PayeForEmployers = app.injector.instanceOf[PayeForEmployers]
-  val selfAssessmentOrganisation: SelfAssessmentOrganisation = app.injector.instanceOf[SelfAssessmentOrganisation]
-  val vat: Vat = app.injector.instanceOf[Vat]
-  val callOptionsOrganisationNoAnswers: CallOptionsOrganisationNoAnswers =  app.injector.instanceOf[CallOptionsOrganisationNoAnswers]
-  val callOptionsNoAnswers: CallOptionsNoAnswers = app.injector.instanceOf[CallOptionsNoAnswers]
-  val whichServiceAccess: WhichServiceAccess = app.injector.instanceOf[WhichServiceAccess]
-  val whichServiceAccessOther: WhichServiceAccessOther = app.injector.instanceOf[WhichServiceAccessOther]
-  val helplinesByService: HelplinesByService = app.injector.instanceOf[HelplinesByService]
-  val helpline: Helpline = app.injector.instanceOf[Helpline]
-  val findHMRCHelpline: FindHMRCHelpline = app.injector.instanceOf[FindHMRCHelpline]
-  val hasThisPersonDied: HasThisPersonDied = app.injector.instanceOf[HasThisPersonDied]
-  val ec: ExecutionContext =  app.injector.instanceOf[ExecutionContext]
+  val authConnector: AuthConnector                                       = app.injector.instanceOf[AuthConnector]
+  val messagesCC: MessagesControllerComponents                           = app.injector.instanceOf[MessagesControllerComponents]
+  val childBenefit: ChildBenefit                                         = app.injector.instanceOf[ChildBenefit]
+  val childcareService: ChildcareService                                 = app.injector.instanceOf[ChildcareService]
+  val incomeTaxPaye: IncomeTaxPaye                                       = app.injector.instanceOf[IncomeTaxPaye]
+  val nationalInsurance: NationalInsurance                               = app.injector.instanceOf[NationalInsurance]
+  val selfAssessment: SelfAssessment                                     = app.injector.instanceOf[SelfAssessment]
+  val statePension: StatePension                                         = app.injector.instanceOf[StatePension]
+  val generalEnquiries: GeneralEnquiries                                 = app.injector.instanceOf[GeneralEnquiries]
+  val generalEnquiriesOrganisation: GeneralEnquiriesOrganisation         = app.injector.instanceOf[GeneralEnquiriesOrganisation]
+  val corporationTax: CorporationTax                                     = app.injector.instanceOf[CorporationTax]
+  val machineGamingDuty: MachineGamesDuty                                = app.injector.instanceOf[MachineGamesDuty]
+  val payeForEmployers: PayeForEmployers                                 = app.injector.instanceOf[PayeForEmployers]
+  val selfAssessmentOrganisation: SelfAssessmentOrganisation             = app.injector.instanceOf[SelfAssessmentOrganisation]
+  val vat: Vat                                                           = app.injector.instanceOf[Vat]
+  val callOptionsOrganisationNoAnswers: CallOptionsOrganisationNoAnswers = app.injector.instanceOf[CallOptionsOrganisationNoAnswers]
+  val callOptionsNoAnswers: CallOptionsNoAnswers                         = app.injector.instanceOf[CallOptionsNoAnswers]
+  val whichServiceAccess: WhichServiceAccess                             = app.injector.instanceOf[WhichServiceAccess]
+  val whichServiceAccessOther: WhichServiceAccessOther                   = app.injector.instanceOf[WhichServiceAccessOther]
+  val helplinesByService: HelplinesByService                             = app.injector.instanceOf[HelplinesByService]
+  val helpline: Helpline                                                 = app.injector.instanceOf[Helpline]
+  val findHMRCHelpline: FindHMRCHelpline                                 = app.injector.instanceOf[FindHMRCHelpline]
+  val hasThisPersonDied: HasThisPersonDied                               = app.injector.instanceOf[HasThisPersonDied]
+  val ec: ExecutionContext                                               = app.injector.instanceOf[ExecutionContext]
 
   val gaClientId = "GA1.1.283183975.1456746121"
   var analyticsRequests = Seq.empty[AnalyticsRequest]
@@ -132,23 +132,23 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
 
   }
 
-  val childBenefitHelpKey: String = "CHILD-BENEFIT"
-  val childcareServiceHelpKey: String = "CHILDCARE-SERVICE"
-  val corporationTaxHelpKey: String = "CORPORATION-TAX"
-  val deceasedHelpKey: String = "deceased"
-  val hasThisPersonDiedHelpKey: String = "DIED"
-  val incomeTaxPayeHelpKey: String = "INCOME-TAX-PAYE"
-  val nationalInsuranceHelpKey: String = "NATIONAL-INSURANCE"
-  val machineGamingDutyHelpKey: String = "MACHINE-GAMING-DUTY"
-  val payeForEmployersHelpKey: String = "PAYE-FOR-EMPLOYERS"
-  val selfAssessmentHelpKey: String = "SELF-ASSESSMENT"
-  val selfAssessmentOrganisationHelpKey: String = "self-assessment"
-  val statePensionHelpKey: String = "STATE-PENSION"
-  val generalEnquiriesHelpKey: String = "GENERAL-ENQUIRIES"
+  val childBenefitHelpKey: String                 = "CHILD-BENEFIT"
+  val childcareServiceHelpKey: String             = "CHILDCARE-SERVICE"
+  val corporationTaxHelpKey: String               = "CORPORATION-TAX"
+  val deceasedHelpKey: String                     = "deceased"
+  val hasThisPersonDiedHelpKey: String            = "DIED"
+  val incomeTaxPayeHelpKey: String                = "INCOME-TAX-PAYE"
+  val nationalInsuranceHelpKey: String            = "NATIONAL-INSURANCE"
+  val machineGamingDutyHelpKey: String            = "MACHINE-GAMING-DUTY"
+  val payeForEmployersHelpKey: String             = "PAYE-FOR-EMPLOYERS"
+  val selfAssessmentHelpKey: String               = "SELF-ASSESSMENT"
+  val selfAssessmentOrganisationHelpKey: String   = "self-assessment"
+  val statePensionHelpKey: String                 = "STATE-PENSION"
+  val generalEnquiriesHelpKey: String             = "GENERAL-ENQUIRIES"
   val generalEnquiriesOrganisationHelpKey: String = "SOMETHING-ELSE"
-  val vatHelpKey: String = "VAT"
-  val defaultHelpKey: String = "GENERAL-ENQUIRIES"
-  val secondaryHeading: String = "Capital Gains Tax"
+  val vatHelpKey: String                          = "VAT"
+  val defaultHelpKey: String                      = "GENERAL-ENQUIRIES"
+  val secondaryHeading: String                    = "Capital Gains Tax"
 
   "CallHelpdeskController get has this person died help page" should {
     "return hasThisPersonDied help page if the help key is 'DIED' but there is no go back url" in {
