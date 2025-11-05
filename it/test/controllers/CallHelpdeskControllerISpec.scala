@@ -18,11 +18,9 @@ package controllers
 
 import org.jsoup.Jsoup
 import org.jsoup.nodes.{Document, Element}
-import play.api.Application
 import play.api.http.Status.OK
 import play.api.libs.ws.DefaultBodyReadables._
 import play.api.libs.ws.DefaultBodyWritables._
-import play.api.inject.guice.GuiceApplicationBuilder
 import play.api.libs.ws.WSResponse
 import play.api.test.Helpers.LOCATION
 import utils.HelperSpec

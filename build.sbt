@@ -41,4 +41,7 @@ lazy val microservice = Project(appName, file("."))
 lazy val it = project
   .enablePlugins(PlayScala)
   .dependsOn(microservice % "test->test")
-  .settings(DefaultBuildSettings.itSettings())
+  .settings(
+    DefaultBuildSettings.itSettings(),
+    scalacOptions ++= Seq("-Wconf:msg=Flag.*repeatedly:s")
+  )

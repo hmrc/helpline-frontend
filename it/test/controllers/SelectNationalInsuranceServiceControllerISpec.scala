@@ -19,7 +19,6 @@ package controllers
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import play.api.Application
-import play.api.libs.ws.writeableOf_JsValue
 import play.api.libs.ws.DefaultBodyWritables.writeableOf_urlEncodedForm
 import play.api.http.Status.{OK, SEE_OTHER}
 import play.api.inject.guice.GuiceApplicationBuilder
