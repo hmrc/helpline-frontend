@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ import scala.concurrent.{ExecutionContext, Future}
 @Singleton
 class SelectNationalInsuranceServiceController @Inject()(implicit
                                                          val authConnector: AuthConnector,
-                                                         implicit val ec: ExecutionContext,
+                                                         val ec: ExecutionContext,
                                                          appConfig: AppConfig,
                                                          mcc: MessagesControllerComponents,
                                                          selectNationalInsuranceService: SelectNationalInsuranceService,
@@ -48,9 +48,6 @@ class SelectNationalInsuranceServiceController @Inject()(implicit
   def retrieveDetailsFromAuth(implicit hc: HeaderCarrier): Future[Option[AuthDetails]] = {
     authConnector.authorise[Option[String] ~ Option[Credentials]](EmptyPredicate, Retrievals.nino and Retrievals.credentials).map {
       case nino ~ credentials => Some(AuthDetails(nino, credentials.map(_.providerId)))
-      case _ =>
-        logger.warn(s"Something went wrong with the call to auth in Select National Insurance Service Controller ${hc.sessionId.map(_.value)}")
-        None
     }.recover {
       case userNotLoggedIn => None
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,44 +14,42 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.helplinefrontend.controllers.filters
+package uk.gov.hmrc.helplinefrontend.filters
 
 import org.apache.pekko.stream.Materializer
-import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
-import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.Configuration
 import play.api.mvc.{Call, RequestHeader, Result}
 import play.api.mvc.Results.Redirect
 import play.api.test.FakeRequest
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
-import uk.gov.hmrc.helplinefrontend.filters.OriginFilter
-import uk.gov.hmrc.helplinefrontend.filters.OriginFilter._
+import uk.gov.hmrc.helplinefrontend.filters.OriginFilter.*
 import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
+import uk.gov.hmrc.helplinefrontend.UnitSpec
 
-import scala.concurrent.duration._
+import scala.concurrent.duration.*
 import scala.concurrent.{Await, ExecutionContext, Future}
 
 class TestAppConfig(config: Configuration, servicesConfig: ServicesConfig)
   extends AppConfig(config, servicesConfig) {
 }
 
-class OriginFilterSpec extends AnyWordSpec with Matchers with GuiceOneAppPerSuite {
+class OriginFilterSpec extends AnyWordSpec with UnitSpec {
 
   val ec: ExecutionContext = ExecutionContext.global
 
-  val mat: Materializer = app.injector.instanceOf[Materializer]
-  val config: Configuration = app.injector.instanceOf[Configuration]
+  val mat: Materializer              = app.injector.instanceOf[Materializer]
+  val config: Configuration          = app.injector.instanceOf[Configuration]
   val servicesConfig: ServicesConfig = app.injector.instanceOf[ServicesConfig]
 
   val testAppConfig: TestAppConfig = new TestAppConfig(config, servicesConfig)
 
   val originFilter: OriginFilter = new OriginFilter(mat, testAppConfig)(ec)
 
-  val ivReferrerUrl:String = "http://localhost:9938/identity-verification/call-options-no-answers"
+  val ivReferrerUrl:String   = "http://localhost:9938/identity-verification/call-options-no-answers"
   val pdvReferrerUrl: String = "http://localhost:9968/personal-details-validation/we-cannot-check-your-identity"
-  val lcReferrerUrl: String = "http://localhost:9810/account-recovery/call-hmrc-helpline-vat-else"
-  val redirectUrl: String = "http://somewhere/else"
+  val lcReferrerUrl: String  = "http://localhost:9810/account-recovery/call-hmrc-helpline-vat-else"
+  val redirectUrl: String    = "http://somewhere/else"
 
   val nextFilter: (RequestHeader) => Future[Result] = incomingRequest => {
 

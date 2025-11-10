@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.helplinefrontend.controllers.monitoring
+package uk.gov.hmrc.helplinefrontend.monitoring
 
 import org.scalamock.scalatest.MockFactory
 import org.scalatest.wordspec.AnyWordSpec
 import play.api.mvc.Request
 import play.api.test.FakeRequest
 import uk.gov.hmrc.helplinefrontend.monitoring.analytics.{AnalyticsConnector, AnalyticsEventHandler}
-import uk.gov.hmrc.helplinefrontend.monitoring.{ContactHmrcInd, EventDispatcher, MonitoringEvent}
 import uk.gov.hmrc.http.HeaderCarrier
 import org.scalatest.matchers.should.Matchers
 import scala.concurrent.ExecutionContext
@@ -30,18 +29,18 @@ import scala.concurrent.ExecutionContext.Implicits.global
 class EventDispatcherSpec extends AnyWordSpec with Matchers with MockFactory {
 
   trait Setup {
-    implicit val request = FakeRequest()
-    implicit val hc = HeaderCarrier()
-
+    implicit val request: Request[_] = FakeRequest()
+    implicit val hc: HeaderCarrier   = HeaderCarrier()
+    
     var invoked: Boolean = false
-    val mockAnalyticsConnector = mock[AnalyticsConnector]
-    val brokenEventDispatcher = new AnalyticsEventHandler(mockAnalyticsConnector) {
-      override def handleEvent(event: MonitoringEvent)(implicit request: Request[_], hc: HeaderCarrier, ec: ExecutionContext) =
+    val mockAnalyticsConnector: AnalyticsConnector = mock[AnalyticsConnector]
+    val brokenEventDispatcher: AnalyticsEventHandler = new AnalyticsEventHandler(mockAnalyticsConnector) {
+      override def handleEvent(event: MonitoringEvent)(implicit request: Request[_], hc: HeaderCarrier, ec: ExecutionContext): Unit =
         throw new RuntimeException("Expected Error")
     }
 
-    val workingEventDispatcher = new AnalyticsEventHandler(mockAnalyticsConnector) {
-      override def handleEvent(event: MonitoringEvent)(implicit request: Request[_], hc: HeaderCarrier, ec: ExecutionContext) =
+    val workingEventDispatcher: AnalyticsEventHandler = new AnalyticsEventHandler(mockAnalyticsConnector) {
+      override def handleEvent(event: MonitoringEvent)(implicit request: Request[_], hc: HeaderCarrier, ec: ExecutionContext): Unit =
         invoked = true
     }
   }
