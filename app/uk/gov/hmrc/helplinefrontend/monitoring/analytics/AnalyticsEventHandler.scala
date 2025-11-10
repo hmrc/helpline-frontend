@@ -46,7 +46,6 @@ class AnalyticsEventHandler @Inject()(connector: AnalyticsConnector) extends Eve
       case e: FindHmrcHelplinePage => sendEvent(factory.findHmrcHelplinePage(e.value))
       case OtherHmrcHelpline => sendEvent(factory.otherHmrcHelpline())
       case HasThisPersonDied => sendEvent(factory.hasThisPersonDied())
-      case null => ()
     }
   }
 
