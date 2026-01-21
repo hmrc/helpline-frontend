@@ -94,7 +94,7 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "Alcoholic Ingredients Relief" -> "vat",
     "Alcohol Wholesaler Registration Scheme" -> "vat",
     "Annual Tax on Enveloped Dwellings" -> "osh",
-    "Anti-money laundering registration" -> "vat",
+    "Money Laundering" -> "vat",
     "Automatic Exchange of Information" -> "osh",
     "Bingo Duty" -> "vat",
     "Biodiesel and Fuels Production Duty" -> "vat",

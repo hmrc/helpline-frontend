@@ -334,10 +334,12 @@ helplines-search.more-contact-details=<a href={0} class="govuk-link">Rhagor o fa
 helplines-search.additional-needs=Help i <a href={0} class="govuk-link">ddelio â CThEF os oes gennych anghenion ychwanegol</a>.
 helplines-search.call-charges=<a href="https://www.gov.uk/costau-galwadau" class="govuk-link">Dysgwch am gostau galwadau</a>
 
-helplines-search.vat.h1=Ffoniwch y llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis
-helplines-search.vat.tel=0300 200 3705
-helplines-search.vat.int=44 300 200 3705
-helplines-search.vat.times=Dydd Llun i ddydd Gwener: 8.30am i 5pm
+helplines-search.vat.h1=E-bostio CThEF
+helplines-search.vat.p.1=Os yw’ch busnes wedi’i gynnwys o dan y Rheoliadau Gwyngalchu Arian, gallwch anfon e-bost at CThEF yn {0} i wneud y canlynol:
+helplines-search.vat.email=<a href={0} class="govuk-link">MLRCIT@hmrc.gov.uk</a>
+helplines-search.vat.p.1.1=gofyn cwestiynau am wyngalchu arian
+helplines-search.vat.p.1.2=gwneud datgeliad gwyngalchu arian
+helplines-search.vat.p.2=Os oes angen i CThEF gysylltu â chi ynglŷn ag unrhyw beth cyfrinachol, byddant yn ymateb dros y ffôn neu drwy’r post.
 
 helplines-search.osh.h1=Ffoniwch Wasanaeth Cwsmeriaid Cymraeg CThEF ar gyfer ymholiadau ynghylch gwasanaethau ar-lein
 helplines-search.osh.tel=0300 200 1900
