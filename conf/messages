@@ -333,11 +333,6 @@ helplines-search.more-contact-details=<a href={0} class="govuk-link">More contac
 helplines-search.additional-needs=Get help <a href={0} class="govuk-link">dealing with HMRC if you have additional needs</a>.
 helplines-search.call-charges=<a href={0} class="govuk-link">Find out about call charges</a>
 
-helplines-search.vat.h1=Call the VAT helpline
-helplines-search.vat.tel=0300 200 3701
-helplines-search.vat.int=+44 292 050 1261
-helplines-search.vat.times=Monday to Friday: 8am to 6pm
-
 helplines-search.osh.h1=Call the online services helpline
 helplines-search.osh.tel=0300 200 3600
 helplines-search.osh.int=+44 161 930 8445
@@ -364,6 +359,13 @@ helplines-search.dst.p.2=Digital Services Tax is a tax on large businesses (UK t
 helplines-search.dst.warning=This mailbox is for Digital Services Tax queries only and not for queries relating to Making Tax Digital or your personal tax account.
 helplines-search.dst-mailbox=<span class="govuk-!-font-weight-bold">Mailbox:</span>
 helplines-search.dst.mailbox=<a href="mailto:ccgdstmailbox@hmrc.gov.uk" class="govuk-link">ccgdstmailbox@hmrc.gov.uk</a>
+
+helplines-search.vat.h1=Email HMRC
+helplines-search.vat.p.1=If your business is covered by the Money Laundering Regulations, you can email HMRC at {0} to:
+helplines-search.vat.email=<a href="mailto:MLRCIT@hmrc.gov.uk" class="govuk-link">MLRCIT@hmrc.gov.uk</a>
+helplines-search.vat.p.1.1=ask questions about money laundering
+helplines-search.vat.p.1.2=make a money laundering disclosure
+helplines-search.vat.p.2=If HMRC needs to contact you about anything confidential, they will reply by phone or post.
 
 find-HMRC-helplines.h1=Find an HMRC helpline
 find-HMRC-helplines.sub-heading=Find the HMRC helpline for the service you are trying to access.

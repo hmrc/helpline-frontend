@@ -1,5 +1,5 @@
 @*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2026 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 @import uk.gov.hmrc.helplinefrontend.config.AppConfig
 @import uk.gov.hmrc.helplinefrontend.views.html.Layout
-@import uk.gov.hmrc.helplinefrontend.views.html.components.{Paragraph, H1, preH1, SummaryList, InsetText}
+@import uk.gov.hmrc.helplinefrontend.views.html.components.{Paragraph, H1, ul, preH1, SummaryList, InsetText}
 @import uk.gov.hmrc.helplinefrontend.models.ui.{SummaryRowData => Row}
 @import scala.collection.mutable.ListBuffer
 
@@ -24,6 +24,7 @@
       p: Paragraph,
       preHeading: preH1,
       h1: H1,
+      ul: ul,
       summaryList: SummaryList,
       insetText: InsetText,
       govukWarningText : GovukWarningText)
@@ -32,7 +33,7 @@
 
 @rows = @{
     val rws = ListBuffer[Row]()
-    if(helpdesk != "dst"){
+    if(helpdesk != "dst" && helpdesk != "vat"){
         rws.append(Row(key = "helplines-search.telephone", value = s"helplines-search.${helpdesk}.tel"))
         rws.append(Row(key = "helplines-search.outside-uk", value = s"helplines-search.${helpdesk}.int"))
         rws.append(Row(key = "helplines-search.opening-times", value = s"helplines-search.${helpdesk}.times"))
@@ -45,16 +46,26 @@
 @layout(pageTitle = s"${messages(s"helplines-search.${helpdesk}.h1")} ${messages("title.suffix")}") {
     @preHeading(heading.replaceAll("_", " "))
     @h1(messages(s"helplines-search.${helpdesk}.h1"))
-    @if(helpdesk != "dst"){
-        @summaryList(rows = rows, classes = "govuk-summary-list--no-border")
-    } else {
+
+    @if(helpdesk == "dst") {
         @p(messages("helplines-search.dst.p.1"))
         @p(messages("helplines-search.dst.p.2"))
         @govukWarningText(WarningText(
             iconFallbackText = Some("Warning"),
             content = Text(messages("helplines-search.dst.warning"))
-        ))
-        @p(messages(s"helplines-search.${helpdesk}-mailbox") + " " + messages(s"helplines-search.${helpdesk}.mailbox"))
+        )   )
+    @p(messages(s"helplines-search.dst-mailbox") + " " + messages("helplines-search.dst.mailbox"))
+    } else if(helpdesk == "vat") {
+    @p(messages("helplines-search.vat.p.1", messages("helplines-search.vat.email")))
+        @ul(
+            items = Seq(
+                "helplines-search.vat.p.1.1",
+                "helplines-search.vat.p.1.2"
+            )
+        )
+    @p(messages("helplines-search.vat.p.2"))
+    } else {
+        @summaryList(rows = rows, classes = "govuk-summary-list--no-border")
     }
     @if(helpdesk == "vat") {
         @p(messages("helplines-search.more-contact-details", "https://www.tax.service.gov.uk/ask-hmrc/chat/vat-online"))
@@ -62,7 +73,7 @@
         @p(messages("helplines-search.more-contact-details", "https://www.tax.service.gov.uk/ask-hmrc/chat/online-services-helpdesk"))
     }
     @insetText(html = Html(messages("helplines-search.additional-needs", "https://www.gov.uk/dealing-hmrc-additional-needs/overview")))
-    @if(helpdesk != "dst"){
+    @if(helpdesk != "dst" && helpdesk != "vat"){
         @p(messages("helplines-search.call-charges", "https://www.gov.uk/call-charges"))
     }
 }

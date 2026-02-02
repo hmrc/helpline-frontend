@@ -609,7 +609,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
         FindHmrcHelplinePage("vat"), *, *, *).returning(()).once()
       val result: Future[Result] = helpdeskController.helpLinesByServiceVatPage(secondaryHeading)(fakeRequest)
       status(result) shouldBe Status.OK
-      contentAsString(result).contains("Call the VAT helpline") shouldBe true
+      contentAsString(result).contains("Email HMRC") shouldBe true
     }
 
     "return the DSP page" in {
