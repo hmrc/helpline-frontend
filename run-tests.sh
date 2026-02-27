@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-sbt clean compile coverage test it/test coverageReport dependencyUpdates
+sbt clean compile coverage Test/test A11yTest/test it/test coverageReport dependencyUpdates

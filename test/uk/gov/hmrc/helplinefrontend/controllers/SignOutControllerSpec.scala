@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2026 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.helplinefrontend.controllers
 
-import org.apache.pekko.Done
 import org.apache.pekko.util.Timeout
 import org.scalatest.concurrent.Eventually
 import org.scalatest.matchers.should.Matchers
@@ -26,31 +25,19 @@ import play.api.mvc.{AnyContentAsEmpty, MessagesControllerComponents, Result}
 import play.api.test.FakeRequest
 import play.api.test.Helpers.{redirectLocation, status}
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
-import uk.gov.hmrc.helplinefrontend.monitoring.EventDispatcher
-import uk.gov.hmrc.helplinefrontend.monitoring.analytics.{AnalyticsConnector, AnalyticsEventHandler, AnalyticsRequest}
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.http.client.HttpClientV2
 
 import scala.concurrent.duration.DurationInt
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.Future
 
 class SignOutControllerSpec extends AnyWordSpec with Matchers with GuiceOneAppPerSuite with Eventually {
 
   val mcc: MessagesControllerComponents = app.injector.instanceOf[MessagesControllerComponents]
-  val appConfig: AppConfig = app.injector.instanceOf[AppConfig]
-  var analyticsRequests = Seq.empty[AnalyticsRequest]
-  val httpClientV2: HttpClientV2 = app.injector.instanceOf[HttpClientV2]
+  val appConfig: AppConfig              = app.injector.instanceOf[AppConfig]
+  val httpClientV2: HttpClientV2        = app.injector.instanceOf[HttpClientV2]
 
-  object TestConnector extends AnalyticsConnector(appConfig, httpClientV2) {
-    override def sendEvent(request: AnalyticsRequest)(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[Done] = {
-      analyticsRequests = analyticsRequests :+ request
-      Future.successful(Done)
-    }
-  }
-  object TestHandler extends AnalyticsEventHandler(TestConnector)
-  val eventDispatcher = new EventDispatcher(TestHandler)
-
-  val controller = new SignOutController(mcc)(appConfig, ExecutionContext.global, eventDispatcher)
+  val controller = new SignOutController(mcc)(appConfig)
 
   implicit val request: FakeRequest[AnyContentAsEmpty.type] = FakeRequest()
   implicit val hc: HeaderCarrier = HeaderCarrier()

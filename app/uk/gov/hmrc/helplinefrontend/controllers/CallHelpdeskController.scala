@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 HM Revenue & Customs
+ * Copyright 2026 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.helplinefrontend.models.CallOption.*
 import uk.gov.hmrc.helplinefrontend.models.*
 import uk.gov.hmrc.helplinefrontend.models.form.*
-import uk.gov.hmrc.helplinefrontend.monitoring.*
 import uk.gov.hmrc.helplinefrontend.views.html.helpdesks.{CallOptionsNoAnswers, CallOptionsOrganisationNoAnswers, ChildBenefit, ChildcareService, CorporationTax, GeneralEnquiries, GeneralEnquiriesOrganisation, HasThisPersonDied, IncomeTaxPaye, MachineGamesDuty, NationalInsurance, PayeForEmployers, SelfAssessment, SelfAssessmentOrganisation, StatePension, Vat, WhichServiceAccess, WhichServiceAccessOther}
 import uk.gov.hmrc.helplinefrontend.views.html.helplinesByService.*
 import uk.gov.hmrc.http.HeaderCarrier
@@ -58,11 +57,10 @@ class CallHelpdeskController @Inject()(implicit
                                        helplinesByService: HelplinesByService,
                                        helpline: Helpline,
                                        findHMRCHelpline: FindHMRCHelpline,
-                                       val eventDispatcher: EventDispatcher,
                                        ec: ExecutionContext)
   extends FrontendController(mcc) with Logging with AuthorisedFunctions {
 
-  def checkIsAuthorisedUser()(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[Boolean] = {
+  private def checkIsAuthorisedUser()(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[Boolean] = {
     authorised(){
       appConfig.isLoggedInUser = true
       Future.successful(appConfig.isLoggedInUser)
@@ -73,7 +71,7 @@ class CallHelpdeskController @Inject()(implicit
     }
   }
 
-  def getGoBackURl(callBackUrl: Option[String]): Option[String] = {
+  private def getGoBackURl(callBackUrl: Option[String]): Option[String] = {
     if (appConfig.backCallEnabled) callBackUrl else None
   }
 
@@ -85,16 +83,12 @@ class CallHelpdeskController @Inject()(implicit
       Future.successful(Ok(
         callOption match {
           case ChildBenefit      => childBenefitPage(backCall)
-          case ChildcareService  =>
-            eventDispatcher.dispatchEvent(ContactHmrcChildcare)
-            childcareServicePage(backCall)
+          case ChildcareService  => childcareServicePage(backCall)
           case IncomeTaxPaye     => incomeTaxPayePage(backCall)
           case NationalInsurance => nationalInsurancePage(backCall)
           case SelfAssessment    => selfAssessmentPage(backCall)
           case StatePension      => statePensionPage(backCall)
-          case Died              =>
-            eventDispatcher.dispatchEvent(HasThisPersonDied)
-            hasThisPersonDied(backCall)
+          case Died              => hasThisPersonDied(backCall)
           case _                 => generalEnquiriesPage(backCall)
         }
       ))
@@ -121,34 +115,23 @@ class CallHelpdeskController @Inject()(implicit
   }
 
   def callOptionsNoAnswersPage(): Action[AnyContent] = Action.async { implicit request =>
-
     checkIsAuthorisedUser().flatMap{ _ =>
-      eventDispatcher.dispatchEvent(ContactHmrcInd)
       Future.successful(Ok(callOptionsNoAnswers(CallOptionForm.callOptionForm(appConfig.callOptionsList))).addingToSession("affinityGroup" -> "Individual"))
     }
-
   }
 
   def callOptionsNoAnswersOrganisationPage(): Action[AnyContent] = Action.async { implicit request =>
-
     checkIsAuthorisedUser().flatMap{ _ =>
-      eventDispatcher.dispatchEvent(ContactHmrcOrg)
       Future.successful(Ok(callOptionsOrganisationNoAnswers(CallOptionForm.callOptionForm(appConfig.callOptionsList))).addingToSession("affinityGroup" -> "Organisation"))
     }
-
   }
 
   def selectCallOption(): Action[AnyContent] = Action.async { implicit request =>
     val result = CallOptionForm.callOptionForm(appConfig.callOptionsList).bindFromRequest().fold(
       errors => BadRequest(callOptionsNoAnswers(errors)),
-      value => {
-        eventDispatcher.dispatchEvent(ContactType(appConfig.defaultCallOptionsAndGAEventMapper(value)))
-
-        value match {
-          case "national-insurance" => Redirect(routes.SelectNationalInsuranceServiceController.showSelectNationalInsuranceServicePage(Some(routes.CallHelpdeskController.callOptionsNoAnswersPage().url)).url)
-          case _ => Redirect(routes.CallHelpdeskController.getHelpdeskPage(value, Some(routes.CallHelpdeskController.callOptionsNoAnswersPage().url)))
-        }
-
+      {
+        case "national-insurance" => Redirect(routes.SelectNationalInsuranceServiceController.showSelectNationalInsuranceServicePage(Some(routes.CallHelpdeskController.callOptionsNoAnswersPage().url)).url)
+        case value => Redirect(routes.CallHelpdeskController.getHelpdeskPage(value, Some(routes.CallHelpdeskController.callOptionsNoAnswersPage().url)))
       }
     )
     Future.successful(result)
@@ -158,7 +141,6 @@ class CallHelpdeskController @Inject()(implicit
     val result = CallOptionOrganisationForm.callOptionOrganisationForm(appConfig.callOptionsOrganisationList).bindFromRequest().fold(
       errors => BadRequest(callOptionsOrganisationNoAnswers(errors)),
       value => {
-        eventDispatcher.dispatchEvent(ContactType(appConfig.defaultCallOptionsOrganisationAndGAEventMapper(value)))
         Redirect(routes.CallHelpdeskController.getHelpdeskOrganisationPage(value, Some(routes.CallHelpdeskController.callOptionsNoAnswersOrganisationPage().url)))
       }
     )
@@ -167,7 +149,6 @@ class CallHelpdeskController @Inject()(implicit
 
   def whichServiceAccessPage(): Action[AnyContent] = Action.async { implicit request =>
     checkIsAuthorisedUser().flatMap{ _ =>
-      eventDispatcher.dispatchEvent(ContactHmrcSa)
       Future.successful(Ok(whichServiceAccess(CallOptionForm.callOptionForm(appConfig.standaloneIndividualList))).addingToSession("affinityGroup" -> "Individual"))
     }
   }
@@ -175,13 +156,9 @@ class CallHelpdeskController @Inject()(implicit
   def selectServiceAccessOption(): Action[AnyContent] = Action.async { implicit request =>
     val result = CallOptionForm.callOptionForm(appConfig.standaloneIndividualList).bindFromRequest().fold(
       errors => BadRequest(whichServiceAccess(errors)),
-      value => {
-        eventDispatcher.dispatchEvent(ContactType(appConfig.standaloneIndividualAndGAEventMapper(value)))
-
-        value match {
-          case "national-insurance" => Redirect(routes.SelectNationalInsuranceServiceController.showSelectNationalInsuranceServicePage(Some(routes.CallHelpdeskController.whichServiceAccessPage().url)).url)
-          case _ => Redirect(routes.CallHelpdeskController.getHelpdeskPage(value, Some(routes.CallHelpdeskController.whichServiceAccessPage().url)))
-        }
+      {
+        case "national-insurance" => Redirect(routes.SelectNationalInsuranceServiceController.showSelectNationalInsuranceServicePage(Some(routes.CallHelpdeskController.whichServiceAccessPage().url)).url)
+        case value => Redirect(routes.CallHelpdeskController.getHelpdeskPage(value, Some(routes.CallHelpdeskController.whichServiceAccessPage().url)))
       }
     )
     Future.successful(result)
@@ -189,7 +166,6 @@ class CallHelpdeskController @Inject()(implicit
 
   def whichServiceAccessOtherPage(): Action[AnyContent] = Action.async { implicit request =>
     checkIsAuthorisedUser().flatMap{ _ =>
-      eventDispatcher.dispatchEvent(ContactHmrcOrg)
       Future.successful(Ok(whichServiceAccessOther(CallOptionForm.callOptionForm(appConfig.standaloneOrganisationList))).addingToSession("affinityGroup" -> "Organisation"))
     }
   }
@@ -198,7 +174,6 @@ class CallHelpdeskController @Inject()(implicit
     val result = CallOptionForm.callOptionForm(appConfig.standaloneOrganisationList).bindFromRequest().fold(
       errors => BadRequest(whichServiceAccessOther(errors)),
       value => {
-        eventDispatcher.dispatchEvent(ContactType(appConfig.standaloneOrganisationAndGAEventMapper(value)))
         if(value == "contact-hmrc"){
           Redirect("https://www.gov.uk/contact-hmrc")
         } else {
@@ -210,7 +185,6 @@ class CallHelpdeskController @Inject()(implicit
   }
 
   def helpLinesByServicePage(): Action[AnyContent] = Action.async { implicit request =>
-    eventDispatcher.dispatchEvent(OtherHmrcHelpline)
     Future.successful(Ok(helplinesByService(HelplinesByServiceForm.helplinesByServiceForm(appConfig.helplinesByService))))
   }
 
@@ -219,32 +193,26 @@ class CallHelpdeskController @Inject()(implicit
   }
 
   def helpLinesByServiceCharitiesPage(heading: String): Action[AnyContent] = Action { implicit request =>
-    eventDispatcher.dispatchEvent(FindHmrcHelplinePage("charities"))
     Ok(helpline(heading, "charities"))
   }
 
   def helpLinesByServiceOshPage(heading: String): Action[AnyContent] = Action { implicit request =>
-    eventDispatcher.dispatchEvent(FindHmrcHelplinePage("osh"))
     Ok(helpline(heading, "osh"))
   }
 
   def helpLinesByServicePensionsPage(heading: String): Action[AnyContent] = Action { implicit request =>
-    eventDispatcher.dispatchEvent(FindHmrcHelplinePage("pensions"))
     Ok(helpline(heading, "pensions"))
   }
 
   def helpLinesByServiceVatPage(heading: String): Action[AnyContent] = Action { implicit request =>
-    eventDispatcher.dispatchEvent(FindHmrcHelplinePage("vat"))
     Ok(helpline(heading, "vat"))
   }
 
   def helpLinesByServiceVoaPage(heading: String): Action[AnyContent] = Action { implicit request =>
-    eventDispatcher.dispatchEvent(FindHmrcHelplinePage("voa"))
     Ok(helpline(heading, "voa"))
   }
 
   def helpLinesByServiceDstPage(heading: String): Action[AnyContent] = Action { implicit request =>
-    eventDispatcher.dispatchEvent(FindHmrcHelplinePage("dst"))
     Ok(helpline(heading, "dst"))
   }
 
@@ -273,7 +241,6 @@ class CallHelpdeskController @Inject()(implicit
   }
 
   def findHMRCHelplinePage(): Action[AnyContent] = Action { implicit request =>
-      eventDispatcher.dispatchEvent(FindHmrcHelpline)
       Ok(findHMRCHelpline(FindHMRCHelplineForm.findHMRCHelplineForm()))
   }
 
@@ -281,22 +248,19 @@ class CallHelpdeskController @Inject()(implicit
     val result = FindHMRCHelplineForm.findHMRCHelplineForm().bindFromRequest().fold(
       errors => BadRequest(findHMRCHelpline(errors)),
       {
-        case "pta" => Redirect(routes.CallHelpdeskController.helpLinesByServiceOshPage("Personal Tax Account"))
-        case "sa" => Redirect(routes.CallHelpdeskController.helpLinesByServiceOshPage("Self Assessment"))
-        case "vat" => Redirect(routes.CallHelpdeskController.helpLinesByServiceVatPage("VAT"))
+        case "pta"       => Redirect(routes.CallHelpdeskController.helpLinesByServiceOshPage("Personal Tax Account"))
+        case "sa"        => Redirect(routes.CallHelpdeskController.helpLinesByServiceOshPage("Self Assessment"))
+        case "vat"       => Redirect(routes.CallHelpdeskController.helpLinesByServiceVatPage("VAT"))
         case "charities" => Redirect(routes.CallHelpdeskController.helpLinesByServiceCharitiesPage("Charities"))
-        case "other" => Redirect(routes.CallHelpdeskController.helpLinesByServicePage())
-        case _ => Redirect(routes.CallHelpdeskController.helpLinesByServicePage())
+        case "other"     => Redirect(routes.CallHelpdeskController.helpLinesByServicePage())
+        case _           => Redirect(routes.CallHelpdeskController.helpLinesByServicePage())
       }
     )
     Future.successful(result)
   }
 
   def hasThisPersonDiedPage: Action[AnyContent] = Action { implicit request =>
-    eventDispatcher.dispatchEvent(HasThisPersonDied)
     Ok(hasThisPersonDied(None))
   }
-
-
 
 }
