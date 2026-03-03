@@ -75,9 +75,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
   val ec: ExecutionContext                                               = app.injector.instanceOf[ExecutionContext]
   val httpClientV2: HttpClientV2                                         = app.injector.instanceOf[HttpClientV2]
 
-  val gaClientId = "GA1.1.283183975.1456746121"
   val request: FakeRequest[AnyContentAsEmpty.type] = FakeRequest()
-    .withCookies(Cookie("_ga", gaClientId))
     .withSession("dimensions" -> """[{"index":2,"value":"ma"},{"index":3,"value":"UpliftNino"},{"index":4,"value":"200-MEO"},{"index":5,"value":"No Enrolments"}]""").withMethod("POST")
 
   def getController(): CallHelpdeskController = {
@@ -462,58 +460,6 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Find an HMRC helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe false
-    }
-  }
-
-  "CallHelpdeskController " should {
-
-    "fire contact_childbenefits ga event when user clicks on Child benefit" in {
-      val result: Future[Result] = getController().selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "child-benefit"))
-
-      status(result) shouldBe Status.SEE_OTHER
-      redirectLocation(result).get should startWith("/helpline/child-benefit")
-    }
-
-    "fire contact_incometaxpaye ga event when user clicks on income tax" in {
-      val result: Future[Result] = getController().selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "income-tax-paye"))
-
-      status(result) shouldBe Status.SEE_OTHER
-      redirectLocation(result).get should startWith("/helpline/income-tax-paye")
-    }
-
-    "fire contact_natinsurance ga event when user clicks on national insurance" in {
-      val result: Future[Result] = getController().selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "national-insurance"))
-
-      status(result) shouldBe Status.SEE_OTHER
-      redirectLocation(result).get shouldBe "/helpline/select-national-insurance-service?back=%2Fhelpline%2Fcall-options-no-answers"
-    }
-
-    "fire contact_sa ga event when user clicks on self assessment" in {
-      val result: Future[Result] = getController().selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "self-assessment"))
-
-      status(result) shouldBe Status.SEE_OTHER
-      redirectLocation(result).get should startWith("/helpline/self-assessment")
-    }
-
-    "fire contact_pension ga event when user clicks on state pension" in {
-      val result: Future[Result] = getController().selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "state-pension"))
-
-      status(result) shouldBe Status.SEE_OTHER
-      redirectLocation(result).get should startWith("/helpline/state-pension")
-    }
-
-    "fire contact_other ga event when user clicks on other" in {
-      val result: Future[Result] = getController().selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "general-enquiries"))
-
-      status(result) shouldBe Status.SEE_OTHER
-      redirectLocation(result).get should startWith("/helpline/general-enquiries")
-    }
-
-    "fire contact_other ga event when user clicks on other and find my nino enabled flag is set to true" in {
-      val result: Future[Result] = getController().selectCallOption()(request.withFormUrlEncodedBody("selected-call-option" -> "general-enquiries"))
-
-      status(result) shouldBe Status.SEE_OTHER
-      redirectLocation(result).get should startWith("/helpline/general-enquiries")
     }
   }
 

@@ -30,7 +30,7 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
   lazy val deviceIdSecret: Option[String]  = config.getOptional[String]("cookie.deviceId.secret")
   lazy val deviceIdPreviousSecret: Option[Seq[String]] = config.getOptional[Seq[String]]("cookie.deviceId.previous.secret")
 
-  private val defaultCallOptionsAndGAEventMapper: mutable.Map[String, String] = mutable.LinkedHashMap(
+  private val defaultCallOptionsMapper: mutable.Map[String, String] = mutable.LinkedHashMap(
     "child-benefit"      -> "contact_childbenefit",
     "childcare-service"  -> "contact_childcare-services",
     "income-tax-paye"    -> "contact_incometaxpaye",
@@ -41,7 +41,7 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "general-enquiries"  -> "contact_other"
   )
 
-  private val defaultCallOptionsOrganisationAndGAEventMapper: mutable.Map[String, String] = mutable.LinkedHashMap(
+  private val defaultCallOptionsOrganisationMapper: mutable.Map[String, String] = mutable.LinkedHashMap(
     "corporation-tax"     -> "contact_corporationtax",
     "machine-games-duty"  -> "contact_machinegamingduty",
     "paye-for-employers"  -> "contact_paye",
@@ -51,7 +51,7 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "help-with-a-service" -> "contact_other_org"
   )
 
-  private val standaloneIndividualAndGAEventMapper: mutable.Map[String, String] = mutable.LinkedHashMap(
+  private val standaloneIndividualMapper: mutable.Map[String, String] = mutable.LinkedHashMap(
     "child-benefit"      -> "contact_childbenefit",
     "childcare-service"  -> "contact_childcare_services",
     "income-tax-paye"    -> "contact_incometaxpaye",
@@ -61,29 +61,6 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "divider"            -> "divider",
     "which-service-are-you-trying-to-access-other" -> "which-service-are-you-trying-to-access-other"
   )
-
-  private val standaloneOrganisationAndGAEventMapper: mutable.Map[String, String] = mutable.LinkedHashMap(
-    "corporation-tax"    -> "contact_corporationtax",
-    "machine-games-duty" -> "contact_machinegamingduty",
-    "vat"                -> "contact_vat",
-    "divider"            -> "divider",
-    "contact-hmrc"       -> "contact_hmrc"
-  )
-
-  val contactHelplineGAEventMapper: Map[String, String] = Map(
-    "child-benefit"         -> "further-contact_childbenefit",
-    "childcare-service"     -> "further-contact_childcare-services",
-    "income-tax-paye"       -> "further-contact_incometaxpaye",
-    "national-insurance"    -> "further-contact_natinsurance",
-    "self-assessment"       -> "further-contact_sa",
-    "state-pension"         -> "further-contact_pension",
-    "general-enquiries"     -> "further-contact_other",
-    "corporation-tax"       -> "further-contact_corporationtax",
-    "machine-games-duty"    -> "further-contact_machinegamingduty",
-    "paye-for-employers"    -> "further-contact_paye",
-    "self-assessment-org"   -> "further-contact_sa_org",
-    "vat"                   -> "further-contact_vat",
-    "general-enquiries-org" -> "further-contact_other_org")
 
   val helplinesByService: Map[String, String] = Map(
     "Advance Ruling Service"                                              -> "osh",
@@ -173,19 +150,19 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
 
   val callOptionsList: List[String] =
     config.getOptional[String]("features.call-options")
-      .fold(defaultCallOptionsAndGAEventMapper.keySet.toList)(_.split(",").toList)
+      .fold(defaultCallOptionsMapper.keySet.toList)(_.split(",").toList)
 
   val callOptionsOrganisationList: List[String] =
     config.getOptional[String]("features.organisation.call-options")
-      .fold(defaultCallOptionsOrganisationAndGAEventMapper.keySet.toList)(_.split(",").toList)
+      .fold(defaultCallOptionsOrganisationMapper.keySet.toList)(_.split(",").toList)
 
   val standaloneIndividualList: List[String] =
     config.getOptional[String]("features.standalone.individual.call-options")
-      .fold(standaloneIndividualAndGAEventMapper.keySet.toList)(_.split(",").toList)
+      .fold(standaloneIndividualMapper.keySet.toList)(_.split(",").toList)
 
   val standaloneOrganisationList: List[String] =
     config.getOptional[String]("features.standalone.organisation.call-options")
-      .fold(standaloneOrganisationAndGAEventMapper.keySet.toList)(_.split(",").toList)
+      .fold(standaloneIndividualMapper.keySet.toList)(_.split(",").toList)
 
   lazy val findYourNationalInsuranceNumberFrontendUrl: String = servicesConfig.getConfString("find-your-national-insurance-number-host","")
 

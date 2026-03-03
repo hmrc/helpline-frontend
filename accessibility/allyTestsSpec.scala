@@ -73,10 +73,7 @@ class allyTestsSpec extends AnyWordSpec
   val hasThisPersonDied: HasThisPersonDied                               = app.injector.instanceOf[HasThisPersonDied]
   val ec: ExecutionContext                                               = app.injector.instanceOf[ExecutionContext]
 
-  val gaClientId = "GA1.1.283183975.1456746121"
   val request: FakeRequest[AnyContentAsEmpty.type] = FakeRequest()
-    .withSession()
-
   val httpClientV2: HttpClientV2 = app.injector.instanceOf[HttpClientV2]
 
   val controller: CallHelpdeskController =
