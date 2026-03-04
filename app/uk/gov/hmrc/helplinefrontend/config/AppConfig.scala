@@ -24,7 +24,7 @@ import scala.collection.mutable
 
 @Singleton
 class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig) {
-  
+
   val welshLanguageSupportEnabled: Boolean = config.getOptional[Boolean]("features.welsh-language-support").getOrElse(true)
   val backCallEnabled: Boolean             = config.getOptional[Boolean]("features.back-call-support").getOrElse(false)
   lazy val deviceIdSecret: Option[String]  = config.getOptional[String]("cookie.deviceId.secret")
@@ -60,6 +60,14 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "state-pension"      -> "contact_pension",
     "divider"            -> "divider",
     "which-service-are-you-trying-to-access-other" -> "which-service-are-you-trying-to-access-other"
+  )
+
+  private val standaloneOrganisationMapper: mutable.Map[String, String] = mutable.LinkedHashMap(
+    "corporation-tax" -> "contact_corporationtax",
+    "machine-games-duty" -> "contact_machinegamingduty",
+    "vat" -> "contact_vat",
+    "divider" -> "divider",
+    "contact-hmrc" -> "contact_hmrc"
   )
 
   val helplinesByService: Map[String, String] = Map(
@@ -115,7 +123,7 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "Pension schemes for practitioners"                                   -> "pensions",
     "Plastic Packaging Tax"                                               -> "osh",
     "Pool Betting Duty"                                                   -> "vat",
-    "Qualifying recognised overseas pension scheme (CROPS)"               -> "osh",
+    "Qualifying recognised overseas pension scheme (QROPS)"               -> "osh",
     "Rebated Oils Enquiry Service"                                        -> "vat",
     "Remote Gambling Duty"                                                -> "vat",
     "Report and Pay Import VAT (NI)"                                      -> "vat",
@@ -134,12 +142,12 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
     "Imports from Ireland"                                                -> "vat",
     "Tied Oils Enquiry Service"                                           -> "vat",
     "Trust registration service"                                          -> "osh",
-    "VAT EC Sales List (ECS)"                                             -> "vat",
+    "VAT EC Sales List (ECSL)"                                             -> "vat",
     "VAT EU Refunds"                                                      -> "vat",
     "VAT for Government and NHS"                                          -> "vat",
     "VAT Mini One Stop Shop - for businesses based in the UK and EU"      -> "vat",
     "VAT Mini One Stop Shop - for businesses based outside the UK and EU" -> "vat",
-    "VAT Reverse Charge Sales List (ROSL)"                                -> "vat",
+    "VAT Reverse Charge Sales List (RCSL)"                                -> "vat",
     "VOA check and challenge your business rates valuation"               -> "voa",
     "Tax code change"                                                     -> "osh",
     "Help to Save"                                                        -> "osh",
@@ -162,7 +170,7 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
 
   val standaloneOrganisationList: List[String] =
     config.getOptional[String]("features.standalone.organisation.call-options")
-      .fold(standaloneIndividualMapper.keySet.toList)(_.split(",").toList)
+      .fold(standaloneOrganisationMapper.keySet.toList)(_.split(",").toList)
 
   lazy val findYourNationalInsuranceNumberFrontendUrl: String = servicesConfig.getConfString("find-your-national-insurance-number-host","")
 
@@ -177,6 +185,7 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
 
   val IVOrigin: String  = "IV"
   val PDVOrigin: String = "PDV"
+  
   val configuredOriginServices: Map[String, String] = Map(
     "/identity-verification"       -> "IV",
     "/personal-details-validation" -> "PDV"
