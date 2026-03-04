@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 HM Revenue & Customs
+ * Copyright 2026 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,13 +29,14 @@ import java.net.URLEncoder
 
 class CallHelpdeskControllerISpec extends HelperSpec {
 
-  val getPageBaseUrl = "/helpline"
   val diedHelpKey = "died"
-  val callOptionsPage = "/call-options-no-answers"
+  val getPageBaseUrl  = "/helpline"
+
+  val callOptionsPage                      = "/call-options-no-answers"
   val whichServiceAreYouTryingToAccessPage = "/which-service-are-you-trying-to-access"
-  val payeForEmployersPage = "/organisation/paye-for-employers"
-  val selfAssessmentPage = "/organisation/self-assessment"
-  val generalEnquiriesPage = "/organisation/help-with-a-service"
+  val payeForEmployersPage                 = "/organisation/paye-for-employers"
+  val selfAssessmentPage                   = "/organisation/self-assessment"
+  val generalEnquiriesPage                 = "/organisation/help-with-a-service"
 
   "GET /helpline/:helpKey" should {
     "return died help page if the help key is 'died' but there is no go back url" in {

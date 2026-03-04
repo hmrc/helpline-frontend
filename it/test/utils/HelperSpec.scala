@@ -25,11 +25,17 @@ import play.api.test.WsTestClient
 import uk.gov.hmrc.crypto.PlainText
 import uk.gov.hmrc.play.bootstrap.frontend.filters.crypto.SessionCookieCrypto
 
-class HelperSpec extends AnyWordSpec with Matchers with WsTestClient with GuiceOneServerPerSuite with ScalaFutures with IntegrationPatience with WireMockHelper {
+class HelperSpec extends AnyWordSpec
+  with Matchers
+  with WsTestClient
+  with GuiceOneServerPerSuite
+  with ScalaFutures
+  with IntegrationPatience
+  with WireMockHelper {
 
-  val sessionBaker: SessionCookieBaker = app.injector.instanceOf[SessionCookieBaker]
+  val sessionBaker: SessionCookieBaker           = app.injector.instanceOf[SessionCookieBaker]
   val cookieHeaderEncoding: CookieHeaderEncoding = app.injector.instanceOf[CookieHeaderEncoding]
-  val sessionCookieCrypto: SessionCookieCrypto = app.injector.instanceOf[SessionCookieCrypto]
+  val sessionCookieCrypto: SessionCookieCrypto   = app.injector.instanceOf[SessionCookieCrypto]
 
   def resource(path: String) = s"http://localhost:$port$path"
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2026 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,21 +20,15 @@ import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.helplinefrontend.config.AppConfig
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import javax.inject.{Inject, Singleton}
-import uk.gov.hmrc.helplinefrontend.monitoring.{EventDispatcher, SignedOut, SignedOutOrg}
 
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.Future
 
 @Singleton
 class SignOutController @Inject()(cc: MessagesControllerComponents)
-                                 (implicit appConfig: AppConfig, executionContext: ExecutionContext,val eventDispatcher: EventDispatcher)
+                                 (implicit appConfig: AppConfig)
   extends FrontendController(cc) {
 
   def signOut(): Action[AnyContent] = Action.async { implicit request =>
-
-    request.session.get("affinityGroup") match {
-      case Some("Organisation") =>  eventDispatcher.dispatchEvent(SignedOutOrg)
-      case _ => eventDispatcher.dispatchEvent(SignedOut)
-    }
 
     val ggRedirectParms = Map(
       "continue" -> Seq(s"${appConfig.logoutCallback}"),

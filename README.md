@@ -14,6 +14,9 @@ with the command
 to suppress errors caused by calls to auditing. However, the tests will run successfully
 without the support of the data stream service.
 
+### Tests
+To run allyTestsSpec, use `sbt A11yTest/test`
+
 ## API
 
 | Method | Path                                             | Description                                      |
