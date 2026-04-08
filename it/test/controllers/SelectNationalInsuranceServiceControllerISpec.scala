@@ -161,6 +161,18 @@ class SelectNationalInsuranceServiceControllerISpec extends HelperSpec {
       }
     }
 
+    "return BadRequest when no option is submitted" in {
+      withClient {
+        wsClient => {
+          val response = wsClient.url(resource(s"$getPageBaseUrl$selectNationalInsuranceServiceKey"))
+            .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded")
+            .withFollowRedirects(false).post(Map.empty[String, Seq[String]]).futureValue
+
+          response.status shouldBe 400
+        }
+      }
+    }
+
     "redirect to check details page when Find my nino is select and origin is not there" in {
       withClient{
         wsClient =>{
