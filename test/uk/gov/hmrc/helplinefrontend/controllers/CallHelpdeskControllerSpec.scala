@@ -298,6 +298,13 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       contentAsString(result).contains("Call the Machine Games Duty helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
     }
+
+    "return Machine Games Duty help page if the help key is 'MACHINE-GAMES-DUTY' (current name)" in {
+      val result: Future[Result] = getController().getHelpdeskOrganisationPage("MACHINE-GAMES-DUTY", None)(fakeRequest)
+
+      status(result) shouldBe Status.OK
+      contentAsString(result).contains("Call the Machine Games Duty helpline") shouldBe true
+    }
   }
 
   "CallHelpdeskController get paye for employers help page" should {
