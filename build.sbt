@@ -31,7 +31,7 @@ lazy val microservice = Project(appName, file("."))
   .settings(
     Seq(
       ScoverageKeys.coverageExcludedPackages := "<empty>;Reverse.*;.*BuildInfo.*;.*Routes.*;.*RoutesPrefix.*;",
-      ScoverageKeys.coverageMinimumStmtTotal := 78,
+      ScoverageKeys.coverageMinimumStmtTotal := 90,
       ScoverageKeys.coverageFailOnMinimum := true,
       ScoverageKeys.coverageHighlighting := true
     )
@@ -43,5 +43,6 @@ lazy val it = project
   .dependsOn(microservice % "test->test")
   .settings(
     DefaultBuildSettings.itSettings(),
+    libraryDependencies += "uk.gov.hmrc" %% "play-frontend-hmrc-play-30" % AppDependencies.playFrontendHmrcVersion % Test,
     scalacOptions ++= Seq("-Wconf:msg=Flag.*repeatedly:s")
   )

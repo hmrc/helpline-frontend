@@ -298,6 +298,13 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       contentAsString(result).contains("Call the Machine Games Duty helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe true
     }
+
+    "return Machine Games Duty help page if the help key is 'MACHINE-GAMES-DUTY' (current name)" in {
+      val result: Future[Result] = getController().getHelpdeskOrganisationPage("MACHINE-GAMES-DUTY", None)(fakeRequest)
+
+      status(result) shouldBe Status.OK
+      contentAsString(result).contains("Call the Machine Games Duty helpline") shouldBe true
+    }
   }
 
   "CallHelpdeskController get paye for employers help page" should {
@@ -460,6 +467,236 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
       status(result) shouldBe Status.OK
       contentAsString(result).contains("Find an HMRC helpline") shouldBe true
       contentAsString(result).contains("Back") shouldBe false
+    }
+  }
+
+  "CallHelpdeskController get call-options-no-answers-organisation page" should {
+    "return OK with a list of organisation help options" in {
+      val result: Future[Result] = getController().callOptionsNoAnswersOrganisationPage()(fakeRequest)
+
+      status(result) shouldBe Status.OK
+    }
+  }
+
+  "CallHelpdeskController selectCallOption" should {
+    "return BadRequest when no option is submitted" in {
+      val postRequest = FakeRequest().withMethod("POST")
+      val result: Future[Result] = getController().selectCallOption()(postRequest)
+
+      status(result) shouldBe Status.BAD_REQUEST
+    }
+
+    "redirect to SelectNationalInsuranceServiceController when national-insurance is selected" in {
+      val postRequest = FakeRequest().withFormUrlEncodedBody("selected-call-option" -> "national-insurance").withMethod("POST")
+      val result: Future[Result] = getController().selectCallOption()(postRequest)
+
+      status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should include("/select-national-insurance-service")
+    }
+
+    "redirect to getHelpdeskPage when a valid option other than national-insurance is selected" in {
+      val postRequest = FakeRequest().withFormUrlEncodedBody("selected-call-option" -> "self-assessment").withMethod("POST")
+      val result: Future[Result] = getController().selectCallOption()(postRequest)
+
+      status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should include("self-assessment")
+    }
+  }
+
+  "CallHelpdeskController selectOrganisationCallOption" should {
+    "return BadRequest when no option is submitted" in {
+      val postRequest = FakeRequest().withMethod("POST")
+      val result: Future[Result] = getController().selectOrganisationCallOption()(postRequest)
+
+      status(result) shouldBe Status.BAD_REQUEST
+    }
+
+    "redirect to getHelpdeskOrganisationPage when a valid option is selected" in {
+      val postRequest = FakeRequest().withFormUrlEncodedBody("selected-call-option" -> "vat").withMethod("POST")
+      val result: Future[Result] = getController().selectOrganisationCallOption()(postRequest)
+
+      status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should include("/organisation/vat")
+    }
+  }
+
+  "CallHelpdeskController selectServiceAccessOption" should {
+    "return BadRequest when no option is submitted" in {
+      val postRequest = FakeRequest().withMethod("POST")
+      val result: Future[Result] = getController().selectServiceAccessOption()(postRequest)
+
+      status(result) shouldBe Status.BAD_REQUEST
+    }
+
+    "redirect to SelectNationalInsuranceServiceController when national-insurance is selected" in {
+      val postRequest = FakeRequest().withFormUrlEncodedBody("selected-call-option" -> "national-insurance").withMethod("POST")
+      val result: Future[Result] = getController().selectServiceAccessOption()(postRequest)
+
+      status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should include("/select-national-insurance-service")
+    }
+
+    "redirect to getHelpdeskPage when a valid option other than national-insurance is selected" in {
+      val postRequest = FakeRequest().withFormUrlEncodedBody("selected-call-option" -> "self-assessment").withMethod("POST")
+      val result: Future[Result] = getController().selectServiceAccessOption()(postRequest)
+
+      status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should include("self-assessment")
+    }
+  }
+
+  "CallHelpdeskController selectServiceAccessOtherOption" should {
+    "return BadRequest when no option is submitted" in {
+      val postRequest = FakeRequest().withMethod("POST")
+      val result: Future[Result] = getController().selectServiceAccessOtherOption()(postRequest)
+
+      status(result) shouldBe Status.BAD_REQUEST
+    }
+
+    "redirect to the gov.uk contact-hmrc URL when contact-hmrc is selected" in {
+      val postRequest = FakeRequest().withFormUrlEncodedBody("selected-call-option" -> "contact-hmrc").withMethod("POST")
+      val result: Future[Result] = getController().selectServiceAccessOtherOption()(postRequest)
+
+      status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get shouldBe "https://www.gov.uk/contact-hmrc"
+    }
+
+    "redirect to getHelpdeskOrganisationPage when a valid option other than contact-hmrc is selected" in {
+      val postRequest = FakeRequest().withFormUrlEncodedBody("selected-call-option" -> "vat").withMethod("POST")
+      val result: Future[Result] = getController().selectServiceAccessOtherOption()(postRequest)
+
+      status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should include("/organisation/vat")
+    }
+  }
+
+  "CallHelpdeskController submitHelplinesByServicePage" should {
+    "return OK" in {
+      val result: Future[Result] = getController().submitHelplinesByServicePage()(fakeRequest)
+
+      status(result) shouldBe Status.OK
+    }
+  }
+
+  "CallHelpdeskController helpLinesByServiceServicePage" should {
+    "return BadRequest when no service is submitted" in {
+      val postRequest = FakeRequest().withMethod("POST")
+      val result: Future[Result] = getController().helpLinesByServiceServicePage()(postRequest)
+
+      status(result) shouldBe Status.BAD_REQUEST
+    }
+
+    "redirect to the VAT helpline page when a VAT service is submitted" in {
+      val postRequest = FakeRequest().withFormUrlEncodedBody("service" -> "VAT Returns").withMethod("POST")
+      val result: Future[Result] = getController().helpLinesByServiceServicePage()(postRequest)
+
+      status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should include("/helplines-by-service/vat")
+    }
+
+    "redirect to the OSH helpline page when an OSH service is submitted" in {
+      val postRequest = FakeRequest().withFormUrlEncodedBody("service" -> "Self Assessment").withMethod("POST")
+      val result: Future[Result] = getController().helpLinesByServiceServicePage()(postRequest)
+
+      status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should include("/helplines-by-service/osh")
+    }
+
+    "redirect to the charities helpline page when a charities service is submitted" in {
+      val postRequest = FakeRequest().withFormUrlEncodedBody("service" -> "Charities and Community Amateur Sports Clubs").withMethod("POST")
+      val result: Future[Result] = getController().helpLinesByServiceServicePage()(postRequest)
+
+      status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should include("/helplines-by-service/charities")
+    }
+
+    "redirect to the pensions helpline page when a pensions service is submitted" in {
+      val postRequest = FakeRequest().withFormUrlEncodedBody("service" -> "Pension schemes online service").withMethod("POST")
+      val result: Future[Result] = getController().helpLinesByServiceServicePage()(postRequest)
+
+      status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should include("/helplines-by-service/pensions")
+    }
+
+    "redirect to the VOA helpline page when a VOA service is submitted" in {
+      val postRequest = FakeRequest().withFormUrlEncodedBody("service" -> "VOA check and challenge your business rates valuation").withMethod("POST")
+      val result: Future[Result] = getController().helpLinesByServiceServicePage()(postRequest)
+
+      status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should include("/helplines-by-service/voa")
+    }
+
+    "redirect to the DST helpline page when a DST service is submitted" in {
+      val postRequest = FakeRequest().withFormUrlEncodedBody("service" -> "Digital Services Tax (DST)").withMethod("POST")
+      val result: Future[Result] = getController().helpLinesByServiceServicePage()(postRequest)
+
+      status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should include("/helplines-by-service/dst")
+    }
+
+    "redirect to the OSH helpline page when an unrecognised service is submitted" in {
+      val postRequest = FakeRequest().withFormUrlEncodedBody("service" -> "Unknown Service").withMethod("POST")
+      val result: Future[Result] = getController().helpLinesByServiceServicePage()(postRequest)
+
+      status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should include("/helplines-by-service/osh")
+    }
+  }
+
+  "CallHelpdeskController processHMRCHelplinePage" should {
+    "return BadRequest when no option is submitted" in {
+      val postRequest = FakeRequest().withMethod("POST")
+      val result: Future[Result] = getController().processHMRCHelplinePage()(postRequest)
+
+      status(result) shouldBe Status.BAD_REQUEST
+    }
+
+    "redirect to OSH page when 'pta' is submitted" in {
+      val postRequest = FakeRequest().withFormUrlEncodedBody("find-HMRC-helplines" -> "pta").withMethod("POST")
+      val result: Future[Result] = getController().processHMRCHelplinePage()(postRequest)
+
+      status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should include("/helplines-by-service/osh")
+    }
+
+    "redirect to OSH page when 'sa' is submitted" in {
+      val postRequest = FakeRequest().withFormUrlEncodedBody("find-HMRC-helplines" -> "sa").withMethod("POST")
+      val result: Future[Result] = getController().processHMRCHelplinePage()(postRequest)
+
+      status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should include("/helplines-by-service/osh")
+    }
+
+    "redirect to VAT page when 'vat' is submitted" in {
+      val postRequest = FakeRequest().withFormUrlEncodedBody("find-HMRC-helplines" -> "vat").withMethod("POST")
+      val result: Future[Result] = getController().processHMRCHelplinePage()(postRequest)
+
+      status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should include("/helplines-by-service/vat")
+    }
+
+    "redirect to charities page when 'charities' is submitted" in {
+      val postRequest = FakeRequest().withFormUrlEncodedBody("find-HMRC-helplines" -> "charities").withMethod("POST")
+      val result: Future[Result] = getController().processHMRCHelplinePage()(postRequest)
+
+      status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should include("/helplines-by-service/charities")
+    }
+
+    "redirect to helplines by service page when 'other' is submitted" in {
+      val postRequest = FakeRequest().withFormUrlEncodedBody("find-HMRC-helplines" -> "other").withMethod("POST")
+      val result: Future[Result] = getController().processHMRCHelplinePage()(postRequest)
+
+      status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should include("/helplines-by-service")
+    }
+
+    "redirect to helplines by service page when an unrecognised value is submitted" in {
+      val postRequest = FakeRequest().withFormUrlEncodedBody("find-HMRC-helplines" -> "unrecognised-value").withMethod("POST")
+      val result: Future[Result] = getController().processHMRCHelplinePage()(postRequest)
+
+      status(result) shouldBe Status.SEE_OTHER
+      redirectLocation(result).get should include("/helplines-by-service")
     }
   }
 

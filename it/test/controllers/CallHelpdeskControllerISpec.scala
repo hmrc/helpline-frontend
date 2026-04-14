@@ -110,6 +110,314 @@ class CallHelpdeskControllerISpec extends HelperSpec {
     }
   }
 
+  "POST /helpline/call-options-no-answers" should {
+    "return BadRequest when no option is submitted" in {
+      withClient {
+        wsClient => {
+          val response = wsClient.url(resource(s"$getPageBaseUrl$callOptionsPage"))
+            .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded")
+            .withFollowRedirects(false).post("").futureValue
+
+          response.status shouldBe 400
+        }
+      }
+    }
+  }
+
+  "GET /helpline/which-service-are-you-trying-to-access" should {
+    "return the which service access page" in {
+      withClient {
+        wsClient => {
+          val response = wsClient.url(resource(s"$getPageBaseUrl$whichServiceAreYouTryingToAccessPage")).get().futureValue
+
+          response.status shouldBe OK
+        }
+      }
+    }
+  }
+
+  "POST /helpline/which-service-are-you-trying-to-access" should {
+    "redirect to the correct helpdesk page when a non-national-insurance option is selected" in {
+      withClient {
+        wsClient => {
+          val backLinkToPage = URLEncoder.encode(s"$getPageBaseUrl$whichServiceAreYouTryingToAccessPage", "UTF-8")
+          val response = wsClient.url(resource(s"$getPageBaseUrl$whichServiceAreYouTryingToAccessPage"))
+            .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded")
+            .withFollowRedirects(false).post("selected-call-option=self-assessment").futureValue
+
+          response.status shouldBe 303
+          response.header(LOCATION).get should endWith(s"$getPageBaseUrl/self-assessment?back=$backLinkToPage")
+        }
+      }
+    }
+  }
+
+  "GET /helpline/which-service-are-you-trying-to-access-other" should {
+    "return the which service access other page" in {
+      withClient {
+        wsClient => {
+          val response = wsClient.url(resource(s"$getPageBaseUrl/which-service-are-you-trying-to-access-other")).get().futureValue
+
+          response.status shouldBe OK
+        }
+      }
+    }
+  }
+
+  "POST /helpline/which-service-are-you-trying-to-access-other" should {
+    "redirect to the gov.uk contact-hmrc page when contact-hmrc is selected" in {
+      withClient {
+        wsClient => {
+          val response = wsClient.url(resource(s"$getPageBaseUrl/which-service-are-you-trying-to-access-other"))
+            .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded")
+            .withFollowRedirects(false).post("selected-call-option=contact-hmrc").futureValue
+
+          response.status shouldBe 303
+          response.header(LOCATION).get shouldBe "https://www.gov.uk/contact-hmrc"
+        }
+      }
+    }
+
+    "redirect to the organisation helpdesk page when a valid non-contact-hmrc option is selected" in {
+      withClient {
+        wsClient => {
+          val backLinkToPage = URLEncoder.encode(s"$getPageBaseUrl/which-service-are-you-trying-to-access-other", "UTF-8")
+          val response = wsClient.url(resource(s"$getPageBaseUrl/which-service-are-you-trying-to-access-other"))
+            .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded")
+            .withFollowRedirects(false).post("selected-call-option=vat").futureValue
+
+          response.status shouldBe 303
+          response.header(LOCATION).get should endWith(s"$getPageBaseUrl/organisation/vat?back=$backLinkToPage")
+        }
+      }
+    }
+  }
+
+  "GET /helpline/has-this-person-died" should {
+    "return the has this person died page" in {
+      withClient {
+        wsClient => {
+          val response = wsClient.url(resource(s"$getPageBaseUrl/has-this-person-died")).get().futureValue
+
+          response.status shouldBe OK
+          val doc = Jsoup.parse(response.body[String])
+          doc.select("h1").text() should include("Has this person died?")
+        }
+      }
+    }
+  }
+
+  "GET /helpline/helplines-by-service" should {
+    "return the helplines by service search page" in {
+      withClient {
+        wsClient => {
+          val response = wsClient.url(resource(s"$getPageBaseUrl/helplines-by-service")).get().futureValue
+
+          response.status shouldBe OK
+        }
+      }
+    }
+  }
+
+  "POST /helpline/helplines-by-service" should {
+    "return OK" in {
+      withClient {
+        wsClient => {
+          val response = wsClient.url(resource(s"$getPageBaseUrl/helplines-by-service"))
+            .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded")
+            .post("selected-call-option=vat").futureValue
+
+          response.status shouldBe OK
+        }
+      }
+    }
+  }
+
+  "GET /helpline/helplines-by-service/charities" should {
+    "return the charities helpline page" in {
+      withClient {
+        wsClient => {
+          val response = wsClient.url(resource(s"$getPageBaseUrl/helplines-by-service/charities?heading=Charities")).get().futureValue
+
+          response.status shouldBe OK
+          response.body[String] should include("Call the Charities helpline")
+        }
+      }
+    }
+  }
+
+  "GET /helpline/helplines-by-service/osh" should {
+    "return the online services helpline page" in {
+      withClient {
+        wsClient => {
+          val response = wsClient.url(resource(s"$getPageBaseUrl/helplines-by-service/osh?heading=Self+Assessment")).get().futureValue
+
+          response.status shouldBe OK
+          response.body[String] should include("Call the online services helpline")
+        }
+      }
+    }
+  }
+
+  "GET /helpline/helplines-by-service/pensions" should {
+    "return the pensions helpline page" in {
+      withClient {
+        wsClient => {
+          val response = wsClient.url(resource(s"$getPageBaseUrl/helplines-by-service/pensions?heading=Pension+schemes+online+service")).get().futureValue
+
+          response.status shouldBe OK
+          response.body[String] should include("Call the pensions helpline")
+        }
+      }
+    }
+  }
+
+  "GET /helpline/helplines-by-service/vat" should {
+    "return the VAT helpline page" in {
+      withClient {
+        wsClient => {
+          val response = wsClient.url(resource(s"$getPageBaseUrl/helplines-by-service/vat?heading=VAT+Returns")).get().futureValue
+
+          response.status shouldBe OK
+          response.body[String] should include("Email HMRC")
+        }
+      }
+    }
+  }
+
+  "GET /helpline/helplines-by-service/voa" should {
+    "return the VOA helpline page" in {
+      withClient {
+        wsClient => {
+          val response = wsClient.url(resource(s"$getPageBaseUrl/helplines-by-service/voa?heading=VOA")).get().futureValue
+
+          response.status shouldBe OK
+          response.body[String] should include("Call the Valuation Office Agency helpline")
+        }
+      }
+    }
+  }
+
+  "GET /helpline/helplines-by-service/dst" should {
+    "return the DST helpline page" in {
+      withClient {
+        wsClient => {
+          val response = wsClient.url(resource(s"$getPageBaseUrl/helplines-by-service/dst?heading=Digital+Services+Tax")).get().futureValue
+
+          response.status shouldBe OK
+          response.body[String] should include("Contact the DST mailbox")
+        }
+      }
+    }
+  }
+
+  "POST /helpline/helplines-by-service/service" should {
+    "redirect to the correct helpline page based on the submitted service" in {
+      withClient {
+        wsClient => {
+          val response = wsClient.url(resource(s"$getPageBaseUrl/helplines-by-service/service"))
+            .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded")
+            .withFollowRedirects(false).post("service=VAT+Returns").futureValue
+
+          response.status shouldBe 303
+          response.header(LOCATION).get should include("/helplines-by-service/vat")
+        }
+      }
+    }
+
+    "return BadRequest when no service is submitted" in {
+      withClient {
+        wsClient => {
+          val response = wsClient.url(resource(s"$getPageBaseUrl/helplines-by-service/service"))
+            .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded")
+            .withFollowRedirects(false).post("").futureValue
+
+          response.status shouldBe 400
+        }
+      }
+    }
+  }
+
+  "GET /helpline/find-hmrc-helpline" should {
+    "return the find HMRC helpline page" in {
+      withClient {
+        wsClient => {
+          val response = wsClient.url(resource(s"$getPageBaseUrl/find-hmrc-helpline")).get().futureValue
+
+          response.status shouldBe OK
+          response.body[String] should include("Find an HMRC helpline")
+        }
+      }
+    }
+  }
+
+  "POST /helpline/find-hmrc-helpline" should {
+    "redirect to the VAT helpline page when 'vat' is submitted" in {
+      withClient {
+        wsClient => {
+          val response = wsClient.url(resource(s"$getPageBaseUrl/find-hmrc-helpline"))
+            .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded")
+            .withFollowRedirects(false).post("find-HMRC-helplines=vat").futureValue
+
+          response.status shouldBe 303
+          response.header(LOCATION).get should include("/helplines-by-service/vat")
+        }
+      }
+    }
+
+    "return BadRequest when no option is submitted" in {
+      withClient {
+        wsClient => {
+          val response = wsClient.url(resource(s"$getPageBaseUrl/find-hmrc-helpline"))
+            .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded")
+            .withFollowRedirects(false).post("").futureValue
+
+          response.status shouldBe 400
+        }
+      }
+    }
+  }
+
+  "GET /helpline/organisation/select-a-service" should {
+    "return the organisation select-a-service page" in {
+      withClient {
+        wsClient => {
+          val response = wsClient.url(resource(s"$getPageBaseUrl/organisation/select-a-service")).get().futureValue
+
+          response.status shouldBe OK
+        }
+      }
+    }
+  }
+
+  "POST /helpline/organisation/select-a-service" should {
+    "redirect to the correct organisation helpdesk page when a valid option is selected" in {
+      withClient {
+        wsClient => {
+          val backLinkToPage = URLEncoder.encode(s"$getPageBaseUrl/organisation/select-a-service", "UTF-8")
+          val response = wsClient.url(resource(s"$getPageBaseUrl/organisation/select-a-service"))
+            .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded")
+            .withFollowRedirects(false).post("selected-call-option=vat").futureValue
+
+          response.status shouldBe 303
+          response.header(LOCATION).get should endWith(s"$getPageBaseUrl/organisation/vat?back=$backLinkToPage")
+        }
+      }
+    }
+
+    "return BadRequest when no option is submitted" in {
+      withClient {
+        wsClient => {
+          val response = wsClient.url(resource(s"$getPageBaseUrl/organisation/select-a-service"))
+            .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded")
+            .withFollowRedirects(false).post("").futureValue
+
+          response.status shouldBe 400
+        }
+      }
+    }
+  }
+
   "GET /helpline/organisation/paye-for-employers" should {
     "return a page which includes the correct help links" in {
 
