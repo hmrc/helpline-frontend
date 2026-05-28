@@ -317,7 +317,7 @@ class CallHelpdeskControllerISpec extends HelperSpec {
         wsClient => {
           val response = wsClient.url(resource(s"$getPageBaseUrl/helplines-by-service/service"))
             .withHttpHeaders("Csrf-Token" -> "nocheck", "Content-Type" -> "application/x-www-form-urlencoded")
-            .withFollowRedirects(false).post("service=VAT+Returns").futureValue
+            .withFollowRedirects(false).post("service=vat-returns").futureValue
 
           response.status shouldBe 303
           response.header(LOCATION).get should include("/helplines-by-service/vat")

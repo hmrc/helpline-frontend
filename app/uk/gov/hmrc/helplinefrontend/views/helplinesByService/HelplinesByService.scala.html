@@ -63,7 +63,7 @@
                         items = Seq(SelectItem(text = "")) ++ appConfig.helplinesByService.map {
                             question => SelectItem(
                                 value = Some(question._1),
-                                text = question._1
+                                text = msgs(s"helpline.service.${question._1}")
                             )
                         },
                         label = Label(
@@ -85,12 +85,12 @@
                     </tr>
                 </thead>
                 <tbody class="govuk-table__body">
-                @for(question <- appConfig.helplinesByService.toSeq.sortBy(_._1)) {
+                @for(question <- appConfig.helplinesByService.toSeq.sortBy(q => msgs(s"helpline.service.${q._1}"))) {
                     <tr class="govuk-table__row">
                         <td class="govuk-table__cell">
                             <ul class="govuk-list">
-                                <li class="govuk-body-l govuk-!-font-weight-bold"><a class="govuk-link govuk-link--no-underline" href="/helpline/helplines-by-service/@question._2?heading=@question._1.replaceAll(" ", "+")">@question._1</a></li>
-                                <li><p class="govuk-body">@msgs(s"helplines-search.${question._1.toLowerCase().replaceAll(" ", "-").replaceAll(",", "").replaceAll("\\(", "").replaceAll("\\)", "")}")</p></li>
+                                <li class="govuk-body-l govuk-!-font-weight-bold"><a class="govuk-link govuk-link--no-underline" href="/helpline/helplines-by-service/@question._2?heading=@question._1">@msgs(s"helpline.service.${question._1}")</a></li>
+                                <li><p class="govuk-body">@msgs(s"helplines-search.${question._1}")</p></li>
                             </ul>
                         </td>
                     </tr>

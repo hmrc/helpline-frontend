@@ -587,7 +587,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
     }
 
     "redirect to the VAT helpline page when a VAT service is submitted" in {
-      val postRequest = FakeRequest().withFormUrlEncodedBody("service" -> "VAT Returns").withMethod("POST")
+      val postRequest = FakeRequest().withFormUrlEncodedBody("service" -> "vat-returns").withMethod("POST")
       val result: Future[Result] = getController().helpLinesByServiceServicePage()(postRequest)
 
       status(result) shouldBe Status.SEE_OTHER
@@ -595,7 +595,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
     }
 
     "redirect to the OSH helpline page when an OSH service is submitted" in {
-      val postRequest = FakeRequest().withFormUrlEncodedBody("service" -> "Self Assessment").withMethod("POST")
+      val postRequest = FakeRequest().withFormUrlEncodedBody("service" -> "self-assessment").withMethod("POST")
       val result: Future[Result] = getController().helpLinesByServiceServicePage()(postRequest)
 
       status(result) shouldBe Status.SEE_OTHER
@@ -603,7 +603,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
     }
 
     "redirect to the charities helpline page when a charities service is submitted" in {
-      val postRequest = FakeRequest().withFormUrlEncodedBody("service" -> "Charities and Community Amateur Sports Clubs").withMethod("POST")
+      val postRequest = FakeRequest().withFormUrlEncodedBody("service" -> "charities-and-community-amateur-sports-clubs").withMethod("POST")
       val result: Future[Result] = getController().helpLinesByServiceServicePage()(postRequest)
 
       status(result) shouldBe Status.SEE_OTHER
@@ -611,7 +611,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
     }
 
     "redirect to the pensions helpline page when a pensions service is submitted" in {
-      val postRequest = FakeRequest().withFormUrlEncodedBody("service" -> "Pension schemes online service").withMethod("POST")
+      val postRequest = FakeRequest().withFormUrlEncodedBody("service" -> "pension-schemes-online-service").withMethod("POST")
       val result: Future[Result] = getController().helpLinesByServiceServicePage()(postRequest)
 
       status(result) shouldBe Status.SEE_OTHER
@@ -619,7 +619,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
     }
 
     "redirect to the VOA helpline page when a VOA service is submitted" in {
-      val postRequest = FakeRequest().withFormUrlEncodedBody("service" -> "VOA check and challenge your business rates valuation").withMethod("POST")
+      val postRequest = FakeRequest().withFormUrlEncodedBody("service" -> "voa-check-and-challenge-your-business-rates-valuation").withMethod("POST")
       val result: Future[Result] = getController().helpLinesByServiceServicePage()(postRequest)
 
       status(result) shouldBe Status.SEE_OTHER
@@ -627,7 +627,7 @@ class CallHelpdeskControllerSpec extends AnyWordSpec with Matchers with GuiceOne
     }
 
     "redirect to the DST helpline page when a DST service is submitted" in {
-      val postRequest = FakeRequest().withFormUrlEncodedBody("service" -> "Digital Services Tax (DST)").withMethod("POST")
+      val postRequest = FakeRequest().withFormUrlEncodedBody("service" -> "digital-services-tax-dst").withMethod("POST")
       val result: Future[Result] = getController().helpLinesByServiceServicePage()(postRequest)
 
       status(result) shouldBe Status.SEE_OTHER

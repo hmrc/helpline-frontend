@@ -44,7 +44,7 @@
 }
 
 @layout(pageTitle = s"${messages(s"helplines-search.${helpdesk}.h1")} ${messages("title.suffix")}") {
-    @preHeading(heading.replaceAll("_", " "))
+    @preHeading(messages(s"helpline.service.$heading"))
     @h1(messages(s"helplines-search.${helpdesk}.h1"))
 
     @if(helpdesk == "dst") {
