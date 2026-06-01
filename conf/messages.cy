@@ -331,6 +331,7 @@ helpline.service.child-benefit=Budd-dal Plant
 helpline.service.tax---free-childcare-and-personal-pension-options=Gofal Plant sy’n Rhydd o Dreth ac Opsiynau Pensiwn Personol
 helpline.service.mandatory-disclosure-rules=Rheolau Datgelu Gorfodol
 
+helplines-search.advance-ruling-service=Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF i adfer eich manylion mewngofnodi ar gyfer y Gwasanaeth Dyfarniadau Uwch (Advance Ruling Service).
 helplines-search.advance-tariff-ruling=Cysylltwch â'r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer Dyfarniadau Tariffau Uwch.
 helplines-search.aggregate-levy=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer yr Ardoll Agregau.
 helplines-search.air-passenger-duty=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer y Cynllun Cofrestru Cyfanwerthwyr Alcohol.
@@ -408,6 +409,11 @@ helplines-search.vat-mini-one-stop-shop---for-businesses-based-in-the-uk-and-eu=
 helplines-search.vat-mini-one-stop-shop---for-businesses-based-outside-the-uk-and-eu=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer y Gwasanaeth Un Cam ar gyfer TAW.
 helplines-search.vat-reverse-charge-sales-list-rcsl=Cysylltwch â’r llinell gymorth Gymraeg ar gyfer Ymholiadau TAW, Tollau ac Ecséis i adfer eich manylion mewngofnodi ar gyfer y Rhestr Gwerthiannau Tâl Gwrthdro (RCSL).
 helplines-search.voa-check-and-challenge-your-business-rates-valuation=Cysylltwch â llinell gymorth Asiantaeth y Swyddfa Brisio (VOA) i adfer eich manylion ar gyfer Gwirio a herio’ch prisiad ardrethi busnes gan y VOA.
+helplines-search.tax-code-change=Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF i adfer eich manylion mewngofnodi ar gyfer newid i god Treth.
+helplines-search.help-to-save=Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF i adfer eich manylion mewngofnodi ar gyfer Cymorth i Gynilo.
+helplines-search.child-benefit=Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF i adfer eich manylion mewngofnodi ar gyfer Budd-dal Plant.
+helplines-search.tax---free-childcare-and-personal-pension-options=Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF i adfer eich manylion mewngofnodi ar gyfer Gofal Plant sy’n Rhydd o Dreth ac Opsiynau Pensiwn Personol.
+helplines-search.mandatory-disclosure-rules=Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF i adfer eich manylion mewngofnodi ar gyfer Rheolau Datgelu Gorfodol.
 
 helplines-search.default.select=Dewis gwasanaeth
 helplines-search.telephone=Ffôn:
